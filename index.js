@@ -1,13 +1,44 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+const PORT = process.env.PORT || 10000;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN || "dr_vu";
 
-// Lắng nghe cổng do Render cung cấp hoặc mặc định là 3000
-const PORT = process.env.PORT || 3000;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("Chatbot is running...");
+// Endpoint để Facebook xác minh webhook
+app.get('/webhook', (req, res) => {
+    let mode = req.query['hub.mode'];
+    let token = req.query['hub.verify_token'];
+    let challenge = req.query['hub.challenge'];
+
+    if (mode && token === VERIFY_TOKEN) {
+        console.log("WEBHOOK_VERIFIED");
+        res.status(200).send(challenge);
+    } else {
+        res.sendStatus(403);
+    }
 });
 
+// Endpoint để nhận tin nhắn từ Facebook Messenger
+app.post('/webhook', (req, res) => {
+    let body = req.body;
+
+    if (body.object === 'page') {
+        body.entry.forEach(entry => {
+            let webhookEvent = entry.messaging[0];
+            console.log(webhookEvent);
+        });
+
+        res.status(200).send('EVENT_RECEIVED');
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+// Khởi động server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Chatbot is running on port ${PORT}`);
 });
