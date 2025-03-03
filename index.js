@@ -3,6 +3,18 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
 require('dotenv').config(); // Nạp biến môi trường từ file .env
+const cloudinary = require('cloudinary').v2;
+const express = require('express');
+const bodyParser = require('body-parser');
+const axios = require('axios');
+const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
+
+// Cấu hình Cloudinary từ biến môi trường
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -106,7 +118,24 @@ async function processMessage(sender_psid, userMessage) {
         sendMessage(sender_psid, "Xin lỗi, tôi gặp sự cố khi phản hồi.");
     }
 }
-
+// Hàm up ảnh từ Cloudinary 
+async function uploadImage(imagePath, folderName = "dich-vu") {
+    try {
+        const result = await cloudinary.uploader.upload(imagePath, { folder: folderName });
+        return result.secure_url; // Trả về link ảnh
+    } catch (error) {
+        console.error("Lỗi upload ảnh:", error);
+        return null;
+    }
+}
+// Lấy danh sách ảnh trong thư mục cụ thể
+cloudinary.api.resources(
+  { type: 'upload', prefix: 'folder_name/' }, 
+  (error, result) => {
+    if (error) console.error(error);
+    else console.log(result.resources.map(file => file.secure_url));
+  }
+);
 // Khởi chạy server
 app.listen(PORT, () => {
     console.log(`Chatbot đang chạy trên cổng ${PORT}`);
