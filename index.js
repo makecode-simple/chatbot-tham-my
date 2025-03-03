@@ -51,14 +51,20 @@ async function handleMessage(senderId, receivedMessage) {
 }
 
 // Gọi API ChatGPT để tạo phản hồi
+const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY // Lấy API Key từ file .env
+});
+
 async function getChatGPTResponse(userMessage) {
     try {
-        const completion = await openai.createChatCompletion({
+        const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: userMessage }]
         });
 
-        return { "text": completion.data.choices[0].message.content };
+        return { "text": response.choices[0].message.content };
     } catch (error) {
         console.error("Lỗi khi gọi OpenAI:", error);
         return { "text": "Xin lỗi, có lỗi xảy ra khi xử lý yêu cầu của bạn." };
