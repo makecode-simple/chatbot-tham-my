@@ -4,7 +4,6 @@ const axios = require('axios');
 const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
 require('dotenv').config(); // Nạp biến môi trường từ file .env
 const cloudinary = require('cloudinary').v2;
-const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
@@ -118,24 +117,38 @@ async function processMessage(sender_psid, userMessage) {
         sendMessage(sender_psid, "Xin lỗi, tôi gặp sự cố khi phản hồi.");
     }
 }
-// Hàm up ảnh từ Cloudinary 
+// 🖼️ Hàm upload ảnh lên thư mục bất kỳ
 async function uploadImage(imagePath, folderName = "dich-vu") {
     try {
         const result = await cloudinary.uploader.upload(imagePath, { folder: folderName });
-        return result.secure_url; // Trả về link ảnh
+        console.log(`Ảnh đã upload vào thư mục '${folderName}':`, result.secure_url);
+        return result.secure_url;
     } catch (error) {
         console.error("Lỗi upload ảnh:", error);
         return null;
     }
 }
-// Lấy danh sách ảnh trong thư mục cụ thể
-cloudinary.api.resources(
-  { type: 'upload', prefix: 'folder_name/' }, 
-  (error, result) => {
-    if (error) console.error(error);
-    else console.log(result.resources.map(file => file.secure_url));
-  }
-);
+
+// 📂 Hàm lấy danh sách ảnh trong thư mục bất kỳ
+async function getImages(folderName = "dich-vu") {
+    try {
+        const result = await cloudinary.api.resources({ type: 'upload', prefix: `${folderName}/` });
+        const images = result.resources.map(file => file.secure_url);
+        
+        if (images.length === 0) {
+            console.log(`Không tìm thấy ảnh nào trong thư mục '${folderName}'.`);
+        } else {
+            console.log(`Danh sách ảnh trong thư mục '${folderName}':`, images);
+        }
+        
+        return images;
+    } catch (error) {
+        console.error("Lỗi lấy danh sách ảnh:", error);
+        return [];
+    }
+}
+
+module.exports = { uploadImage, getImages };
 // Khởi chạy server
 app.listen(PORT, () => {
     console.log(`Chatbot đang chạy trên cổng ${PORT}`);
