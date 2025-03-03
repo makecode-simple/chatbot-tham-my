@@ -4,9 +4,6 @@ const axios = require('axios');
 const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
 require('dotenv').config(); // Nạp biến môi trường từ file .env
 const cloudinary = require('cloudinary').v2;
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
 
 // Cấu hình Cloudinary từ biến môi trường
 cloudinary.config({
