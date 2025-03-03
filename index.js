@@ -12,6 +12,27 @@ app.use(bodyParser.json());
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
+// Kiểm tra nếu server đang hoạt động
+app.get("/", (req, res) => {
+    res.send("Chatbot đang hoạt động!");
+});
+
+// Xử lý xác thực Webhook của Facebook
+app.get("/webhook", (req, res) => {
+    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+    
+    const mode = req.query["hub.mode"];
+    const token = req.query["hub.verify_token"];
+    const challenge = req.query["hub.challenge"];
+
+    if (mode && token === VERIFY_TOKEN) {
+        console.log("WEBHOOK VERIFIED!");
+        res.status(200).send(challenge);
+    } else {
+        res.status(403).send("Forbidden");
+    }
+});
+
 // Cấu hình OpenAI API
 const openai = new OpenAI({
     apiKey: OPENAI_API_KEY
@@ -63,8 +84,27 @@ function sendMessage(sender_psid, response) {
     };
 
     axios.post(`https://graph.facebook.com/v17.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, request_body)
-        .then(() => console.log("Message sent!"))
-        .catch(error => console.error("Lỗi khi gửi tin nhắn:", error.response ? error.response.data : error));
+        .then((res) => {
+            console.log("Message sent!", res.data);
+        })
+        .catch(error => {
+            console.error("Lỗi khi gửi tin nhắn:", error.response ? error.response.data : error);
+        });
+}
+
+// Ghi log phản hồi từ ChatGPT
+async function processMessage(sender_psid, userMessage) {
+    console.log(`Người dùng (${sender_psid}) gửi: ${userMessage}`);
+
+    try {
+        const botResponse = await getChatGPTResponse(userMessage);
+        console.log(`ChatGPT phản hồi: ${botResponse.text}`);
+
+        sendMessage(sender_psid, botResponse.text);
+    } catch (error) {
+        console.error("Lỗi xử lý tin nhắn:", error);
+        sendMessage(sender_psid, "Xin lỗi, tôi gặp sự cố khi phản hồi.");
+    }
 }
 
 // Khởi chạy server
