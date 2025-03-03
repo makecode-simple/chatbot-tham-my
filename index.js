@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai'); // Chỉ import OpenAI một lần
 require('dotenv').config(); // Nạp biến môi trường từ file .env
 
 const app = express();
@@ -13,50 +13,11 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 // Cấu hình OpenAI API
-const openai = new OpenAIApi(new Configuration({
+const openai = new OpenAI({
     apiKey: OPENAI_API_KEY
-}));
-
-// Xử lý khi Facebook gửi dữ liệu đến Webhook
-app.post('/webhook', (req, res) => {
-    let body = req.body;
-
-    if (body.object === 'page') {
-        body.entry.forEach(entry => {
-            let webhookEvent = entry.messaging[0];
-            let senderId = webhookEvent.sender.id;
-
-            if (webhookEvent.message) {
-                handleMessage(senderId, webhookEvent.message);
-            }
-        });
-
-        res.status(200).send('EVENT_RECEIVED');
-    } else {
-        res.sendStatus(404);
-    }
 });
-
-// Xử lý tin nhắn từ người dùng
-async function handleMessage(senderId, receivedMessage) {
-    let response;
-
-    if (receivedMessage.text) {
-        response = await getChatGPTResponse(receivedMessage.text);
-    } else {
-        response = { "text": "Xin lỗi, tôi chỉ hiểu tin nhắn dạng văn bản!" };
-    }
-
-    sendMessage(senderId, response);
-}
 
 // Gọi API ChatGPT để tạo phản hồi
-const { OpenAI } = require('openai');
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY // Lấy API Key từ file .env
-});
-
 async function getChatGPTResponse(userMessage) {
     try {
         const response = await openai.chat.completions.create({
@@ -71,34 +32,42 @@ async function getChatGPTResponse(userMessage) {
     }
 }
 
-// Gửi tin nhắn phản hồi
-async function sendMessage(senderId, response) {
-    try {
-        await axios.post(`https://graph.facebook.com/v12.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
-            recipient: { id: senderId },
-            message: response
+// Lắng nghe tin nhắn từ Facebook Messenger
+app.post('/webhook', async (req, res) => {
+    let body = req.body;
+
+    if (body.object === 'page') {
+        body.entry.forEach(async (entry) => {
+            let webhook_event = entry.messaging[0];
+            let sender_psid = webhook_event.sender.id;
+
+            if (webhook_event.message) {
+                let userMessage = webhook_event.message.text;
+                let botResponse = await getChatGPTResponse(userMessage);
+
+                sendMessage(sender_psid, botResponse.text);
+            }
         });
-    } catch (error) {
-        console.error("Lỗi khi gửi tin nhắn: ", error.response ? error.response.data : error.message);
-    }
-}
 
-// Cấu hình Webhook Verification
-app.get('/webhook', (req, res) => {
-    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-
-    let mode = req.query['hub.mode'];
-    let token = req.query['hub.verify_token'];
-    let challenge = req.query['hub.challenge'];
-
-    if (mode && token === VERIFY_TOKEN) {
-        res.status(200).send(challenge);
+        res.status(200).send('EVENT_RECEIVED');
     } else {
-        res.sendStatus(403);
+        res.sendStatus(404);
     }
 });
 
-// Khởi động server
+// Hàm gửi tin nhắn về Messenger
+function sendMessage(sender_psid, response) {
+    let request_body = {
+        recipient: { id: sender_psid },
+        message: { text: response }
+    };
+
+    axios.post(`https://graph.facebook.com/v17.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, request_body)
+        .then(() => console.log("Message sent!"))
+        .catch(error => console.error("Lỗi khi gửi tin nhắn:", error.response ? error.response.data : error));
+}
+
+// Khởi chạy server
 app.listen(PORT, () => {
     console.log(`Chatbot đang chạy trên cổng ${PORT}`);
 });
