@@ -35,10 +35,9 @@ async function sendImagesBatch(senderId, images) {
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-    // Giới hạn tối đa 10 ảnh (Messenger nhóm tối đa 10 ảnh)
+    // Giới hạn tối đa 10 ảnh
     const maxImages = images.slice(0, 10);
 
-    // Gửi tất cả ảnh song song
     let sendRequests = maxImages.map(url => {
         return new Promise((resolve, reject) => {
             request({
@@ -66,10 +65,9 @@ async function sendImagesBatch(senderId, images) {
         });
     });
 
-    // Chạy tất cả request song song
+    // Gửi tất cả ảnh cùng lúc (song song)
     await Promise.all(sendRequests);
 }
-
 
 // 📌 Xử lý tin nhắn và gửi ảnh nhóm
 async function handleMessage(senderId, userMessage) {
