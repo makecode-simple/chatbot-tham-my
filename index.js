@@ -46,7 +46,7 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            await sendImagesAlbum(senderId, images); // Gửi ảnh theo nhóm 5 tấm
+            await sendImagesIndividually(senderId, images); // Gửi từng ảnh để Messenger tự gom thành album
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
@@ -55,25 +55,6 @@ async function handleMessage(senderId, userMessage) {
         }
         await sendMessage(senderId, { text: chatgptResponse });
     }
-}
-// 🔥 Hàm gửi ảnh theo nhóm 5 ảnh để Messenger tự gom thành album
-async function sendImagesAlbum(senderId, images) {
-    if (images.length === 0) return;
-
-    const elements = images.slice(0, 10).map(url => ({
-        media_type: "image",
-        url: url
-    }));
-
-    await sendMessage(senderId, {
-        attachment: {
-            type: "template",
-            payload: {
-                template_type: "media",
-                elements: elements
-            }
-        }
-    });
 }
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
