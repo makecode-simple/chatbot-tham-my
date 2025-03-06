@@ -39,21 +39,17 @@ async function sendImagesBatch(senderId, images) {
     const maxImages = images.slice(0, 10);
 
     let attachments = maxImages.map(url => ({
-        type: "image",
-        payload: { url: url, is_reusable: true }
+        attachment: {
+            type: "image",
+            payload: { url: url, is_reusable: true }
+        }
     }));
 
-    // Gửi tất cả ảnh trong một tin nhắn duy nhất
+    // Gửi tất cả ảnh trong một request
     let requestBody = {
         recipient: { id: senderId },
         message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: attachments
-                }
-            }
+            attachments: attachments
         }
     };
 
