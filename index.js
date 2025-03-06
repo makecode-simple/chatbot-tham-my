@@ -28,7 +28,6 @@ const scripts = {
     }
 };
 
-// 🔥 Xử lý tin nhắn khách gửi đến
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
@@ -48,13 +47,10 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            // Lấy tối đa 10 ảnh đầu tiên từ danh sách
-            let imageMessages = images.slice(0, 10).map(url => ({
-                attachment: { type: "image", payload: { url } }
-            }));
-
-            // Gửi tất cả ảnh trong **1 request duy nhất**
-            await sendMessage(senderId, imageMessages);
+            for (let i = 0; i < images.length; i++) {
+                await sendMessage(senderId, { attachment: { type: "image", payload: { url: images[i] } } });
+                await new Promise(resolve => setTimeout(resolve, 1000)); // ⏳ Chờ 1s giữa các ảnh
+            }
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
