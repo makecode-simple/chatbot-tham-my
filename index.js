@@ -45,14 +45,42 @@ async function handleMessage(senderId, userMessage) {
         response.text = scripts[service].text;
         await sendMessage(senderId, response);
 
-        // Lấy ảnh feedback từ Cloudinary
+        // 🖼️ Lấy ảnh feedback từ Cloudinary
         const images = await getImages(scripts[service].images);
-        for (let imgUrl of images) {
-            await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+
+        if (images.length > 1) {
+            // Gửi album ảnh
+            let elements = images.map(imgUrl => ({
+                media_type: "image",
+                url: imgUrl
+            }));
+
+            await sendMessage(senderId, {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "media",
+                        elements: elements
+                    }
+                }
+            });
+        } else if (images.length === 1) {
+            // Nếu chỉ có một ảnh thì gửi bình thường
+            await sendMessage(senderId, {
+                attachment: { type: "image", payload: { url: images[0] } }
+            });
         }
     } else {
+        // 💡 Debug phản hồi từ ChatGPT
         let chatgptResponse = await getChatGPTResponse(userMessage);
-        await sendMessage(senderId, `Dạ chị ơi, em chưa có thông tin chính xác về câu hỏi này. Nhưng em có thể giải thích thêm về khái niệm này nha!\n\n${chatgptResponse}`);
+        console.log("ChatGPT Response:", chatgptResponse);
+
+        // Gửi câu trả lời từ ChatGPT
+        if (chatgptResponse) {
+            await sendMessage(senderId, `Dạ chị ơi, đây là thông tin em tìm được:\n\n${chatgptResponse}`);
+        } else {
+            await sendMessage(senderId, "Dạ chị ơi, em chưa có thông tin chính xác về câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊");
+        }
     }
 }
 
