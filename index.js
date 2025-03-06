@@ -31,18 +31,14 @@ const scripts = {
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    const sendPromises = images.map(url => 
-        sendMessage(senderId, {
-            attachment: {
-                type: "image",
-                payload: { url: url, is_reusable: true }
-            }
-        })
-    );
+    let attachments = images.map(url => ({
+        type: "image",
+        payload: { url: url, is_reusable: true }
+    }));
 
-    await Promise.all(sendPromises); // Gửi đồng thời tất cả ảnh
+    await sendMessage(senderId, { attachment: { type: "template", payload: { template_type: "media", elements: attachments } } });
 }
-
+// Gửi tin cho khách
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
@@ -71,7 +67,6 @@ async function handleMessage(senderId, userMessage) {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
-
 
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
