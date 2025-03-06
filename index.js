@@ -48,39 +48,34 @@ async function handleMessage(senderId, userMessage) {
         // 🖼️ Lấy ảnh feedback từ Cloudinary
         const images = await getImages(scripts[service].images);
 
-        if (images.length > 1) {
-            // Gửi album ảnh
-            let elements = images.map(imgUrl => ({
-                media_type: "image",
-                url: imgUrl
+        // Nếu có ảnh, gửi dưới dạng album (generic template)
+        if (images.length > 0) {
+            let elements = images.slice(0, 10).map(url => ({
+                title: "Feedback khách hàng",
+                image_url: url,
+                subtitle: "Kết quả thực tế sau dịch vụ",
+                default_action: { type: "web_url", url }
             }));
 
-            await sendMessage(senderId, {
+            let albumMessage = {
                 attachment: {
                     type: "template",
                     payload: {
-                        template_type: "media",
-                        elements: elements
+                        template_type: "generic",
+                        elements
                     }
                 }
-            });
-        } else if (images.length === 1) {
-            // Nếu chỉ có một ảnh thì gửi bình thường
-            await sendMessage(senderId, {
-                attachment: { type: "image", payload: { url: images[0] } }
-            });
+            };
+
+            await sendMessage(senderId, albumMessage);
         }
     } else {
-        // 💡 Debug phản hồi từ ChatGPT
+        // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
         let chatgptResponse = await getChatGPTResponse(userMessage);
-        console.log("ChatGPT Response:", chatgptResponse);
-
-        // Gửi câu trả lời từ ChatGPT
-        if (chatgptResponse) {
-            await sendMessage(senderId, `Dạ chị ơi, đây là thông tin em tìm được:\n\n${chatgptResponse}`);
-        } else {
-            await sendMessage(senderId, "Dạ chị ơi, em chưa có thông tin chính xác về câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊");
+        if (!chatgptResponse || chatgptResponse.trim() === "") {
+            chatgptResponse = "Dạ chị ơi, em chưa có câu trả lời chính xác cho câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊";
         }
+        await sendMessage(senderId, { text: chatgptResponse });
     }
 }
 
