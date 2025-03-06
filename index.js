@@ -27,30 +27,22 @@ const scripts = {
         images: "hutmo"
     }
 };
-// Gửi toàn bộ ảnh trong 1 lần (Messenger sẽ tự xếp chồng ảnh)
+// Gửi tất cả ảnh cùng lúc để Messenger tự nhóm lại
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    await sendMessage(senderId, {
-        attachment: {
-            type: "image",
-            payload: {
-                is_reusable: true, // Cho phép sử dụng lại ảnh
-                url: images[0] // Messenger chỉ chấp nhận 1 URL, trick ở đây là gửi 1 URL đại diện
+    const sendPromises = images.map(url => 
+        sendMessage(senderId, {
+            attachment: {
+                type: "image",
+                payload: { url: url, is_reusable: true }
             }
-        }
-    });
+        })
+    );
 
-    // Gửi tất cả ảnh còn lại trong 1 tin nhắn JSON
-    let attachments = images.map(url => ({
-        type: "image",
-        payload: { url: url, is_reusable: true }
-    }));
-
-    await sendMessage(senderId, { attachment: attachments });
+    await Promise.all(sendPromises); // Gửi đồng thời tất cả ảnh
 }
 
-// 🎯 Hàm gửi tin nhắn cho khách
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
@@ -79,6 +71,7 @@ async function handleMessage(senderId, userMessage) {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
+
 
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
