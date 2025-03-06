@@ -40,7 +40,6 @@ async function handleMessage(senderId, userMessage) {
         service = "hutmo";
     }
 
-    // Nếu có dịch vụ hợp lệ
     if (service && scripts[service]) {
         response.text = scripts[service].text;
         await sendMessage(senderId, response);
@@ -49,16 +48,15 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            for (let i = 0; i < Math.min(images.length, 10); i++) {
-                let imgUrl = images[i];
-                await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+            // Lấy tối đa 10 ảnh đầu tiên từ danh sách
+            let imageMessages = images.slice(0, 10).map(url => ({
+                attachment: { type: "image", payload: { url } }
+            }));
 
-                // ⏳ Chờ 0.5 giây trước khi gửi ảnh tiếp theo
-                await new Promise(resolve => setTimeout(resolve, 500));
-            }
+            // Gửi tất cả ảnh trong **1 request duy nhất**
+            await sendMessage(senderId, imageMessages);
         }
     } else {
-        // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
         let chatgptResponse = await getChatGPTResponse(userMessage);
         if (!chatgptResponse || chatgptResponse.trim() === "") {
             chatgptResponse = "Dạ chị ơi, em chưa có câu trả lời chính xác cho câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊";
