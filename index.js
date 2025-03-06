@@ -27,12 +27,11 @@ const scripts = {
         images: "hutmo"
     }
 };
-
+// 🎯 Hàm gửi tin nhắn cho khách
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
 
-    // Xác định dịch vụ khách quan tâm
     if (userMessage.includes("nâng ngực")) {
         service = "nangnguc";
     } else if (userMessage.includes("hút mỡ")) {
@@ -47,10 +46,7 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            for (let i = 0; i < images.length; i++) {
-                await sendMessage(senderId, { attachment: { type: "image", payload: { url: images[i] } } });
-                await new Promise(resolve => setTimeout(resolve, 1000)); // ⏳ Chờ 1s giữa các ảnh
-            }
+            await sendImagesBatch(senderId, images); // Gửi ảnh theo nhóm
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
@@ -58,6 +54,18 @@ async function handleMessage(senderId, userMessage) {
             chatgptResponse = "Dạ chị ơi, em chưa có câu trả lời chính xác cho câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊";
         }
         await sendMessage(senderId, { text: chatgptResponse });
+    }
+}
+
+// 🔥 Hàm gửi ảnh theo nhóm 4 ảnh một lần, chờ 2s giữa mỗi nhóm
+async function sendImagesBatch(senderId, images) {
+    const BATCH_SIZE = 4; // Gửi 4 ảnh mỗi lần (tránh bị gom nhóm thành album 5 ảnh)
+    for (let i = 0; i < images.length; i += BATCH_SIZE) {
+        let batch = images.slice(i, i + BATCH_SIZE);
+        for (let imgUrl of batch) {
+            await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+        }
+        await new Promise(resolve => setTimeout(resolve, 2000)); // ⏳ Chờ 2s giữa mỗi batch
     }
 }
 // 🎯 Webhook xử lý tin nhắn từ Messenger
