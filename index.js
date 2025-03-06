@@ -28,14 +28,15 @@ const scripts = {
         images: "hutmo"
     }
 };
+
+// 📌 Gửi ảnh từng tấm một để Messenger nhóm lại đúng cách
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    // Gửi ảnh hàng loạt bằng cách tạo một batch request
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-    
-    let requests = images.map(url => {
-        return {
+
+    for (let url of images) {
+        let requestBody = {
             recipient: { id: senderId },
             message: {
                 attachment: {
@@ -44,23 +45,27 @@ async function sendImagesBatch(senderId, images) {
                 }
             }
         };
-    });
 
-    // Gửi hàng loạt bằng batch API của Facebook
-    request({
-        uri: `https://graph.facebook.com/v17.0/me/messages`,
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "POST",
-        json: { messaging_type: "UPDATE", recipient: { id: senderId }, message: { attachment: requests } }
-    }, (err, res, body) => {
-        if (err) {
-            console.error("Lỗi gửi ảnh hàng loạt:", err);
-        } else {
-            console.log("Gửi ảnh hàng loạt thành công:", body);
-        }
-    });
+        await new Promise((resolve, reject) => {
+            request({
+                uri: `https://graph.facebook.com/v17.0/me/messages`,
+                qs: { access_token: PAGE_ACCESS_TOKEN },
+                method: "POST",
+                json: requestBody
+            }, (err, res, body) => {
+                if (err) {
+                    console.error("❌ Lỗi gửi ảnh:", err);
+                    reject(err);
+                } else {
+                    console.log("✅ Ảnh đã gửi thành công:", body);
+                    resolve(body);
+                }
+            });
+        });
+    }
 }
-// Gửi tin cho khách
+
+// 📌 Gửi tin nhắn + ảnh nhóm
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
@@ -75,11 +80,18 @@ async function handleMessage(senderId, userMessage) {
         response.text = scripts[service].text;
         await sendMessage(senderId, response); // Gửi text trước
 
-        // 🖼️ Lấy ảnh feedback từ Cloudinary
-        const images = await getImages(scripts[service].images);
+        try {
+            // 🖼️ Lấy ảnh feedback từ Cloudinary
+            const images = await getImages(scripts[service].images);
 
-        if (images.length > 0) {
-            await sendImagesBatch(senderId, images); // Gửi tất cả ảnh cùng lúc
+            if (images && images.length > 0) {
+                console.log(`📸 Tìm thấy ${images.length} ảnh, gửi đi...`);
+                await sendImagesBatch(senderId, images); // Gửi tất cả ảnh từng cái
+            } else {
+                console.warn("⚠️ Không tìm thấy ảnh để gửi.");
+            }
+        } catch (error) {
+            console.error("❌ Lỗi khi lấy ảnh từ Cloudinary:", error);
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
