@@ -27,6 +27,20 @@ const scripts = {
         images: "hutmo"
     }
 };
+// 🔥 Hàm gửi từng ảnh một để Messenger tự động gom thành album
+async function sendImagesIndividually(senderId, images) {
+    if (images.length === 0) return;
+
+    for (let imgUrl of images) {
+        await sendMessage(senderId, {
+            attachment: {
+                type: "image",
+                payload: { url: imgUrl }
+            }
+        });
+    }
+}
+
 // 🎯 Hàm gửi tin nhắn cho khách
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
