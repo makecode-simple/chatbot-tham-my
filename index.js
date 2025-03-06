@@ -49,8 +49,12 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            for (let imgUrl of images.slice(0, 10)) {
+            for (let i = 0; i < Math.min(images.length, 10); i++) {
+                let imgUrl = images[i];
                 await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+
+                // ⏳ Chờ 0.5 giây trước khi gửi ảnh tiếp theo
+                await new Promise(resolve => setTimeout(resolve, 500));
             }
         }
     } else {
@@ -62,7 +66,6 @@ async function handleMessage(senderId, userMessage) {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
-
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     let body = req.body;
