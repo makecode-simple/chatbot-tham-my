@@ -27,18 +27,18 @@ const scripts = {
         images: "hutmo"
     }
 };
-// 🔥 Hàm gửi từng ảnh một để Messenger tự động gom thành album
-async function sendImagesIndividually(senderId, images) {
+// 🔥 Gửi tất cả ảnh cùng một lúc để Messenger tự gom nhóm
+async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    for (let imgUrl of images) {
-        await sendMessage(senderId, {
-            attachment: {
-                type: "image",
-                payload: { url: imgUrl }
-            }
-        });
-    }
+    const messages = images.map(url => ({
+        attachment: {
+            type: "image",
+            payload: { url: url }
+        }
+    }));
+
+    await sendMessage(senderId, messages);
 }
 
 // 🎯 Hàm gửi tin nhắn cho khách
@@ -54,13 +54,13 @@ async function handleMessage(senderId, userMessage) {
 
     if (service && scripts[service]) {
         response.text = scripts[service].text;
-        await sendMessage(senderId, response);
+        await sendMessage(senderId, response); // Gửi text trước
 
         // 🖼️ Lấy ảnh feedback từ Cloudinary
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            await sendImagesIndividually(senderId, images); // Gửi từng ảnh để Messenger tự gom thành album
+            await sendImagesBatch(senderId, images); // Gửi tất cả ảnh cùng lúc
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
@@ -70,6 +70,7 @@ async function handleMessage(senderId, userMessage) {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
+
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     let body = req.body;
