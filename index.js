@@ -46,7 +46,7 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            await sendImagesBatch(senderId, images); // Gửi ảnh theo nhóm
+            await sendImagesAlbum(senderId, images); // Gửi ảnh theo nhóm 5 tấm
         }
     } else {
         let chatgptResponse = await getChatGPTResponse(userMessage);
@@ -57,17 +57,6 @@ async function handleMessage(senderId, userMessage) {
     }
 }
 
-// 🔥 Hàm gửi ảnh theo nhóm 4 ảnh một lần, chờ 2s giữa mỗi nhóm
-async function sendImagesBatch(senderId, images) {
-    const BATCH_SIZE = 4; // Gửi 4 ảnh mỗi lần (tránh bị gom nhóm thành album 5 ảnh)
-    for (let i = 0; i < images.length; i += BATCH_SIZE) {
-        let batch = images.slice(i, i + BATCH_SIZE);
-        for (let imgUrl of batch) {
-            await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
-        }
-        await new Promise(resolve => setTimeout(resolve, 3000)); // ⏳ Chờ 3s giữa mỗi batch
-    }
-}
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     let body = req.body;
