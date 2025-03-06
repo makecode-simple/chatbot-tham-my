@@ -34,58 +34,34 @@ async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-    let attachmentIds = [];
 
-    // 1️⃣ **Upload tất cả ảnh lên Messenger trước**
-    for (let url of images) {
-        try {
-            let uploadResponse = await new Promise((resolve, reject) => {
-                request({
-                    uri: `https://graph.facebook.com/v17.0/me/message_attachments`,
-                    qs: { access_token: PAGE_ACCESS_TOKEN },
-                    method: "POST",
-                    json: {
-                        message: {
-                            attachment: {
-                                type: "image",
-                                payload: { url: url, is_reusable: true }
-                            }
-                        }
-                    }
-                }, (err, res, body) => {
-                    if (err || !body.attachment_id) {
-                        console.error("❌ Lỗi upload ảnh:", err || body);
-                        reject(err || body);
-                    } else {
-                        console.log(`✅ Ảnh uploaded: ${body.attachment_id}`);
-                        resolve(body.attachment_id);
-                    }
-                });
-            });
+    // Giới hạn tối đa 10 ảnh (Messenger chỉ hiển thị tối đa 10 ảnh trong album)
+    const maxImages = images.slice(0, 10);
 
-            attachmentIds.push(uploadResponse);
-        } catch (error) {
-            console.error("❌ Không thể upload ảnh:", error);
-        }
-    }
+    let attachments = maxImages.map(url => ({
+        type: "image",
+        payload: { url: url, is_reusable: true }
+    }));
 
-    if (attachmentIds.length === 0) return;
-
-    // 2️⃣ **Gửi tất cả ảnh trong cùng một batch request**
-    let batchRequests = attachmentIds.map(id => ({
+    // Gửi tất cả ảnh trong một tin nhắn duy nhất
+    let requestBody = {
         recipient: { id: senderId },
         message: {
             attachment: {
-                type: "image",
-                payload: { attachment_id: id }
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: attachments
+                }
             }
         }
-    }));
+    };
 
-    request.post({
-        uri: `https://graph.facebook.com`,
+    request({
+        uri: `https://graph.facebook.com/v17.0/me/messages`,
         qs: { access_token: PAGE_ACCESS_TOKEN },
-        json: { batch: batchRequests }
+        method: "POST",
+        json: requestBody
     }, (err, res, body) => {
         if (err) {
             console.error("❌ Lỗi gửi album ảnh:", err);
