@@ -18,7 +18,7 @@ async function getImages(service) {
     const result = await cloudinary.api.resources({
       type: "upload",
       prefix: folderPath,
-      max_results: 5,
+      max_results: 10,
     });
     
     // Trả về danh sách URL ảnh
