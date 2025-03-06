@@ -48,26 +48,13 @@ async function handleMessage(senderId, userMessage) {
         // 🖼️ Lấy ảnh feedback từ Cloudinary
         const images = await getImages(scripts[service].images);
 
-        // Nếu có ảnh, gửi dưới dạng album (generic template)
         if (images.length > 0) {
-            let elements = images.slice(0, 10).map(url => ({
-                title: "Feedback khách hàng",
-                image_url: url,
-                subtitle: "Kết quả thực tế sau dịch vụ",
-                default_action: { type: "web_url", url }
+            // Gửi tất cả ảnh trong một tin nhắn để Messenger tự gom nhóm
+            const attachments = images.map(url => ({
+                attachment: { type: "image", payload: { url } }
             }));
 
-            let albumMessage = {
-                attachment: {
-                    type: "template",
-                    payload: {
-                        template_type: "generic",
-                        elements
-                    }
-                }
-            };
-
-            await sendMessage(senderId, albumMessage);
+            await sendMessage(senderId, attachments);
         }
     } else {
         // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
@@ -78,7 +65,6 @@ async function handleMessage(senderId, userMessage) {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
-
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     let body = req.body;
