@@ -29,43 +29,48 @@ const scripts = {
     }
 };
 
-// 📌 Gửi ảnh từng tấm một để Messenger nhóm lại đúng cách
+// 📌 Gửi ảnh nhóm theo Media Template
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-    for (let url of images) {
-        let requestBody = {
-            recipient: { id: senderId },
-            message: {
-                attachment: {
-                    type: "image",
-                    payload: { url: url, is_reusable: true }
+    // Giới hạn tối đa 10 ảnh để tránh lỗi Messenger
+    const maxImages = images.slice(0, 10);
+
+    let elements = maxImages.map(url => ({
+        media_type: "image",
+        url: url
+    }));
+
+    let requestBody = {
+        recipient: { id: senderId },
+        message: {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "media",
+                    elements: elements
                 }
             }
-        };
+        }
+    };
 
-        await new Promise((resolve, reject) => {
-            request({
-                uri: `https://graph.facebook.com/v17.0/me/messages`,
-                qs: { access_token: PAGE_ACCESS_TOKEN },
-                method: "POST",
-                json: requestBody
-            }, (err, res, body) => {
-                if (err) {
-                    console.error("❌ Lỗi gửi ảnh:", err);
-                    reject(err);
-                } else {
-                    console.log("✅ Ảnh đã gửi thành công:", body);
-                    resolve(body);
-                }
-            });
-        });
-    }
+    request({
+        uri: `https://graph.facebook.com/v17.0/me/messages`,
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "POST",
+        json: requestBody
+    }, (err, res, body) => {
+        if (err) {
+            console.error("❌ Lỗi gửi bó ảnh:", err);
+        } else {
+            console.log("✅ Gửi bó ảnh thành công:", body);
+        }
+    });
 }
 
-// 📌 Gửi tin nhắn + ảnh nhóm
+// 📌 Xử lý tin nhắn và gửi ảnh nhóm
 async function handleMessage(senderId, userMessage) {
     let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
     let service = "";
@@ -86,7 +91,7 @@ async function handleMessage(senderId, userMessage) {
 
             if (images && images.length > 0) {
                 console.log(`📸 Tìm thấy ${images.length} ảnh, gửi đi...`);
-                await sendImagesBatch(senderId, images); // Gửi tất cả ảnh từng cái
+                await sendImagesBatch(senderId, images); // Gửi nhóm ảnh bằng Media Template
             } else {
                 console.warn("⚠️ Không tìm thấy ảnh để gửi.");
             }
