@@ -49,11 +49,9 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            let imageMessages = images.slice(0, 10).map(url => ({
-                attachment: { type: "image", payload: { url } }
-            }));
-
-            await sendMessage(senderId, imageMessages);
+            for (let imgUrl of images.slice(0, 10)) {
+                await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+            }
         }
     } else {
         // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
