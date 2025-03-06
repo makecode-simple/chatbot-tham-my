@@ -27,18 +27,18 @@ const scripts = {
         images: "hutmo"
     }
 };
-// 🔥 Gửi tất cả ảnh cùng một lúc để Messenger tự gom nhóm
+// 🔥 Gửi tất cả ảnh lần lượt để Messenger tự gom nhóm
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    const messages = images.map(url => ({
-        attachment: {
-            type: "image",
-            payload: { url: url }
-        }
-    }));
-
-    await sendMessage(senderId, messages);
+    for (const url of images) {
+        await sendMessage(senderId, {
+            attachment: {
+                type: "image",
+                payload: { url: url }
+            }
+        });
+    }
 }
 
 // 🎯 Hàm gửi tin nhắn cho khách
