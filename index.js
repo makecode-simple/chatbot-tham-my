@@ -35,7 +35,7 @@ async function sendImagesBatch(senderId, images) {
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-    // Giới hạn tối đa 10 ảnh
+    // Giới hạn tối đa 10 ảnh (Messenger chỉ nhóm tối đa 10 ảnh)
     const maxImages = images.slice(0, 10);
 
     let sendRequests = maxImages.map(url => {
