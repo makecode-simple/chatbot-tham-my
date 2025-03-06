@@ -27,16 +27,37 @@ const scripts = {
         images: "hutmo"
     }
 };
-// Gửi tất cả ảnh cùng lúc để Messenger tự nhóm lại
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    let attachments = images.map(url => ({
-        type: "image",
-        payload: { url: url, is_reusable: true }
-    }));
+    // Gửi ảnh hàng loạt bằng cách tạo một batch request
+    const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+    
+    let requests = images.map(url => {
+        return {
+            recipient: { id: senderId },
+            message: {
+                attachment: {
+                    type: "image",
+                    payload: { url: url, is_reusable: true }
+                }
+            }
+        };
+    });
 
-    await sendMessage(senderId, { attachment: { type: "template", payload: { template_type: "media", elements: attachments } } });
+    // Gửi hàng loạt bằng batch API của Facebook
+    request({
+        uri: `https://graph.facebook.com/v17.0/me/messages`,
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "POST",
+        json: { messaging_type: "UPDATE", recipient: { id: senderId }, message: { attachment: requests } }
+    }, (err, res, body) => {
+        if (err) {
+            console.error("Lỗi gửi ảnh hàng loạt:", err);
+        } else {
+            console.log("Gửi ảnh hàng loạt thành công:", body);
+        }
+    });
 }
 // Gửi tin cho khách
 async function handleMessage(senderId, userMessage) {
