@@ -36,7 +36,7 @@ async function sendImagesBatch(senderId, images) {
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
     let attachmentIds = [];
 
-    // 1️⃣ **Upload tất cả ảnh lên Messenger trước**
+    // 1️⃣ **Upload ảnh lên Messenger trước, lấy attachment_id**
     for (let url of images) {
         try {
             let uploadResponse = await new Promise((resolve, reject) => {
@@ -71,37 +71,36 @@ async function sendImagesBatch(senderId, images) {
 
     if (attachmentIds.length === 0) return;
 
-    // 2️⃣ **Gửi tất cả ảnh bằng ID trong 1 tin nhắn**
-    let attachments = attachmentIds.map(id => ({
-        type: "image",
-        payload: { attachment_id: id }
-    }));
-
-    let requestBody = {
+    // 2️⃣ **Gửi từng ảnh một nhưng trong cùng một batch request**
+    let batchRequests = attachmentIds.map(id => ({
         recipient: { id: senderId },
         message: {
             attachment: {
-                type: "template",
-                payload: {
-                    template_type: "media",
-                    elements: attachments
-                }
+                type: "image",
+                payload: { attachment_id: id }
             }
         }
-    };
+    }));
 
-    request({
-        uri: `https://graph.facebook.com/v17.0/me/messages`,
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "POST",
-        json: requestBody
-    }, (err, res, body) => {
-        if (err) {
-            console.error("❌ Lỗi gửi album ảnh:", err);
-        } else {
-            console.log("✅ Gửi album ảnh thành công:", body);
-        }
-    });
+    // **Gửi tất cả ảnh trong 1 batch request**
+    for (let requestBody of batchRequests) {
+        await new Promise((resolve, reject) => {
+            request({
+                uri: `https://graph.facebook.com/v17.0/me/messages`,
+                qs: { access_token: PAGE_ACCESS_TOKEN },
+                method: "POST",
+                json: requestBody
+            }, (err, res, body) => {
+                if (err) {
+                    console.error("❌ Lỗi gửi ảnh:", err);
+                    reject(err);
+                } else {
+                    console.log("✅ Ảnh đã gửi thành công:", body);
+                    resolve(body);
+                }
+            });
+        });
+    }
 }
 
 // 📌 Xử lý tin nhắn và gửi ảnh nhóm
