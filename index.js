@@ -45,16 +45,16 @@ async function handleMessage(senderId, userMessage) {
         response.text = scripts[service].text;
         await sendMessage(senderId, response);
 
-// 🖼️ Lấy ảnh feedback từ Cloudinary
-const images = await getImages(scripts[service].images);
+        // 🖼️ Lấy ảnh feedback từ Cloudinary
+        const images = await getImages(scripts[service].images);
 
-if (images.length > 0) {
-    // Gửi từng ảnh một, Messenger sẽ tự nhóm lại thành album ảnh
-    for (let imgUrl of images) {
-        await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
-    }
-}
-else {
+        if (images.length > 0) {
+            // Gửi từng ảnh một, Messenger sẽ tự nhóm lại thành album ảnh
+            for (let imgUrl of images) {
+                await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
+            }
+        }
+    } else {
         // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
         let chatgptResponse = await getChatGPTResponse(userMessage);
         if (!chatgptResponse || chatgptResponse.trim() === "") {
@@ -63,6 +63,7 @@ else {
         await sendMessage(senderId, { text: chatgptResponse });
     }
 }
+
 // 🎯 Webhook xử lý tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     let body = req.body;
