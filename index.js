@@ -65,7 +65,7 @@ async function sendImagesBatch(senderId, images) {
         for (let imgUrl of batch) {
             await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
         }
-        await new Promise(resolve => setTimeout(resolve, 2000)); // ⏳ Chờ 2s giữa mỗi batch
+        await new Promise(resolve => setTimeout(resolve, 3000)); // ⏳ Chờ 3s giữa mỗi batch
     }
 }
 // 🎯 Webhook xử lý tin nhắn từ Messenger
