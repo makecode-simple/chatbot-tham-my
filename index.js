@@ -27,18 +27,27 @@ const scripts = {
         images: "hutmo"
     }
 };
-// 🔥 Gửi tất cả ảnh lần lượt để Messenger tự gom nhóm
+// Gửi toàn bộ ảnh trong 1 lần (Messenger sẽ tự xếp chồng ảnh)
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
-    for (const url of images) {
-        await sendMessage(senderId, {
-            attachment: {
-                type: "image",
-                payload: { url: url }
+    await sendMessage(senderId, {
+        attachment: {
+            type: "image",
+            payload: {
+                is_reusable: true, // Cho phép sử dụng lại ảnh
+                url: images[0] // Messenger chỉ chấp nhận 1 URL, trick ở đây là gửi 1 URL đại diện
             }
-        });
-    }
+        }
+    });
+
+    // Gửi tất cả ảnh còn lại trong 1 tin nhắn JSON
+    let attachments = images.map(url => ({
+        type: "image",
+        payload: { url: url, is_reusable: true }
+    }));
+
+    await sendMessage(senderId, { attachment: attachments });
 }
 
 // 🎯 Hàm gửi tin nhắn cho khách
