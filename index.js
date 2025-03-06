@@ -35,26 +35,25 @@ async function sendImagesBatch(senderId, images) {
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-    // Giới hạn tối đa 10 ảnh (Messenger chỉ nhóm tối đa 10 ảnh)
+    // Giới hạn tối đa 10 ảnh (Messenger nhóm tối đa 10 ảnh)
     const maxImages = images.slice(0, 10);
 
-    for (let url of maxImages) {
-        let requestBody = {
-            recipient: { id: senderId },
-            message: {
-                attachment: {
-                    type: "image",
-                    payload: { url: url, is_reusable: true }
-                }
-            }
-        };
-
-        await new Promise((resolve, reject) => {
+    // Gửi tất cả ảnh song song
+    let sendRequests = maxImages.map(url => {
+        return new Promise((resolve, reject) => {
             request({
                 uri: `https://graph.facebook.com/v17.0/me/messages`,
                 qs: { access_token: PAGE_ACCESS_TOKEN },
                 method: "POST",
-                json: requestBody
+                json: {
+                    recipient: { id: senderId },
+                    message: {
+                        attachment: {
+                            type: "image",
+                            payload: { url: url, is_reusable: true }
+                        }
+                    }
+                }
             }, (err, res, body) => {
                 if (err) {
                     console.error("❌ Lỗi gửi ảnh:", err);
@@ -65,7 +64,10 @@ async function sendImagesBatch(senderId, images) {
                 }
             });
         });
-    }
+    });
+
+    // Chạy tất cả request song song
+    await Promise.all(sendRequests);
 }
 
 
