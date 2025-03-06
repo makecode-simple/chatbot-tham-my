@@ -49,10 +49,11 @@ async function handleMessage(senderId, userMessage) {
         const images = await getImages(scripts[service].images);
 
         if (images.length > 0) {
-            // Gửi từng ảnh một, Messenger sẽ tự nhóm lại thành album ảnh
-            for (let imgUrl of images) {
-                await sendMessage(senderId, { attachment: { type: "image", payload: { url: imgUrl } } });
-            }
+            let imageMessages = images.slice(0, 10).map(url => ({
+                attachment: { type: "image", payload: { url } }
+            }));
+
+            await sendMessage(senderId, imageMessages);
         }
     } else {
         // 🧠 Hỏi ChatGPT, nếu phản hồi rỗng thì thay thế bằng nội dung mặc định
