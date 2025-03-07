@@ -29,79 +29,38 @@ const scripts = {
     }
 };
 
-// 📌 Gửi tất cả ảnh cùng lúc bằng batch request
 async function sendImagesBatch(senderId, images) {
     if (images.length === 0) return;
 
     const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-    let attachmentIds = [];
 
-    // 1️⃣ **Upload ảnh lên Facebook Messenger trước**
-    for (let url of images) {
-        try {
-            let uploadResponse = await new Promise((resolve, reject) => {
-                request({
-                    uri: `https://graph.facebook.com/v17.0/me/message_attachments`,
-                    qs: { access_token: PAGE_ACCESS_TOKEN },
-                    method: "POST",
-                    json: {
-                        message: {
-                            attachment: {
-                                type: "image",
-                                payload: { url: url, is_reusable: true }
-                            }
-                        }
-                    }
-                }, (err, res, body) => {
-                    if (err || !body.attachment_id) {
-                        console.error("❌ Lỗi upload ảnh:", err || body);
-                        reject(err || body);
-                    } else {
-                        console.log(`✅ Ảnh uploaded: ${body.attachment_id}`);
-                        resolve(body.attachment_id);
-                    }
-                });
-            });
+    // Giới hạn tối đa 10 ảnh (Messenger chỉ nhóm tối đa 10 ảnh)
+    const maxImages = images.slice(0, 10);
 
-            attachmentIds.push(uploadResponse);
-        } catch (error) {
-            console.error("❌ Không thể upload ảnh:", error);
-        }
-    }
-
-    if (attachmentIds.length === 0) return;
-
-    // 2️⃣ **Gửi tất cả ảnh bằng ID trong một tin nhắn**
-    let attachments = attachmentIds.map(id => ({
-        type: "image",
-        payload: { attachment_id: id }
-    }));
-
-    let requestBody = {
-        recipient: { id: senderId },
-        message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "media",
-                    elements: attachments
+    for (let url of maxImages) {
+        let requestBody = {
+            recipient: { id: senderId },
+            message: {
+                attachment: {
+                    type: "image",
+                    payload: { url: url, is_reusable: true }
                 }
             }
-        }
-    };
+        };
 
-    request({
-        uri: `https://graph.facebook.com/v17.0/me/messages`,
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "POST",
-        json: requestBody
-    }, (err, res, body) => {
-        if (err) {
-            console.error("❌ Lỗi gửi album ảnh:", err);
-        } else {
-            console.log("✅ Gửi album ảnh thành công:", body);
-        }
-    });
+        request({
+            uri: `https://graph.facebook.com/v17.0/me/messages`,
+            qs: { access_token: PAGE_ACCESS_TOKEN },
+            method: "POST",
+            json: requestBody
+        }, (err, res, body) => {
+            if (err) {
+                console.error("❌ Lỗi gửi ảnh:", err);
+            } else {
+                console.log("✅ Ảnh đã gửi thành công:", body);
+            }
+        });
+    }
 }
 
 // 📌 Xử lý tin nhắn và gửi ảnh nhóm
