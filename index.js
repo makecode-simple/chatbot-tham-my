@@ -83,7 +83,8 @@ const greetingMessage = `Dạ chào chị, chị muốn tư vấn dịch vụ th
 // Các từ khoá kích hoạt gửi list dịch vụ và hỏi thông tin địa chỉ
 const genericTriggers = [
     "tư vấn", "dịch vụ", "giới thiệu", "thẩm mỹ", "có gì", "muốn biết dịch vụ",
-    "hello", "help me", "i need more information", "tư vấn giúp", "muốn làm đẹp", "không đau"
+    "hello", "help me", "i need more information", "tư vấn giúp", "muốn làm đẹp", "không đau", "hi", "chị cần tư vấn",
+	"cho chị thông tin dịch vụ bên mình đi em", "d.v bên mình sao em", "tu van dich vu", "co nhung dich vu tham my nao"
 ];
 
 const addressTriggers = [
@@ -95,29 +96,43 @@ app.post("/webhook", async (req, res) => {
     const body = req.body;
 
     if (body.object === "page") {
-        body.entry.forEach(async function(entry) {
+        body.entry.forEach(async function (entry) {
             const webhook_event = entry.messaging[0];
             const senderId = webhook_event.sender.id;
 
+            // Kiểm tra có message và text hay không
             if (webhook_event.message && webhook_event.message.text) {
-                const message = webhook_event.message.text;
+                const message = webhook_event.message.text.trim();
+                const lowerCaseMessage = message.toLowerCase();
 
                 console.log("Received message:", message);
 
-                const lowerCaseMessage = message.toLowerCase();
+                // Nếu câu quá ngắn hoặc vô nghĩa
+                if (message.length < 3) {
+                    await messengerService.sendMessage(senderId, {
+                        text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo để em tư vấn kỹ hơn nha!"
+                    });
+                    return;
+                }
 
+                // Kiểm tra địa chỉ
                 if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
-                    const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
+                    const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
+✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
+🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
                     await messengerService.sendMessage(senderId, { text: addressInfo });
                     return;
                 }
 
+                // Kiểm tra generic trigger (hỏi chung dịch vụ)
                 if (genericTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
                     await messengerService.sendMessage(senderId, { text: greetingMessage });
                     return;
                 }
 
+                // Kiểm tra flow dịch vụ
                 const matchedFlow = findFlow(message);
+
                 if (matchedFlow) {
                     await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
 
@@ -127,9 +142,9 @@ app.post("/webhook", async (req, res) => {
                     return;
                 }
 
+                // Nếu không có gì khớp, fallback ChatGPT
                 const chatGPTResponse = await chatGPTFallback(message);
                 await messengerService.sendMessage(senderId, { text: chatGPTResponse });
-
             } else {
                 console.log("Sự kiện không phải tin nhắn, bỏ qua!");
             }
@@ -140,6 +155,7 @@ app.post("/webhook", async (req, res) => {
         res.sendStatus(404);
     }
 });
+
 
 app.get("/webhook", (req, res) => {
     const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
