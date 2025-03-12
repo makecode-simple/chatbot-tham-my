@@ -24,6 +24,9 @@ function findFlow(userMessage) {
   });
 }
 
+// Regex kiểm tra SĐT Việt Nam
+const phoneRegex = /(0[3|5|7|8|9])+([0-9]{8})\b/;
+
 // Webhook nhận tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
   const body = req.body;
@@ -47,6 +50,18 @@ app.post("/webhook", async (req, res) => {
           return;
         }
 
+        // Kiểm tra nếu khách để lại SĐT trực tiếp
+        if (phoneRegex.test(lowerCaseMessage)) {
+          await messengerService.sendMessage(senderId, {
+            text: "Dạ em ghi nhận thông tin rồi nha chị! Bạn tư vấn viên sẽ liên hệ ngay cho mình ạ!"
+          });
+
+          // TODO: Đẩy thông tin qua CRM hoặc Google Sheet ở đây
+          console.log("Lead khách để lại số:", message);
+
+          return;
+        }
+
         // Kiểm tra flow trigger
         const matchedFlow = findFlow(message);
 
@@ -62,9 +77,9 @@ app.post("/webhook", async (req, res) => {
           return;
         }
 
-        // Không khớp trigger nào, fallback hỏi lại hoặc xin số
+        // Không khớp trigger nào và chưa có SĐT
         await messengerService.sendMessage(senderId, {
-          text: "Dạ chị đang hỏi về dịch vụ gì ạ? Chị có thể nhắn rõ hơn giúp em không? Hoặc để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn nha!"
+          text: "Dạ chị đang hỏi về dịch vụ gì ạ? Để rõ hơn, chị để lại số điện thoại/Zalo, bên em tư vấn ngay cho mình nha!"
         });
 
       } else {
