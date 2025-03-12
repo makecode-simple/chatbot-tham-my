@@ -14,18 +14,17 @@ function findFlow(userMessage) {
   const msg = userMessage.toLowerCase();
 
   return flowData.find(item => {
-    // Nếu không có trigger_keywords thì bỏ qua
     if (!item.trigger_keywords || !Array.isArray(item.trigger_keywords)) {
       return false;
     }
 
-    // Kiểm tra từng trigger có trong câu hỏi không
     return item.trigger_keywords.some(trigger => msg.includes(trigger));
   });
 }
 
-// Regex kiểm tra SĐT Việt Nam
-const phoneRegex = /(0[3|5|7|8|9])+([0-9]{8})\b/;
+// Regex kiểm tra SĐT Việt Nam và quốc tế
+const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
+const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
 // Webhook nhận tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
@@ -42,34 +41,40 @@ app.post("/webhook", async (req, res) => {
 
         console.log("Received message:", message);
 
-        // Kiểm tra câu hỏi ngắn không có ý nghĩa
+        // Kiểm tra câu hỏi quá ngắn
         if (message.length < 3) {
           await messengerService.sendMessage(senderId, {
-            text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo để em tư vấn kỹ hơn nha!"
+            text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
           });
           return;
         }
 
-        // Kiểm tra nếu khách để lại SĐT trực tiếp
-        if (phoneRegex.test(lowerCaseMessage)) {
+        // Kiểm tra nếu khách để lại số ĐT VN hoặc quốc tế
+        if (phoneRegexVN.test(lowerCaseMessage) || phoneRegexInternational.test(lowerCaseMessage)) {
           await messengerService.sendMessage(senderId, {
-            text: "Dạ em ghi nhận thông tin rồi nha chị! Bạn tư vấn viên sẽ liên hệ ngay cho mình ạ!"
+            text: "Dạ em ghi nhận thông tin rồi nha chị! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình ạ!"
           });
 
-          // TODO: Đẩy thông tin qua CRM hoặc Google Sheet ở đây
           console.log("Lead khách để lại số:", message);
-
           return;
         }
 
-        // Kiểm tra flow trigger
+        // Detect English message (to reply in English)
+        const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
+
+        if (isEnglish) {
+          await messengerService.sendMessage(senderId, {
+            text: "Hi, may I know which service you are interested in? Please leave your Zalo/Viber/WhatsApp so our assistant Ms. Ngan can contact you soon!"
+          });
+          return;
+        }
+
+        // Kiểm tra flow trigger từ JSON
         const matchedFlow = findFlow(message);
 
         if (matchedFlow) {
-          // Trả lời action_response từ JSON
           await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
 
-          // Nếu có next_step, gửi thêm
           if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
             await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
           }
@@ -77,9 +82,9 @@ app.post("/webhook", async (req, res) => {
           return;
         }
 
-        // Không khớp trigger nào và chưa có SĐT
+        // Không khớp trigger, chưa có SĐT ➡️ Xin Zalo/Viber để nhân viên hỗ trợ
         await messengerService.sendMessage(senderId, {
-          text: "Dạ chị đang hỏi về dịch vụ gì ạ? Để rõ hơn, chị để lại số điện thoại/Zalo, bên em tư vấn ngay cho mình nha!"
+          text: "Dạ chị có thể để lại SĐT Zalo/Viber để bạn Ngân - trợ lý bác sĩ có thể trao đổi, tư vấn chi tiết cho chị được không ạ?"
         });
 
       } else {
