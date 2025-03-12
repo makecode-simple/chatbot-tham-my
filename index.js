@@ -34,14 +34,32 @@ async function chatGPTFallback(message) {
     const endpoint = "https://api.openai.com/v1/chat/completions";
 
     const prompt = `
-    Bạn là trợ lý tư vấn thẩm mỹ Dr Hồ Cao Vũ.  
+    Bạn là nhân viên tư vấn thẩm mỹ tại Dr Hồ Cao Vũ.  
     Trả lời thân thiện, chuyên nghiệp, ngắn gọn, dễ hiểu.  
-    Tuyệt đối KHÔNG suy luận hoặc tự chế thông tin không có trong dữ liệu cung cấp.  
+    Tuyệt đối KHÔNG TỰ Ý suy luận, NGHIÊM CẤM TỰ CHẾ THÔNG TIN không có trong dữ liệu cung cấp.  
     Chỉ trả lời dựa trên dữ liệu đã được huấn luyện hoặc cung cấp bên dưới.
 
-    Nếu khách hỏi dịch vụ nâng ngực, mông, mắt, mũi, căng da mặt... hoặc địa chỉ, luôn trả lời theo nội dung:
-    - Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.
-    - Các dịch vụ chính gồm: Nâng ngực, hút mỡ bụng, nâng mũi, cắt mí, thẩm mỹ vùng kín, tái tạo vú sau điều trị ung thư...
+    Nếu khách hỏi địa chỉ, luôn chỉ trả lời theo nội dung:
+    - Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
+✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
+🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!
+	khách hỏi về các dịch vụ thẩm mỹ Dr. Hồ Cao Vũ có chỉ trả lời theo script này:
+    - Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
+* Tái tạo vú sau khi điều trị ung thư
+* Hút mỡ bụng, tạo hình thành bụng sau sinh
+* Tiểu phẫu cắt mí
+* Tiểu phẫu treo cung mày
+* Chỉnh mắt lỗi
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
+*Chỉnh mũi lỗi
+* Phẫu thuật căng da mặt.
+* Hút mỡ bụng/tay/ đùi/ lưng
+* Thẩm mỹ vùng kín
+* Căng da mặt toàn diện
+* Căng chỉ da mặt/ PRP trẻ hóa
+* Độn thái dương/ độn cằm
+* Hút mỡ tiêm lên mặt
 
     Nếu không tìm thấy câu hỏi nằm trong phạm vi dịch vụ hoặc thông tin, hãy hỏi lại:
     - "Dạ chị đang hỏi về dịch vụ gì ạ? Chị có thể nhắn rõ hơn giúp em không?"
@@ -116,16 +134,16 @@ app.post("/webhook", async (req, res) => {
                 }
 
 				// Kiểm tra địa chỉ
-					if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
-						const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
-					✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
-					🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
+				if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
+					const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
+				✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
+				🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
 
-						await messengerService.sendMessage(senderId, { text: addressInfo });
+					await messengerService.sendMessage(senderId, { text: addressInfo });
 
-						// Kết thúc xử lý ngay, không gửi thêm ChatGPT hay flow gì nữa
-						return;
-					}
+					// Bắt buộc return để ngắt luôn, không cho xử lý tiếp
+					return;
+				}
 
                 // Kiểm tra generic trigger (hỏi chung dịch vụ)
                 if (genericTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
