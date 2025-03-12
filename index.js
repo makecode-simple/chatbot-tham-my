@@ -69,36 +69,42 @@ app.post("/webhook", async (req, res) => {
         body.entry.forEach(async function(entry) {
             const webhook_event = entry.messaging[0];
             const senderId = webhook_event.sender.id;
-            const message = webhook_event.message.text;
 
-            console.log("Received message:", message);
+            // Kiểm tra có message và text hay không
+            if (webhook_event.message && webhook_event.message.text) {
+                const message = webhook_event.message.text;
 
-            const lowerCaseMessage = message.toLowerCase();
+                console.log("Received message:", message);
 
-            // Nếu khách nhắn lần đầu hoặc câu chung chung
-            const isGeneric = genericTriggers.some(trigger => lowerCaseMessage.includes(trigger));
+                const lowerCaseMessage = message.toLowerCase();
 
-            if (isGeneric) {
-                await messengerService.sendMessage(senderId, { text: greetingMessage });
-                return;
-            }
+                // Nếu khách nhắn lần đầu hoặc câu chung chung
+                const isGeneric = genericTriggers.some(trigger => lowerCaseMessage.includes(trigger));
 
-            // Check flow
-            const matchedFlow = findFlow(message);
-            if (matchedFlow) {
-                let response = matchedFlow.action_response;
+                if (isGeneric) {
+                    await messengerService.sendMessage(senderId, { text: greetingMessage });
+                    return;
+                }
 
-                // Gửi phản hồi chính
-                await messengerService.sendMessage(senderId, { text: response });
+                // Check flow
+                const matchedFlow = findFlow(message);
+                if (matchedFlow) {
+                    let response = matchedFlow.action_response;
 
-                // Next step nếu có
-                if (matchedFlow.next_step) {
-                    await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
+                    // Gửi phản hồi chính
+                    await messengerService.sendMessage(senderId, { text: response });
+
+                    // Next step nếu có
+                    if (matchedFlow.next_step) {
+                        await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
+                    }
+                } else {
+                    // Nếu không khớp flow, đẩy qua ChatGPT
+                    const chatGPTResponse = await chatGPTFallback(message);
+                    await messengerService.sendMessage(senderId, { text: chatGPTResponse });
                 }
             } else {
-                // Nếu không khớp flow, đẩy qua ChatGPT
-                const chatGPTResponse = await chatGPTFallback(message);
-                await messengerService.sendMessage(senderId, { text: chatGPTResponse });
+                console.log("Sự kiện không phải tin nhắn, bỏ qua!");
             }
         });
 
