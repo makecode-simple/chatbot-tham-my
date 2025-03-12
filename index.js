@@ -1,124 +1,111 @@
+// Import các module cần thiết
 const express = require("express");
 const bodyParser = require("body-parser");
-const { getImages } = require("./cloudinaryService");
-const { sendMessage, getChatGPTResponse } = require("./messengerService");
-const request = require("request");
+const messengerService = require("./messengerService");
+const cloudinaryService = require("./cloudinaryService");
+const fs = require("fs");
+const axios = require("axios");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
 app.use(bodyParser.json());
 
-// 🎯 Kịch bản phản hồi
-const scripts = {
-    "nangnguc": {
-        text: `Dạ chào chị, xin phép em giới thiệu về phương pháp phẫu thuật **NÂNG NGỰC KHÔNG ĐAU** bằng dao mổ siêu âm Ultrasonic Surgical Scalpel chị xem qua ạ.\n\n
-        🔹 Dao Ultrasonic Surgical Scalpel giúp bác sĩ tạo khoang ngực không chảy máu, giảm đau sau phẫu thuật đến 90%.\n
-        🔹 Thời gian nghỉ dưỡng rất ít, chỉ sau **6-12H** chị có thể sinh hoạt bình thường.\n
-        🔹 **Không đau - Không chảy máu - Không tiết dịch - Không để lại sẹo**.\n
-        ✅ Em gửi chị ảnh feedback của khách hàng nhé!`,
-        images: "nangnguc"
-    },
-    "hutmo": {
-        text: `Dạ chị ơi, đây là thông tin về **HÚT MỠ KHÔNG ĐAU** ạ! 💪\n\n
-        🔹 Công nghệ **Body Jet** hiện đại, hạn chế xâm lấn, **không gây đau, không để lại sẹo**.\n
-        🔹 Chỉ cần **1 lần duy nhất**, loại bỏ mỡ thừa hiệu quả, không tái phát.\n
-        🔹 Chị có thể đi lại bình thường sau **6-8 giờ** mà không cần nghỉ dưỡng.\n
-        ✅ Em gửi chị ảnh feedback khách hàng nhé!`,
-        images: "hutmo"
-    }
-};
+// Load JSON flow khi server khởi động
+const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
 
-async function sendImagesBatch(senderId, images) {
-    if (images.length === 0) return;
+// Hàm tìm flow phù hợp dựa vào trigger
+function findFlow(userMessage) {
+    userMessage = userMessage.toLowerCase();
+    return flowData.find(item => {
+        const triggers = item.sub_service.toLowerCase() + " " + item.sub_topic.toLowerCase();
+        return triggers.includes(userMessage);
+    });
+}
 
-    const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+// Hàm gọi ChatGPT fallback
+async function chatGPTFallback(message) {
+    const apiKey = process.env.OPENAI_API_KEY;
+    const endpoint = "https://api.openai.com/v1/chat/completions";
 
-    // Giới hạn tối đa 10 ảnh (Messenger chỉ nhóm tối đa 10 ảnh)
-    const maxImages = images.slice(0, 10);
+    const prompt = `Bạn là trợ lý tư vấn thẩm mỹ Dr Hồ Cao Vũ. Hãy tư vấn thân thiện, chuyên nghiệp. Nếu khách hỏi tiếng Anh hoặc ngoài phạm vi, xin SĐT/Zalo để hỗ trợ viên liên hệ.`;
 
-    for (let url of maxImages) {
-        let requestBody = {
-            recipient: { id: senderId },
-            message: {
-                attachment: {
-                    type: "image",
-                    payload: { url: url, is_reusable: true }
-                }
-            }
-        };
+    const data = {
+        model: "gpt-3.5-turbo",
+        messages: [
+            { role: "system", content: prompt },
+            { role: "user", content: message }
+        ],
+        max_tokens: 300
+    };
 
-        request({
-            uri: `https://graph.facebook.com/v17.0/me/messages`,
-            qs: { access_token: PAGE_ACCESS_TOKEN },
-            method: "POST",
-            json: requestBody
-        }, (err, res, body) => {
-            if (err) {
-                console.error("❌ Lỗi gửi ảnh:", err);
-            } else {
-                console.log("✅ Ảnh đã gửi thành công:", body);
+    try {
+        const res = await axios.post(endpoint, data, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${apiKey}`
             }
         });
+
+        return res.data.choices[0].message.content;
+    } catch (error) {
+        console.error("ChatGPT Error:", error);
+        return "Dạ xin lỗi chị, em chưa có thông tin rõ. Chị để lại SĐT/Zalo để bên em tư vấn kỹ hơn nha!";
     }
 }
 
-// 📌 Xử lý tin nhắn và gửi ảnh nhóm
-async function handleMessage(senderId, userMessage) {
-    let response = { text: "Dạ chị ơi, em chưa hiểu câu hỏi của chị. Chị có thể hỏi lại giúp em nha! 😊" };
-    let service = "";
-
-    if (userMessage.includes("nâng ngực")) {
-        service = "nangnguc";
-    } else if (userMessage.includes("hút mỡ")) {
-        service = "hutmo";
-    }
-
-    if (service && scripts[service]) {
-        response.text = scripts[service].text;
-        await sendMessage(senderId, response); // Gửi text trước
-
-        try {
-            // 🖼️ Lấy ảnh feedback từ Cloudinary
-            const images = await getImages(scripts[service].images);
-
-            if (images && images.length > 0) {
-                console.log(`📸 Tìm thấy ${images.length} ảnh, gửi đi...`);
-                await sendImagesBatch(senderId, images); // Gửi nhóm ảnh
-            } else {
-                console.warn("⚠️ Không tìm thấy ảnh để gửi.");
-            }
-        } catch (error) {
-            console.error("❌ Lỗi khi lấy ảnh từ Cloudinary:", error);
-        }
-    } else {
-        let chatgptResponse = await getChatGPTResponse(userMessage);
-        if (!chatgptResponse || chatgptResponse.trim() === "") {
-            chatgptResponse = "Dạ chị ơi, em chưa có câu trả lời chính xác cho câu hỏi này. Chị có thể hỏi lại giúp em nha! 😊";
-        }
-        await sendMessage(senderId, { text: chatgptResponse });
-    }
-}
-
-// 🎯 Webhook xử lý tin nhắn từ Messenger
+// Webhook nhận tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
-    let body = req.body;
+    const body = req.body;
 
     if (body.object === "page") {
         body.entry.forEach(async function(entry) {
-            let webhook_event = entry.messaging[0];
-            let sender_psid = webhook_event.sender.id;
+            const webhook_event = entry.messaging[0];
+            const senderId = webhook_event.sender.id;
+            const message = webhook_event.message.text;
 
-            if (webhook_event.message && webhook_event.message.text) {
-                await handleMessage(sender_psid, webhook_event.message.text.toLowerCase());
+            console.log("Received message:", message);
+
+            // Check flow
+            const matchedFlow = findFlow(message);
+            if (matchedFlow) {
+                let response = matchedFlow.action_response;
+
+                // Gửi phản hồi chính
+                await messengerService.sendMessage(senderId, { text: response });
+
+                // Next step nếu có
+                if (matchedFlow.next_step) {
+                    await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
+                }
+            } else {
+                // Nếu không khớp flow, đẩy qua ChatGPT
+                const chatGPTResponse = await chatGPTFallback(message);
+                await messengerService.sendMessage(senderId, { text: chatGPTResponse });
             }
         });
+
         res.status(200).send("EVENT_RECEIVED");
     } else {
         res.sendStatus(404);
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Chatbot đang chạy trên cổng ${PORT}`);
+// Endpoint xác thực webhook
+app.get("/webhook", (req, res) => {
+    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+    const mode = req.query["hub.mode"];
+    const token = req.query["hub.verify_token"];
+    const challenge = req.query["hub.challenge"];
+
+    if (mode && token) {
+        if (mode === "subscribe" && token === VERIFY_TOKEN) {
+            console.log("WEBHOOK_VERIFIED");
+            res.status(200).send(challenge);
+        } else {
+            res.sendStatus(403);
+        }
+    }
 });
+
+// Khởi chạy server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
