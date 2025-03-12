@@ -94,8 +94,8 @@ app.post("/webhook", async (req, res) => {
                     // Gửi phản hồi chính
                     await messengerService.sendMessage(senderId, { text: response });
 
-                    // Next step nếu có
-                    if (matchedFlow.next_step) {
+                    // Next step nếu có và không rỗng
+                    if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
                         await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
                     }
                 } else {
