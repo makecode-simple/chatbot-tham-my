@@ -1,170 +1,72 @@
 [
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Phẫu thuật nâng ngực",
-        "sub_topic": "Túi Mentor (Mentor Extra / Mentor Classic / FDA chứng nhận)",
-        "action_response": "Dạ chào chị, đây là dịch vụ nâng ngực không đau, hồi phục nhanh chỉ sau 6-12h. Bác Vũ chuyên dùng túi Mentor được FDA chứng nhận ạ. Em gửi chị ảnh feedback khách hàng nha!",
-        "next_step": "Gửi ảnh feedback ➡️ Mời chị để lại SĐT/Zalo để bác sĩ gọi tư vấn chi tiết"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Tháo túi ngực",
-        "sub_topic": "Quy trình tháo túi / Phục hồi sau tháo túi",
-        "action_response": "Dạ chị cần tháo túi ngực đúng không ạ? Bác Vũ có kỹ thuật tháo túi an toàn, không đau và không để lại sẹo. Em gửi chị quy trình chi tiết nhé!",
-        "next_step": "Gửi quy trình ➡️ Mời chị để lại SĐT/Zalo để hẹn lịch phẫu thuật"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Bóc bao xơ",
-        "sub_topic": "Loại bỏ bao xơ an toàn / Phục hồi nhanh",
-        "action_response": "Dạ chị muốn bóc bao xơ ạ? Bác Vũ chuyên xử lý các ca bao xơ lâu năm, cam kết an toàn và phục hồi nhanh. Em gửi chị feedback khách hàng thực tế nhé!",
-        "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm chi phí/quy trình"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Túi ngực",
-        "sub_topic": "Túi Mentor chi tiết / Dòng túi phù hợp từng dáng ngực / Feedback khách hàng",
-        "action_response": "Dạ chị ơi, bên em chỉ đặt túi Mentor đã được FDA chứng nhận hơn 40 năm nghiên cứu lâm sàng ạ! Mentor Extra phù hợp với ngực sa trễ, Mentor Classic cho dáng tự nhiên nha chị!",
-        "next_step": "Gửi feedback khách ➡️ Mời chị để lại SĐT/Zalo để tư vấn loại túi phù hợp"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Tái tạo vú sau điều trị ung thư",
-        "sub_topic": "Quy trình tái tạo vú sau ung thư / Hơn 500 ca thực tế / Bác sĩ Vũ chuyên sâu",
-        "action_response": "Dạ đây là dịch vụ tái tạo vú cho bệnh nhân sau điều trị ung thư, Bác sĩ Vũ đã làm hơn 500 ca rồi ạ. Em gửi chị hình ảnh trước-sau thực tế nha!",
-        "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để biết chi phí/lịch hẹn"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Nâng ngực bằng dao siêu âm",
-        "sub_topic": "Dao Ultrasonic giảm đau 90% / Hồi phục 6-12h / Không để lại sẹo",
-        "action_response": "Dạ chị, phương pháp dao siêu âm Ultrasonic giúp giảm đau 90%, hồi phục nhanh chỉ sau 6-12h và không để lại sẹo. Em gửi chị ảnh khách hàng thực tế nhé!",
-        "next_step": "Gửi ảnh feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn quy trình/chi phí"
-    },
-    {
-        "parent_service": "Ngực",
-        "sub_service": "Nâng ngực bằng dao hamonic",
-        "sub_topic": "Dao Harmonic tiên tiến / Không chảy máu / Ít xâm lấn",
-        "action_response": "Dạ chị, dao Harmonic tiên tiến giúp phẫu thuật nhẹ nhàng, không chảy máu, hồi phục nhanh. Em gửi chị quy trình chi tiết nha!",
-        "next_step": "Gửi quy trình ➡️ Mời chị để lại SĐT/Zalo để bác sĩ tư vấn thêm"
-    },
-    {
-        "parent_service": "Mũi",
-        "sub_service": "Nâng mũi tái cấu trúc/ nâng mũi sụn sườn",
-        "sub_topic": "Sụn sườn tự thân / Tái cấu trúc dáng mũi / Kết quả lâu dài",
-        "action_response": "Dạ chị ơi, nâng mũi tái cấu trúc bằng sụn sườn tự thân sẽ giúp dáng mũi tự nhiên, bền đẹp lâu dài. Em gửi chị feedback khách hàng thực tế nha!",
-        "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn chi tiết"
-    },
-    {
-        "parent_service": "Mũi",
-        "sub_service": "Chỉnh mũi lỗi",
-        "sub_topic": "Chỉnh sửa mũi hỏng / Phục hồi cấu trúc mũi lỗi / Hình ảnh trước-sau",
-        "action_response": "Dạ chị cần chỉnh sửa mũi lỗi đúng không ạ? Bác Vũ chuyên xử lý các ca mũi hỏng, cam kết khắc phục và tạo dáng mũi chuẩn tự nhiên. Em gửi chị hình ảnh trước-sau!",
-        "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm"
-    },
-    {
-        "parent_service": "Mũi",
-        "sub_service": "Các dịch vụ khác về mũi",
-        "sub_topic": "Đẩy ChatGPT hoặc tư vấn viên hỗ trợ trực tiếp",
-        "action_response": "Dạ em ghi nhận ạ! Để bác sĩ tư vấn rõ hơn, chị để lại SĐT/Zalo nha!",
-        "next_step": "Mời để lại SĐT/Zalo ➡️ Đẩy thông tin cho tư vấn viên liên hệ"
-    },
-    {
-        "parent_service": "Mắt",
-        "sub_service": "Tiểu phẫu cắt mí",
-        "sub_topic": "Cắt mí trên/dưới / Kết hợp nâng cung / Không để lại sẹo / Hình ảnh thực tế",
-        "action_response": "Dạ chị quan tâm cắt mí đúng không ạ? Bác Vũ thực hiện cắt mí trên/dưới, kết hợp treo cung mày, không để lại sẹo và hồi phục nhanh ạ!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn lịch hẹn"
-    },
-    {
-        "parent_service": "Mắt",
-        "sub_service": "Tiểu phẫu treo cung mày",
-        "sub_topic": "Treo cung mày không sẹo / Trẻ hóa vùng mắt / Thời gian hồi phục nhanh",
-        "action_response": "Dạ chị cần treo cung mày để cải thiện mí sụp ạ? Phương pháp không sẹo, trẻ hóa vùng mắt. Em gửi chị quy trình chi tiết nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn thêm quy trình/chi phí"
-    },
-    {
-        "parent_service": "Mắt",
-        "sub_service": "Chỉnh mắt lỗi",
-        "sub_topic": "Sửa mắt hỏng / Chỉnh mắt không cân đối / Mắt lé, lác / Phẫu thuật tỉ mỉ",
-        "action_response": "Dạ chị cần chỉnh mắt lỗi đúng không ạ? Bác Vũ chuyên chỉnh sửa mắt hỏng, lé/lác hoặc không cân xứng. Em gửi chị ảnh khách hàng thực tế nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mắt",
-        "sub_service": "Các dịch vụ khác về mắt",
-        "sub_topic": "Đẩy ChatGPT hoặc tư vấn viên hỗ trợ trực tiếp",
-        "action_response": "Dạ em ghi nhận ạ! Để tư vấn thêm, chị để lại SĐT/Zalo nha chị!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Bụng",
-        "sub_service": "Hút mỡ bụng/tay/ đùi/ lưng",
-        "sub_topic": "Kết hợp tạo dáng eo thon / Hút mỡ an toàn / Hồi phục sau 24h / Không để lại sẹo",
-        "action_response": "Dạ chị quan tâm hút mỡ bụng đúng không ạ? Phương pháp an toàn, không để lại sẹo, hồi phục nhanh sau 24h. Em gửi chị hình ảnh trước-sau!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Phẫu thuật căng da mặt",
-        "sub_topic": "Căng da mặt nội soi / Không sẹo / Hồi phục nhanh / Hình ảnh khách thực tế",
-        "action_response": "Dạ đây là dịch vụ căng da mặt nội soi, không để lại sẹo, hồi phục nhanh. Em gửi chị ảnh khách thực tế nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Căng da mặt toàn diện",
-        "sub_topic": "Căng toàn bộ vùng mặt / Kết hợp PRP / Tái tạo collagen / Trẻ hóa toàn diện",
-        "action_response": "Dạ chị cần căng da toàn diện kết hợp PRP tái tạo collagen đúng không ạ? Em gửi chị quy trình và hình ảnh khách hàng!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Căng chỉ da mặt/ PRP trẻ hóa",
-        "sub_topic": "Căng chỉ sinh học / PRP tái tạo / Da căng sáng tự nhiên / Không cần phẫu thuật",
-        "action_response": "Dạ chị quan tâm căng chỉ sinh học, PRP trẻ hóa đúng không ạ? Da sáng mịn, không cần phẫu thuật. Em gửi chị thông tin chi tiết!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Độn thái dương/ độn cằm",
-        "sub_topic": "Độn silicon mềm / Định hình khuôn mặt / Kết quả lâu dài / Không sẹo",
-        "action_response": "Dạ chị cần độn thái dương hoặc cằm đúng không ạ? Phương pháp an toàn, cân đối khuôn mặt. Em gửi chị hình ảnh thực tế nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Hút mỡ tiêm lên mặt",
-        "sub_topic": "Hút mỡ nọng cằm / Tiêm tái tạo vùng hõm thái dương / Cân đối khuôn mặt",
-        "action_response": "Dạ chị cần hút mỡ nọng cằm hoặc tiêm tái tạo vùng hõm đúng không ạ? Em gửi chị quy trình và ảnh trước-sau nhé!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Mặt",
-        "sub_service": "Các dịch vụ khác về da mặt",
-        "sub_topic": "Đẩy ChatGPT hoặc tư vấn viên hỗ trợ trực tiếp",
-        "action_response": "Dạ em ghi nhận ạ! Để hỗ trợ thêm, chị để lại SĐT/Zalo nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Vùng kín",
-        "sub_service": "Thẩm mỹ vùng kín",
-        "sub_topic": "Trẻ hóa bằng laser / Thu hẹp sau sinh / Phục hồi cảm giác / An toàn tuyệt đối",
-        "action_response": "Dạ dịch vụ trẻ hóa vùng kín bằng laser bên em an toàn tuyệt đối, không đau, cải thiện thẩm mỹ và cảm giác. Em gửi chị quy trình chi tiết nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Vùng kín",
-        "sub_service": "Các dịch vụ khác về vùng kín",
-        "sub_topic": "Đẩy ChatGPT hoặc tư vấn viên hỗ trợ trực tiếp",
-        "action_response": "Dạ em ghi nhận ạ! Để hỗ trợ thêm, chị để lại SĐT/Zalo nha!",
-        "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-    },
-    {
-        "parent_service": "Dịch vụ khác",
-        "sub_service": "Các loại hình thẩm mỹ khác",
-        "sub_topic": "Đẩy ChatGPT hoặc xin SĐT để Ngân tư vấn trực tiếp / Chuyển hỗ trợ viên",
-        "action_response": "Dạ dịch vụ này cần trao đổi chi tiết ạ! Chị để lại SĐT/Zalo để bạn Ngân tư vấn trực tiếp giúp em nha!",
-        "next_step":
-    }
+  {
+    "parent_service": "Ngực",
+    "sub_service": "Phẫu thuật nâng ngực",
+    "sub_topic": "Túi Mentor (Mentor Extra / Mentor Classic / FDA chứng nhận)",
+    "action_response": "Dạ chào chị, đây là dịch vụ nâng ngực không đau, hồi phục nhanh chỉ sau 6-12h. Bác Vũ chuyên dùng túi Mentor được FDA chứng nhận ạ. Em gửi chị ảnh feedback khách hàng nha!",
+    "next_step": "Gửi ảnh feedback ➡️ Mời chị để lại SĐT/Zalo để bác sĩ gọi tư vấn chi tiết"
+  },
+  {
+    "parent_service": "Ngực",
+    "sub_service": "Tháo túi ngực",
+    "sub_topic": "Quy trình tháo túi / Phục hồi sau tháo túi",
+    "action_response": "Dạ chị cần tháo túi ngực đúng không ạ? Bác Vũ có kỹ thuật tháo túi an toàn, không đau và không để lại sẹo. Em gửi chị quy trình chi tiết nhé!",
+    "next_step": "Gửi quy trình ➡️ Mời chị để lại SĐT/Zalo để hẹn lịch phẫu thuật"
+  },
+  {
+    "parent_service": "Ngực",
+    "sub_service": "Bóc bao xơ",
+    "sub_topic": "Loại bỏ bao xơ an toàn / Phục hồi nhanh",
+    "action_response": "Dạ chị muốn bóc bao xơ ạ? Bác Vũ chuyên xử lý các ca bao xơ lâu năm, cam kết an toàn và phục hồi nhanh. Em gửi chị feedback khách hàng thực tế nhé!",
+    "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm chi phí/quy trình"
+  },
+  {
+    "parent_service": "Ngực",
+    "sub_service": "Tái tạo vú sau điều trị ung thư",
+    "sub_topic": "Quy trình tái tạo vú sau ung thư / Hơn 500 ca thực tế / Bác sĩ Vũ chuyên sâu",
+    "action_response": "Dạ đây là dịch vụ tái tạo vú cho bệnh nhân sau điều trị ung thư, Bác sĩ Vũ đã làm hơn 500 ca rồi ạ. Em gửi chị hình ảnh trước-sau thực tế nha!",
+    "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để biết chi phí/lịch hẹn"
+  },
+  {
+    "parent_service": "Mũi",
+    "sub_service": "Nâng mũi tái cấu trúc/ nâng mũi sụn sườn",
+    "sub_topic": "Sụn sườn tự thân / Tái cấu trúc dáng mũi / Kết quả lâu dài",
+    "action_response": "Dạ chị ơi, nâng mũi tái cấu trúc bằng sụn sườn tự thân sẽ giúp dáng mũi tự nhiên, bền đẹp lâu dài. Em gửi chị feedback khách hàng thực tế nha!",
+    "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn chi tiết"
+  },
+  {
+    "parent_service": "Mũi",
+    "sub_service": "Chỉnh mũi lỗi",
+    "sub_topic": "Chỉnh sửa mũi hỏng / Phục hồi cấu trúc mũi lỗi / Hình ảnh trước-sau",
+    "action_response": "Dạ chị cần chỉnh sửa mũi lỗi đúng không ạ? Bác Vũ chuyên xử lý các ca mũi hỏng, cam kết khắc phục và tạo dáng mũi chuẩn tự nhiên. Em gửi chị hình ảnh trước-sau!",
+    "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm"
+  },
+  {
+    "parent_service": "Mắt",
+    "sub_service": "Tiểu phẫu cắt mí",
+    "sub_topic": "Cắt mí trên/dưới / Kết hợp nâng cung / Không để lại sẹo / Hình ảnh thực tế",
+    "action_response": "Dạ chị quan tâm cắt mí đúng không ạ? Bác Vũ thực hiện cắt mí trên/dưới, kết hợp treo cung mày, không để lại sẹo và hồi phục nhanh ạ!",
+    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn lịch hẹn"
+  },
+  {
+    "parent_service": "Mắt",
+    "sub_service": "Chỉnh mắt lỗi",
+    "sub_topic": "Sửa mắt hỏng / Chỉnh mắt không cân đối / Mắt lé, lác / Phẫu thuật tỉ mỉ",
+    "action_response": "Dạ chị cần chỉnh mắt lỗi đúng không ạ? Bác Vũ chuyên chỉnh sửa mắt hỏng, lé/lác hoặc không cân xứng. Em gửi chị ảnh khách hàng thực tế nha!",
+    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
+  },
+  {
+    "parent_service": "Bụng",
+    "sub_service": "Hút mỡ bụng/tay/ đùi/ lưng",
+    "sub_topic": "Kết hợp tạo dáng eo thon / Hút mỡ an toàn / Hồi phục sau 24h / Không để lại sẹo",
+    "action_response": "Dạ chị quan tâm hút mỡ bụng đúng không ạ? Phương pháp an toàn, không để lại sẹo, hồi phục nhanh sau 24h. Em gửi chị hình ảnh trước-sau!",
+    "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm"
+  },
+  {
+    "parent_service": "Vùng kín",
+    "sub_service": "Thẩm mỹ vùng kín",
+    "sub_topic": "Trẻ hóa bằng laser / Thu hẹp sau sinh / Phục hồi cảm giác / An toàn tuyệt đối",
+    "action_response": "Dạ dịch vụ trẻ hóa vùng kín bằng laser bên em an toàn tuyệt đối, không đau, cải thiện thẩm mỹ và cảm giác. Em gửi chị quy trình chi tiết nha!",
+    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
+  }
 ]
