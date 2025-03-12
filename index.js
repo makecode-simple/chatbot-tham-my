@@ -115,14 +115,17 @@ app.post("/webhook", async (req, res) => {
                     return;
                 }
 
-                // Kiểm tra địa chỉ
-                if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
-                    const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
-✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
-🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
-                    await messengerService.sendMessage(senderId, { text: addressInfo });
-                    return;
-                }
+				// Kiểm tra địa chỉ
+					if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
+						const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.
+					✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.
+					🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
+
+						await messengerService.sendMessage(senderId, { text: addressInfo });
+
+						// Kết thúc xử lý ngay, không gửi thêm ChatGPT hay flow gì nữa
+						return;
+					}
 
                 // Kiểm tra generic trigger (hỏi chung dịch vụ)
                 if (genericTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
