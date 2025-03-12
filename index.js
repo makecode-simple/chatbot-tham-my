@@ -9,11 +9,17 @@ app.use(bodyParser.json());
 // Load JSON flow dịch vụ và thông tin chung
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
 
-// Hàm tìm flow trigger
+// Hàm tìm flow trigger chính xác
 function findFlow(userMessage) {
   const msg = userMessage.toLowerCase();
 
   return flowData.find(item => {
+    // Nếu không có trigger_keywords thì bỏ qua
+    if (!item.trigger_keywords || !Array.isArray(item.trigger_keywords)) {
+      return false;
+    }
+
+    // Kiểm tra từng trigger có trong câu hỏi không
     return item.trigger_keywords.some(trigger => msg.includes(trigger));
   });
 }
@@ -33,7 +39,7 @@ app.post("/webhook", async (req, res) => {
 
         console.log("Received message:", message);
 
-        // Câu quá ngắn hoặc vô nghĩa
+        // Kiểm tra câu hỏi ngắn không có ý nghĩa
         if (message.length < 3) {
           await messengerService.sendMessage(senderId, {
             text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo để em tư vấn kỹ hơn nha!"
@@ -41,11 +47,14 @@ app.post("/webhook", async (req, res) => {
           return;
         }
 
+        // Kiểm tra flow trigger
         const matchedFlow = findFlow(message);
 
         if (matchedFlow) {
+          // Trả lời action_response từ JSON
           await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
 
+          // Nếu có next_step, gửi thêm
           if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
             await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
           }
@@ -53,7 +62,7 @@ app.post("/webhook", async (req, res) => {
           return;
         }
 
-        // Nếu không khớp flow nào ➡️ fallback ChatGPT hoặc xin SĐT
+        // Không khớp trigger nào, fallback hỏi lại hoặc xin số
         await messengerService.sendMessage(senderId, {
           text: "Dạ chị đang hỏi về dịch vụ gì ạ? Chị có thể nhắn rõ hơn giúp em không? Hoặc để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn nha!"
         });
@@ -69,7 +78,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Xác thực webhook
+// Xác thực webhook với Facebook
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query["hub.mode"];
@@ -86,6 +95,6 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// Chạy server
+// Khởi động server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
