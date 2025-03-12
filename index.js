@@ -52,6 +52,15 @@ async function chatGPTFallback(message) {
     }
 }
 
+// Lời chào mặc định khi khách mới nhắn tin hoặc nhắn chung chung
+const greetingMessage = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n• Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n• Tái tạo vú sau khi điều trị ung thư\n• Hút mỡ bụng, tạo hình thành bụng sau sinh\n• Tiểu phẫu cắt mí\n• Tiểu phẫu treo cung mày\n• Chỉnh mắt lỗi\n• Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n• Chỉnh mũi lỗi\n• Phẫu thuật căng da mặt\n• Hút mỡ bụng/tay/ đùi/ lưng\n• Thẩm mỹ vùng kín\n• Căng da mặt toàn diện\n• Căng chỉ da mặt/ PRP trẻ hóa\n• Độn thái dương/ độn cằm\n• Hút mỡ tiêm lên mặt`;
+
+// Các từ khoá kích hoạt gửi list dịch vụ
+const genericTriggers = [
+    "tư vấn", "dịch vụ", "giới thiệu", "thẩm mỹ", "có gì", "muốn biết dịch vụ",
+    "hello", "help me", "i need more information", "tư vấn giúp", "muốn làm đẹp", "không đau"
+];
+
 // Webhook nhận tin nhắn từ Messenger
 app.post("/webhook", async (req, res) => {
     const body = req.body;
@@ -63,6 +72,16 @@ app.post("/webhook", async (req, res) => {
             const message = webhook_event.message.text;
 
             console.log("Received message:", message);
+
+            const lowerCaseMessage = message.toLowerCase();
+
+            // Nếu khách nhắn lần đầu hoặc câu chung chung
+            const isGeneric = genericTriggers.some(trigger => lowerCaseMessage.includes(trigger));
+
+            if (isGeneric) {
+                await messengerService.sendMessage(senderId, { text: greetingMessage });
+                return;
+            }
 
             // Check flow
             const matchedFlow = findFlow(message);
