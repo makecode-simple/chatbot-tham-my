@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const messengerService = require("./messengerService");
-const cloudinaryService = require("./cloudinaryService");
+const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const axios = require("axios");
 
@@ -11,6 +11,13 @@ app.use(bodyParser.json());
 
 // Load JSON flow khi server khởi động
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
+
+// Cloudinary Config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // Hàm tìm flow phù hợp dựa vào trigger
 function findFlow(userMessage) {
@@ -58,8 +65,11 @@ const greetingMessage = `Dạ chào chị, chị muốn tư vấn dịch vụ th
 // Các từ khoá kích hoạt gửi list dịch vụ và hỏi thông tin địa chỉ
 const genericTriggers = [
     "tư vấn", "dịch vụ", "giới thiệu", "thẩm mỹ", "có gì", "muốn biết dịch vụ",
-    "hello", "help me", "i need more information", "tư vấn giúp", "muốn làm đẹp", "không đau",
-    "địa chỉ", "phòng khám ở đâu", "đ/c", "lịch khám", "bác khám ở đâu", "phẫu thuật chỗ nào"
+    "hello", "help me", "i need more information", "tư vấn giúp", "muốn làm đẹp", "không đau"
+];
+
+const addressTriggers = [
+    "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu"
 ];
 
 // Webhook nhận tin nhắn từ Messenger
@@ -71,7 +81,6 @@ app.post("/webhook", async (req, res) => {
             const webhook_event = entry.messaging[0];
             const senderId = webhook_event.sender.id;
 
-            // Kiểm tra có message và text hay không
             if (webhook_event.message && webhook_event.message.text) {
                 const message = webhook_event.message.text;
 
@@ -79,38 +88,25 @@ app.post("/webhook", async (req, res) => {
 
                 const lowerCaseMessage = message.toLowerCase();
 
-                // Nếu khách hỏi địa chỉ hoặc thông tin cơ bản
-                const addressTriggers = ["địa chỉ", "phòng khám ở đâu", "đ/c", "lịch khám", "bác khám ở đâu", "chỗ khám ở đâu?", "văn phòng bác sĩ"];
-                const isAddress = addressTriggers.some(trigger => lowerCaseMessage.includes(trigger));
-
-                if (isAddress) {
+                if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
                     const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7 ạ.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
                     await messengerService.sendMessage(senderId, { text: addressInfo });
                     return;
                 }
 
-                // Nếu khách nhắn lần đầu hoặc câu chung chung
-                const isGeneric = genericTriggers.some(trigger => lowerCaseMessage.includes(trigger));
-
-                if (isGeneric) {
+                if (genericTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
                     await messengerService.sendMessage(senderId, { text: greetingMessage });
                     return;
                 }
 
-                // Check flow
                 const matchedFlow = findFlow(message);
                 if (matchedFlow) {
-                    let response = matchedFlow.action_response;
+                    await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
 
-                    // Gửi phản hồi chính
-                    await messengerService.sendMessage(senderId, { text: response });
-
-                    // Next step nếu có và không rỗng
                     if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
                         await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
                     }
                 } else {
-                    // Nếu không khớp flow, đẩy qua ChatGPT
                     const chatGPTResponse = await chatGPTFallback(message);
                     await messengerService.sendMessage(senderId, { text: chatGPTResponse });
                 }
@@ -142,6 +138,5 @@ app.get("/webhook", (req, res) => {
     }
 });
 
-// Khởi chạy server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
