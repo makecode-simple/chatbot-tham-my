@@ -87,7 +87,7 @@ const genericTriggers = [
 ];
 
 const addressTriggers = [
-    "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu", "dc o dau", "d.c o dau vay"
+    "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "nơi bác khám thẩm mỹ ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu", "dc o dau", "d.c o dau vay"
 ];
 
 // Webhook nhận tin nhắn từ Messenger
@@ -107,7 +107,7 @@ app.post("/webhook", async (req, res) => {
                 const lowerCaseMessage = message.toLowerCase();
 
                 if (addressTriggers.some(trigger => lowerCaseMessage.includes(trigger))) {
-                    const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7 ạ.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
+                    const addressInfo = `Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!`;
                     await messengerService.sendMessage(senderId, { text: addressInfo });
                     return;
                 }
@@ -124,10 +124,12 @@ app.post("/webhook", async (req, res) => {
                     if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
                         await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
                     }
-                } else {
-                    const chatGPTResponse = await chatGPTFallback(message);
-                    await messengerService.sendMessage(senderId, { text: chatGPTResponse });
+                    return;
                 }
+
+                const chatGPTResponse = await chatGPTFallback(message);
+                await messengerService.sendMessage(senderId, { text: chatGPTResponse });
+
             } else {
                 console.log("Sự kiện không phải tin nhắn, bỏ qua!");
             }
@@ -139,7 +141,6 @@ app.post("/webhook", async (req, res) => {
     }
 });
 
-// Endpoint xác thực webhook
 app.get("/webhook", (req, res) => {
     const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
     const mode = req.query["hub.mode"];
