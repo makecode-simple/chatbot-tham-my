@@ -70,3 +70,25 @@
     "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
   }
 ]
+[
+  {
+    "parent_service": "Thông tin chung",
+    "sub_service": "Địa chỉ",
+    "sub_topic": "Địa chỉ phòng khám",
+    "trigger_keywords": [
+		"địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu"    
+		],
+    "action_response": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!",
+    "next_step": ""
+  },
+  {
+    "parent_service": "Thông tin chung",
+    "sub_service": "Chào hỏi",
+    "sub_topic": "Giới thiệu dịch vụ",
+    "trigger_keywords": [
+      "tư vấn", "dịch vụ", "giới thiệu", "thẩm mỹ", "có gì", "muốn biết dịch vụ"
+    ],
+    "action_response": "Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n• Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n• Tái tạo vú sau khi điều trị ung thư\n• Hút mỡ bụng, tạo hình thành bụng sau sinh\n• Tiểu phẫu cắt mí\n• Tiểu phẫu treo cung mày\n• Chỉnh mắt lỗi\n• Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n• Chỉnh mũi lỗi\n• Phẫu thuật căng da mặt\n• Hút mỡ bụng/tay/ đùi/ lưng\n• Thẩm mỹ vùng kín\n• Căng da mặt toàn diện\n• Căng chỉ da mặt/ PRP trẻ hóa\n• Độn thái dương/ độn cằm\n• Hút mỡ tiêm lên mặt",
+    "next_step": ""
+  },
+]
