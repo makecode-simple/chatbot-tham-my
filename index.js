@@ -28,12 +28,30 @@ function findFlow(userMessage) {
     });
 }
 
-// Hàm gọi ChatGPT fallback
+// Hàm gọi ChatGPT fallback với kiểm soát thông tin
 async function chatGPTFallback(message) {
     const apiKey = process.env.OPENAI_API_KEY;
     const endpoint = "https://api.openai.com/v1/chat/completions";
 
-    const prompt = `Bạn là trợ lý tư vấn thẩm mỹ Dr Hồ Cao Vũ. Hãy tư vấn thân thiện, chuyên nghiệp. Nếu khách hỏi tiếng Anh hoặc ngoài phạm vi, xin SĐT/Zalo để hỗ trợ viên liên hệ.`;
+    const prompt = `
+    Bạn là trợ lý tư vấn thẩm mỹ Dr Hồ Cao Vũ.  
+    Trả lời thân thiện, chuyên nghiệp, ngắn gọn, dễ hiểu.  
+    Tuyệt đối KHÔNG suy luận hoặc tự chế thông tin không có trong dữ liệu cung cấp.  
+    Chỉ trả lời dựa trên dữ liệu đã được huấn luyện hoặc cung cấp bên dưới.
+
+    Nếu khách hỏi dịch vụ nâng ngực, mông, mắt, mũi, căng da mặt... hoặc địa chỉ, luôn trả lời theo nội dung:
+    - Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.
+    - Các dịch vụ chính gồm: Nâng ngực, hút mỡ bụng, nâng mũi, cắt mí, thẩm mỹ vùng kín, tái tạo vú sau điều trị ung thư...
+
+    Nếu không tìm thấy câu hỏi nằm trong phạm vi dịch vụ hoặc thông tin, hãy hỏi lại:
+    - "Dạ chị đang hỏi về dịch vụ gì ạ? Chị có thể nhắn rõ hơn giúp em không?"
+
+    Hoặc xin số điện thoại:
+    - "Dạ để rõ hơn, chị để lại số điện thoại/Zalo, bên em tư vấn kỹ hơn nha!"
+
+    Nếu khách viết tắt hoặc nhắn không rõ:
+    - "Dạ do chị viết tắt, em chưa rõ lắm. Chị nhắn giúp em chi tiết hơn nha!"
+    `;
 
     const data = {
         model: "gpt-3.5-turbo",
@@ -55,7 +73,7 @@ async function chatGPTFallback(message) {
         return res.data.choices[0].message.content;
     } catch (error) {
         console.error("ChatGPT Error:", error);
-        return "Dạ xin lỗi chị, em chưa có thông tin rõ. Chị để lại SĐT/Zalo để bên em tư vấn kỹ hơn nha!";
+        return "Dạ xin lỗi chị, em chưa rõ câu hỏi. Chị để lại số điện thoại/Zalo để em tư vấn kỹ hơn nha!";
     }
 }
 
@@ -69,7 +87,7 @@ const genericTriggers = [
 ];
 
 const addressTriggers = [
-    "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu"
+    "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu", "chỗ nào khám", "chỗ khám ở đâu", "where is the address", "address of dr Vu", "văn phòng bác sĩ", "office của bác sĩ ở đâu", "phòng mạch của bác sĩ vũ ở đâu", "dc o dau", "d.c o dau vay"
 ];
 
 // Webhook nhận tin nhắn từ Messenger
