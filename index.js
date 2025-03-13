@@ -129,15 +129,25 @@ app.post("/webhook", async (req, res) => {
 
       console.log(`💬 [${senderId}] ${message}`);
 
-      // ========= Handoff im lặng =========
+      // ========= 1. Handoff im lặng =========
       if (handoffUsers.has(senderId)) {
         console.log(`🙊 User ${senderId} handoff cho CSKH, im lặng.`);
         return;
       }
 
-      // ========= Kiểm tra completed session =========
+      // ========= 2. Phàn nàn / cần gặp người thật =========
+      if (isAngryCustomer(message)) {
+        await messengerService.sendMessage(senderId, {
+          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Em đã chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
+        });
+
+        handoffUsers.add(senderId);
+        console.log(`🚨 Handoff user ${senderId} cho CSKH.`);
+        return;
+      }
+
+      // ========= 3. Kiểm tra completed session =========
       if (completedUsers.has(senderId)) {
-        // Nếu KHÔNG phải câu chốt ➜ mở lại session ngay
         if (!isEndConversation(message)) {
           completedUsers.delete(senderId);
           console.log(`🔄 User ${senderId} quay lại hỏi thêm, bot tiếp tục!`);
@@ -147,45 +157,17 @@ app.post("/webhook", async (req, res) => {
         }
       }
 
-      // ========= Phàn nàn / cần gặp người thật =========
-      if (isAngryCustomer(message)) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Để em chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
-        });
-
-        handoffUsers.add(senderId);
-        console.log(`🚨 Handoff user ${senderId} cho CSKH.`);
-        return;
-      }
-
-      // ========= Kết thúc trò chuyện =========
-      if (isEndConversation(message)) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
-        });
-
-        completedUsers.add(senderId);
-        console.log(`✅ User ${senderId} đã chốt, im lặng.`);
-        return;
-      }
-
-      // ========= Câu hỏi quá ngắn =========
-      if (message.length < 3) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
-        });
-        return;
-      }
-
-      // ========= Số điện thoại =========
+      // ========= 4. Số điện thoại =========
       const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
       const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
       if (phoneRegexVN.test(message) || phoneRegexInternational.test(message)) {
+
         if (!isValidPhoneNumber(message)) {
           await messengerService.sendMessage(senderId, {
-            text: "Dạ em kiểm tra chưa đúng định dạng số điện thoại rồi ạ. Chị kiểm tra lại hoặc để lại số Zalo/Viber giúp em để tư vấn ngay nha!"
+            text: "Dạ số điện thoại chị nhập chưa đúng định dạng ạ. Số Việt Nam cần đủ 10 số hoặc theo dạng +84. Chị kiểm tra lại giúp em nhé!"
           });
+          console.log(`⚠️ Số điện thoại không hợp lệ: ${message}`);
           return;
         }
 
@@ -198,7 +180,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ========= Tiếng Anh? =========
+      // ========= 5. Tiếng Anh =========
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
         await messengerService.sendMessage(senderId, {
@@ -207,7 +189,26 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ========= Flow dịch vụ =========
+      // ========= 6. Kết thúc trò chuyện =========
+      if (isEndConversation(message)) {
+        await messengerService.sendMessage(senderId, {
+          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
+        });
+
+        completedUsers.add(senderId);
+        console.log(`✅ User ${senderId} đã chốt, im lặng.`);
+        return;
+      }
+
+      // ========= 7. Câu hỏi quá ngắn =========
+      if (message.length < 3) {
+        await messengerService.sendMessage(senderId, {
+          text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
+        });
+        return;
+      }
+
+      // ========= 8. Flow dịch vụ =========
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
@@ -219,7 +220,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ========= Không khớp gì ➜ xin lại SĐT =========
+      // ========= 9. Không khớp gì ➜ xin lại SĐT =========
       await messengerService.sendMessage(senderId, {
         text: "Dạ chị có thể để lại SĐT Zalo/Viber để bạn Ngân - trợ lý bác sĩ có thể trao đổi, tư vấn chi tiết cho chị được không ạ?"
       });
