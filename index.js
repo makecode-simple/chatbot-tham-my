@@ -1,8 +1,11 @@
+// index.js - Full chatbot server, merge toàn bộ logic cũ và Cloudinary
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const messengerService = require("./messengerService");
 const fs = require("fs");
 const OpenAI = require("openai");
+const cloudinary = require("cloudinary").v2;
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,8 +15,16 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// ==== CONFIG CLOUDINARY ====
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 // ==== LOAD DATA ====
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
+const chatbotServiceFlows = JSON.parse(fs.readFileSync("./data/chatbot-service-flows.json"));
 const countryDigitRules = JSON.parse(fs.readFileSync("countryDigitRules.json"));
 const countryCodes = Object.keys(countryDigitRules);
 
@@ -24,17 +35,7 @@ const handoffUsers = new Set();
 // ====== GPT SENTIMENT ANALYSIS ======
 async function analyzeSentimentWithGPT(message) {
   try {
-    const prompt = `
-Bạn là chuyên gia phân tích cảm xúc khách hàng.
-Hãy phân loại cảm xúc đoạn chat sau vào 1 trong 3 loại:
-- "negative" (tiêu cực, giận dữ, không hài lòng)
-- "neutral" (bình thường)
-- "positive" (tích cực, vui vẻ)
-
-Đoạn chat: "${message}"
-
-Trả lời chỉ 1 từ: negative, neutral, positive
-`;
+    const prompt = `Bạn là chuyên gia phân tích cảm xúc khách hàng.\nHãy phân loại cảm xúc đoạn chat sau vào 1 trong 3 loại:\n- \"negative\"\n- \"neutral\"\n- \"positive\"\n\nĐoạn chat: \"${message}\"\n\nTrả lời chỉ 1 từ: negative, neutral, positive`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -45,9 +46,7 @@ Trả lời chỉ 1 từ: negative, neutral, positive
 
     const sentiment = response.choices[0].message.content.trim().toLowerCase();
     console.log("🎯 GPT Sentiment:", sentiment);
-
     return sentiment;
-
   } catch (error) {
     console.error("❌ GPT Error:", error.message);
     return "neutral";
@@ -57,7 +56,7 @@ Trả lời chỉ 1 từ: negative, neutral, positive
 // ====== VALIDATE PHONE ======
 function isValidPhoneNumber(message) {
   if (!message) return false;
-  let cleanNumber = message.replace(/[\s-]/g, '');
+  let cleanNumber = message.replace(/\s|-/g, '');
 
   if (cleanNumber.startsWith('0')) {
     cleanNumber = '+84' + cleanNumber.slice(1);
@@ -68,11 +67,7 @@ function isValidPhoneNumber(message) {
   const countryCode = countryCodes.find(code => cleanNumber.startsWith(code));
   if (!countryCode) {
     const genericPhone = /^\+\d{6,15}$/.test(cleanNumber);
-    if (genericPhone) {
-      console.log(`❗ Số quốc gia chưa có rule: ${cleanNumber}`);
-      return "unknown";
-    }
-    return false;
+    return genericPhone ? "unknown" : false;
   }
 
   const numberWithoutCode = cleanNumber.slice(countryCode.length);
@@ -80,211 +75,207 @@ function isValidPhoneNumber(message) {
   if (!digitRule) return false;
 
   const length = numberWithoutCode.length;
-  if (length < digitRule.min || length > digitRule.max) {
-    console.log(`❌ Số không đúng độ dài quy định cho ${countryCode}: ${length} số`);
-    return false;
+  return length >= digitRule.min && length <= digitRule.max;
+}
+
+// ====== CLOUDINARY FUNCTIONS ======
+async function getFeedbackImages(serviceFolder) {
+  try {
+    const result = await cloudinary.search
+      .expression(`folder:feedback/${serviceFolder} AND resource_type:image`)
+      .sort_by('public_id', 'desc')
+      .max_results(10)
+      .execute();
+
+    return result.resources.map(file => file.secure_url);
+  } catch (error) {
+    console.error('❌ Cloudinary fetch error:', error);
+    return [];
   }
-
-  console.log(`✅ Số hợp lệ: ${cleanNumber}`);
-  return true;
 }
 
-// ====== DETECT END CONVERSATION ======
+async function getBangGiaImage(folder) {
+  try {
+    const result = await cloudinary.search
+      .expression(`folder:banggia/${folder} AND resource_type:image`)
+      .sort_by('public_id', 'desc')
+      .max_results(1)
+      .execute();
+
+    return result.resources[0]?.secure_url || null;
+  } catch (error) {
+    console.error('❌ Cloudinary fetch bảng giá error:', error);
+    return null;
+  }
+}
+
+// ====== LOGIC KIỂM TRA KẾT THÚC, PHÀN NÀN, ANGRY ======
 function isEndConversation(message) {
-  if (!message) return false;
-
-  const normalizedMsg = message
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[!.,?~]/g, "")
-    .trim();
-
-  const endKeywords = [
-    "ok", "oke", "okie", "okei", "okey",
-    "cam on", "cảm ơn", "thanks", "thank you",
-    "duoc roi", "được rồi", "dong y", "dạ rồi", "yes", "vâng", "rồi nha",
-    "roi nhe", "oke roi", "ok ban", "ok nhe"
-  ];
-
-  return endKeywords.some(keyword => normalizedMsg === keyword || normalizedMsg.endsWith(keyword));
+  const normalizedMsg = normalizeText(message);
+  const endKeywords = ["ok", "oke", "okie", "cam on", "thanks", "được rồi", "yes", "vâng"];
+  return endKeywords.some(keyword => normalizedMsg.includes(keyword));
 }
 
-// ====== RULE BASED COMPLAINT DETECTION ======
 const complaintSynonyms = {
-  "không hài lòng": ["ko hài lòng", "k hài lòng", "bất mãn", "không ok", "k ok", "k đồng ý"],
-  "dịch vụ kém": ["dv kém", "dịch vụ tệ", "dịch vụ không tốt", "dịch vụ chán", "dịch vụ không ổn"],
-  "bực mình": ["bực bội", "bực quá", "ức chế", "chán ghê", "tức"],
-  "phàn nàn": ["than phiền", "complain", "méc", "mách", "khiếu nại"],
-  "giải thích": ["trả lời rõ", "nói lại", "hướng dẫn lại", "nói rõ ra"],
-  "có ai ở đó không": ["ai ở đó", "có ai ko", "có người không", "alo có ai"],
-  "gặp người tư vấn": ["tư vấn viên đâu", "người thật đâu", "cho gặp admin", "muốn nói chuyện với người"],
-  "bot dở quá": ["bot ngu", "bot kém", "bot chán", "bot tệ"]
+  "không hài lòng": ["ko hài lòng", "bất mãn", "k ok"],
+  "dịch vụ kém": ["dịch vụ tệ", "dịch vụ không tốt"],
+  "bực mình": ["ức chế", "chán ghê"],
+  "phàn nàn": ["complain", "khiếu nại"],
+  "gặp người tư vấn": ["gặp admin", "muốn nói chuyện với người"]
 };
 
 function isAngryCustomer(message) {
-  if (!message) return false;
-
-  const normalizedMsg = message
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[!.,?~]/g, "")
-    .trim();
-
+  const normalizedMsg = normalizeText(message);
   for (const key in complaintSynonyms) {
     if (normalizedMsg.includes(key)) return true;
-
     for (const synonym of complaintSynonyms[key]) {
       if (normalizedMsg.includes(synonym)) return true;
     }
   }
-
   return false;
 }
 
-// ====== FIND FLOW MATCH ======
-function findFlow(userMessage) {
-  const msg = userMessage.toLowerCase();
+function normalizeText(msg) {
+  return msg?.toLowerCase()
+    .normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .replace(/[!.,?~]/g, "").trim() || "";
+}
 
-  return flowData.find(item => {
-    if (!item.trigger_keywords || !Array.isArray(item.trigger_keywords)) {
-      return false;
+// ====== SEND FLOW STEPS ======
+async function sendFlowSteps(sender_psid, steps, parentService) {
+  const feedbackFolders = ["mat", "mui", "nguc"];
+
+  if (feedbackFolders.includes(parentService)) {
+    const feedbackImages = await getFeedbackImages(parentService);
+    if (feedbackImages.length > 0) {
+      await messengerService.sendMessage(sender_psid, { text: "Dưới đây là feedback khách hàng thực tế bên em chị tham khảo thêm nha!" });
+      for (const url of feedbackImages) {
+        await messengerService.sendMessage(sender_psid, { attachment: { type: 'image', payload: { url, is_reusable: true } } });
+      }
     }
+  }
 
-    return item.trigger_keywords.some(trigger => msg.includes(trigger));
+  for (const step of steps) {
+    if (step.type === 'text') {
+      await messengerService.sendMessage(sender_psid, { text: step.content });
+    }
+  }
+
+  const bangGiaFolderMap = {
+    "mui": "banggia_thammymui",
+    "mat": "banggia_thammymat",
+    "nguc": "banggia_nangnguc",
+    "vungkin": "banggia_thammyvungkin",
+    "damat": "banggiathammy_damat",
+    "bung": "banggia_hutmobung",
+    "cacdichvukhac": "banggia_cacdichvukhac"
+  };
+
+  const bangGiaFolder = bangGiaFolderMap[parentService];
+  if (bangGiaFolder) {
+    const bangGiaImage = await getBangGiaImage(bangGiaFolder);
+    if (bangGiaImage) {
+      await messengerService.sendMessage(sender_psid, { text: "Đây là bảng giá dịch vụ bên em chị tham khảo thêm nha!" });
+      await messengerService.sendMessage(sender_psid, { attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } } });
+    }
+  }
+
+  await messengerService.sendMessage(sender_psid, { text: "Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!" });
+}
+
+// ====== HANDLE POSTBACK PAYLOAD ======
+function handlePostback(sender_psid, postback) {
+  const payload = postback.payload;
+  console.log(`📦 Postback payload nhận: ${payload}`);
+
+  let foundFlow = false;
+  chatbotServiceFlows.flows.forEach(service => {
+    service.sub_flows.forEach(flow => {
+      if (flow.payload === payload) {
+        foundFlow = true;
+        const parentServiceKey = normalizeText(service.parent_service.replace(/\s+/g, ""));
+        sendFlowSteps(sender_psid, flow.steps, parentServiceKey);
+      }
+    });
   });
+
+  if (!foundFlow) {
+    messengerService.sendMessage(sender_psid, { text: "Dạ chị quan tâm dịch vụ nào bên em để em hỗ trợ thêm nha!" });
+  }
 }
 
 // ====== WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
   const body = req.body;
-
   if (body.object === "page") {
-    body.entry.forEach(async function (entry) {
+    body.entry.forEach(async entry => {
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
-
       const message = webhook_event.message?.text?.trim();
-      if (!message) return;
 
+      if (webhook_event.postback) {
+        return handlePostback(senderId, webhook_event.postback);
+      }
+
+      if (!message) return;
       console.log(`💬 [${senderId}] ${message}`);
 
-      // ====== 1. Nếu đang handoff ➔ Kiểm tra quay lại
       if (handoffUsers.has(senderId)) {
         if (findFlow(message)) {
           handoffUsers.delete(senderId);
-          await messengerService.sendMessage(senderId, {
-            text: "Dạ chị cần tư vấn thêm dịch vụ đúng không ạ? Em hỗ trợ chị ngay nha!"
-          });
-          console.log(`✅ User ${senderId} quay lại hỏi dịch vụ ➔ bot trở lại!`);
-        } else {
-          console.log(`🙊 User ${senderId} đang handoff, bot im.`);
-          return;
-        }
+          await messengerService.sendMessage(senderId, { text: "Dạ chị cần tư vấn thêm dịch vụ đúng không ạ? Em hỗ trợ chị ngay nha!" });
+        } else return;
       }
 
-      // ====== 2. Nếu khách kết thúc hội thoại ➔ Chốt và ngưng trả lời
       if (isEndConversation(message)) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
-        });
         completedUsers.add(senderId);
-        console.log(`✅ User ${senderId} kết thúc hội thoại, bot ngưng trả lời.`);
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!" });
       }
 
-      // ====== 3. Nếu khách đã kết thúc trước đó ➔ Kiểm tra quay lại
       if (completedUsers.has(senderId)) {
         if (findFlow(message)) {
           completedUsers.delete(senderId);
-          await messengerService.sendMessage(senderId, {
-            text: "Dạ chị cần em hỗ trợ thêm dịch vụ nào ạ?"
-          });
-          console.log(`🔄 User ${senderId} quay lại hỏi tiếp ➔ Mở lại phiên chat.`);
+          await messengerService.sendMessage(senderId, { text: "Dạ chị cần em hỗ trợ thêm dịch vụ nào ạ?" });
         } else if (isAngryCustomer(message) || (await analyzeSentimentWithGPT(message)) === "negative") {
           handoffUsers.add(senderId);
-          console.log(`🚨 User ${senderId} bực ➔ Handoff CSKH.`);
-          return;
-        } else {
-          console.log(`🤫 User ${senderId} đã chốt, bot im.`);
-          return;
-        }
+        } else return;
       }
 
-      // ====== 4. Rule-based phát hiện phàn nàn ➔ Handoff
       if (isAngryCustomer(message)) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Em đã chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
-        });
         handoffUsers.add(senderId);
-        console.log(`🚨 User ${senderId} handoff do rule-based phát hiện.`);
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Dạ em xin lỗi chị, em đã chuyển thông tin cho tư vấn viên hỗ trợ ngay ạ!" });
       }
 
-      // ====== 5. GPT kiểm tra cảm xúc ➔ Negative ➔ Handoff
       const sentiment = await analyzeSentimentWithGPT(message);
       if (sentiment === "negative") {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Bạn tư vấn viên sẽ hỗ trợ chị ngay ạ!"
-        });
         handoffUsers.add(senderId);
-        console.log(`🚨 User ${senderId} handoff do GPT nhận diện tiêu cực.`);
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Dạ em xin lỗi chị, bạn tư vấn viên sẽ hỗ trợ chị ngay ạ!" });
       }
 
-      // ====== 6. Check số điện thoại
-      const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
-      const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
-
-      if (phoneRegexVN.test(message) || phoneRegexInternational.test(message)) {
-        if (!isValidPhoneNumber(message)) {
-          await messengerService.sendMessage(senderId, {
-            text: "Dạ số chị nhập chưa đúng định dạng ạ! Số Việt Nam cần đủ 10 số hoặc dạng +84 nhé chị!"
-          });
-          return;
-        }
-
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
-        });
+      if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
-        console.log(`📞 User ${senderId} để lại số: ${message}`);
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!" });
       }
 
-      // ====== 7. Check tiếng Anh ➔ Tư vấn English
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
-        await messengerService.sendMessage(senderId, {
-          text: "Hi, may I know which service you are interested in? Please leave your Zalo/Viber/WhatsApp so our assistant Ms. Ngan can contact you soon!"
-        });
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Hi, may I know which service you are interested in? Please leave your Zalo/Viber/WhatsApp so our assistant Ms. Ngan can contact you soon!" });
       }
 
-      // ====== 8. Câu quá ngắn ➔ Nhắc rõ hơn
       if (message.length < 3) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ chị nhắn rõ hơn giúp em ạ! Hoặc để lại số Zalo/Viber để được tư vấn nhanh nha chị!"
-        });
-        return;
+        return await messengerService.sendMessage(senderId, { text: "Dạ chị nhắn rõ hơn giúp em ạ! Hoặc để lại số Zalo/Viber để được tư vấn nhanh nha chị!" });
       }
 
-      // ====== 9. Flow keyword ➔ Phản hồi dịch vụ
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
-
-        if (matchedFlow.next_step && matchedFlow.next_step.trim() !== "") {
+        if (matchedFlow.next_step) {
           await messengerService.sendMessage(senderId, { text: matchedFlow.next_step });
         }
-
         return;
       }
 
-      // ====== 10. Mặc định ➔ Xin lại SĐT
-      await messengerService.sendMessage(senderId, {
-        text: "Dạ chị để lại SĐT/Zalo/Viber để bạn Ngân - trợ lý bác sĩ tư vấn chi tiết hơn cho chị nhé!"
-      });
-
+      await messengerService.sendMessage(senderId, { text: "Dạ chị để lại SĐT/Zalo/Viber để bạn Ngân - trợ lý bác sĩ tư vấn chi tiết hơn cho chị nhé!" });
     });
 
     res.status(200).send("EVENT_RECEIVED");
@@ -300,14 +291,12 @@ app.get("/webhook", (req, res) => {
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
 
-  if (mode && token) {
-    if (mode === "subscribe" && token === VERIFY_TOKEN) {
-      console.log("WEBHOOK_VERIFIED");
-      res.status(200).send(challenge);
-    } else {
-      res.sendStatus(403);
-    }
+  if (mode === "subscribe" && token === VERIFY_TOKEN) {
+    console.log("WEBHOOK_VERIFIED");
+    return res.status(200).send(challenge);
   }
+
+  res.sendStatus(403);
 });
 
 // ====== START SERVER ======

@@ -1,0 +1,309 @@
+{
+  "flows": [
+    {
+      "parent_service": "Ngực",
+      "sub_flows": [
+        {
+          "payload": "ngực-phẫu-thuật-nâng-ngực",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Chị đang tìm hiểu dịch vụ Phẫu thuật nâng ngực phải không ạ?"
+            },
+            {
+              "type": "text",
+              "content": "Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện."
+            },
+            {
+              "type": "text",
+              "content": "Dưới đây là hình ảnh feedback của khách hàng đã nâng ngực bên bác Vũ ạ!"
+            },
+            {
+              "type": "image_group",
+              "urls": [
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb1.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb2.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb3.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb4.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb5.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb6.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb7.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb8.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb9.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/fb10.jpg"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá dịch vụ nâng ngực bên em hiện tại, chị tham khảo thêm nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/nangnguc/banggia.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại số điện thoại để bên em tư vấn chi tiết hơn cho mình nha!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-tháo-túi-ngực",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Dịch vụ Tháo túi ngực bên em đảm bảo an toàn tuyệt đối, không đau, không để lại biến chứng."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/thao-tui-nguc.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại số điện thoại để bên em liên hệ tư vấn cụ thể hơn nhé!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-bóc-bao-xơ-túi-ngực",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chị quan tâm đến Bóc bao xơ túi ngực đúng không ạ? Bác sĩ Vũ có kỹ thuật bóc tách an toàn, không đau và phục hồi nhanh."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/boc-bao-xo.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Em xin phép được tư vấn chi tiết hơn, chị để lại số điện thoại giúp em nhé!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-tái-tạo-vú-sau-điều-trị-ung-thư",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ, dịch vụ Tái tạo vú sau điều trị ung thư bên em sử dụng kỹ thuật tiên tiến giúp phục hồi tự nhiên, đảm bảo an toàn tuyệt đối."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/tai-tao-vu.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại thông tin để bên em tư vấn kỹ hơn cho mình nha!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-nâng-ngực-bằng-phương-pháp-dao-siêu-âm",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Đây là phương pháp Nâng ngực không đau bằng dao siêu âm Ultrasonic, giảm đau 90%, phục hồi cực nhanh."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/dao-sieu-am.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại số điện thoại để em tư vấn thêm nha!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-nâng-ngực-bằng-dao-hamonic",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ, nâng ngực bằng dao Harmonic giúp giảm đau tối đa, không chảy máu, thời gian hồi phục siêu nhanh ạ!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/dao-harmonic.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Để lại thông tin giúp em, bên em tư vấn chi tiết hơn cho chị nha!"
+            }
+          ]
+        },
+        {
+          "payload": "ngực-các-dịch-vụ-khác-về-ngực",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chị quan tâm các dịch vụ khác về ngực phải không ạ? Bên em có đầy đủ các dịch vụ từ chỉnh sửa, nâng cấp đến tái tạo theo yêu cầu."
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại số điện thoại để em tư vấn cụ thể hơn nha!"
+            }
+			 {
+      "parent_service": "Mũi",
+      "sub_flows": [
+        {
+          "payload": "mũi-nâng-mũi-tái-cấu-trúc-nâng-mũi-sụn-sườn",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Dịch vụ Nâng mũi tái cấu trúc/ nâng mũi sụn sườn bên em giúp dáng mũi tự nhiên, sử dụng sụn sườn tự thân nên an toàn tuyệt đối!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mui/nangmui1.jpg"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mui/nangmui2.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá dịch vụ nâng mũi bên em hiện tại, chị tham khảo thêm nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mui/banggia.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại thông tin giúp em, bên em tư vấn thêm nha chị!"
+            }
+          ]
+        },
+        {
+          "payload": "mũi-chỉnh-mũi-lỗi",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ, chỉnh sửa mũi lỗi là thế mạnh của bác sĩ Vũ, phục hồi dáng mũi chuẩn, an toàn, không để lại sẹo."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mui/chinhmui1.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Chị để lại thông tin giúp em, bên em liên hệ tư vấn kỹ hơn cho mình nha!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Mắt",
+      "sub_flows": [
+        {
+          "payload": "mắt-tiểu-phẫu-cắt-mí",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Tiểu phẫu cắt mí bên bác Vũ giúp mắt rõ nét, không đau, hồi phục nhanh chỉ sau 5-7 ngày."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mat/catmi1.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá cắt mí hiện tại, chị tham khảo thêm nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mat/banggia.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Bụng",
+      "sub_flows": [
+        {
+          "payload": "bụng-hút-mỡ-bụng-tay-đùi-lưng",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Bên em có dịch vụ hút mỡ tạo dáng bụng, tay, đùi, lưng cực kỳ an toàn và không cần nghỉ dưỡng lâu."
+            },
+            {
+              "type": "image_group",
+              "urls": [
+                "https://res.cloudinary.com/demo/image/upload/feedback/bung/hutmo1.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/bung/hutmo2.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/bung/hutmo3.jpg"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá dịch vụ hút mỡ, chị tham khảo thêm nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/bung/banggia.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Mặt",
+      "sub_flows": [
+        {
+          "payload": "mặt-phẫu-thuật-căng-da-mặt",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Phẫu thuật căng da mặt bên em giúp trẻ hóa toàn diện, không để lại sẹo và hồi phục nhanh."
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mat/cangda1.jpg"
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá dịch vụ căng da mặt, chị tham khảo nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/mat/banggia.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Vùng kín",
+      "sub_flows": [
+        {
+          "payload": "vùng-kín-thẩm-mỹ-vùng-kín",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Bên em có dịch vụ thẩm mỹ vùng kín, se khít và làm hồng không phẫu thuật, an toàn, không đau và phục hồi nhanh."
+            },
+            {
+              "type": "image_group",
+              "urls": [
+                "https://res.cloudinary.com/demo/image/upload/feedback/vungkin/feedback1.jpg",
+                "https://res.cloudinary.com/demo/image/upload/feedback/vungkin/feedback2.jpg"
+              ]
+            },
+            {
+              "type": "text",
+              "content": "Đây là bảng giá thẩm mỹ vùng kín bên em, chị tham khảo thêm nha!"
+            },
+            {
+              "type": "image",
+              "url": "https://res.cloudinary.com/demo/image/upload/feedback/vungkin/banggia.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
