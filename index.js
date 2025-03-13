@@ -106,7 +106,7 @@ function isEndConversation(message) {
     "roi nhe", "oke roi", "ok ban", "ok nhe"
   ];
 
-  return endKeywords.some(keyword => normalizedMsg.includes(keyword));
+  return endKeywords.some(keyword => normalizedMsg === keyword || normalizedMsg.endsWith(keyword));
 }
 
 // ====== RULE BASED COMPLAINT DETECTION ======
@@ -168,68 +168,70 @@ app.post("/webhook", async (req, res) => {
 
       console.log(`💬 [${senderId}] ${message}`);
 
-      // ====== 1. Handoff đã active ➜ Im lặng tuyệt đối
+      // ====== 1. Nếu đang handoff ➜ Im lặng
       if (handoffUsers.has(senderId)) {
-        console.log(`🙊 User ${senderId} đã chuyển CSKH, bot im lặng.`);
+        console.log(`🙊 User ${senderId} handoff CSKH, bot im.`);
         return;
       }
 
-      // ====== 2. RULE-BASED COMPLAINT ➜ Handoff
+      // ====== 2. Nếu khách nói kết thúc hội thoại ➜ Chốt
+      if (isEndConversation(message)) {
+        await messengerService.sendMessage(senderId, {
+          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
+        });
+        completedUsers.add(senderId);
+        console.log(`✅ User ${senderId} kết thúc hội thoại, bot ngưng trả lời.`);
+        return;
+      }
+
+      // ====== 3. Nếu khách đã kết thúc trước đó ➜ Im tiếp
+      if (completedUsers.has(senderId)) {
+        console.log(`🤫 User ${senderId} đã kết thúc, bot ngưng trả lời.`);
+        return;
+      }
+
+      // ====== 4. Rule-based phát hiện phàn nàn ➜ Handoff
       if (isAngryCustomer(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em xin lỗi chị về sự bất tiện ạ! Em đã chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
         });
-
         handoffUsers.add(senderId);
-        console.log(`🚨 [Rule] Handoff user ${senderId}`);
+        console.log(`🚨 User ${senderId} handoff do rule-based phát hiện.`);
         return;
       }
 
-      // ====== 3. GPT SENTIMENT CHECK ➜ Smart Handoff
+      // ====== 5. GPT kiểm tra cảm xúc ➜ Negative ➜ Handoff
       const sentiment = await analyzeSentimentWithGPT(message);
-
       if (sentiment === "negative") {
         await messengerService.sendMessage(senderId, {
-          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Bạn tư vấn viên sẽ liên hệ hỗ trợ ngay với mình nha!"
+          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Bạn tư vấn viên sẽ hỗ trợ chị ngay ạ!"
         });
-
         handoffUsers.add(senderId);
-        console.log(`🚨 [GPT] Handoff user ${senderId}`);
+        console.log(`🚨 User ${senderId} handoff do GPT nhận diện tiêu cực.`);
         return;
       }
 
-      // ====== 4. Completed user ➜ kiểm tra quay lại
-      if (completedUsers.has(senderId)) {
-        if (!isEndConversation(message)) {
-          completedUsers.delete(senderId);
-          console.log(`🔄 User ${senderId} quay lại hỏi tiếp!`);
-        } else {
-          console.log(`🤫 User ${senderId} đã chốt, im tiếp.`);
-          return;
-        }
-      }
-
-      // ====== 5. PHONE CHECK
+      // ====== 6. Check số điện thoại
       const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
       const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
       if (phoneRegexVN.test(message) || phoneRegexInternational.test(message)) {
         if (!isValidPhoneNumber(message)) {
           await messengerService.sendMessage(senderId, {
-            text: "Dạ số điện thoại chị nhập chưa đúng định dạng ạ. Số Việt Nam cần đủ 10 số hoặc theo dạng +84. Chị kiểm tra lại giúp em nhé!"
+            text: "Dạ số chị nhập chưa đúng định dạng ạ! Số Việt Nam cần đủ 10 số hoặc dạng +84 nhé chị!"
           });
           return;
         }
 
         await messengerService.sendMessage(senderId, {
-          text: "Dạ em ghi nhận thông tin rồi nha chị! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình ạ!"
+          text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
         });
-
         completedUsers.add(senderId);
+        console.log(`📞 User ${senderId} để lại số: ${message}`);
         return;
       }
 
-      // ====== 6. ENGLISH DETECT
+      // ====== 7. Check tiếng Anh ➜ Tư vấn English
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
         await messengerService.sendMessage(senderId, {
@@ -238,25 +240,15 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 7. END CONVERSATION DETECT
-      if (isEndConversation(message)) {
-        await messengerService.sendMessage(senderId, {
-          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
-        });
-
-        completedUsers.add(senderId);
-        return;
-      }
-
-      // ====== 8. MESSAGE TOO SHORT
+      // ====== 8. Câu quá ngắn ➜ Nhắc rõ hơn
       if (message.length < 3) {
         await messengerService.sendMessage(senderId, {
-          text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
+          text: "Dạ chị nhắn rõ hơn giúp em ạ! Hoặc để lại số Zalo/Viber để được tư vấn nhanh nha chị!"
         });
         return;
       }
 
-      // ====== 9. FLOW KEYWORD DETECT
+      // ====== 9. Flow keyword ➜ Phản hồi dịch vụ
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
@@ -268,9 +260,9 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 10. DEFAULT ASK FOR PHONE
+      // ====== 10. Mặc định ➜ Xin lại SĐT
       await messengerService.sendMessage(senderId, {
-        text: "Dạ chị có thể để lại SĐT Zalo/Viber để bạn Ngân - trợ lý bác sĩ có thể trao đổi, tư vấn chi tiết cho chị được không ạ?"
+        text: "Dạ chị để lại SĐT/Zalo/Viber để bạn Ngân - trợ lý bác sĩ tư vấn chi tiết hơn cho chị nhé!"
       });
 
     });
@@ -281,7 +273,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// ====== VERIFY WEBHOOK FACEBOOK ======
+// ====== VERIFY WEBHOOK ======
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query["hub.mode"];
@@ -300,4 +292,4 @@ app.get("/webhook", (req, res) => {
 
 // ====== START SERVER ======
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
