@@ -168,13 +168,21 @@ app.post("/webhook", async (req, res) => {
 
       console.log(`💬 [${senderId}] ${message}`);
 
-      // ====== 1. Nếu đang handoff ➜ Im lặng
+      // ====== 1. Nếu đang handoff ➔ Kiểm tra quay lại
       if (handoffUsers.has(senderId)) {
-        console.log(`🙊 User ${senderId} handoff CSKH, bot im.`);
-        return;
+        if (findFlow(message)) {
+          handoffUsers.delete(senderId);
+          await messengerService.sendMessage(senderId, {
+            text: "Dạ chị cần tư vấn thêm dịch vụ đúng không ạ? Em hỗ trợ chị ngay nha!"
+          });
+          console.log(`✅ User ${senderId} quay lại hỏi dịch vụ ➔ bot trở lại!`);
+        } else {
+          console.log(`🙊 User ${senderId} đang handoff, bot im.`);
+          return;
+        }
       }
 
-      // ====== 2. Nếu khách kết thúc hội thoại ➜ Chốt và ngưng trả lời
+      // ====== 2. Nếu khách kết thúc hội thoại ➔ Chốt và ngưng trả lời
       if (isEndConversation(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
@@ -184,22 +192,25 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 3. Nếu khách đã kết thúc trước đó ➜ Kiểm tra quay lại hỏi tiếp
+      // ====== 3. Nếu khách đã kết thúc trước đó ➔ Kiểm tra quay lại
       if (completedUsers.has(senderId)) {
-        // Nếu nội dung có thông tin thực sự ➜ Mở lại session
-        if (message.length >= 10 || findFlow(message)) {
+        if (findFlow(message)) {
           completedUsers.delete(senderId);
           await messengerService.sendMessage(senderId, {
-            text: "Dạ chị cần em hỗ trợ thêm thông tin gì ạ?"
+            text: "Dạ chị cần em hỗ trợ thêm dịch vụ nào ạ?"
           });
-          console.log(`🔄 User ${senderId} quay lại hỏi tiếp ➜ Mở lại phiên chat.`);
+          console.log(`🔄 User ${senderId} quay lại hỏi tiếp ➔ Mở lại phiên chat.`);
+        } else if (isAngryCustomer(message) || (await analyzeSentimentWithGPT(message)) === "negative") {
+          handoffUsers.add(senderId);
+          console.log(`🚨 User ${senderId} bực ➔ Handoff CSKH.`);
+          return;
         } else {
-          console.log(`🤫 User ${senderId} đã chốt, tin nhắn ngắn ➜ im tiếp.`);
+          console.log(`🤫 User ${senderId} đã chốt, bot im.`);
           return;
         }
       }
 
-      // ====== 4. Rule-based phát hiện phàn nàn ➜ Handoff
+      // ====== 4. Rule-based phát hiện phàn nàn ➔ Handoff
       if (isAngryCustomer(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em xin lỗi chị về sự bất tiện ạ! Em đã chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
@@ -209,7 +220,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 5. GPT kiểm tra cảm xúc ➜ Negative ➜ Handoff
+      // ====== 5. GPT kiểm tra cảm xúc ➔ Negative ➔ Handoff
       const sentiment = await analyzeSentimentWithGPT(message);
       if (sentiment === "negative") {
         await messengerService.sendMessage(senderId, {
@@ -240,7 +251,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 7. Check tiếng Anh ➜ Tư vấn English
+      // ====== 7. Check tiếng Anh ➔ Tư vấn English
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
         await messengerService.sendMessage(senderId, {
@@ -249,7 +260,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 8. Câu quá ngắn ➜ Nhắc rõ hơn
+      // ====== 8. Câu quá ngắn ➔ Nhắc rõ hơn
       if (message.length < 3) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ chị nhắn rõ hơn giúp em ạ! Hoặc để lại số Zalo/Viber để được tư vấn nhanh nha chị!"
@@ -257,7 +268,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 9. Flow keyword ➜ Phản hồi dịch vụ
+      // ====== 9. Flow keyword ➔ Phản hồi dịch vụ
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
@@ -269,7 +280,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 10. Mặc định ➜ Xin lại SĐT
+      // ====== 10. Mặc định ➔ Xin lại SĐT
       await messengerService.sendMessage(senderId, {
         text: "Dạ chị để lại SĐT/Zalo/Viber để bạn Ngân - trợ lý bác sĩ tư vấn chi tiết hơn cho chị nhé!"
       });
