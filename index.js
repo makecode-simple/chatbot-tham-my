@@ -174,7 +174,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 2. Nếu khách nói kết thúc hội thoại ➜ Chốt
+      // ====== 2. Nếu khách kết thúc hội thoại ➜ Chốt và ngưng trả lời
       if (isEndConversation(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
@@ -184,10 +184,19 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 3. Nếu khách đã kết thúc trước đó ➜ Im tiếp
+      // ====== 3. Nếu khách đã kết thúc trước đó ➜ Kiểm tra quay lại hỏi tiếp
       if (completedUsers.has(senderId)) {
-        console.log(`🤫 User ${senderId} đã kết thúc, bot ngưng trả lời.`);
-        return;
+        // Nếu nội dung có thông tin thực sự ➜ Mở lại session
+        if (message.length >= 10 || findFlow(message)) {
+          completedUsers.delete(senderId);
+          await messengerService.sendMessage(senderId, {
+            text: "Dạ chị cần em hỗ trợ thêm thông tin gì ạ?"
+          });
+          console.log(`🔄 User ${senderId} quay lại hỏi tiếp ➜ Mở lại phiên chat.`);
+        } else {
+          console.log(`🤫 User ${senderId} đã chốt, tin nhắn ngắn ➜ im tiếp.`);
+          return;
+        }
       }
 
       // ====== 4. Rule-based phát hiện phàn nàn ➜ Handoff
