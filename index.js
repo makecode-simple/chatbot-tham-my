@@ -28,18 +28,27 @@ function findFlow(userMessage) {
 
 // Hàm kiểm tra SĐT hợp lệ (VN + Quốc tế full code theo countryDigitRules)
 function isValidPhoneNumber(message) {
-  if (!message.startsWith('+')) return false;
+  if (!message) return false;
 
-  const cleanNumber = message.replace(/ /g, '').replace(/-/g, '');
+  // Xử lý loại bỏ khoảng trắng và dấu -
+  let cleanNumber = message.replace(/[\s-]/g, '');
+
+  // Nếu là số VN bắt đầu bằng 0, chuyển về +84
+  if (cleanNumber.startsWith('0')) {
+    cleanNumber = '+84' + cleanNumber.slice(1);
+  }
+
+  // Phải bắt đầu bằng +
+  if (!cleanNumber.startsWith('+')) return false;
 
   const countryCode = countryCodes.find(code => cleanNumber.startsWith(code));
 
   if (!countryCode) {
-    // Tạm nhận số chưa có trong rule (nếu thoả mãn format chung)
+    // Chấp nhận số chưa có rule nếu format đúng (ví dụ quốc gia chưa thêm)
     const genericPhone = /^\+\d{6,15}$/.test(cleanNumber);
     if (genericPhone) {
       console.log(`❗ Số quốc gia chưa có rule: ${cleanNumber}`);
-      return "unknown"; // flag riêng
+      return "unknown"; // flag riêng nếu cần xử lý
     }
     return false;
   }
@@ -51,9 +60,11 @@ function isValidPhoneNumber(message) {
   const length = numberWithoutCode.length;
 
   if (length < digitRule.min || length > digitRule.max) {
+    console.log(`❌ Số không đúng độ dài quy định cho ${countryCode}: ${length} số`);
     return false;
   }
 
+  console.log(`✅ Số hợp lệ: ${cleanNumber}`);
   return true;
 }
 
