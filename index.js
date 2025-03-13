@@ -2,15 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const messengerService = require("./messengerService");
 const fs = require("fs");
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 
 const app = express();
 app.use(bodyParser.json());
 
 // ==== CONFIG GPT ====
-const openai = new OpenAIApi(new Configuration({
-  apiKey: process.env.OPENAI_API_KEY, // đảm bảo đã set trong env
-}));
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 // ==== LOAD DATA ====
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
@@ -36,21 +36,21 @@ Hãy phân loại cảm xúc đoạn chat sau vào 1 trong 3 loại:
 Trả lời chỉ 1 từ: negative, neutral, positive
 `;
 
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
       temperature: 0,
-      max_tokens: 5
+      max_tokens: 5,
     });
 
-    const sentiment = response.data.choices[0].message.content.trim().toLowerCase();
+    const sentiment = response.choices[0].message.content.trim().toLowerCase();
     console.log("🎯 GPT Sentiment:", sentiment);
 
     return sentiment;
 
   } catch (error) {
     console.error("❌ GPT Error:", error.message);
-    return "neutral"; // fallback nếu lỗi
+    return "neutral";
   }
 }
 
@@ -154,7 +154,7 @@ function findFlow(userMessage) {
   });
 }
 
-// ====== WEBHOOK XỬ LÝ ======
+// ====== WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
@@ -174,7 +174,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // ====== 2. RULE-BASED: Phàn nàn ➜ Handoff
+      // ====== 2. RULE-BASED COMPLAINT ➜ Handoff
       if (isAngryCustomer(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em xin lỗi chị về sự bất tiện ạ! Em đã chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
@@ -280,3 +280,24 @@ app.post("/webhook", async (req, res) => {
     res.sendStatus(404);
   }
 });
+
+// ====== VERIFY WEBHOOK FACEBOOK ======
+app.get("/webhook", (req, res) => {
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
+
+  if (mode && token) {
+    if (mode === "subscribe" && token === VERIFY_TOKEN) {
+      console.log("WEBHOOK_VERIFIED");
+      res.status(200).send(challenge);
+    } else {
+      res.sendStatus(403);
+    }
+  }
+});
+
+// ====== START SERVER ======
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
