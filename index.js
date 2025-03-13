@@ -6,15 +6,16 @@ const fs = require("fs");
 const app = express();
 app.use(bodyParser.json());
 
-// Load dữ liệu
+// Load dữ liệu flow + rules
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
 const countryDigitRules = JSON.parse(fs.readFileSync("countryDigitRules.json"));
 const countryCodes = Object.keys(countryDigitRules);
 
-// Danh sách user đã kết thúc trò chuyện
+// Danh sách user đã kết thúc hoặc cần handoff
 const completedUsers = new Set();
+const handoffUsers = new Set();
 
-// === HÀM XỬ LÝ PHONE === //
+// Hàm validate số điện thoại
 function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/[\s-]/g, '');
@@ -49,28 +50,59 @@ function isValidPhoneNumber(message) {
   return true;
 }
 
-// === HÀM PHÁT HIỆN KẾT THÚC TRÒ CHUYỆN === //
+// Hàm nhận diện chốt hội thoại
 function isEndConversation(message) {
   if (!message) return false;
 
   const normalizedMsg = message
     .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // bỏ dấu tiếng Việt
-    .replace(/[!.,?~]/g, "") // bỏ ký tự đặc biệt
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[!.,?~]/g, "")
     .trim();
 
-  // Từ khóa "chốt" linh hoạt
   const endKeywords = [
     "ok", "oke", "okie", "okei", "okey",
     "cam on", "cảm ơn", "thanks", "thank you",
-    "duoc roi", "được rồi", "dong y", "dạ rồi", "yes", "vâng", "uầy", "rồi nha",
+    "duoc roi", "được rồi", "dong y", "dạ rồi", "yes", "vâng", "rồi nha",
     "roi nhe", "oke roi", "ok ban", "ok nhe"
   ];
 
   return endKeywords.some(keyword => normalizedMsg.includes(keyword));
 }
 
-// === HÀM TÌM FLOW === //
+// Nhận diện phàn nàn hoặc yêu cầu gặp người thật
+const complaintSynonyms = {
+  "không hài lòng": ["ko hài lòng", "k hài lòng", "bất mãn", "không ok", "k ok", "k đồng ý"],
+  "dịch vụ kém": ["dv kém", "dịch vụ tệ", "dịch vụ không tốt", "dịch vụ chán", "dịch vụ không ổn"],
+  "bực mình": ["bực bội", "bực quá", "ức chế", "chán ghê", "tức"],
+  "phàn nàn": ["than phiền", "complain", "méc", "mách", "khiếu nại"],
+  "giải thích": ["trả lời rõ", "nói lại", "hướng dẫn lại", "nói rõ ra"],
+  "có ai ở đó không": ["ai ở đó", "có ai ko", "có người không", "alo có ai"],
+  "gặp người tư vấn": ["tư vấn viên đâu", "người thật đâu", "cho gặp admin", "muốn nói chuyện với người"],
+  "bot dở quá": ["bot ngu", "bot kém", "bot chán", "bot tệ"]
+};
+
+function isAngryCustomer(message) {
+  if (!message) return false;
+
+  const normalizedMsg = message
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[!.,?~]/g, "")
+    .trim();
+
+  for (const key in complaintSynonyms) {
+    if (normalizedMsg.includes(key)) return true;
+
+    for (const synonym of complaintSynonyms[key]) {
+      if (normalizedMsg.includes(synonym)) return true;
+    }
+  }
+
+  return false;
+}
+
+// Hàm tìm flow
 function findFlow(userMessage) {
   const msg = userMessage.toLowerCase();
 
@@ -83,7 +115,7 @@ function findFlow(userMessage) {
   });
 }
 
-// === WEBHOOK XỬ LÝ === //
+// Webhook xử lý tin nhắn
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
@@ -92,9 +124,13 @@ app.post("/webhook", async (req, res) => {
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
 
-      // Nếu user đã kết thúc -> im lặng
       if (completedUsers.has(senderId)) {
-        console.log(`🤫 Người dùng ${senderId} đã kết thúc, im lặng!`);
+        console.log(`🤫 User ${senderId} đã chốt, im lặng.`);
+        return;
+      }
+
+      if (handoffUsers.has(senderId)) {
+        console.log(`🙊 User ${senderId} handoff cho CSKH, im lặng.`);
         return;
       }
 
@@ -103,19 +139,28 @@ app.post("/webhook", async (req, res) => {
 
       console.log(`💬 [${senderId}] ${message}`);
 
-      const lowerCaseMessage = message.toLowerCase();
+      // Xử lý phàn nàn / yêu cầu người thật
+      if (isAngryCustomer(message)) {
+        await messengerService.sendMessage(senderId, {
+          text: "Dạ em xin lỗi chị về sự bất tiện ạ! Để em chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
+        });
 
-      // Kiểm tra kết thúc trò chuyện
+        handoffUsers.add(senderId);
+        console.log(`🚨 Handoff user ${senderId} cho CSKH.`);
+        return;
+      }
+
+      // Kết thúc trò chuyện
       if (isEndConversation(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
         });
 
-        completedUsers.add(senderId); // đánh dấu kết thúc
+        completedUsers.add(senderId);
         return;
       }
 
-      // Kiểm tra độ dài tin nhắn quá ngắn
+      // Tin nhắn ngắn
       if (message.length < 3) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
@@ -123,11 +168,11 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Kiểm tra SĐT
+      // Kiểm tra số điện thoại
       const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
       const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
-      if (phoneRegexVN.test(lowerCaseMessage) || phoneRegexInternational.test(lowerCaseMessage)) {
+      if (phoneRegexVN.test(message) || phoneRegexInternational.test(message)) {
         if (!isValidPhoneNumber(message)) {
           await messengerService.sendMessage(senderId, {
             text: "Dạ em kiểm tra chưa đúng định dạng số điện thoại rồi ạ. Chị kiểm tra lại hoặc để lại số Zalo/Viber giúp em để tư vấn ngay nha!"
@@ -139,12 +184,12 @@ app.post("/webhook", async (req, res) => {
           text: "Dạ em ghi nhận thông tin rồi nha chị! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình ạ!"
         });
 
-        completedUsers.add(senderId); // chốt luôn sau khi nhận SĐT
+        completedUsers.add(senderId);
         console.log(`🎉 Lead khách để lại số: ${message}`);
         return;
       }
 
-      // Kiểm tra tiếng Anh
+      // Tiếng Anh?
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
         await messengerService.sendMessage(senderId, {
@@ -153,7 +198,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Kiểm tra trigger keywords
+      // Tìm flow dịch vụ
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
@@ -165,7 +210,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Không khớp gì ➜ xin lại SĐT
+      // Mặc định xin lại SĐT
       await messengerService.sendMessage(senderId, {
         text: "Dạ chị có thể để lại SĐT Zalo/Viber để bạn Ngân - trợ lý bác sĩ có thể trao đổi, tư vấn chi tiết cho chị được không ạ?"
       });
@@ -178,7 +223,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Xác thực webhook Facebook
+// Webhook Facebook
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query["hub.mode"];
