@@ -6,16 +6,16 @@ const fs = require("fs");
 const app = express();
 app.use(bodyParser.json());
 
-// Load dữ liệu flow + rules
+// Load flow dịch vụ và country rules
 const flowData = JSON.parse(fs.readFileSync("Flow_Full_Services_DrHoCaoVu.json"));
 const countryDigitRules = JSON.parse(fs.readFileSync("countryDigitRules.json"));
 const countryCodes = Object.keys(countryDigitRules);
 
-// Danh sách user đã kết thúc hoặc cần handoff
+// Session state
 const completedUsers = new Set();
 const handoffUsers = new Set();
 
-// Hàm validate số điện thoại
+// ====== VALIDATE PHONE ======
 function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/[\s-]/g, '');
@@ -50,7 +50,7 @@ function isValidPhoneNumber(message) {
   return true;
 }
 
-// Hàm nhận diện chốt hội thoại
+// ====== DETECT END CONVERSATION ======
 function isEndConversation(message) {
   if (!message) return false;
 
@@ -70,7 +70,7 @@ function isEndConversation(message) {
   return endKeywords.some(keyword => normalizedMsg.includes(keyword));
 }
 
-// Nhận diện phàn nàn hoặc yêu cầu gặp người thật
+// ====== DETECT ANGRY CUSTOMER ======
 const complaintSynonyms = {
   "không hài lòng": ["ko hài lòng", "k hài lòng", "bất mãn", "không ok", "k ok", "k đồng ý"],
   "dịch vụ kém": ["dv kém", "dịch vụ tệ", "dịch vụ không tốt", "dịch vụ chán", "dịch vụ không ổn"],
@@ -102,7 +102,7 @@ function isAngryCustomer(message) {
   return false;
 }
 
-// Hàm tìm flow
+// ====== FIND FLOW MATCH ======
 function findFlow(userMessage) {
   const msg = userMessage.toLowerCase();
 
@@ -115,7 +115,7 @@ function findFlow(userMessage) {
   });
 }
 
-// Webhook xử lý tin nhắn
+// ====== WEBHOOK XỬ LÝ ======
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
@@ -124,22 +124,30 @@ app.post("/webhook", async (req, res) => {
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
 
-      if (completedUsers.has(senderId)) {
-        console.log(`🤫 User ${senderId} đã chốt, im lặng.`);
-        return;
-      }
-
-      if (handoffUsers.has(senderId)) {
-        console.log(`🙊 User ${senderId} handoff cho CSKH, im lặng.`);
-        return;
-      }
-
       const message = webhook_event.message?.text?.trim();
       if (!message) return;
 
       console.log(`💬 [${senderId}] ${message}`);
 
-      // Xử lý phàn nàn / yêu cầu người thật
+      // ========= Handoff im lặng =========
+      if (handoffUsers.has(senderId)) {
+        console.log(`🙊 User ${senderId} handoff cho CSKH, im lặng.`);
+        return;
+      }
+
+      // ========= Kiểm tra completed session =========
+      if (completedUsers.has(senderId)) {
+        // Nếu KHÔNG phải câu chốt ➜ mở lại session ngay
+        if (!isEndConversation(message)) {
+          completedUsers.delete(senderId);
+          console.log(`🔄 User ${senderId} quay lại hỏi thêm, bot tiếp tục!`);
+        } else {
+          console.log(`🤫 User ${senderId} đã chốt, im lặng tiếp.`);
+          return;
+        }
+      }
+
+      // ========= Phàn nàn / cần gặp người thật =========
       if (isAngryCustomer(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em xin lỗi chị về sự bất tiện ạ! Để em chuyển thông tin cho bạn tư vấn viên hỗ trợ ngay nha!"
@@ -150,17 +158,18 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Kết thúc trò chuyện
+      // ========= Kết thúc trò chuyện =========
       if (isEndConversation(message)) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
         });
 
         completedUsers.add(senderId);
+        console.log(`✅ User ${senderId} đã chốt, im lặng.`);
         return;
       }
 
-      // Tin nhắn ngắn
+      // ========= Câu hỏi quá ngắn =========
       if (message.length < 3) {
         await messengerService.sendMessage(senderId, {
           text: "Dạ chị hỏi rõ hơn giúp em với ạ! Hoặc chị để lại số điện thoại/Zalo/Viber để em tư vấn kỹ hơn nha!"
@@ -168,7 +177,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Kiểm tra số điện thoại
+      // ========= Số điện thoại =========
       const phoneRegexVN = /(0[3|5|7|8|9])+([0-9]{8})\b/;
       const phoneRegexInternational = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 
@@ -189,7 +198,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Tiếng Anh?
+      // ========= Tiếng Anh? =========
       const isEnglish = /^[A-Za-z0-9 ?!.]+$/.test(message);
       if (isEnglish) {
         await messengerService.sendMessage(senderId, {
@@ -198,7 +207,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Tìm flow dịch vụ
+      // ========= Flow dịch vụ =========
       const matchedFlow = findFlow(message);
       if (matchedFlow) {
         await messengerService.sendMessage(senderId, { text: matchedFlow.action_response });
@@ -210,7 +219,7 @@ app.post("/webhook", async (req, res) => {
         return;
       }
 
-      // Mặc định xin lại SĐT
+      // ========= Không khớp gì ➜ xin lại SĐT =========
       await messengerService.sendMessage(senderId, {
         text: "Dạ chị có thể để lại SĐT Zalo/Viber để bạn Ngân - trợ lý bác sĩ có thể trao đổi, tư vấn chi tiết cho chị được không ạ?"
       });
@@ -223,7 +232,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Webhook Facebook
+// ====== VERIFY WEBHOOK FACEBOOK ======
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query["hub.mode"];
@@ -240,6 +249,6 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// Server
+// ====== START SERVER ======
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
