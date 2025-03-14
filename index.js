@@ -40,6 +40,7 @@ function normalizeText(msg) {
 
 // ====== VALIDATE PHONE ======
 const countryCodes = Object.keys(countryDigitRules);
+
 function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/\s|-/g, '');
@@ -79,7 +80,22 @@ async function getFeedbackImages(folder) {
     return [];
   }
 }
-// ====== Tin nhắn mở đầu ======
+
+async function getBangGiaImage(publicId) {
+  try {
+    const result = await cloudinary.search
+      .expression(`folder:banggia AND public_id:${publicId} AND resource_type:image`)
+      .max_results(1)
+      .execute();
+
+    return result.resources[0]?.secure_url || null;
+  } catch (error) {
+    console.error('❌ Cloudinary fetch bảng giá error:', error);
+    return null;
+  }
+}
+
+// ====== FLOW: MENU DỊCH VỤ ======
 async function sendMenuDichVu(sender_psid) {
   const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
 * Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n
@@ -97,25 +113,232 @@ async function sendMenuDichVu(sender_psid) {
 * Căng chỉ da mặt/ PRP trẻ hóa\n
 * Độn thái dương/ độn cằm\n
 * Hút mỡ tiêm lên mặt`;
-  
+
   await messengerService.sendMessage(sender_psid, { text: menuText });
 }
 
-// ====== GET BẢNG GIÁ IMAGE ======
-async function getBangGiaImage(publicId) {
-  try {
-    const result = await cloudinary.search
-      .expression(`folder:banggia AND public_id:${publicId} AND resource_type:image`)
-      .max_results(1)
-      .execute();
+// ====== FLOW: NÂNG NGỰC ======
+async function sendNangNgucFlow(sender_psid) {
+  console.log("🚀 Trigger Nâng Ngực Flow");
 
-    return result.resources[0]?.secure_url || null;
-  } catch (error) {
-    console.error('❌ Cloudinary fetch bảng giá error:', error);
-    return null;
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chào chị! Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện.\n\n
+Bên em áp dụng dao mổ siêu âm Ultrasonic Surgical Scalpel giúp:\n
+1. Không đau\n
+2. Không gây chảy máu\n
+3. Không tiết dịch\n
+4. Không gây co thắt bao xơ\n
+5. Không cần nghỉ dưỡng\n
+6. Không để lại sẹo`
+  });
+
+  const feedbackImages = await getFeedbackImages("nguc");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
+
+  const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
 }
 
+// ====== FLOW: NÂNG MŨI ======
+async function sendNangMuiFlow(sender_psid) {
+  console.log("🚀 Trigger Nâng Mũi Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
+Bên em áp dụng công nghệ Nâng mũi tái cấu trúc, sử dụng sụn sườn tự thân giúp dáng mũi cao, đẹp tự nhiên và duy trì lâu dài.`
+  });
+
+  const feedbackImages = await getFeedbackImages("mui");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammymui");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+// ====== FLOW: THẨM MỸ MẮT ======
+async function sendThamMyMatFlow(sender_psid) {
+  console.log("🚀 Trigger Thẩm Mỹ Mắt Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
+Em gửi hình ảnh 1 vài ca thẩm mỹ vùng mắt bác từng làm ạ!`
+  });
+
+  const feedbackImages = await getFeedbackImages("mat");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// ====== FLOW: THẨM MỸ CẰM ======
+async function sendThamMyCamFlow(sender_psid) {
+  console.log("🚀 Trigger Thẩm Mỹ Cằm Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị ơi, chi phí thẩm mỹ cằm bên em từ 30-40 triệu tùy cấu trúc giải phẫu nha!\n\n
+Bác sĩ sẽ kiểm tra và tư vấn chi tiết để mình có kết quả tự nhiên nhất ạ!`
+  });
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// ====== FLOW: THẨM MỸ VÙNG KÍN ======
+async function sendThamMyVungKinFlow(sender_psid) {
+  console.log("🚀 Trigger Thẩm Mỹ Vùng Kín Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Em gửi bảng giá thẩm mỹ vùng kín chị tham khảo ạ!"
+  });
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammyvungkan");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// ====== FLOW: TREO CUNG MÀY ======
+async function sendTreoCungMayFlow(sender_psid) {
+  console.log("🚀 Trigger Treo Cung Mày Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ em gửi các ca treo cung mày gần đây bác Vũ làm chị tham khảo ạ.\nKhông đau - Không sẹo - Không sưng bầm!`
+  });
+
+  const feedbackImages = await getFeedbackImages("mat");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// ====== FLOW: CHỈNH MŨI LỖI ======
+async function sendChinhMuiLoiFlow(sender_psid) {
+  console.log("🚀 Trigger Chỉnh Mũi Lỗi Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị ơi, bên em chuyên chỉnh sửa các ca mũi lỗi như lệch, lộ sóng, bóng đỏ...\n\n
+Bác sĩ sẽ kiểm tra trực tiếp và đưa ra phương pháp chỉnh sửa phù hợp nhất cho mình nha!`
+  });
+
+  const feedbackImages = await getFeedbackImages("mui");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_thammymui");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// ====== FLOW: THÁO TÚI NGỰC ======
+async function sendThaoTuiNgucFlow(sender_psid) {
+  console.log("🚀 Trigger Tháo Túi Ngực Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Bác Vũ tháo túi ngực không đau, không cần nghỉ dưỡng.\nEm gửi chi phí tham khảo chị nha!`
+  });
+
+  const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
 // ====== FLOW: BẢNG GIÁ ONLY ======
 async function sendBangGiaOnlyFlow(sender_psid, parentService) {
   console.log(`🚀 Trigger bảng giá only flow for ${parentService}`);
@@ -133,10 +356,10 @@ async function sendBangGiaOnlyFlow(sender_psid, parentService) {
   const bangGiaPublicId = bangGiaMap[parentService];
 
   if (!bangGiaPublicId) {
-    console.log(`❌ Không có bảng giá cho ${parentService}`);
-    return await messengerService.sendMessage(sender_psid, {
+    await messengerService.sendMessage(sender_psid, {
       text: "Dạ chị ơi, bên em sẽ gửi bảng giá chi tiết cho mình sau nhé!"
     });
+    return;
   }
 
   const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
@@ -146,215 +369,10 @@ async function sendBangGiaOnlyFlow(sender_psid, parentService) {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
     });
   } else {
-    console.log(`❌ Không tìm thấy ảnh bảng giá cho ${parentService}`);
     await messengerService.sendMessage(sender_psid, {
       text: "Dạ chị ơi, hiện tại bên em chưa cập nhật bảng giá này trên hệ thống. Chị để lại số để em gửi chi tiết hơn ạ!"
     });
   }
-}
-// ====== FLOW: NANG NGUC ======
-async function sendNangNgucFlow(sender_psid) {
-  console.log("🚀 Trigger Nâng Ngực Flow");
-
-  // 1️⃣ Giới thiệu dịch vụ
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ chào chị! Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện.\n\nBên em áp dụng dao mổ siêu âm Ultrasonic Surgical Scalpel giúp:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo`
-  });
-
-  // 2️⃣ Gửi ảnh feedback
-  const feedbackImages = await getFeedbackImages("nguc");
-
-  if (feedbackImages.length > 0) {
-    console.log(`📸 Sending ${feedbackImages.length} feedback images`);
-    for (const url of feedbackImages) {
-      await messengerService.sendMessage(sender_psid, {
-        attachment: { type: 'image', payload: { url, is_reusable: true } }
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-  } else {
-    console.log("❌ Không tìm thấy ảnh feedback ngực");
-  }
-
-  // 3️⃣ Gửi bảng giá nâng ngực
-  const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá nâng ngực");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_nangnguc");
-  }
-
-  // 4️⃣ Xin số điện thoại
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-// ====== FLOW: NANG MUI ======
-async function sendNangMuiFlow(sender_psid) {
-  console.log("🚀 Trigger Nâng Mũi Flow");
-
-  // 1️⃣ Giới thiệu dịch vụ
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
-Bên em áp dụng công nghệ Nâng mũi tái cấu trúc, sử dụng sụn sườn tự thân giúp dáng mũi cao, đẹp tự nhiên và duy trì lâu dài.\n
-Ưu điểm vượt trội:\n
-1. An toàn tuyệt đối, hạn chế tối đa biến chứng.\n
-2. Dáng mũi mềm mại, tự nhiên như thật.\n
-3. Không bóng đỏ, không lộ sóng.\n
-4. Thời gian hồi phục nhanh.\n
-5. Bảo hành dài hạn.\n\n
-Em gửi chị hình ảnh một vài ca thẩm mỹ mũi bác từng làm ạ!`
-  });
-
-  // 2️⃣ Gửi ảnh feedback nâng mũi
-  const feedbackImages = await getFeedbackImages("mui");
-
-  if (feedbackImages.length > 0) {
-    console.log(`📸 Sending ${feedbackImages.length} feedback images for nâng mũi`);
-    for (const url of feedbackImages) {
-      await messengerService.sendMessage(sender_psid, {
-        attachment: { type: 'image', payload: { url, is_reusable: true } }
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay 1s mỗi ảnh cho mượt
-    }
-  } else {
-    console.log("❌ Không tìm thấy ảnh feedback nâng mũi");
-  }
-
-  // 3️⃣ Gửi ảnh bảng giá nâng mũi
-  const bangGiaImage = await getBangGiaImage("banggia_thammymui");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá nâng mũi");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammymui");
-  }
-
-  // 4️⃣ Xin số điện thoại
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-// ====== FLOW: THAM MY MAT ======
-async function sendThamMyMatFlow(sender_psid) {
-  console.log("🚀 Trigger Thẩm Mỹ Mắt Flow");
-
-  // 1️⃣ Giới thiệu dịch vụ
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
-Em gửi hình ảnh 1 vài ca thẩm mỹ vùng mắt bác từng làm ạ!`
-  });
-
-  // 2️⃣ Gửi ảnh feedback thẩm mỹ mắt
-  const feedbackImages = await getFeedbackImages("mat");
-
-  if (feedbackImages.length > 0) {
-    console.log(`📸 Sending ${feedbackImages.length} feedback images for thẩm mỹ mắt`);
-    for (const url of feedbackImages) {
-      await messengerService.sendMessage(sender_psid, {
-        attachment: { type: 'image', payload: { url, is_reusable: true } }
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay 1s mỗi ảnh cho mượt
-    }
-  } else {
-    console.log("❌ Không tìm thấy ảnh feedback thẩm mỹ mắt");
-  }
-
-  // 3️⃣ Gửi ảnh bảng giá thẩm mỹ mắt
-  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá thẩm mỹ mắt");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammymat");
-  }
-
-  // 4️⃣ Xin số điện thoại
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-// ====== FLOW: THAM MY VUNG KIN ======
-async function sendThamMyVungKinFlow(sender_psid) {
-  console.log("🚀 Trigger Thẩm Mỹ Vùng Kín Flow");
-
-  // 1️⃣ Gửi text báo giá
-  await messengerService.sendMessage(sender_psid, {
-    text: "Em gửi bảng giá chị tham khảo ạ!"
-  });
-
-  // 2️⃣ Gửi ảnh bảng giá vùng kín
-  const bangGiaImage = await getBangGiaImage("banggia_thammyvungkin");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá thẩm mỹ vùng kín");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammyvungkin");
-  }
-
-  // 3️⃣ Xin số điện thoại / Zalo / Viber
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-// ====== FLOW: TREO CUNG MAY ======
-async function sendTreoCungMayFlow(sender_psid) {
-  console.log("🚀 Trigger Treo Cung Mày Flow");
-
-  // 1️⃣ Gửi text giới thiệu dịch vụ treo cung mày
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ em gửi các ca treo cung mày gần đây bác Vũ làm chị tham khảo ạ.\nKhông đau - Không sẹo - Không Sưng bầm`
-  });
-
-  // 2️⃣ Gửi ảnh feedback vùng mắt
-  const feedbackImages = await getFeedbackImages("mat");
-
-  if (feedbackImages.length > 0) {
-    console.log(`📸 Sending ${feedbackImages.length} feedback images for treo cung mày`);
-    for (const url of feedbackImages) {
-      await messengerService.sendMessage(sender_psid, {
-        attachment: { type: 'image', payload: { url, is_reusable: true } }
-      });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay 1s mỗi ảnh
-    }
-  } else {
-    console.log("❌ Không tìm thấy ảnh feedback mắt cho treo cung mày");
-  }
-
-  // 3️⃣ Gửi bảng giá thẩm mỹ mắt
-  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá thẩm mỹ mắt cho treo cung mày");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammymat");
-  }
-
-  // 4️⃣ Xin số điện thoại
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
 }
 
 // ====== FOLLOW UP QUESTION HANDLER ======
@@ -397,7 +415,7 @@ app.post("/webhook", async (req, res) => {
     const textMessage = normalizeText(message);
 
     try {
-      // ====== 1. Kiểm tra số điện thoại trước ======
+      // 1️⃣ Kiểm tra số điện thoại
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
         await messengerService.sendMessage(senderId, {
@@ -406,7 +424,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 2. Trả lời FAQ trước ======
+      // 2️⃣ FAQ
       const foundFAQ = flowFullServices.faqs.find(item =>
         textMessage.includes(normalizeText(item.question))
       );
@@ -416,7 +434,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 3. Các flow dịch vụ ======
+      // 3️⃣ Các flow dịch vụ
       if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
         await sendNangNgucFlow(senderId);
         continue;
@@ -472,7 +490,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 4. XIN GIÁ ONLY ======
+      // 4️⃣ Xin bảng giá only
       if (textMessage.includes("bảng giá")) {
         if (textMessage.includes("nâng ngực")) {
           await sendBangGiaOnlyFlow(senderId, "nguc");
@@ -510,7 +528,7 @@ app.post("/webhook", async (req, res) => {
         }
       }
 
-      // ====== 5. Chỉ gửi Menu nếu là lời chào hoặc keyword chung ======
+      // 5️⃣ Lời chào và menu dịch vụ
       const loiChaoKeywords = [
         "hi", "hello", "alo", "xin chao",
         "cho chi hoi", "toi can tu van", "can tu van",
@@ -523,7 +541,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 6. Nếu không khớp gì cả, thì handoff ======
+      // 6️⃣ Nếu không khớp, handoff
       await handleFollowUp(senderId, textMessage);
 
     } catch (error) {
@@ -532,98 +550,6 @@ app.post("/webhook", async (req, res) => {
   }
 
   res.status(200).send("EVENT_RECEIVED");
-});
-
-
-	// ====== FLOW: THAO TUI NGUC ======
-async function sendThaoTuiNgucFlow(sender_psid) {
-  console.log("🚀 Trigger Tháo Túi Ngực Flow");
-
-  // 1️⃣ Gửi text giới thiệu dịch vụ tháo túi
-  await messengerService.sendMessage(sender_psid, {
-    text: `Bác Vũ tháo túi không đau, không cần nghỉ dưỡng ạ.\nEm gửi chi phí chị tham khảo ạ.`
-  });
-
-  // 2️⃣ Gửi bảng giá (dùng bảng giá nâng ngực)
-  const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
-
-  if (bangGiaImage) {
-    console.log("📄 Sending bảng giá tháo túi (banggia_nangnguc)");
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  } else {
-    console.log("❌ Không tìm thấy ảnh bảng giá banggia_nangnguc");
-  }
-
-  // 3️⃣ Xin số điện thoại
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-// ====== XIN GIÁ ONLY ======
-if (
-  textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")
-) {
-  return sendThaoTuiNgucFlow(senderId);
-}		
-if (textMessage.includes("bảng giá")) {
-  if (textMessage.includes("nâng ngực")) {
-    return sendBangGiaOnlyFlow(senderId, "nguc");
-  }
-
-  if (textMessage.includes("nâng mũi")) {
-    return sendBangGiaOnlyFlow(senderId, "mui");
-  }
-
-  if (textMessage.includes("cắt mí")) {
-    return sendBangGiaOnlyFlow(senderId, "mat");
-  }
-
-  if (textMessage.includes("hút mỡ bụng")) {
-    return sendBangGiaOnlyFlow(senderId, "bung");
-  }
-
-  if (textMessage.includes("thẩm mỹ vùng kín")) {
-    return sendBangGiaOnlyFlow(senderId, "vungkin");
-  }
-
-  if (textMessage.includes("căng da mặt")) {
-    return sendBangGiaOnlyFlow(senderId, "damat");
-  }
-
-  if (textMessage.includes("dịch vụ khác")) {
-    return sendBangGiaOnlyFlow(senderId, "cacdichvu");
-  }
-}
-const loiChaoKeywords = [
-  "hi", "hello", "alo", "xin chao",
-  "cho chi hoi", "toi can tu van", "can tu van",
-  "dich vu", "tu van dich vu", "o day co gi", "cac dịch vụ ở đây",
-  "dịch vụ bao gồm có gi", "bang thong tin dich vu"
-];
-
-if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
-  return sendMenuDichVu(senderId);
-}
-
-      // ====== PHONE VALIDATION ======
-      if (isValidPhoneNumber(message)) {
-        completedUsers.add(senderId);
-        return await messengerService.sendMessage(senderId, {
-          text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
-        });
-      }
-
-      // ====== FOLLOW UP QUESTION HANDLER ======
-      await handleFollowUp(senderId, textMessage);
-    });
-
-    res.status(200).send("EVENT_RECEIVED");
-  } else {
-    res.sendStatus(404);
-  }
 });
 
 // ====== VERIFY WEBHOOK ======
