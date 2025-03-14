@@ -23,8 +23,9 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const chatbotServiceFlows = JSON.parse(fs.readFileSync('./data/chatbot-service-flows.json', 'utf-8'));
-const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
+const DATA_FOLDER = './data/';
+const chatbotServiceFlows = JSON.parse(fs.readFileSync(`${DATA_FOLDER}chatbot-service-flows.json`, 'utf-8'));
+const countryDigitRules = JSON.parse(fs.readFileSync(`${DATA_FOLDER}countryDigitRules.json`, 'utf-8'));
 const countryCodes = Object.keys(countryDigitRules);
 
 // ====== SESSION USERS ======
@@ -159,6 +160,8 @@ async function getBangGiaImage(publicId) {
 
 // ====== SEND FLOW STEPS ======
 async function sendFlowSteps(sender_psid, steps, parentService) {
+  console.log(`📝 sendFlowSteps: parentService = ${parentService}`);
+
   for (const step of steps) {
     if (step.type === 'text') {
       await messengerService.sendMessage(sender_psid, { text: step.content });
@@ -166,6 +169,8 @@ async function sendFlowSteps(sender_psid, steps, parentService) {
   }
 
   const feedbackFolder = feedbackFolderMap[parentService];
+  console.log(`📂 feedbackFolder = ${feedbackFolder}`);
+
   if (feedbackFolder) {
     const feedbackImages = await getFeedbackImages(feedbackFolder);
     if (feedbackImages.length > 0) {
@@ -181,6 +186,8 @@ async function sendFlowSteps(sender_psid, steps, parentService) {
   }
 
   const bangGiaPublicId = bangGiaFileMap[parentService];
+  console.log(`📄 bangGiaPublicId = ${bangGiaPublicId}`);
+
   if (bangGiaPublicId) {
     const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
     if (bangGiaImage) {
@@ -210,6 +217,7 @@ function handlePostback(sender_psid, postback) {
       if (flow.payload === payload) {
         foundFlow = true;
         const parentServiceKey = normalizeText(service.parent_service.replace(/\s+/g, ''));
+        console.log(`🎯 parentService = ${parentServiceKey}`);
         sendFlowSteps(sender_psid, flow.steps, parentServiceKey);
       }
     });
@@ -240,6 +248,10 @@ app.post("/webhook", async (req, res) => {
       const message = webhook_event.message.text.trim();
       console.log(`💬 [${senderId}] ${message}`);
 
+      // Debug sentiment & angry detection
+      const sentiment = await analyzeSentimentWithGPT(message);
+      console.log(`🧠 Sentiment Analysis: ${sentiment}`);
+
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
         return await messengerService.sendMessage(senderId, {
@@ -254,7 +266,7 @@ app.post("/webhook", async (req, res) => {
         });
       }
 
-      if (isAngryCustomer(message) || (await analyzeSentimentWithGPT(message)) === "negative") {
+      if (isAngryCustomer(message) || sentiment === "negative") {
         handoffUsers.add(senderId);
         return await messengerService.sendMessage(senderId, {
           text: "Dạ em xin lỗi chị, em đã chuyển thông tin cho tư vấn viên hỗ trợ ngay ạ!"
