@@ -389,36 +389,93 @@ app.post("/webhook", async (req, res) => {
       const message = webhook_event.message.text.trim();
       const textMessage = normalizeText(message);
 
-      // ====== KEYWORD DETECT ======
+      // ====== 1. Kiểm tra số điện thoại trước ======
+      if (isValidPhoneNumber(message)) {
+        completedUsers.add(senderId);
+        return await messengerService.sendMessage(senderId, {
+          text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
+        });
+      }
+
+      // ====== 2. Trả lời FAQ trước ======
+      const foundFAQ = flowFullServices.faqs.find(item =>
+        textMessage.includes(normalizeText(item.question))
+      );
+
+      if (foundFAQ) {
+        return await messengerService.sendMessage(senderId, { text: foundFAQ.answer });
+      }
+
+     // ====== 3. Các flow dịch vụ ======
       if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
         return sendNangNgucFlow(senderId);
       }
-		if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
-		  return sendNangMuiFlow(senderId);
-		}
-		if (
-		  textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
-		  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
-		  textMessage.includes("tham my mat") || textMessage.includes("thẩm mỹ mắt")
-		) {
-		  return sendThamMyMatFlow(senderId);
-		}
-		if (
-		  textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") ||
-		  textMessage.includes("don cam") || textMessage.includes("độn cằm")
-		) {
-		  return sendThamMyCamFlow(senderId);
-		}
-		if (
-		  textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
-		) {
-		  return sendThamMyVungKinFlow(senderId);
-		}
-		if (
-	  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
-			) {
-			  return sendTreoCungMayFlow(senderId);
-			}	
+
+      if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
+        return sendNangMuiFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
+        textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
+        textMessage.includes("tham my mat") || textMessage.includes("thẩm mỹ mắt")
+      ) {
+        return sendThamMyMatFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") ||
+        textMessage.includes("don cam") || textMessage.includes("độn cằm")
+      ) {
+        return sendThamMyCamFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
+      ) {
+        return sendThamMyVungKinFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
+      ) {
+        return sendTreoCungMayFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
+      ) {
+        return sendChinhMuiLoiFlow(senderId);
+      }
+
+      if (
+        textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")
+      ) {
+        return sendThaoTuiNgucFlow(senderId);
+      }
+
+      // ====== 4. Chỉ gửi Menu nếu là lời chào hoặc keyword chung ======
+      const loiChaoKeywords = [
+        "hi", "hello", "alo", "xin chao",
+        "cho chi hoi", "toi can tu van", "can tu van",
+        "dich vu", "tu van dich vu", "o day co gi", "cac dịch vụ ở đây",
+        "dịch vụ bao gồm có gi", "bang thong tin dich vu"
+      ];
+
+      if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
+        return sendMenuDichVu(senderId);
+      }
+
+      // ====== 5. Nếu không khớp gì cả, thì handoff ======
+      handoffUsers.add(senderId);
+      console.log(`🚀 Handoff triggered for ${senderId}`);
+    });
+
+    res.status(200).send("EVENT_RECEIVED");
+  } else {
+    res.sendStatus(404);
+  }
+});	
 	// ====== FLOW: THAO TUI NGUC ======
 async function sendThaoTuiNgucFlow(sender_psid) {
   console.log("🚀 Trigger Tháo Túi Ngực Flow");
