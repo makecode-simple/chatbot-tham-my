@@ -23,10 +23,7 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const DATA_FOLDER = './data/';
-const chatbotServiceFlows = JSON.parse(fs.readFileSync(`${DATA_FOLDER}chatbot-service-flows.json`, 'utf-8'));
-const countryDigitRules = JSON.parse(fs.readFileSync(`${DATA_FOLDER}countryDigitRules.json`, 'utf-8'));
-const countryCodes = Object.keys(countryDigitRules);
+const countryDigitRules = JSON.parse(fs.readFileSync('./countryDigitRules.json', 'utf-8'));
 const flowFullServices = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
 // ====== SESSION USERS ======
@@ -42,6 +39,7 @@ function normalizeText(msg) {
 }
 
 // ====== VALIDATE PHONE ======
+const countryCodes = Object.keys(countryDigitRules);
 function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/\s|-/g, '');
@@ -65,27 +63,6 @@ function isValidPhoneNumber(message) {
   const length = numberWithoutCode.length;
   return length >= digitRule.min && length <= digitRule.max;
 }
-
-// ====== CLOUDINARY FOLDER MAPS ======
-const feedbackFolderMap = {
-  "nguc": "nguc",
-  "mui": "mui",
-  "mat": "mat",
-  "bung": "bung",
-  "vungkin": "vungkin",
-  "damat": "damat",
-  "cacdichvu": "cacdichvu"
-};
-
-const bangGiaFileMap = {
-  "nguc": "banggia_nangnguc",
-  "mui": "banggia_thammymui",
-  "mat": "banggia_thammymat",
-  "bung": "banggia_hutmobung",
-  "vungkin": "banggia_thammyvungkan",
-  "damat": "banggiathammy_damat",
-  "cacdichvu": "banggia_cacdichvukhac"
-};
 
 // ====== CLOUDINARY FUNCTIONS ======
 async function getFeedbackImages(folder) {
@@ -117,50 +94,44 @@ async function getBangGiaImage(publicId) {
   }
 }
 
-// ====== SEND FLOW STEPS ======
-async function sendFlowSteps(sender_psid, steps, parentService) {
-  console.log(`📝 sendFlowSteps: parentService = ${parentService}`);
+// ====== FLOW: NANG NGUC ======
+async function sendNangNgucFlow(sender_psid) {
+  console.log("🚀 Trigger Nâng Ngực Flow");
 
-  // (1) Gửi text giới thiệu kỹ thuật (steps)
-  for (const step of steps) {
-    if (step.type === 'text') {
-      await messengerService.sendMessage(sender_psid, { text: step.content });
-    }
-  }
+  // 1️⃣ Giới thiệu dịch vụ
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chào chị! Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện.\n\nBên em áp dụng dao mổ siêu âm Ultrasonic Surgical Scalpel giúp:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo\n\nChị xem qua giúp em nhé!`
+  });
 
-  // (2) Gửi toàn bộ ảnh feedback NGAY LẬP TỨC
-  const feedbackFolder = feedbackFolderMap[parentService];
-  console.log(`📂 feedbackFolder = ${feedbackFolder}`);
+  // 2️⃣ Gửi ảnh feedback
+  const feedbackImages = await getFeedbackImages("nguc");
 
-  if (feedbackFolder) {
-    const feedbackImages = await getFeedbackImages(feedbackFolder);
-    if (feedbackImages.length > 0) {
-      for (const url of feedbackImages) {
-        await messengerService.sendMessage(sender_psid, {
-          attachment: { type: 'image', payload: { url, is_reusable: true } }
-        });
-      }
-    }
-  }
-
-  // (3) Delay 1 giây rồi gửi ảnh bảng giá
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  const bangGiaPublicId = bangGiaFileMap[parentService];
-  console.log(`📄 bangGiaPublicId = ${bangGiaPublicId}`);
-
-  if (bangGiaPublicId) {
-    const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
-    if (bangGiaImage) {
+  if (feedbackImages.length > 0) {
+    console.log(`📸 Sending ${feedbackImages.length} feedback images`);
+    for (const url of feedbackImages) {
       await messengerService.sendMessage(sender_psid, {
-        attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+        attachment: { type: 'image', payload: { url, is_reusable: true } }
       });
     }
+  } else {
+    console.log("❌ Không tìm thấy ảnh feedback ngực");
   }
 
-  // (4) Gửi text xin số điện thoại/Zalo/Viber
+  // 3️⃣ Gửi bảng giá nâng ngực
+  const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
+
+  if (bangGiaImage) {
+    console.log("📄 Sending bảng giá nâng ngực");
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  } else {
+    console.log("❌ Không tìm thấy ảnh bảng giá banggia_nangnguc");
+  }
+
+  // 4️⃣ Xin số điện thoại
   await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
 
@@ -176,30 +147,6 @@ async function handleFollowUp(sender_psid, textMessage) {
   }
 }
 
-// ====== HANDLE POSTBACK ======
-function handlePostback(sender_psid, postback) {
-  const payload = postback.payload;
-  console.log(`📦 Postback payload nhận: ${payload}`);
-
-  let foundFlow = false;
-
-  chatbotServiceFlows.flows.forEach(service => {
-    service.sub_flows.forEach(flow => {
-      if (flow.payload === payload) {
-        foundFlow = true;
-        const parentServiceKey = normalizeText(service.parent_service.replace(/\s+/g, ''));
-        sendFlowSteps(sender_psid, flow.steps, parentServiceKey);
-      }
-    });
-  });
-
-  if (!foundFlow) {
-    messengerService.sendMessage(sender_psid, {
-      text: "Dạ chị quan tâm dịch vụ nào bên em để em hỗ trợ thêm nha!"
-    });
-  }
-}
-
 // ====== MAIN WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
   const body = req.body;
@@ -209,80 +156,14 @@ app.post("/webhook", async (req, res) => {
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
 
-      if (webhook_event.postback) {
-        handlePostback(senderId, webhook_event.postback);
-        return;
-      }
-
       if (!webhook_event.message || !webhook_event.message.text) return;
       const message = webhook_event.message.text.trim();
       const textMessage = normalizeText(message);
 
-// ====== KEYWORD DETECT ======
-
-// Ngực
-if (
-  textMessage.includes("nang nguc") || textMessage.includes("nâng ngực") ||
-  textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực") ||
-  textMessage.includes("boc bao xo") || textMessage.includes("bóc bao xơ")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "nguc").sub_flows[0].steps, "nguc");
-}
-
-// Mũi
-if (
-  textMessage.includes("nang mui") || textMessage.includes("nâng mũi") ||
-  textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "mui").sub_flows[0].steps, "mui");
-}
-
-// Mắt
-if (
-  textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
-  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
-  textMessage.includes("chinh mat loi") || textMessage.includes("chỉnh mắt lỗi")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "mat").sub_flows[0].steps, "mat");
-}
-
-// Bụng
-if (
-  textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng") ||
-  textMessage.includes("tao hinh bung") || textMessage.includes("tạo hình thành bụng")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "bung").sub_flows[0].steps, "bung");
-}
-
-// Vùng kín
-if (
-  textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "vungkin").sub_flows[0].steps, "vungkin");
-}
-
-// Da mặt
-if (
-  textMessage.includes("cang da mat") || textMessage.includes("căng da mặt") ||
-  textMessage.includes("cang chi") || textMessage.includes("căng chỉ") ||
-  textMessage.includes("prp") || textMessage.includes("tre hoa") || textMessage.includes("trẻ hóa") ||
-  textMessage.includes("don thai duong") || textMessage.includes("độn thái dương") ||
-  textMessage.includes("don cam") || textMessage.includes("độn cằm") ||
-  textMessage.includes("hut mo tiem mat") || textMessage.includes("hút mỡ tiêm lên mặt")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "damat").sub_flows[0].steps, "damat");
-}
-
-// Các dịch vụ khác
-if (
-  textMessage.includes("dich vu khac") || textMessage.includes("dịch vụ khác") ||
-  textMessage.includes("cham soc body") || textMessage.includes("chăm sóc body") ||
-  textMessage.includes("triet long") || textMessage.includes("triệt lông") ||
-  textMessage.includes("giam beo") || textMessage.includes("giảm béo")
-) {
-  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "cacdichvu").sub_flows[0].steps, "cacdichvu");
-}
-
+      // ====== KEYWORD DETECT ======
+      if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
+        return sendNangNgucFlow(senderId);
+      }
 
       // ====== PHONE VALIDATION ======
       if (isValidPhoneNumber(message)) {
