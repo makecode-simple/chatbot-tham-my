@@ -24,7 +24,16 @@ cloudinary.config({
 
 // ====== LOAD DATA ======
 const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
-const flowFullServices = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
+const flowFullServicesRaw = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
+
+// ✅ Normalize câu hỏi FAQ ngay khi load
+const flowFullServices = {
+  ...flowFullServicesRaw,
+  faqs: flowFullServicesRaw.faqs.map(item => ({
+    question: normalizeText(item.question),
+    answer: item.answer
+  }))
+};
 
 // ====== SESSION USERS ======
 const completedUsers = new Set();
@@ -382,9 +391,9 @@ async function handleFollowUp(sender_psid, textMessage) {
     return;
   }
 
-  const found = flowFullServices.faqs.find(item =>
-    textMessage.includes(normalizeText(item.question))
-  );
+const found = flowFullServices.faqs.find(item =>
+  textMessage.includes(item.question) // ✅ khỏi cần normalize lại!
+);
 
   if (found) {
     await messengerService.sendMessage(sender_psid, { text: found.answer });
@@ -540,7 +549,6 @@ app.post("/webhook", async (req, res) => {
 		  await sendMenuDichVu(senderId);
 		  continue;
 		}
-
 
       // 6️⃣ Nếu không khớp, handoff
       await handleFollowUp(senderId, textMessage);
