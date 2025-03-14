@@ -136,6 +136,56 @@ async function sendNangNgucFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+// ====== FLOW: NANG MUI ======
+async function sendNangMuiFlow(sender_psid) {
+  console.log("🚀 Trigger Nâng Mũi Flow");
+
+  // 1️⃣ Giới thiệu dịch vụ
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
+Bên em áp dụng công nghệ Nâng mũi tái cấu trúc, sử dụng sụn sườn tự thân giúp dáng mũi cao, đẹp tự nhiên và duy trì lâu dài.\n
+Ưu điểm vượt trội:\n
+1. An toàn tuyệt đối, hạn chế tối đa biến chứng.\n
+2. Dáng mũi mềm mại, tự nhiên như thật.\n
+3. Không bóng đỏ, không lộ sóng.\n
+4. Thời gian hồi phục nhanh.\n
+5. Bảo hành dài hạn.\n\n
+Em gửi chị hình ảnh một vài ca thẩm mỹ mũi bác từng làm ạ!`
+  });
+
+  // 2️⃣ Gửi ảnh feedback nâng mũi
+  const feedbackImages = await getFeedbackImages("mui");
+
+  if (feedbackImages.length > 0) {
+    console.log(`📸 Sending ${feedbackImages.length} feedback images for nâng mũi`);
+    for (const url of feedbackImages) {
+      await messengerService.sendMessage(sender_psid, {
+        attachment: { type: 'image', payload: { url, is_reusable: true } }
+      });
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay 1s mỗi ảnh cho mượt
+    }
+  } else {
+    console.log("❌ Không tìm thấy ảnh feedback nâng mũi");
+  }
+
+  // 3️⃣ Gửi ảnh bảng giá nâng mũi
+  const bangGiaImage = await getBangGiaImage("banggia_thammymui");
+
+  if (bangGiaImage) {
+    console.log("📄 Sending bảng giá nâng mũi");
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  } else {
+    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammymui");
+  }
+
+  // 4️⃣ Xin số điện thoại
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
 
 // ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
@@ -173,6 +223,9 @@ app.post("/webhook", async (req, res) => {
       if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
         return sendNangNgucFlow(senderId);
       }
+		if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
+		  return sendNangMuiFlow(senderId);
+		}
 
       // ====== PHONE VALIDATION ======
       if (isValidPhoneNumber(message)) {
