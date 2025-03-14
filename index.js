@@ -391,7 +391,7 @@ async function handleFollowUp(sender_psid, textMessage) {
   }
 
 const found = flowFullServices.faqs.find(item =>
-  textMessage.includes(item.question) // ✅ khỏi cần normalize lại!
+  item.questions.some(q => textMessage === q)
 );
 
   if (found) {
