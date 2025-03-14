@@ -380,22 +380,23 @@ async function handleFollowUp(sender_psid, textMessage) {
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
-  if (body.object === "page") {
+  if (body.object !== "page") {
+    return res.sendStatus(404);
+  }
 
-    // ✅ CHẮC CHẮN for...of, KHÔNG forEach!
-    for (const entry of body.entry) {
+  for (const entry of body.entry) {
+    const webhook_event = entry.messaging[0];
+    const senderId = webhook_event.sender.id;
 
-      const webhook_event = entry.messaging[0];
-      const senderId = webhook_event.sender.id;
+    if (!webhook_event.message || !webhook_event.message.text) {
+      console.log("❌ Không có message text");
+      continue;
+    }
 
-      if (!webhook_event.message || !webhook_event.message.text) {
-        console.log("❌ Không có message text");
-        continue;
-      }
+    const message = webhook_event.message.text.trim();
+    const textMessage = normalizeText(message);
 
-      const message = webhook_event.message.text.trim();
-      const textMessage = normalizeText(message);
-
+    try {
       // ====== 1. Kiểm tra số điện thoại trước ======
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
@@ -471,7 +472,45 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 4. Chỉ gửi Menu nếu là lời chào hoặc keyword chung ======
+      // ====== 4. XIN GIÁ ONLY ======
+      if (textMessage.includes("bảng giá")) {
+        if (textMessage.includes("nâng ngực")) {
+          await sendBangGiaOnlyFlow(senderId, "nguc");
+          continue;
+        }
+
+        if (textMessage.includes("nâng mũi")) {
+          await sendBangGiaOnlyFlow(senderId, "mui");
+          continue;
+        }
+
+        if (textMessage.includes("cắt mí")) {
+          await sendBangGiaOnlyFlow(senderId, "mat");
+          continue;
+        }
+
+        if (textMessage.includes("hút mỡ bụng")) {
+          await sendBangGiaOnlyFlow(senderId, "bung");
+          continue;
+        }
+
+        if (textMessage.includes("thẩm mỹ vùng kín")) {
+          await sendBangGiaOnlyFlow(senderId, "vungkin");
+          continue;
+        }
+
+        if (textMessage.includes("căng da mặt")) {
+          await sendBangGiaOnlyFlow(senderId, "damat");
+          continue;
+        }
+
+        if (textMessage.includes("dịch vụ khác")) {
+          await sendBangGiaOnlyFlow(senderId, "cacdichvu");
+          continue;
+        }
+      }
+
+      // ====== 5. Chỉ gửi Menu nếu là lời chào hoặc keyword chung ======
       const loiChaoKeywords = [
         "hi", "hello", "alo", "xin chao",
         "cho chi hoi", "toi can tu van", "can tu van",
@@ -484,17 +523,17 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // ====== 5. Nếu không khớp gì cả, thì handoff ======
-      handoffUsers.add(senderId);
-      console.log(`🚀 Handoff triggered for ${senderId}`);
+      // ====== 6. Nếu không khớp gì cả, thì handoff ======
+      await handleFollowUp(senderId, textMessage);
+
+    } catch (error) {
+      console.error(`❌ Lỗi xử lý message từ ${senderId}:`, error);
     }
-
-    res.status(200).send("EVENT_RECEIVED");
-
-  } else {
-    res.sendStatus(404);
   }
+
+  res.status(200).send("EVENT_RECEIVED");
 });
+
 
 	// ====== FLOW: THAO TUI NGUC ======
 async function sendThaoTuiNgucFlow(sender_psid) {
