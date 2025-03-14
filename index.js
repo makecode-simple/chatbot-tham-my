@@ -381,6 +381,7 @@ app.post("/webhook", async (req, res) => {
   const body = req.body;
 
   if (body.object === "page") {
+    // ĐÂY! forEach PHẢI async
     body.entry.forEach(async entry => {
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
