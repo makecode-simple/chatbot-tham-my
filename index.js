@@ -186,6 +186,49 @@ Em gửi chị hình ảnh một vài ca thẩm mỹ mũi bác từng làm ạ!`
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+// ====== FLOW: THAM MY MAT ======
+async function sendThamMyMatFlow(sender_psid) {
+  console.log("🚀 Trigger Thẩm Mỹ Mắt Flow");
+
+  // 1️⃣ Giới thiệu dịch vụ
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với khuôn mặt và cấu trúc giải phẫu chị.\n\n
+Em gửi hình ảnh 1 vài ca thẩm mỹ vùng mắt bác từng làm ạ!`
+  });
+
+  // 2️⃣ Gửi ảnh feedback thẩm mỹ mắt
+  const feedbackImages = await getFeedbackImages("mat");
+
+  if (feedbackImages.length > 0) {
+    console.log(`📸 Sending ${feedbackImages.length} feedback images for thẩm mỹ mắt`);
+    for (const url of feedbackImages) {
+      await messengerService.sendMessage(sender_psid, {
+        attachment: { type: 'image', payload: { url, is_reusable: true } }
+      });
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay 1s mỗi ảnh cho mượt
+    }
+  } else {
+    console.log("❌ Không tìm thấy ảnh feedback thẩm mỹ mắt");
+  }
+
+  // 3️⃣ Gửi ảnh bảng giá thẩm mỹ mắt
+  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
+
+  if (bangGiaImage) {
+    console.log("📄 Sending bảng giá thẩm mỹ mắt");
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  } else {
+    console.log("❌ Không tìm thấy ảnh bảng giá banggia_thammymat");
+  }
+
+  // 4️⃣ Xin số điện thoại
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
 
 // ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
@@ -226,7 +269,13 @@ app.post("/webhook", async (req, res) => {
 		if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
 		  return sendNangMuiFlow(senderId);
 		}
-
+		if (
+		  textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
+		  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
+		  textMessage.includes("tham my mat") || textMessage.includes("thẩm mỹ mắt")
+		) {
+		  return sendThamMyMatFlow(senderId);
+		}
       // ====== PHONE VALIDATION ======
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
