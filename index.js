@@ -26,11 +26,10 @@ cloudinary.config({
 const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 const flowFullServicesRaw = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
-// ✅ Normalize câu hỏi FAQ ngay khi load
 const flowFullServices = {
   ...flowFullServicesRaw,
   faqs: flowFullServicesRaw.faqs.map(item => ({
-    question: normalizeText(item.question),
+    questions: item.questions.map(q => normalizeText(q)),
     answer: item.answer
   }))
 };
