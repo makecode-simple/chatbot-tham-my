@@ -23,7 +23,7 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
+const countryDigitRules = JSON.parse(fs.readFileSync('./countryDigitRules.json', 'utf-8'));
 const flowFullServices = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
 // ====== SESSION USERS ======
@@ -100,7 +100,7 @@ async function sendNangNgucFlow(sender_psid) {
 
   // 1️⃣ Giới thiệu dịch vụ
   await messengerService.sendMessage(sender_psid, {
-    text: `Dạ chào chị! Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện.\n\nBên em áp dụng dao mổ siêu âm Ultrasonic Surgical Scalpel giúp:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo\n\nChị xem qua giúp em nhé!`
+    text: `Dạ chào chị! Bên em chuyên Phẫu thuật nâng ngực bằng công nghệ hiện đại nhất, cam kết không đau, không để lại sẹo. Bác Vũ trực tiếp thực hiện.\n\nBên em áp dụng dao mổ siêu âm Ultrasonic Surgical Scalpel giúp:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo`
   });
 
   // 2️⃣ Gửi ảnh feedback
@@ -112,6 +112,7 @@ async function sendNangNgucFlow(sender_psid) {
       await messengerService.sendMessage(sender_psid, {
         attachment: { type: 'image', payload: { url, is_reusable: true } }
       });
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   } else {
     console.log("❌ Không tìm thấy ảnh feedback ngực");
@@ -130,6 +131,7 @@ async function sendNangNgucFlow(sender_psid) {
   }
 
   // 4️⃣ Xin số điện thoại
+  await new Promise(resolve => setTimeout(resolve, 1000));
   await messengerService.sendMessage(sender_psid, {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
@@ -137,7 +139,14 @@ async function sendNangNgucFlow(sender_psid) {
 
 // ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
-  const found = flowFullServices.faqs.find(item => textMessage.includes(normalizeText(item.question)));
+  if (!flowFullServices || !flowFullServices.faqs) {
+    console.log("❌ flowFullServices.faqs not found");
+    return;
+  }
+
+  const found = flowFullServices.faqs.find(item =>
+    textMessage.includes(normalizeText(item.question))
+  );
 
   if (found) {
     await messengerService.sendMessage(sender_psid, { text: found.answer });
