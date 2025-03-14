@@ -532,8 +532,7 @@ app.post("/webhook", async (req, res) => {
       const loiChaoKeywords = [
         "hi", "hello", "alo", "xin chao",
         "cho chi hoi", "toi can tu van", "can tu van",
-        "dich vu", "tu van dich vu", "o day co gi", "cac dịch vụ ở đây",
-        "dịch vụ bao gồm có gi", "bang thong tin dich vu"
+        "dich vu", "tu van dich vu"
       ];
 
       if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
