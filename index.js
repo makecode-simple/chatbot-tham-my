@@ -382,7 +382,7 @@ app.post("/webhook", async (req, res) => {
 
   if (body.object === "page") {
 
-    // Dùng for...of để tránh lỗi await
+    // ✅ CHẮC CHẮN for...of, KHÔNG forEach!
     for (const entry of body.entry) {
 
       const webhook_event = entry.messaging[0];
