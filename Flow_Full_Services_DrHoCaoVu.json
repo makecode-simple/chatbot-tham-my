@@ -1,122 +1,145 @@
-[
-  {
-    "parent_service": "Ngực",
-    "sub_service": "Phẫu thuật nâng ngực",
-    "sub_topic": "Túi Mentor (Mentor Extra / Mentor Classic / FDA chứng nhận)",
-    "trigger_keywords": [
-      "nâng ngực", "nâng ngực mentor", "nâng ngực không đau", "nâng ngực 6-12h", "mentor extra", "mentor classic", "túi mentor"
-    ],
-    "action_response": "Dạ chào chị, đây là dịch vụ nâng ngực không đau, hồi phục nhanh chỉ sau 6-12h. Bác Vũ chuyên dùng túi Mentor được FDA chứng nhận ạ. Em gửi chị ảnh feedback khách hàng nha!",
-    "next_step": "Gửi ảnh feedback ➡️ Mời chị để lại SĐT/Zalo để bác sĩ gọi tư vấn chi tiết"
-  },
-  {
-    "parent_service": "Ngực",
-    "sub_service": "Tháo túi ngực",
-    "sub_topic": "Quy trình tháo túi / Phục hồi sau tháo túi",
-    "trigger_keywords": [
-      "tháo túi ngực", "tháo túi mentor", "quy trình tháo túi ngực", "phục hồi tháo túi"
-    ],
-    "action_response": "Dạ chị cần tháo túi ngực đúng không ạ? Bác Vũ có kỹ thuật tháo túi an toàn, không đau và không để lại sẹo. Em gửi chị quy trình chi tiết nhé!",
-    "next_step": "Gửi quy trình ➡️ Mời chị để lại SĐT/Zalo để hẹn lịch phẫu thuật"
-  },
-  {
-    "parent_service": "Ngực",
-    "sub_service": "Bóc bao xơ",
-    "sub_topic": "Loại bỏ bao xơ an toàn / Phục hồi nhanh",
-    "trigger_keywords": [
-      "bóc bao xơ", "loại bỏ bao xơ", "phục hồi bóc bao xơ"
-    ],
-    "action_response": "Dạ chị muốn bóc bao xơ ạ? Bác Vũ chuyên xử lý các ca bao xơ lâu năm, cam kết an toàn và phục hồi nhanh. Em gửi chị feedback khách hàng thực tế nhé!",
-    "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm chi phí/quy trình"
-  },
-  {
-    "parent_service": "Ngực",
-    "sub_service": "Tái tạo vú sau điều trị ung thư",
-    "sub_topic": "Quy trình tái tạo vú sau ung thư / Hơn 500 ca thực tế / Bác sĩ Vũ chuyên sâu",
-    "trigger_keywords": [
-      "tái tạo vú", "tái tạo vú sau ung thư", "phẫu thuật tái tạo vú", "điều trị ung thư vú"
-    ],
-    "action_response": "Dạ đây là dịch vụ tái tạo vú cho bệnh nhân sau điều trị ung thư, Bác sĩ Vũ đã làm hơn 500 ca rồi ạ. Em gửi chị hình ảnh trước-sau thực tế nha!",
-    "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để biết chi phí/lịch hẹn"
-  },
-  {
-    "parent_service": "Mũi",
-    "sub_service": "Nâng mũi tái cấu trúc/ nâng mũi sụn sườn",
-    "sub_topic": "Sụn sườn tự thân / Tái cấu trúc dáng mũi / Kết quả lâu dài",
-    "trigger_keywords": [
-      "nâng mũi", "nâng mũi tái cấu trúc", "nâng mũi sụn sườn", "tái cấu trúc mũi", "sụn sườn tự thân"
-    ],
-    "action_response": "Dạ chị ơi, nâng mũi tái cấu trúc bằng sụn sườn tự thân sẽ giúp dáng mũi tự nhiên, bền đẹp lâu dài. Em gửi chị feedback khách hàng thực tế nha!",
-    "next_step": "Gửi feedback ➡️ Mời chị để lại SĐT/Zalo để tư vấn chi tiết"
-  },
-  {
-    "parent_service": "Mũi",
-    "sub_service": "Chỉnh mũi lỗi",
-    "sub_topic": "Chỉnh sửa mũi hỏng / Phục hồi cấu trúc mũi lỗi / Hình ảnh trước-sau",
-    "trigger_keywords": [
-      "chỉnh mũi lỗi", "sửa mũi lỗi", "chỉnh mũi hỏng", "sửa mũi hỏng", "phục hồi mũi hỏng"
-    ],
-    "action_response": "Dạ chị cần chỉnh sửa mũi lỗi đúng không ạ? Bác Vũ chuyên xử lý các ca mũi hỏng, cam kết khắc phục và tạo dáng mũi chuẩn tự nhiên. Em gửi chị hình ảnh trước-sau!",
-    "next_step": "Gửi ảnh trước-sau ➡️ Mời chị để lại SĐT/Zalo để tư vấn thêm"
-  },
-  {
-    "parent_service": "Mắt",
-    "sub_service": "Tiểu phẫu cắt mí",
-    "sub_topic": "Cắt mí trên/dưới / Kết hợp nâng cung / Không để lại sẹo / Hình ảnh thực tế",
-    "trigger_keywords": [
-      "cắt mí", "tiểu phẫu cắt mí", "cắt mí trên", "cắt mí dưới", "nâng cung mày"
-    ],
-    "action_response": "Dạ chị quan tâm cắt mí đúng không ạ? Bác Vũ thực hiện cắt mí trên/dưới, kết hợp treo cung mày, không để lại sẹo và hồi phục nhanh ạ!",
-    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn lịch hẹn"
-  },
-  {
-    "parent_service": "Mắt",
-    "sub_service": "Chỉnh mắt lỗi",
-    "sub_topic": "Sửa mắt hỏng / Chỉnh mắt không cân đối / Mắt lé, lác / Phẫu thuật tỉ mỉ",
-    "trigger_keywords": [
-      "chỉnh mắt lỗi", "sửa mắt lỗi", "mắt lé", "mắt lác", "chỉnh mắt không cân đối"
-    ],
-    "action_response": "Dạ chị cần chỉnh mắt lỗi đúng không ạ? Bác Vũ chuyên chỉnh sửa mắt hỏng, lé/lác hoặc không cân xứng. Em gửi chị ảnh khách hàng thực tế nha!",
-    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-  },
-  {
-    "parent_service": "Bụng",
-    "sub_service": "Hút mỡ bụng/tay/ đùi/ lưng",
-    "sub_topic": "Kết hợp tạo dáng eo thon / Hút mỡ an toàn / Hồi phục sau 24h / Không để lại sẹo",
-    "trigger_keywords": [
-      "hút mỡ bụng", "hút mỡ tay", "hút mỡ đùi", "hút mỡ lưng", "tạo dáng eo thon"
-    ],
-    "action_response": "Dạ chị quan tâm hút mỡ bụng đúng không ạ? Phương pháp an toàn, không để lại sẹo, hồi phục nhanh sau 24h. Em gửi chị hình ảnh trước-sau!",
-    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn thêm"
-  },
-  {
-    "parent_service": "Vùng kín",
-    "sub_service": "Thẩm mỹ vùng kín",
-    "sub_topic": "Trẻ hóa bằng laser / Thu hẹp sau sinh / Phục hồi cảm giác / An toàn tuyệt đối",
-    "trigger_keywords": [
-      "thẩm mỹ vùng kín", "trẻ hóa vùng kín", "thu hẹp sau sinh", "phục hồi cảm giác vùng kín"
-    ],
-    "action_response": "Dạ dịch vụ trẻ hóa vùng kín bằng laser bên em an toàn tuyệt đối, không đau, cải thiện thẩm mỹ và cảm giác. Em gửi chị quy trình chi tiết nha!",
-    "next_step": "Mời chị để lại SĐT/Zalo để tư vấn trực tiếp"
-  },
-  {
-    "parent_service": "Thông tin chung",
-    "sub_service": "Địa chỉ",
-    "sub_topic": "Địa chỉ phòng khám",
-    "trigger_keywords": [
-      "địa chỉ", "phòng khám ở đâu", "đ/c", "dc o dau", "d/c ở đâu", "lịch khám", "bác khám ở đâu"
-    ],
-    "action_response": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7.\n✅ Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn.\n🎯 Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước nha chị!",
-    "next_step": ""
-  },
-  {
-    "parent_service": "Thông tin chung",
-    "sub_service": "Chào hỏi",
-    "sub_topic": "Giới thiệu dịch vụ",
-    "trigger_keywords": [
-      "tư vấn", "dịch vụ", "giới thiệu", "thẩm mỹ", "có gì", "muốn biết dịch vụ"
-    ],
-    "action_response": "Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n• Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n• Tái tạo vú sau khi điều trị ung thư\n• Hút mỡ bụng, tạo hình thành bụng sau sinh\n• Tiểu phẫu cắt mí\n• Tiểu phẫu treo cung mày\n• Chỉnh mắt lỗi\n• Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n• Chỉnh mũi lỗi\n• Phẫu thuật căng da mặt\n• Hút mỡ bụng/tay/ đùi/ lưng\n• Thẩm mỹ vùng kín\n• Căng da mặt toàn diện\n• Căng chỉ da mặt/ PRP trẻ hóa\n• Độn thái dương/ độn cằm\n• Hút mỡ tiêm lên mặt",
-    "next_step": ""
-  }
-]
+{
+  "flows": [
+    {
+      "parent_service": "nguc",
+      "sub_flows": [
+        {
+          "sub_service": "Nâng ngực",
+          "trigger_keywords": ["nâng ngực", "nang nguc", "đặt túi ngực", "độn ngực"],
+          "action_response": "Thông tin nâng ngực",
+          "next_step": "feedback_nguc"
+        },
+        {
+          "sub_service": "Tháo túi ngực",
+          "trigger_keywords": ["tháo túi ngực", "thao tui nguc"],
+          "action_response": "Thông tin tháo túi ngực",
+          "next_step": "feedback_nguc"
+        }
+      ]
+    },
+    {
+      "parent_service": "mui",
+      "sub_flows": [
+        {
+          "sub_service": "Nâng mũi",
+          "trigger_keywords": ["nâng mũi", "nang mui"],
+          "action_response": "Thông tin nâng mũi",
+          "next_step": "feedback_mui"
+        }
+      ]
+    },
+    {
+      "parent_service": "mat",
+      "sub_flows": [
+        {
+          "sub_service": "Cắt mí",
+          "trigger_keywords": ["cắt mí", "cat mi"],
+          "action_response": "Thông tin cắt mí",
+          "next_step": "feedback_mat"
+        }
+      ]
+    },
+    {
+      "parent_service": "bung",
+      "sub_flows": [
+        {
+          "sub_service": "Hút mỡ bụng",
+          "trigger_keywords": ["hút mỡ bụng", "hut mo bung"],
+          "action_response": "Thông tin hút mỡ bụng",
+          "next_step": "feedback_bung"
+        }
+      ]
+    },
+    {
+      "parent_service": "vungkin",
+      "sub_flows": [
+        {
+          "sub_service": "Thẩm mỹ vùng kín",
+          "trigger_keywords": ["thẩm mỹ vùng kín", "tham my vung kin"],
+          "action_response": "Thông tin thẩm mỹ vùng kín",
+          "next_step": "feedback_vungkin"
+        }
+      ]
+    },
+    {
+      "parent_service": "damat",
+      "sub_flows": [
+        {
+          "sub_service": "Căng da mặt",
+          "trigger_keywords": ["căng da mặt", "cang da mat"],
+          "action_response": "Thông tin căng da mặt",
+          "next_step": "feedback_damat"
+        }
+      ]
+    },
+	{
+  "parent_service": "damat",
+  "sub_flows": [
+    {
+      "sub_service": "Thẩm mỹ cằm",
+      "trigger_keywords": ["thẩm mỹ cằm", "tham my cam", "độn cằm", "don cam"],
+      "action_response": "Chi phí thẩm mỹ cằm sẽ từ 30-40 triệu tùy cấu trúc giải phẫu ạ.",
+      "next_step": "xin_sdt"
+    }
+  ]
+}
+    {
+      "parent_service": "cacdichvu",
+      "sub_flows": [
+        {
+          "sub_service": "Dịch vụ khác",
+          "trigger_keywords": ["dịch vụ khác", "dich vu khac"],
+          "action_response": "Thông tin dịch vụ khác",
+          "next_step": "feedback_cacdichvu"
+        }
+      ]
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "nâng ngực có đau không",
+      "answer": "Dạ chị ơi, bên em sử dụng dao siêu âm Ultrasonic giúp giảm đau tới 90%. Sau phẫu thuật chỉ cần nghỉ dưỡng nhẹ nhàng thôi ạ!"
+    },
+    {
+      "question": "nâng ngực bảo hành thế nào",
+      "answer": "Dạ chị yên tâm, túi ngực bên em là Mentor được bảo hành chính hãng trọn đời và có giấy tờ đầy đủ ạ!"
+    },
+    {
+      "question": "nâng ngực có sẹo không",
+      "answer": "Dạ phẫu thuật bên em cam kết không để lại sẹo, đường mổ được giấu kín và chăm sóc cẩn thận sau mổ ạ!"
+    },
+    {
+      "question": "bao lâu thì lành",
+      "answer": "Dạ chị có thể sinh hoạt bình thường sau 6-12 tiếng. Sau 7 ngày thì mình tháo chỉ và phục hồi hoàn toàn sau 1 tháng ạ!"
+    },
+    {
+      "question": "địa chỉ ở đâu",
+      "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị!"
+    },
+	    {
+      "question": "Tháo túi có đau không?",
+      "answer": "Bác Vũ tháo túi không đau, không cần nghĩ dưỡng ạ."
+    },
+{
+  "question": "Ưu điểm của nâng ngực",
+  "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%\n\nNâng ngực với dao siêu âm thế hệ mới Ultrasonic Surgical Scalpel do Thạc sĩ - Bác sĩ Hồ Cao Vũ trực tiếp thực hiện:\n- Không đau, không chảy máu\n- Xuất viện và trở lại cuộc sống bình thường ngay sau 6 tiếng\n- Không cần hệ thống dẫn dịch trong và sau phẫu thuật\n- Không cần sử dụng giảm đau, kháng sinh sau khi xuất viện\n- Sau phẫu thuật 2 ngày bay nội địa, 7 ngày bay quốc tế\n- Không co thắt bao xơ\n- Không để lại sẹo xấu"
+}
+    {
+      "question": "giá nâng ngực bao nhiêu",
+      "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
+    },
+    {
+      "question": "hút mỡ bụng có đau không",
+      "answer": "Dạ bên em áp dụng công nghệ hút mỡ không đau, sau 24 giờ có thể đi lại và sinh hoạt nhẹ nhàng ạ!"
+    },
+    {
+      "question": "cắt mí có để lại sẹo không",
+      "answer": "Dạ không chị nhé! Cắt mí được bác Vũ thực hiện tỉ mỉ, không để lại sẹo và hồi phục nhanh ạ!"
+    },
+    {
+      "question": "bác sĩ nào làm",
+      "answer": "Dạ bác Vũ trực tiếp thực hiện phẫu thuật và tư vấn chị nha! Hơn 20 năm kinh nghiệm, chuyên điều trị các ca khó và tái phẫu thuật."
+    }
+  ]
+}
