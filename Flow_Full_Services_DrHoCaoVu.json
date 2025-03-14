@@ -69,20 +69,15 @@
           "trigger_keywords": ["căng da mặt", "cang da mat"],
           "action_response": "Thông tin căng da mặt",
           "next_step": "feedback_damat"
+        },
+        {
+          "sub_service": "Thẩm mỹ cằm",
+          "trigger_keywords": ["thẩm mỹ cằm", "tham my cam", "độn cằm", "don cam"],
+          "action_response": "Chi phí thẩm mỹ cằm sẽ từ 30-40 triệu tùy cấu trúc giải phẫu ạ.",
+          "next_step": "xin_sdt"
         }
       ]
     },
-	{
-  "parent_service": "damat",
-  "sub_flows": [
-    {
-      "sub_service": "Thẩm mỹ cằm",
-      "trigger_keywords": ["thẩm mỹ cằm", "tham my cam", "độn cằm", "don cam"],
-      "action_response": "Chi phí thẩm mỹ cằm sẽ từ 30-40 triệu tùy cấu trúc giải phẫu ạ.",
-      "next_step": "xin_sdt"
-    }
-  ]
-}
     {
       "parent_service": "cacdichvu",
       "sub_flows": [
@@ -95,7 +90,6 @@
       ]
     }
   ],
-
   "faqs": [
     {
       "question": "nâng ngực có đau không",
@@ -117,14 +111,14 @@
       "question": "địa chỉ ở đâu",
       "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị!"
     },
-	    {
+    {
       "question": "Tháo túi có đau không?",
       "answer": "Bác Vũ tháo túi không đau, không cần nghĩ dưỡng ạ."
     },
-{
-  "question": "Ưu điểm của nâng ngực",
-  "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%\n\nNâng ngực với dao siêu âm thế hệ mới Ultrasonic Surgical Scalpel do Thạc sĩ - Bác sĩ Hồ Cao Vũ trực tiếp thực hiện:\n- Không đau, không chảy máu\n- Xuất viện và trở lại cuộc sống bình thường ngay sau 6 tiếng\n- Không cần hệ thống dẫn dịch trong và sau phẫu thuật\n- Không cần sử dụng giảm đau, kháng sinh sau khi xuất viện\n- Sau phẫu thuật 2 ngày bay nội địa, 7 ngày bay quốc tế\n- Không co thắt bao xơ\n- Không để lại sẹo xấu"
-}
+    {
+      "question": "Ưu điểm của nâng ngực",
+      "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%\n\nNâng ngực với dao siêu âm thế hệ mới Ultrasonic Surgical Scalpel do Thạc sĩ - Bác sĩ Hồ Cao Vũ trực tiếp thực hiện:\n- Không đau, không chảy máu\n- Xuất viện và trở lại cuộc sống bình thường ngay sau 6 tiếng\n- Không cần hệ thống dẫn dịch trong và sau phẫu thuật\n- Không cần sử dụng giảm đau, kháng sinh sau khi xuất viện\n- Sau phẫu thuật 2 ngày bay nội địa, 7 ngày bay quốc tế\n- Không co thắt bao xơ\n- Không để lại sẹo xấu"
+    },
     {
       "question": "giá nâng ngực bao nhiêu",
       "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
