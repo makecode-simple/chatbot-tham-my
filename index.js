@@ -81,32 +81,24 @@ async function getFeedbackImages(folder) {
 }
 // ====== Tin nhắn mở đầu ======
 async function sendMenuDichVu(sender_psid) {
-  const menu = [
-    "✅ Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ",
-    "✅ Tái tạo vú sau khi điều trị ung thư",
-    "✅ Hút mỡ bụng, tạo hình thành bụng sau sinh",
-    "✅ Tiểu phẫu cắt mí",
-    "✅ Tiểu phẫu treo cung mày",
-    "✅ Chỉnh mắt lỗi",
-    "✅ Nâng mũi tái cấu trúc/ nâng mũi sụn sườn",
-    "✅ Chỉnh mũi lỗi",
-    "✅ Phẫu thuật căng da mặt",
-    "✅ Hút mỡ bụng/tay/đùi/lưng",
-    "✅ Thẩm mỹ vùng kín",
-    "✅ Căng da mặt toàn diện",
-    "✅ Căng chỉ da mặt/PRP trẻ hóa",
-    "✅ Độn thái dương/ độn cằm",
-    "✅ Hút mỡ tiêm lên mặt"
-  ];
-
-  await messengerService.sendMessage(sender_psid, {
-    text: "Dạ chào chị, chị muốn tư vấn dịch vụ nào dưới đây ạ?"
-  });
-
-  for (const item of menu) {
-    await messengerService.sendMessage(sender_psid, { text: item });
-    await new Promise(resolve => setTimeout(resolve, 300)); // delay nhẹ cho mượt
-  }
+  const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n
+* Tái tạo vú sau khi điều trị ung thư\n
+* Hút mỡ bụng, tạo hình thành bụng sau sinh\n
+* Tiểu phẫu cắt mí\n
+* Tiểu phẫu treo cung mày\n
+* Chỉnh mắt lỗi\n
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n
+* Chỉnh mũi lỗi\n
+* Phẫu thuật căng da mặt\n
+* Hút mỡ bụng/tay/ đùi/ lưng\n
+* Thẩm mỹ vùng kín\n
+* Căng da mặt toàn diện\n
+* Căng chỉ da mặt/ PRP trẻ hóa\n
+* Độn thái dương/ độn cằm\n
+* Hút mỡ tiêm lên mặt`;
+  
+  await messengerService.sendMessage(sender_psid, { text: menuText });
 }
 
 // ====== GET BẢNG GIÁ IMAGE ======
