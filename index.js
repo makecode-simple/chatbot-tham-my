@@ -27,7 +27,7 @@ const DATA_FOLDER = './data/';
 const chatbotServiceFlows = JSON.parse(fs.readFileSync(`${DATA_FOLDER}chatbot-service-flows.json`, 'utf-8'));
 const countryDigitRules = JSON.parse(fs.readFileSync(`${DATA_FOLDER}countryDigitRules.json`, 'utf-8'));
 const countryCodes = Object.keys(countryDigitRules);
-const flowFullServices = JSON.parse(fs.readFileSync(`${DATA_FOLDER}Flow_Full_Services_DrHoCaoVu.json`, 'utf-8'));
+const flowFullServices = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
 // ====== SESSION USERS ======
 const completedUsers = new Set();
