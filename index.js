@@ -27,30 +27,18 @@ const DATA_FOLDER = './data/';
 const chatbotServiceFlows = JSON.parse(fs.readFileSync(`${DATA_FOLDER}chatbot-service-flows.json`, 'utf-8'));
 const countryDigitRules = JSON.parse(fs.readFileSync(`${DATA_FOLDER}countryDigitRules.json`, 'utf-8'));
 const countryCodes = Object.keys(countryDigitRules);
+const flowFullServices = JSON.parse(fs.readFileSync(`${DATA_FOLDER}Flow_Full_Services_DrHoCaoVu.json`, 'utf-8'));
 
 // ====== SESSION USERS ======
 const completedUsers = new Set();
 const handoffUsers = new Set();
 
-// ====== GPT SENTIMENT ANALYSIS ======
-async function analyzeSentimentWithGPT(message) {
-  try {
-    const prompt = `Bạn là chuyên gia phân tích cảm xúc khách hàng.\nHãy phân loại cảm xúc đoạn chat sau vào 1 trong 3 loại:\n- \"negative\"\n- \"neutral\"\n- \"positive\"\n\nĐoạn chat: \"${message}\"\n\nTrả lời chỉ 1 từ: negative, neutral, positive`;
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0,
-      max_tokens: 5
-    });
-
-    const sentiment = response.choices[0].message.content.trim().toLowerCase();
-    console.log("🎯 GPT Sentiment:", sentiment);
-    return sentiment;
-  } catch (error) {
-    console.error("❌ GPT Error:", error.message);
-    return "neutral";
-  }
+// ====== TEXT NORMALIZATION ======
+function normalizeText(msg) {
+  return msg?.toLowerCase()
+    .normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .replace(/[!.,?~]/g, "")
+    .trim() || "";
 }
 
 // ====== VALIDATE PHONE ======
@@ -78,44 +66,15 @@ function isValidPhoneNumber(message) {
   return length >= digitRule.min && length <= digitRule.max;
 }
 
-// ====== TEXT NORMALIZATION ======
-function normalizeText(msg) {
-  return msg?.toLowerCase()
-    .normalize("NFD").replace(/\p{Diacritic}/gu, "")
-    .replace(/[!.,?~]/g, "").trim() || "";
-}
-
-// ====== CUSTOMER FEEDBACK DETECTION ======
-const complaintSynonyms = {
-  "không hài lòng": ["ko hài lòng", "bất mãn", "k ok"],
-  "dịch vụ kém": ["dịch vụ tệ", "dịch vụ không tốt"],
-  "bực mình": ["ức chế", "chán ghê"],
-  "phàn nàn": ["complain", "khiếu nại"],
-  "gặp người tư vấn": ["gặp admin", "muốn nói chuyện với người"]
-};
-
-function isAngryCustomer(message) {
-  const normalizedMsg = normalizeText(message);
-  for (const key in complaintSynonyms) {
-    if (normalizedMsg.includes(key)) return true;
-    for (const synonym of complaintSynonyms[key]) {
-      if (normalizedMsg.includes(synonym)) return true;
-    }
-  }
-  return false;
-}
-
-function isEndConversation(message) {
-  const normalizedMsg = normalizeText(message);
-  const endKeywords = ["ok", "oke", "okie", "cam on", "thanks", "được rồi", "yes", "vâng"];
-  return endKeywords.some(keyword => normalizedMsg.includes(keyword));
-}
-
 // ====== CLOUDINARY FOLDER MAPS ======
 const feedbackFolderMap = {
   "nguc": "nguc",
   "mui": "mui",
-  "mat": "mat"
+  "mat": "mat",
+  "bung": "bung",
+  "vungkin": "vungkin",
+  "damat": "damat",
+  "cacdichvu": "cacdichvu"
 };
 
 const bangGiaFileMap = {
@@ -147,7 +106,7 @@ async function getFeedbackImages(folder) {
 async function getBangGiaImage(publicId) {
   try {
     const result = await cloudinary.search
-      .expression(`folder:banggia AND public_id:banggia/${publicId} AND resource_type:image`)
+      .expression(`folder:banggia AND public_id:${publicId} AND resource_type:image`)
       .max_results(1)
       .execute();
 
@@ -162,21 +121,20 @@ async function getBangGiaImage(publicId) {
 async function sendFlowSteps(sender_psid, steps, parentService) {
   console.log(`📝 sendFlowSteps: parentService = ${parentService}`);
 
+  // (1) Gửi text giới thiệu kỹ thuật (steps)
   for (const step of steps) {
     if (step.type === 'text') {
       await messengerService.sendMessage(sender_psid, { text: step.content });
     }
   }
 
+  // (2) Gửi toàn bộ ảnh feedback NGAY LẬP TỨC
   const feedbackFolder = feedbackFolderMap[parentService];
   console.log(`📂 feedbackFolder = ${feedbackFolder}`);
 
   if (feedbackFolder) {
     const feedbackImages = await getFeedbackImages(feedbackFolder);
     if (feedbackImages.length > 0) {
-      await messengerService.sendMessage(sender_psid, {
-        text: "Dưới đây là feedback khách hàng bên em, chị tham khảo nha!"
-      });
       for (const url of feedbackImages) {
         await messengerService.sendMessage(sender_psid, {
           attachment: { type: 'image', payload: { url, is_reusable: true } }
@@ -185,6 +143,9 @@ async function sendFlowSteps(sender_psid, steps, parentService) {
     }
   }
 
+  // (3) Delay 1 giây rồi gửi ảnh bảng giá
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   const bangGiaPublicId = bangGiaFileMap[parentService];
   console.log(`📄 bangGiaPublicId = ${bangGiaPublicId}`);
 
@@ -192,17 +153,27 @@ async function sendFlowSteps(sender_psid, steps, parentService) {
     const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
     if (bangGiaImage) {
       await messengerService.sendMessage(sender_psid, {
-        text: "Đây là bảng giá dịch vụ bên em, chị tham khảo nha!"
-      });
-      await messengerService.sendMessage(sender_psid, {
         attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
       });
     }
   }
 
+  // (4) Gửi text xin số điện thoại/Zalo/Viber
   await messengerService.sendMessage(sender_psid, {
     text: "Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
   });
+}
+
+// ====== FOLLOW UP QUESTION HANDLER ======
+async function handleFollowUp(sender_psid, textMessage) {
+  const found = flowFullServices.faqs.find(item => textMessage.includes(normalizeText(item.question)));
+
+  if (found) {
+    await messengerService.sendMessage(sender_psid, { text: found.answer });
+  } else {
+    handoffUsers.add(sender_psid);
+    console.log(`🚀 Handoff triggered for ${sender_psid}`);
+  }
 }
 
 // ====== HANDLE POSTBACK ======
@@ -217,7 +188,6 @@ function handlePostback(sender_psid, postback) {
       if (flow.payload === payload) {
         foundFlow = true;
         const parentServiceKey = normalizeText(service.parent_service.replace(/\s+/g, ''));
-        console.log(`🎯 parentService = ${parentServiceKey}`);
         sendFlowSteps(sender_psid, flow.steps, parentServiceKey);
       }
     });
@@ -246,50 +216,75 @@ app.post("/webhook", async (req, res) => {
 
       if (!webhook_event.message || !webhook_event.message.text) return;
       const message = webhook_event.message.text.trim();
-      console.log(`💬 [${senderId}] ${message}`);
-
       const textMessage = normalizeText(message);
 
-      // Dịch vụ Ngực
-      if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
-        return handlePostback(senderId, { payload: "ngực-phẫu-thuật-nâng-ngực" });
-      }
-      if (textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")) {
-        return handlePostback(senderId, { payload: "ngực-tháo-túi-ngực" });
-      }
+// ====== KEYWORD DETECT ======
 
-      // Dịch vụ Mũi
-      if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
-        return handlePostback(senderId, { payload: "mũi-nâng-mũi-tái-cấu-trúc-nâng-mũi-sụn-sườn" });
-      }
-      if (textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")) {
-        return handlePostback(senderId, { payload: "mũi-chỉnh-mũi-lỗi" });
-      }
+// Ngực
+if (
+  textMessage.includes("nang nguc") || textMessage.includes("nâng ngực") ||
+  textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực") ||
+  textMessage.includes("boc bao xo") || textMessage.includes("bóc bao xơ")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "nguc").sub_flows[0].steps, "nguc");
+}
 
-      // Dịch vụ Mắt
-      if (textMessage.includes("cat mi") || textMessage.includes("cắt mí")) {
-        return handlePostback(senderId, { payload: "mắt-tiểu-phẫu-cắt-mí" });
-      }
+// Mũi
+if (
+  textMessage.includes("nang mui") || textMessage.includes("nâng mũi") ||
+  textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "mui").sub_flows[0].steps, "mui");
+}
 
-      // Dịch vụ Bụng
-      if (textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng")) {
-        return handlePostback(senderId, { payload: "bụng-hút-mỡ-bụng-tay-đùi-lưng" });
-      }
+// Mắt
+if (
+  textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
+  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
+  textMessage.includes("chinh mat loi") || textMessage.includes("chỉnh mắt lỗi")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "mat").sub_flows[0].steps, "mat");
+}
 
-      // Dịch vụ Vùng kín
-      if (textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")) {
-        return handlePostback(senderId, { payload: "vùng-kín-thẩm-mỹ-vùng-kín" });
-      }
+// Bụng
+if (
+  textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng") ||
+  textMessage.includes("tao hinh bung") || textMessage.includes("tạo hình thành bụng")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "bung").sub_flows[0].steps, "bung");
+}
 
-      // Dịch vụ Da mặt
-      if (textMessage.includes("cang da mat") || textMessage.includes("căng da mặt")) {
-        return handlePostback(senderId, { payload: "mặt-phẫu-thuật-căng-da-mặt" });
-      }
+// Vùng kín
+if (
+  textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "vungkin").sub_flows[0].steps, "vungkin");
+}
 
-      // Validate phone
-      const sentiment = await analyzeSentimentWithGPT(message);
-      console.log(`🧠 Sentiment Analysis: ${sentiment}`);
+// Da mặt
+if (
+  textMessage.includes("cang da mat") || textMessage.includes("căng da mặt") ||
+  textMessage.includes("cang chi") || textMessage.includes("căng chỉ") ||
+  textMessage.includes("prp") || textMessage.includes("tre hoa") || textMessage.includes("trẻ hóa") ||
+  textMessage.includes("don thai duong") || textMessage.includes("độn thái dương") ||
+  textMessage.includes("don cam") || textMessage.includes("độn cằm") ||
+  textMessage.includes("hut mo tiem mat") || textMessage.includes("hút mỡ tiêm lên mặt")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "damat").sub_flows[0].steps, "damat");
+}
 
+// Các dịch vụ khác
+if (
+  textMessage.includes("dich vu khac") || textMessage.includes("dịch vụ khác") ||
+  textMessage.includes("cham soc body") || textMessage.includes("chăm sóc body") ||
+  textMessage.includes("triet long") || textMessage.includes("triệt lông") ||
+  textMessage.includes("giam beo") || textMessage.includes("giảm béo")
+) {
+  return sendFlowSteps(senderId, chatbotServiceFlows.flows.find(s => normalizeText(s.parent_service) === "cacdichvu").sub_flows[0].steps, "cacdichvu");
+}
+
+
+      // ====== PHONE VALIDATION ======
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
         return await messengerService.sendMessage(senderId, {
@@ -297,23 +292,8 @@ app.post("/webhook", async (req, res) => {
         });
       }
 
-      if (isEndConversation(message)) {
-        completedUsers.add(senderId);
-        return await messengerService.sendMessage(senderId, {
-          text: "Dạ em cảm ơn chị, chúc chị một ngày tốt lành ạ!"
-        });
-      }
-
-      if (isAngryCustomer(message) || sentiment === "negative") {
-        handoffUsers.add(senderId);
-        return await messengerService.sendMessage(senderId, {
-          text: "Dạ em xin lỗi chị, em đã chuyển thông tin cho tư vấn viên hỗ trợ ngay ạ!"
-        });
-      }
-
-      await messengerService.sendMessage(senderId, {
-        text: "Dạ chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
-      });
+      // ====== FOLLOW UP QUESTION HANDLER ======
+      await handleFollowUp(senderId, textMessage);
     });
 
     res.status(200).send("EVENT_RECEIVED");
