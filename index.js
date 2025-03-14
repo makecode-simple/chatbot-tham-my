@@ -248,7 +248,45 @@ app.post("/webhook", async (req, res) => {
       const message = webhook_event.message.text.trim();
       console.log(`💬 [${senderId}] ${message}`);
 
-      // Debug sentiment & angry detection
+      const textMessage = normalizeText(message);
+
+      // Dịch vụ Ngực
+      if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
+        return handlePostback(senderId, { payload: "ngực-phẫu-thuật-nâng-ngực" });
+      }
+      if (textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")) {
+        return handlePostback(senderId, { payload: "ngực-tháo-túi-ngực" });
+      }
+
+      // Dịch vụ Mũi
+      if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
+        return handlePostback(senderId, { payload: "mũi-nâng-mũi-tái-cấu-trúc-nâng-mũi-sụn-sườn" });
+      }
+      if (textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")) {
+        return handlePostback(senderId, { payload: "mũi-chỉnh-mũi-lỗi" });
+      }
+
+      // Dịch vụ Mắt
+      if (textMessage.includes("cat mi") || textMessage.includes("cắt mí")) {
+        return handlePostback(senderId, { payload: "mắt-tiểu-phẫu-cắt-mí" });
+      }
+
+      // Dịch vụ Bụng
+      if (textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng")) {
+        return handlePostback(senderId, { payload: "bụng-hút-mỡ-bụng-tay-đùi-lưng" });
+      }
+
+      // Dịch vụ Vùng kín
+      if (textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")) {
+        return handlePostback(senderId, { payload: "vùng-kín-thẩm-mỹ-vùng-kín" });
+      }
+
+      // Dịch vụ Da mặt
+      if (textMessage.includes("cang da mat") || textMessage.includes("căng da mặt")) {
+        return handlePostback(senderId, { payload: "mặt-phẫu-thuật-căng-da-mặt" });
+      }
+
+      // Validate phone
       const sentiment = await analyzeSentimentWithGPT(message);
       console.log(`🧠 Sentiment Analysis: ${sentiment}`);
 
