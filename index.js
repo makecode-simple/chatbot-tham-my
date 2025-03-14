@@ -23,7 +23,7 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const countryDigitRules = JSON.parse(fs.readFileSync('./countryDigitRules.json', 'utf-8'));
+const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 const flowFullServices = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
 // ====== SESSION USERS ======
