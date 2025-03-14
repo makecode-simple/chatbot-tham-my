@@ -528,17 +528,19 @@ app.post("/webhook", async (req, res) => {
         }
       }
 
-      // 5️⃣ Lời chào và menu dịch vụ
-      const loiChaoKeywords = [
-        "hi", "hello", "alo", "xin chao",
-        "cho chi hoi", "toi can tu van", "can tu van",
-        "dich vu", "tu van dich vu"
-      ];
+		// 5️⃣ Lời chào và menu dịch vụ
+		const loiChaoKeywords = [
+		  "hi", "hello", "alo", "xin chao",
+		  "cho chi hoi", "toi can tu van", "can tu van",
+		  "dich vu", "tu van dich vu"
+		];
 
-      if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
-        await sendMenuDichVu(senderId);
-        continue;
-      }
+		// ✅ Sử dụng includes() → sai → đổi thành kiểm tra đúng nguyên câu!
+		if (loiChaoKeywords.includes(textMessage)) {
+		  await sendMenuDichVu(senderId);
+		  continue;
+		}
+
 
       // 6️⃣ Nếu không khớp, handoff
       await handleFollowUp(senderId, textMessage);
