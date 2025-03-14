@@ -79,6 +79,27 @@ async function getFeedbackImages(folder) {
     return [];
   }
 }
+// ====== Tin nhắn mở đầu ======
+async function sendMenuDichVu(sender_psid) {
+  const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n
+* Tái tạo vú sau khi điều trị ung thư\n
+* Hút mỡ bụng, tạo hình thành bụng sau sinh\n
+* Tiểu phẫu cắt mí\n
+* Tiểu phẫu treo cung mày\n
+* Chỉnh mắt lỗi\n
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n
+* Chỉnh mũi lỗi\n
+* Phẫu thuật căng da mặt\n
+* Hút mỡ bụng/tay/ đùi/ lưng\n
+* Thẩm mỹ vùng kín\n
+* Căng da mặt toàn diện\n
+* Căng chỉ da mặt/ PRP trẻ hóa\n
+* Độn thái dương/ độn cằm\n
+* Hút mỡ tiêm lên mặt`;
+  
+  await messengerService.sendMessage(sender_psid, { text: menuText });
+}
 
 // ====== GET BẢNG GIÁ IMAGE ======
 async function getBangGiaImage(publicId) {
@@ -460,6 +481,17 @@ if (textMessage.includes("bảng giá")) {
     return sendBangGiaOnlyFlow(senderId, "cacdichvu");
   }
 }
+const loiChaoKeywords = [
+  "hi", "hello", "alo", "xin chao",
+  "cho chi hoi", "toi can tu van", "can tu van",
+  "dich vu", "tu van dich vu", "o day co gi", "cac dịch vụ ở đây",
+  "dịch vụ bao gồm có gi", "bang thong tin dich vu"
+];
+
+if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
+  return sendMenuDichVu(senderId);
+}
+
       // ====== PHONE VALIDATION ======
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
