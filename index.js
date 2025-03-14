@@ -381,21 +381,28 @@ app.post("/webhook", async (req, res) => {
   const body = req.body;
 
   if (body.object === "page") {
-    // ĐÂY! forEach PHẢI async
-    body.entry.forEach(async entry => {
+
+    // Dùng for...of để tránh lỗi await
+    for (const entry of body.entry) {
+
       const webhook_event = entry.messaging[0];
       const senderId = webhook_event.sender.id;
 
-      if (!webhook_event.message || !webhook_event.message.text) return;
+      if (!webhook_event.message || !webhook_event.message.text) {
+        console.log("❌ Không có message text");
+        continue;
+      }
+
       const message = webhook_event.message.text.trim();
       const textMessage = normalizeText(message);
 
       // ====== 1. Kiểm tra số điện thoại trước ======
       if (isValidPhoneNumber(message)) {
         completedUsers.add(senderId);
-        return await messengerService.sendMessage(senderId, {
+        await messengerService.sendMessage(senderId, {
           text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
         });
+        continue;
       }
 
       // ====== 2. Trả lời FAQ trước ======
@@ -404,16 +411,19 @@ app.post("/webhook", async (req, res) => {
       );
 
       if (foundFAQ) {
-        return await messengerService.sendMessage(senderId, { text: foundFAQ.answer });
+        await messengerService.sendMessage(senderId, { text: foundFAQ.answer });
+        continue;
       }
 
-     // ====== 3. Các flow dịch vụ ======
+      // ====== 3. Các flow dịch vụ ======
       if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
-        return sendNangNgucFlow(senderId);
+        await sendNangNgucFlow(senderId);
+        continue;
       }
 
       if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
-        return sendNangMuiFlow(senderId);
+        await sendNangMuiFlow(senderId);
+        continue;
       }
 
       if (
@@ -421,38 +431,44 @@ app.post("/webhook", async (req, res) => {
         textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
         textMessage.includes("tham my mat") || textMessage.includes("thẩm mỹ mắt")
       ) {
-        return sendThamMyMatFlow(senderId);
+        await sendThamMyMatFlow(senderId);
+        continue;
       }
 
       if (
         textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") ||
         textMessage.includes("don cam") || textMessage.includes("độn cằm")
       ) {
-        return sendThamMyCamFlow(senderId);
+        await sendThamMyCamFlow(senderId);
+        continue;
       }
 
       if (
         textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
       ) {
-        return sendThamMyVungKinFlow(senderId);
+        await sendThamMyVungKinFlow(senderId);
+        continue;
       }
 
       if (
         textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
       ) {
-        return sendTreoCungMayFlow(senderId);
+        await sendTreoCungMayFlow(senderId);
+        continue;
       }
 
       if (
         textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
       ) {
-        return sendChinhMuiLoiFlow(senderId);
+        await sendChinhMuiLoiFlow(senderId);
+        continue;
       }
 
       if (
         textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")
       ) {
-        return sendThaoTuiNgucFlow(senderId);
+        await sendThaoTuiNgucFlow(senderId);
+        continue;
       }
 
       // ====== 4. Chỉ gửi Menu nếu là lời chào hoặc keyword chung ======
@@ -464,19 +480,22 @@ app.post("/webhook", async (req, res) => {
       ];
 
       if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
-        return sendMenuDichVu(senderId);
+        await sendMenuDichVu(senderId);
+        continue;
       }
 
       // ====== 5. Nếu không khớp gì cả, thì handoff ======
       handoffUsers.add(senderId);
       console.log(`🚀 Handoff triggered for ${senderId}`);
-    });
+    }
 
     res.status(200).send("EVENT_RECEIVED");
+
   } else {
     res.sendStatus(404);
   }
-});	
+});
+
 	// ====== FLOW: THAO TUI NGUC ======
 async function sendThaoTuiNgucFlow(sender_psid) {
   console.log("🚀 Trigger Tháo Túi Ngực Flow");
