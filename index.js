@@ -821,7 +821,7 @@ if (
       }
 
       // 5️⃣ Cuối cùng kiểm tra FAQ
-      await handleFollowUp(senderId, textMessage);
+      await handleFollowUp(sender_psid, textMessage);
 
     } catch (error) {
       console.error(`❌ Lỗi xử lý message từ ${senderId}:`, error);
