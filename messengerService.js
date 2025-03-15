@@ -2,6 +2,17 @@
 const request = require("request");
 const OpenAI = require("openai");
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// ====== IMPORT FLOWS ======
+const {
+    sendNangNgucFlow,
+    sendNangMuiFlow,
+    sendCatMiFlow,
+    sendHutMoBungFlow,
+    sendThamMyVungKinFlow,
+    sendCangDaMatFlow,
+    sendThamMyCamFlow,
+    sendDichVuKhacFlow
+} = require("./servicesFlow");
 
 // ====== USER SESSION (Để giữ context dịch vụ khách đang hỏi) ======
 let userSession = {};
