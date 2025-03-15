@@ -471,6 +471,120 @@ async function sendTreoCungMayFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+// Flow: Tái tạo vú sau ung thư
+async function sendTaiTaoVuFlow(sender_psid) {
+  console.log("🚀 Trigger Tái Tạo Vú Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị ơi, bên em chuyên thực hiện tái tạo vú sau điều trị ung thư với kỹ thuật tiên tiến nhất, giúp phục hồi dáng vú tự nhiên, an toàn và không đau ạ!`
+  });
+
+  const feedbackImages = await getFeedbackImages("taotaovu");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// Flow: Chỉnh mắt lỗi
+async function sendChinhMatLoiFlow(sender_psid) {
+  console.log("🚀 Trigger Chỉnh Mắt Lỗi Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ chuyên sửa các ca mắt lỗi như mí hỏng, mí không đều, sụp mí... đảm bảo không đau, hồi phục nhanh và tự nhiên nhất ạ!`
+  });
+
+  const feedbackImages = await getFeedbackImages("mat");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// Flow: Căng chỉ da mặt/ PRP trẻ hóa
+async function sendCangChiDaMatFlow(sender_psid) {
+  console.log("🚀 Trigger Căng Chỉ Da Mặt Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ sử dụng công nghệ căng chỉ collagen và PRP trẻ hóa không đau, không sưng bầm, giúp da săn chắc trẻ trung ngay ạ!`
+  });
+
+  const feedbackImages = await getFeedbackImages("cangchi");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// Flow: Độn thái dương
+async function sendDonThaiDuongFlow(sender_psid) {
+  console.log("🚀 Trigger Độn Thái Dương Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ độn thái dương sử dụng vật liệu an toàn, tự nhiên, hồi phục nhanh và không để lại dấu vết chị nha!`
+  });
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// Flow: Hút mỡ tay, đùi, lưng
+async function sendHutMoBodyFlow(sender_psid) {
+  console.log("🚀 Trigger Hút Mỡ Body Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ chuyên hút mỡ tay, đùi, lưng không đau, hồi phục nhanh, hiệu quả rõ rệt chị nha!`
+  });
+
+  const feedbackImages = await getFeedbackImages("body");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
+// Flow: Hút mỡ tiêm lên mặt
+async function sendHutMoTiemLenMatFlow(sender_psid) {
+  console.log("🚀 Trigger Hút Mỡ Tiêm Lên Mặt Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ hút mỡ tự thân và tiêm lên mặt giúp khuôn mặt trẻ trung, đầy đặn tự nhiên, không đau, không nghỉ dưỡng ạ!`
+  });
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+
 // ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
   if (!flowFullServices || !flowFullServices.faqs) {
@@ -523,47 +637,138 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // 2️⃣ Các flow dịch vụ
-      if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
-        await sendNangNgucFlow(senderId);
-        continue;
-      }
+     // 2️⃣ Các flow dịch vụ
+if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực") || textMessage.includes("dat tui nguc") || textMessage.includes("đặt túi ngực") || textMessage.includes("don nguc") || textMessage.includes("độn ngực")) {
+  await sendNangNgucFlow(sender_psid);
+  continue;
+}
 
-      if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
-        await sendNangMuiFlow(senderId);
-        continue;
-      }
+if (textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")) {
+  await sendThaoTuiNgucFlow(sender_psid);
+  continue;
+}
 
-      if (
-        textMessage.includes("cat mi") || textMessage.includes("cắt mí") ||
-        textMessage.includes("treo cung may") || textMessage.includes("treo cung mày") ||
-        textMessage.includes("tham my mat") || textMessage.includes("thẩm mỹ mắt")
-      ) {
-        await sendThamMyMatFlow(senderId);
-        continue;
-      }
+if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
+  await sendNangMuiFlow(sender_psid);
+  continue;
+}
 
-      if (
-        textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") ||
-        textMessage.includes("don cam") || textMessage.includes("độn cằm")
-      ) {
-        await sendThamMyCamFlow(senderId);
-        continue;
-      }
+if (textMessage.includes("cat mi") || textMessage.includes("cắt mí")) {
+  await sendThamMyMatFlow(sender_psid);
+  continue;
+}
 
-      if (
-        textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")
-      ) {
-        await sendThamMyVungKinFlow(senderId);
-        continue;
-      }
+if (textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng")) {
+  await sendHutMoBungFlow(sender_psid);
+  continue;
+}
 
-      if (
-        textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
-      ) {
-        await sendTreoCungMayFlow(senderId);
-        continue;
-      }
+if (textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")) {
+  await sendThamMyVungKinFlow(sender_psid);
+  continue;
+}
+
+if (textMessage.includes("cang da mat") || textMessage.includes("căng da mặt")) {
+  await sendCangDaMatFlow(sender_psid);
+  continue;
+}
+
+if (textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") || textMessage.includes("don cam") || textMessage.includes("độn cằm")) {
+  await sendThamMyCamFlow(sender_psid);
+  continue;
+}
+
+if (
+  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
+) {
+  await sendTreoCungMayFlow(sender_psid);
+  continue;
+}
+
+if (
+  textMessage.includes("dich vu khac") || textMessage.includes("dịch vụ khác")
+) {
+  await sendPhauThuatKhacFlow(sender_psid);
+  continue;
+}
+
+// Các dịch vụ bổ sung từ JSON
+
+// Tái tạo vú sau khi điều trị ung thư
+if (
+  textMessage.includes("tai tao vu") || textMessage.includes("tái tạo vú") ||
+  textMessage.includes("ung thu vu") || textMessage.includes("ung thư vú")
+) {
+  await sendTaiTaoVuFlow(sender_psid);
+  continue;
+}
+
+// Hút mỡ bụng, tạo hình thành bụng sau sinh
+if (
+  textMessage.includes("tao hinh thanh bung") || textMessage.includes("tạo hình thành bụng")
+) {
+  await sendTaoHinhThanhBungFlow(sender_psid);
+  continue;
+}
+
+// Tiểu phẫu treo cung mày
+if (
+  textMessage.includes("tieu phau treo cung may") || textMessage.includes("tiểu phẫu treo cung mày")
+) {
+  await sendTreoCungMayFlow(sender_psid);
+  continue;
+}
+
+// Chỉnh mắt lỗi
+if (
+  textMessage.includes("chinh mat loi") || textMessage.includes("chỉnh mắt lỗi")
+) {
+  await sendChinhMatLoiFlow(sender_psid);
+  continue;
+}
+
+// Chỉnh mũi lỗi
+if (
+  textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
+) {
+  await sendChinhMuiLoiFlow(sender_psid);
+  continue;
+}
+
+// Hút mỡ tay, đùi, lưng
+if (
+  textMessage.includes("hut mo tay") || textMessage.includes("hút mỡ tay") ||
+  textMessage.includes("hut mo dui") || textMessage.includes("hút mỡ đùi") ||
+  textMessage.includes("hut mo lung") || textMessage.includes("hút mỡ lưng")
+) {
+  await sendHutMoBodyFlow(sender_psid);
+  continue;
+}
+
+// Căng chỉ da mặt/ PRP trẻ hóa
+if (
+  textMessage.includes("cang chi da mat") || textMessage.includes("căng chỉ da mặt") ||
+  textMessage.includes("prp tre hoa") || textMessage.includes("prp trẻ hóa")
+) {
+  await sendCangChiPRPFlow(sender_psid);
+  continue;
+}
+
+// Độn thái dương
+if (
+  textMessage.includes("don thai duong") || textMessage.includes("độn thái dương")
+) {
+  await sendDonThaiDuongFlow(sender_psid);
+  continue;
+}
+
+// Hút mỡ tiêm lên mặt
+if (
+  textMessage.includes("hut mo tiem len mat") || textMessage.includes("hút mỡ tiêm lên mặt")
+) {
+  await sendHutMoTiemMatFlow(sender_psid);
+  continue;
+}
 
       // 3️⃣ Xin bảng giá only
       if (textMessage.includes("bảng giá")) {
