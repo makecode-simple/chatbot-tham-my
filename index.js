@@ -638,7 +638,7 @@ async function handleFollowUp(sender_psid, textMessage) {
   return false; // trả về false khi không match FAQ nào
 }
 
-// ====== MAIN WEBHOOK HANDLER ======
+// ====== MAIN WEBHOOK HANDLER FINAL ======
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
@@ -668,11 +668,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // 2️⃣ Kiểm tra FAQ trước
-		const faqAnswered = await handleFollowUp(sender_psid, textMessage);
-		if (faqAnswered) continue;  // có FAQ được trả lời thì dừng lại luôn
-
-      // 3️⃣ Các flow dịch vụ
+      // 2️⃣ Các flow dịch vụ (ưu tiên rõ ràng)
       const serviceKeywords = [
         { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
         { keywords: ["thao tui nguc", "tháo túi ngực"], action: sendThaoTuiNgucFlow },
@@ -704,21 +700,24 @@ app.post("/webhook", async (req, res) => {
 
       if (serviceMatched) continue;
 
-      // 4️⃣ Xin bảng giá only
+      // 3️⃣ Xin bảng giá only
       if (textMessage.includes("bảng giá")) {
         await sendBangGiaOnlyFlow(sender_psid, "cacdichvu");
         continue;
       }
 
-      // 5️⃣ Lời chào và menu dịch vụ
-      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "dich vu", "tu van dich vu"];
-
-      if (loiChaoKeywords.some(keyword => textMessage === keyword)) {
+      // 4️⃣ Lời chào và menu dịch vụ (check chính xác hơn tránh xung đột FAQ)
+      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "menu"];
+      if (loiChaoKeywords.includes(textMessage)) {
         await sendMenuDichVu(sender_psid);
         continue;
       }
 
-      // 6️⃣ Default handoff
+      // 5️⃣ Cuối cùng kiểm tra FAQ (linh hoạt nhất)
+      const faqAnswered = await handleFollowUp(sender_psid, textMessage);
+      if (faqAnswered) continue;
+
+      // 6️⃣ Default handoff nếu không match gì
       console.log(`🚀 Handoff triggered for ${sender_psid}`);
       handoffUsers.add(sender_psid);
 
