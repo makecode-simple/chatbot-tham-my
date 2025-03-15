@@ -102,6 +102,30 @@ async function getBangGiaImage(publicId) {
     return null;
   }
 }
+// ====== CHATGPT HANDLER + SESSION ======
+const { handleUserMessage } = require('./messengerService');
+
+// ====== WEBHOOK ROUTE ======
+app.post('/webhook', async (req, res) => {
+  const body = req.body;
+
+  if (body.object === 'page') {
+    body.entry.forEach(async function(entry) {
+      const webhookEvent = entry.messaging[0];
+      const senderId = webhookEvent.sender.id;
+      const message = webhookEvent.message?.text;
+
+      if (message) {
+        // Xử lý message qua handler chính, truyền flowFullServices đã load vào
+        await handleUserMessage(senderId, message, flowFullServices);
+      }
+    });
+
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 // ====== FLOW FUNCTIONS ======
 
@@ -707,7 +731,7 @@ app.post("/webhook", async (req, res) => {
       }
 
       // 4️⃣ Lời chào và menu dịch vụ (check chính xác hơn tránh xung đột FAQ)
-      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "menu"];
+      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "menu", "thong tin dich vu khac"];
       if (loiChaoKeywords.includes(textMessage)) {
         await sendMenuDichVu(sender_psid);
         continue;

@@ -5,13 +5,29 @@
       "sub_flows": [
         {
           "sub_service": "Nâng ngực",
-          "trigger_keywords": ["nâng ngực", "nang nguc", "đặt túi ngực", "độn ngực"],
+          "trigger_keywords": [
+            "nâng ngực",
+            "nang nguc",
+            "đặt túi ngực",
+            "độn ngực",
+            "độn túi ngực",
+            "nâng ngực nội soi",
+            "phẫu thuật ngực",
+            "làm ngực",
+            "ngực to hơn"
+          ],
           "action_response": "Thông tin nâng ngực",
           "next_step": "feedback_nguc"
         },
         {
           "sub_service": "Tháo túi ngực",
-          "trigger_keywords": ["tháo túi ngực", "thao tui nguc"],
+          "trigger_keywords": [
+            "tháo túi ngực",
+            "thao tui nguc",
+            "tháo ngực",
+            "gỡ túi ngực",
+            "gỡ túi"
+          ],
           "action_response": "Thông tin tháo túi ngực",
           "next_step": "feedback_nguc"
         }
@@ -22,7 +38,17 @@
       "sub_flows": [
         {
           "sub_service": "Nâng mũi",
-          "trigger_keywords": ["nâng mũi", "nang mui"],
+          "trigger_keywords": [
+            "nâng mũi",
+            "nang mui",
+            "làm mũi",
+            "độn mũi",
+            "sửa mũi",
+            "nâng cao sống mũi",
+            "nâng mũi sụn sườn",
+            "nâng mũi cấu trúc",
+            "phẫu thuật mũi"
+          ],
           "action_response": "Thông tin nâng mũi",
           "next_step": "feedback_mui"
         }
@@ -33,7 +59,16 @@
       "sub_flows": [
         {
           "sub_service": "Cắt mí",
-          "trigger_keywords": ["cắt mí", "cat mi"],
+          "trigger_keywords": [
+            "cắt mí",
+            "cat mi",
+            "làm mắt",
+            "nhấn mí",
+            "mở rộng góc mắt",
+            "phẫu thuật mắt",
+            "mí bị sụp",
+            "cắt da thừa mí"
+          ],
           "action_response": "Thông tin cắt mí",
           "next_step": "feedback_mat"
         }
@@ -44,7 +79,15 @@
       "sub_flows": [
         {
           "sub_service": "Hút mỡ bụng",
-          "trigger_keywords": ["hút mỡ bụng", "hut mo bung"],
+          "trigger_keywords": [
+            "hút mỡ bụng",
+            "hut mo bung",
+            "giảm mỡ bụng",
+            "lipo bụng",
+            "giảm béo bụng",
+            "hút mỡ nội soi",
+            "giảm mỡ không phẫu thuật"
+          ],
           "action_response": "Thông tin hút mỡ bụng",
           "next_step": "feedback_bung"
         }
@@ -55,7 +98,15 @@
       "sub_flows": [
         {
           "sub_service": "Thẩm mỹ vùng kín",
-          "trigger_keywords": ["thẩm mỹ vùng kín", "tham my vung kin"],
+          "trigger_keywords": [
+            "thẩm mỹ vùng kín",
+            "tham my vung kin",
+            "se khit",
+            "tre hoa vung kin",
+            "phẫu thuật vùng kín",
+            "làm hồng vùng kín",
+            "tạo hình vùng kín"
+          ],
           "action_response": "Thông tin thẩm mỹ vùng kín",
           "next_step": "feedback_vungkin"
         }
@@ -66,13 +117,30 @@
       "sub_flows": [
         {
           "sub_service": "Căng da mặt",
-          "trigger_keywords": ["căng da mặt", "cang da mat"],
+          "trigger_keywords": [
+            "căng da mặt",
+            "cang da mat",
+            "tre hoa da mat",
+            "nang co mat",
+            "phẫu thuật căng da mặt",
+            "căng chỉ collagen",
+            "xóa nếp nhăn mặt"
+          ],
           "action_response": "Thông tin căng da mặt",
           "next_step": "feedback_damat"
         },
         {
           "sub_service": "Thẩm mỹ cằm",
-          "trigger_keywords": ["thẩm mỹ cằm", "tham my cam", "độn cằm", "don cam"],
+          "trigger_keywords": [
+            "thẩm mỹ cằm",
+            "tham my cam",
+            "độn cằm",
+            "don cam",
+            "gọt cằm",
+            "sửa cằm",
+            "nâng cằm",
+            "làm thon gọn cằm"
+          ],
           "action_response": "Chi phí thẩm mỹ cằm sẽ từ 30-40 triệu tùy cấu trúc giải phẫu ạ.",
           "next_step": "xin_sdt"
         }
@@ -83,122 +151,178 @@
       "sub_flows": [
         {
           "sub_service": "Dịch vụ khác",
-          "trigger_keywords": ["dịch vụ khác", "dich vu khac"],
+          "trigger_keywords": [
+            "dịch vụ khác",
+            "dich vu khac",
+            "dịch vụ thẩm mỹ khác",
+            "phẫu thuật khác",
+            "dịch vụ thêm"
+          ],
           "action_response": "Thông tin dịch vụ khác",
           "next_step": "feedback_cacdichvu"
         }
       ]
     }
-  ],
- "faqs": [
-  {
-    "questions": [
-      "nâng ngực có đau không",
-      "nang nguc co dau khong"
-    ],
-    "answer": "Dạ chị ơi, bên em sử dụng dao siêu âm Ultrasonic giúp giảm đau tới 90%. Sau phẫu thuật chỉ cần nghỉ dưỡng nhẹ nhàng thôi ạ!"
-  },
-  {
-    "questions": [
-      "nâng ngực bảo hành thế nào",
-      "nang nguc bao hanh the nao"
-    ],
-    "answer": "Dạ chị yên tâm, túi ngực bên em là Mentor được bảo hành chính hãng trọn đời và có giấy tờ đầy đủ ạ!"
-  },
-  {
-    "questions": [
-      "nâng ngực có sẹo không",
-      "nang nguc co seo khong"
-    ],
-    "answer": "Dạ phẫu thuật bên em cam kết không để lại sẹo, đường mổ được giấu kín và chăm sóc cẩn thận sau mổ ạ!"
-  },
-  {
-    "questions": [
-      "bao lâu thì lành",
-      "bao lau thi lanh",
-      "co can nghi duong khong",
-      "có cần nghỉ dưỡng không"
-    ],
-    "answer": "Sau phẫu thuật nâng ngực chị nằm viện tối đa 12 tiếng, tuy nhiên thông thường thì 6-10 tiếng là khách bác Vũ đã khoẻ đi lại nhẹ nhàng bình thường nên có thể xuất viện sớm hơn. Sau phẫu thuật không cần uống thêm giảm đau, kháng sinh, không cần đặt ống dẫn lưu, không cần nghỉ dưỡng ạ. Bên bác Vũ cũng hỗ trợ quay video full 100% ca mổ, sử dụng dao siêu âm mới 100%, khách hàng trực tiếp ký tên lên hộp dao trước khi mổ. Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ!"
-  },
-  {
-    "questions": [
-      "địa chỉ ở đâu",
-      "dia chi o dau",
-      "d/c o dau",
-      "dia chi",
-      "d.c phong kham"
-    ],
-    "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị! * Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
-  },
-  {
-    "questions": [
-      "tháo túi có đau không",
-      "thao tui co dau khong"
-    ],
-    "answer": "Bác Vũ tháo túi không đau, không cần nghỉ dưỡng ạ."
-  },
-  {
-    "questions": [
-      "ưu điểm của nâng ngực",
-      "uu diem cua nang nguc"
-    ],
-    "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%"
-  },
-  {
-    "questions": [
-      "giá nâng ngực bao nhiêu",
-      "gia nang nguc bao nhieu"
-    ],
-    "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
-  },
-  {
-    "questions": [
-      "hút mỡ bụng có đau không",
-      "hut mo bung co dau khong",
-      "hut mo bung"
-    ],
-    "answer": "Dạ bên em áp dụng công nghệ hút mỡ bụng không đau, không cần nghỉ dưỡng. Sau 24 giờ có thể đi lại và sinh hoạt nhẹ nhàng nha chị!"
-  },
-  {
-    "questions": [
-      "cắt mí có để lại sẹo không",
-      "cat mi co de lai seo khong"
-    ],
-    "answer": "Dạ không chị nhé! Cắt mí được bác Vũ thực hiện tỉ mỉ, không để lại sẹo và hồi phục nhanh ạ!"
-  },
-  {
-    "questions": [
-      "bác sĩ nào làm",
-      "bac si nao lam"
-    ],
-    "answer": "Dạ bác Vũ trực tiếp thực hiện phẫu thuật và tư vấn chị nha! Hơn 20 năm kinh nghiệm, chuyên điều trị các ca khó và tái phẫu thuật."
-  },
-  {
-    "questions": [
-      "căng da mặt có đau không",
-      "cang da mat co dau khong",
-      "cang da mat"
-    ],
-    "answer": "Dạ bên bác Vũ thực hiện căng da mặt toàn diện không đau, hồi phục nhanh, không để lại sẹo chị nha!"
-  },
-  {
-    "questions": [
-      "phẫu thuật khác",
-      "phau thuat khac",
-      "dich vu khac",
-      "dịch vụ khác"
-    ],
-    "answer": "Dạ bên em có nhiều dịch vụ thẩm mỹ khác như hút mỡ tay, hút mỡ đùi, tạo hình rốn, căng chỉ collagen… Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
-  },
-  {
-    "questions": [
-      "cho xin so dien thoai",
-      "cho xin sdt",
-      "co so dt nao",
-      "co zalo khong"
-    ],
-    "answer": "Dạ chị để lại số điện thoại/Zalo/Viber để bên em liên hệ tư vấn chi tiết hơn cho mình nha!"
-  }
-]
+  ]
+}
+{
+  "faqs": [
+    {
+      "questions": [
+        "nâng ngực có đau không",
+        "nang nguc co dau khong",
+        "đặt túi ngực có đau không",
+        "ngực có đau không sau phẫu thuật",
+        "phẫu thuật nâng ngực đau không",
+        "nâng ngực đau nhiều không",
+        "nâng ngực sưng không"
+      ],
+      "answer": "Dạ chị ơi, bên em sử dụng dao siêu âm Ultrasonic giúp giảm đau tới 90%. Sau phẫu thuật chỉ cần nghỉ dưỡng nhẹ nhàng thôi ạ!"
+    },
+    {
+      "questions": [
+        "nâng ngực bảo hành thế nào",
+        "nang nguc bao hanh the nao",
+        "túi ngực bảo hành ra sao",
+        "bảo hành nâng ngực thế nào",
+        "chế độ bảo hành nâng ngực"
+      ],
+      "answer": "Dạ chị yên tâm, túi ngực bên em là Mentor được bảo hành chính hãng trọn đời và có giấy tờ đầy đủ ạ!"
+    },
+    {
+      "questions": [
+        "nâng ngực có sẹo không",
+        "nang nguc co seo khong",
+        "phẫu thuật nâng ngực để lại sẹo không",
+        "có thẹo không sau nâng ngực",
+        "đường mổ nâng ngực có thấy không"
+      ],
+      "answer": "Dạ phẫu thuật bên em cam kết không để lại sẹo, đường mổ được giấu kín và chăm sóc cẩn thận sau mổ ạ!"
+    },
+    {
+      "questions": [
+        "bao lâu thì lành",
+        "bao lau thi lanh",
+        "co can nghi duong khong",
+        "có cần nghỉ dưỡng không",
+        "mấy ngày thì hồi phục",
+        "phẫu thuật xong bao lâu lành",
+        "nâng ngực bao lâu thì đi làm được"
+      ],
+      "answer": "Sau phẫu thuật nâng ngực chị nằm viện tối đa 12 tiếng, thông thường 6-10 tiếng là có thể khoẻ và đi lại nhẹ nhàng. Không cần uống giảm đau, kháng sinh hay đặt ống dẫn lưu. Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ!"
+    },
+    {
+      "questions": [
+        "địa chỉ ở đâu",
+        "dia chi o dau",
+        "d/c o dau",
+        "dia chi",
+        "d.c phong kham",
+        "map phòng khám",
+        "địa chỉ bệnh viện",
+        "địa chỉ bác sĩ vũ",
+        "phòng khám nằm đâu vậy"
+      ],
+      "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị! * Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
+    },
+    {
+      "questions": [
+        "tháo túi có đau không",
+        "thao tui co dau khong",
+        "tháo ngực đau không",
+        "gỡ túi ngực đau không",
+        "tháo túi ngực có cần nghỉ dưỡng không"
+      ],
+      "answer": "Bác Vũ tháo túi không đau, không cần nghỉ dưỡng ạ."
+    },
+    {
+      "questions": [
+        "ưu điểm của nâng ngực",
+        "uu diem cua nang nguc",
+        "nâng ngực có lợi ích gì",
+        "vì sao nên nâng ngực",
+        "nâng ngực có gì đặc biệt",
+        "điểm khác biệt nâng ngực dr vũ"
+      ],
+      "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%"
+    },
+    {
+      "questions": [
+        "giá nâng ngực bao nhiêu",
+        "gia nang nguc bao nhieu",
+        "chi phí nâng ngực",
+        "nâng ngực hết bao nhiêu tiền",
+        "nâng ngực giá sao",
+        "báo giá nâng ngực"
+      ],
+      "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
+    }
+  ]
+}
+{
+  "faqs": [
+    {
+      "questions": [
+        "hút mỡ bụng có đau không",
+        "hut mo bung co dau khong",
+        "hut mo bung",
+        "giảm mỡ bụng có đau không",
+        "hút mỡ bụng có an toàn không",
+        "hút mỡ bụng cần nghỉ dưỡng không"
+      ],
+      "answer": "Dạ bên em áp dụng công nghệ hút mỡ bụng không đau, không cần nghỉ dưỡng. Sau 24 giờ có thể đi lại và sinh hoạt nhẹ nhàng nha chị!"
+    },
+    {
+      "questions": [
+        "cắt mí có để lại sẹo không",
+        "cat mi co de lai seo khong",
+        "cắt mí có sẹo không",
+        "phẫu thuật cắt mí có đau không",
+        "nhấn mí có để lại sẹo không"
+      ],
+      "answer": "Dạ không chị nhé! Cắt mí được bác Vũ thực hiện tỉ mỉ, không để lại sẹo và hồi phục nhanh ạ!"
+    },
+    {
+      "questions": [
+        "bác sĩ nào làm",
+        "bac si nao lam",
+        "ai phẫu thuật cho tôi",
+        "bác vũ có trực tiếp làm không",
+        "bác sĩ có kinh nghiệm không"
+      ],
+      "answer": "Dạ bác Vũ trực tiếp thực hiện phẫu thuật và tư vấn chị nha! Hơn 20 năm kinh nghiệm, chuyên điều trị các ca khó và tái phẫu thuật."
+    },
+    {
+      "questions": [
+        "căng da mặt có đau không",
+        "cang da mat co dau khong",
+        "cang da mat",
+        "phẫu thuật căng da mặt đau không",
+        "căng da mặt có an toàn không"
+      ],
+      "answer": "Dạ bên bác Vũ thực hiện căng da mặt toàn diện không đau, hồi phục nhanh, không để lại sẹo chị nha!"
+    },
+    {
+      "questions": [
+        "phẫu thuật khác",
+        "phau thuat khac",
+        "dich vu khac",
+        "dịch vụ khác",
+        "bên mình còn dịch vụ nào nữa",
+        "các dịch vụ khác"
+      ],
+      "answer": "Dạ bên em có nhiều dịch vụ thẩm mỹ khác như hút mỡ tay, hút mỡ đùi, tạo hình rốn, căng chỉ collagen… Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
+    },
+    {
+      "questions": [
+        "cho xin so dien thoai",
+        "cho xin sdt",
+        "co so dt nao",
+        "co zalo khong",
+        "liên hệ zalo",
+        "gửi số điện thoại tư vấn"
+      ],
+      "answer": "Dạ chị để lại số điện thoại/Zalo/Viber để bên em liên hệ tư vấn chi tiết hơn cho mình nha!"
+    }
+  ]
 }
