@@ -58,22 +58,21 @@ async function handleUserMessage(senderId, userMessage, flowData) {
 
     if (intent === "show_services") {
         await sendMessage(senderId, {
-            text: `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
-
-* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
-* Tái tạo vú sau khi điều trị ung thư
-* Hút mỡ bụng, tạo hình thành bụng sau sinh
-* Tiểu phẫu cắt mí
-* Tiểu phẫu treo cung mày
-* Chỉnh mắt lỗi
-* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
-* Chỉnh mũi lỗi
-* Phẫu thuật căng da mặt
-* Hút mỡ bụng/tay/ đùi/ lưng
-* Thẩm mỹ vùng kín
-* Căng da mặt toàn diện
-* Căng chỉ da mặt/ PRP trẻ hóa
-* Độn thái dương/ độn cằm
+            text: `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n
+* Tái tạo vú sau khi điều trị ung thư\n
+* Hút mỡ bụng, tạo hình thành bụng sau sinh\n
+* Tiểu phẫu cắt mí\n
+* Tiểu phẫu treo cung mày\n
+* Chỉnh mắt lỗi\n
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n
+* Chỉnh mũi lỗi\n
+* Phẫu thuật căng da mặt\n
+* Hút mỡ bụng/tay/ đùi/ lưng\n
+* Thẩm mỹ vùng kín\n
+* Căng da mặt toàn diện\n
+* Căng chỉ da mặt/ PRP trẻ hóa\n
+* Độn thái dương/ độn cằm\n
 * Hút mỡ tiêm lên mặt`
         });
     } else if (intent === "service_detail") {
@@ -83,17 +82,28 @@ async function handleUserMessage(senderId, userMessage, flowData) {
             await sendNangNgucFlow(senderId);
         } else if (currentService === "Cắt mí") {
             await sendCatMiFlow(senderId);
+        } else if (currentService === "Hút mỡ bụng") {
+            await sendHutMoBungFlow(senderId);
+        } else if (currentService === "Thẩm mỹ vùng kín") {
+            await sendThamMyVungKinFlow(senderId);
+        } else if (currentService === "Căng da mặt") {
+            await sendCangDaMatFlow(senderId);
+        } else if (currentService === "Thẩm mỹ cằm") {
+            await sendThamMyCamFlow(senderId);
+        } else if (currentService === "Dịch vụ khác") {
+            await sendDichVuKhacFlow(senderId);
         } else {
             await sendMessage(senderId, { text: reply });
         }
     } else {
         await sendMessage(senderId, { text: reply });
     }
-}
 
 // ====== GPT XỬ LÝ ĐOÁN Ý ======
 async function getChatGPTResponse(userMessage, currentService, flowData) {
-    const availableServices = flowData.services.map(s => s.name).join(", ");
+    const availableServices = flowData.flows
+        .flatMap(f => f.sub_flows.map(sf => sf.sub_service))
+        .join(", ");
 
     const prompt = `
 Bạn là trợ lý tư vấn thẩm mỹ Dr. Học Cao Vũ.
@@ -141,7 +151,7 @@ Quy tắc:
         console.error("Lỗi GPT:", err);
         return {
             intent: "unknown",
-            reply: "Dạ, chị vui lòng để lại số điện thoại để bên em hỗ trợ chi tiết hơn ạ!",
+            reply: "Dạ, Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn thêm cho mình nha!",
             newService: null
         };
     }
