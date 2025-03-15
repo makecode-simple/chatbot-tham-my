@@ -616,28 +616,27 @@ async function sendTaoHinhThanhBungFlow(sender_psid) {
   });
 }
 
-// ====== FOLLOW UP QUESTION HANDLER ======
+// ====== FOLLOW UP QUESTION HANDLER (phiên bản final ổn định nhất) ======
 async function handleFollowUp(sender_psid, textMessage) {
   if (!flowFullServices || !flowFullServices.faqs) {
     console.log("❌ FAQs bị null hoặc không load được");
-    return;
+    return false; // chắc chắn return false khi không có FAQ
   }
 
   console.log("🔍 User hỏi gì:", textMessage);
 
   const found = flowFullServices.faqs.find(item =>
-    item.questions.some(q => textMessage.includes(q))
+    item.questions.some(q => textMessage.includes(q) || q.includes(textMessage))
   );
 
   if (found) {
     console.log("✅ Trả lời câu hỏi:", found.answer);
     await messengerService.sendMessage(sender_psid, { text: found.answer });
-  } else {
-    console.log(`🚀 Handoff triggered for ${sender_psid}`);
-    handoffUsers.add(sender_psid);
+    return true; // trả về true khi có FAQ được trả lời
   }
-}
 
+  return false; // trả về false khi không match FAQ nào
+}
 
 // ====== MAIN WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
@@ -670,13 +669,8 @@ app.post("/webhook", async (req, res) => {
       }
 
       // 2️⃣ Kiểm tra FAQ trước
-      const foundFaq = flowFullServices.faqs.find(item =>
-        item.questions.some(q => textMessage.includes(q))
-      );
-      if (foundFaq) {
-        await messengerService.sendMessage(sender_psid, { text: foundFaq.answer });
-        continue;
-      }
+		const faqAnswered = await handleFollowUp(sender_psid, textMessage);
+		if (faqAnswered) continue;  // có FAQ được trả lời thì dừng lại luôn
 
       // 3️⃣ Các flow dịch vụ
       const serviceKeywords = [
