@@ -626,8 +626,7 @@ app.post("/webhook", async (req, res) => {
       continue;
     }
 
-    const sender_psid = webhook_event.sender.id;  // ✅ fix chỗ này, đổi senderId -> sender_psid
-
+    const sender_psid = webhook_event.sender.id;
     const message = webhook_event.message.text.trim();
     const textMessage = normalizeText(message);
 
@@ -641,190 +640,65 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-     // 2️⃣ Các flow dịch vụ
-if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực") || textMessage.includes("dat tui nguc") || textMessage.includes("đặt túi ngực") || textMessage.includes("don nguc") || textMessage.includes("độn ngực")) {
-  await sendNangNgucFlow(sender_psid);
-  continue;
-}
+      // 2️⃣ Kiểm tra FAQ trước
+      const foundFaq = flowFullServices.faqs.find(item =>
+        item.questions.some(q => textMessage.includes(q))
+      );
+      if (foundFaq) {
+        await messengerService.sendMessage(sender_psid, { text: foundFaq.answer });
+        continue;
+      }
 
-if (textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")) {
-  await sendThaoTuiNgucFlow(sender_psid);
-  continue;
-}
+      // 3️⃣ Các flow dịch vụ
+      const serviceKeywords = [
+        { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
+        { keywords: ["thao tui nguc", "tháo túi ngực"], action: sendThaoTuiNgucFlow },
+        { keywords: ["nang mui", "nâng mũi"], action: sendNangMuiFlow },
+        { keywords: ["cat mi", "cắt mí", "tham my mat", "thẩm mỹ mắt"], action: sendThamMyMatFlow },
+        { keywords: ["hut mo bung", "hút mỡ bụng"], action: sendHutMoBungFlow },
+        { keywords: ["tham my vung kin", "thẩm mỹ vùng kín"], action: sendThamMyVungKinFlow },
+        { keywords: ["cang da mat", "căng da mặt"], action: sendCangDaMatFlow },
+        { keywords: ["tham my cam", "thẩm mỹ cằm", "don cam", "độn cằm"], action: sendThamMyCamFlow },
+        { keywords: ["treo cung may", "treo cung mày"], action: sendTreoCungMayFlow },
+        { keywords: ["tai tao vu", "tái tạo vú", "ung thu vu", "ung thư vú"], action: sendTaiTaoVuFlow },
+        { keywords: ["tao hinh thanh bung", "tạo hình thành bụng"], action: sendTaoHinhThanhBungFlow },
+        { keywords: ["chinh mat loi", "chỉnh mắt lỗi"], action: sendChinhMatLoiFlow },
+        { keywords: ["chinh mui loi", "chỉnh mũi lỗi"], action: sendChinhMuiLoiFlow },
+        { keywords: ["hut mo tay", "hút mỡ tay", "hut mo dui", "hút mỡ đùi", "hut mo lung", "hút mỡ lưng"], action: sendHutMoBodyFlow },
+        { keywords: ["cang chi da mat", "căng chỉ da mặt", "prp tre hoa", "prp trẻ hóa"], action: sendCangChiDaMatFlow },
+        { keywords: ["don thai duong", "độn thái dương"], action: sendDonThaiDuongFlow },
+        { keywords: ["hut mo tiem len mat", "hút mỡ tiêm lên mặt"], action: sendHutMoTiemLenMatFlow }
+      ];
 
-if (textMessage.includes("nang mui") || textMessage.includes("nâng mũi")) {
-  await sendNangMuiFlow(sender_psid);
-  continue;
-}
-
-if (textMessage.includes("cat mi") || textMessage.includes("cắt mí")) {
-  await sendThamMyMatFlow(sender_psid);
-  continue;
-}
-
-if (textMessage.includes("hut mo bung") || textMessage.includes("hút mỡ bụng")) {
-  await sendHutMoBungFlow(sender_psid);
-  continue;
-}
-
-if (textMessage.includes("tham my vung kin") || textMessage.includes("thẩm mỹ vùng kín")) {
-  await sendThamMyVungKinFlow(sender_psid);
-  continue;
-}
-
-if (textMessage.includes("cang da mat") || textMessage.includes("căng da mặt")) {
-  await sendCangDaMatFlow(sender_psid);
-  continue;
-}
-
-if (textMessage.includes("tham my cam") || textMessage.includes("thẩm mỹ cằm") || textMessage.includes("don cam") || textMessage.includes("độn cằm")) {
-  await sendThamMyCamFlow(sender_psid);
-  continue;
-}
-
-if (
-  textMessage.includes("treo cung may") || textMessage.includes("treo cung mày")
-) {
-  await sendTreoCungMayFlow(sender_psid);
-  continue;
-}
-
-if (
-  textMessage.includes("dich vu khac") || textMessage.includes("dịch vụ khác")
-) {
-  await sendPhauThuatKhacFlow(sender_psid);
-  continue;
-}
-
-// Các dịch vụ bổ sung từ JSON
-
-// Tái tạo vú sau khi điều trị ung thư
-if (
-  textMessage.includes("tai tao vu") || textMessage.includes("tái tạo vú") ||
-  textMessage.includes("ung thu vu") || textMessage.includes("ung thư vú")
-) {
-  await sendTaiTaoVuFlow(sender_psid);
-  continue;
-}
-
-// Hút mỡ bụng, tạo hình thành bụng sau sinh
-if (
-  textMessage.includes("tao hinh thanh bung") || textMessage.includes("tạo hình thành bụng")
-) {
-  await sendTaoHinhThanhBungFlow(sender_psid);
-  continue;
-}
-
-// Tiểu phẫu treo cung mày
-if (
-  textMessage.includes("tieu phau treo cung may") || textMessage.includes("tiểu phẫu treo cung mày")
-) {
-  await sendTreoCungMayFlow(sender_psid);
-  continue;
-}
-
-// Chỉnh mắt lỗi
-if (
-  textMessage.includes("chinh mat loi") || textMessage.includes("chỉnh mắt lỗi")
-) {
-  await sendChinhMatLoiFlow(sender_psid);
-  continue;
-}
-
-// Chỉnh mũi lỗi
-if (
-  textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
-) {
-  await sendChinhMuiLoiFlow(sender_psid);
-  continue;
-}
-
-// Hút mỡ tay, đùi, lưng
-if (
-  textMessage.includes("hut mo tay") || textMessage.includes("hút mỡ tay") ||
-  textMessage.includes("hut mo dui") || textMessage.includes("hút mỡ đùi") ||
-  textMessage.includes("hut mo lung") || textMessage.includes("hút mỡ lưng")
-) {
-  await sendHutMoBodyFlow(sender_psid);
-  continue;
-}
-
-// Căng chỉ da mặt/ PRP trẻ hóa
-if (
-  textMessage.includes("cang chi da mat") || textMessage.includes("căng chỉ da mặt") ||
-  textMessage.includes("prp tre hoa") || textMessage.includes("prp trẻ hóa")
-) {
-  await sendCangChiPRPFlow(sender_psid);
-  continue;
-}
-
-// Độn thái dương
-if (
-  textMessage.includes("don thai duong") || textMessage.includes("độn thái dương")
-) {
-  await sendDonThaiDuongFlow(sender_psid);
-  continue;
-}
-
-// Hút mỡ tiêm lên mặt
-if (
-  textMessage.includes("hut mo tiem len mat") || textMessage.includes("hút mỡ tiêm lên mặt")
-) {
-  await sendHutMoTiemMatFlow(sender_psid);
-  continue;
-}
-
-      // 3️⃣ Xin bảng giá only
-      if (textMessage.includes("bảng giá")) {
-        if (textMessage.includes("nâng ngực")) {
-          await sendBangGiaOnlyFlow(senderId, "nguc");
-          continue;
-        }
-
-        if (textMessage.includes("nâng mũi")) {
-          await sendBangGiaOnlyFlow(senderId, "mui");
-          continue;
-        }
-
-        if (textMessage.includes("cắt mí")) {
-          await sendBangGiaOnlyFlow(senderId, "mat");
-          continue;
-        }
-
-        if (textMessage.includes("hút mỡ bụng")) {
-          await sendBangGiaOnlyFlow(senderId, "bung");
-          continue;
-        }
-
-        if (textMessage.includes("thẩm mỹ vùng kín")) {
-          await sendBangGiaOnlyFlow(senderId, "vungkin");
-          continue;
-        }
-
-        if (textMessage.includes("căng da mặt")) {
-          await sendBangGiaOnlyFlow(senderId, "damat");
-          continue;
-        }
-
-        if (textMessage.includes("dịch vụ khác")) {
-          await sendBangGiaOnlyFlow(senderId, "cacdichvu");
-          continue;
+      let serviceMatched = false;
+      for (const service of serviceKeywords) {
+        if (service.keywords.some(keyword => textMessage.includes(keyword))) {
+          await service.action(sender_psid);
+          serviceMatched = true;
+          break;
         }
       }
 
-      // 4️⃣ Lời chào và menu dịch vụ
-		const loiChaoKeywords = [
-		  "hi", "hello", "alo", "xin chao",
-		  "cho chi hoi", "toi can tu van", "can tu van",
-		  "dich vu", "tu van dich vu"
-		];
+      if (serviceMatched) continue;
 
-		if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
-		  await sendMenuDichVu(sender_psid);
-		  continue;
-		}
-      // 5️⃣ Cuối cùng kiểm tra FAQ
-      await handleFollowUp(sender_psid, textMessage);
+      // 4️⃣ Xin bảng giá only
+      if (textMessage.includes("bảng giá")) {
+        await sendBangGiaOnlyFlow(sender_psid, "cacdichvu");
+        continue;
+      }
+
+      // 5️⃣ Lời chào và menu dịch vụ
+      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "dich vu", "tu van dich vu"];
+
+      if (loiChaoKeywords.some(keyword => textMessage === keyword)) {
+        await sendMenuDichVu(sender_psid);
+        continue;
+      }
+
+      // 6️⃣ Default handoff
+      console.log(`🚀 Handoff triggered for ${sender_psid}`);
+      handoffUsers.add(sender_psid);
+
     } catch (error) {
       console.error(`❌ Lỗi xử lý message từ ${sender_psid}:`, error);
     }
@@ -832,6 +706,7 @@ if (
 
   res.status(200).send("EVENT_RECEIVED");
 });
+
 // ====== VERIFY WEBHOOK ======
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
