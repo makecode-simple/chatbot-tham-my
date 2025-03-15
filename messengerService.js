@@ -56,26 +56,28 @@ async function handleUserMessage(senderId, userMessage, flowData) {
         userSession[senderId] = { service: newService };
     }
 
-    if (intent === "show_services") {
-        await sendMessage(senderId, {
-            text: "Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
+		if (intent === "show_services") {
+			await sendMessage(senderId, {
+				text: `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
 
-* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
-* Tái tạo vú sau khi điều trị ung thư
-* Hút mỡ bụng, tạo hình thành bụng sau sinh
-* Tiểu phẫu cắt mí
-* Tiểu phẫu treo cung mày
-* Chỉnh mắt lỗi
-* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
-* Chỉnh mũi lỗi
-* Phẫu thuật căng da mặt
-* Hút mỡ bụng/tay/ đùi/ lưng
-* Thẩm mỹ vùng kín
-* Căng da mặt toàn diện
-* Căng chỉ da mặt/ PRP trẻ hóa
-* Độn thái dương/ độn cằm
-* Hút mỡ tiêm lên mặt"
-        });
+		* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
+		* Tái tạo vú sau khi điều trị ung thư
+		* Hút mỡ bụng, tạo hình thành bụng sau sinh
+		* Tiểu phẫu cắt mí
+		* Tiểu phẫu treo cung mày
+		* Chỉnh mắt lỗi
+		* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
+		* Chỉnh mũi lỗi
+		* Phẫu thuật căng da mặt
+		* Hút mỡ bụng/tay/ đùi/ lưng
+		* Thẩm mỹ vùng kín
+		* Căng da mặt toàn diện
+		* Căng chỉ da mặt/ PRP trẻ hóa
+		* Độn thái dương/ độn cằm
+		* Hút mỡ tiêm lên mặt`
+			});
+		}
+
     } else if (intent === "service_detail") {
         if (currentService === "Nâng mũi") {
             await sendNangMuiFlow(senderId);
