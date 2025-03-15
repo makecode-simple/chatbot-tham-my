@@ -73,8 +73,7 @@
           "next_step": "feedback_mat"
         }
       ]
-    }
-  ],
+    },
     {
       "parent_service": "bung",
       "sub_flows": [
