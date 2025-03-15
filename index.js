@@ -107,25 +107,27 @@ async function getBangGiaImage(publicId) {
 
 // ====== FLOW: MENU DỊCH VỤ ======
 async function sendMenuDichVu(sender_psid) {
-  const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
-* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ\n
-* Tái tạo vú sau khi điều trị ung thư\n
-* Hút mỡ bụng, tạo hình thành bụng sau sinh\n
-* Tiểu phẫu cắt mí\n
-* Tiểu phẫu treo cung mày\n
-* Chỉnh mắt lỗi\n
-* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn\n
-* Chỉnh mũi lỗi\n
-* Phẫu thuật căng da mặt\n
-* Hút mỡ bụng/tay/ đùi/ lưng\n
-* Thẩm mỹ vùng kín\n
-* Căng da mặt toàn diện\n
-* Căng chỉ da mặt/ PRP trẻ hóa\n
-* Độn thái dương/ độn cằm\n
+  console.log("🚀 Trigger Menu dịch vụ");
+  const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
+
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
+* Tái tạo vú sau khi điều trị ung thư
+* Hút mỡ bụng, tạo hình thành bụng sau sinh
+* Tiểu phẫu cắt mí
+* Tiểu phẫu treo cung mày
+* Chỉnh mắt lỗi
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
+* Chỉnh mũi lỗi
+* Phẫu thuật căng da mặt
+* Hút mỡ bụng/tay/ đùi/ lưng
+* Thẩm mỹ vùng kín
+* Căng da mặt toàn diện
+* Căng chỉ da mặt/ PRP trẻ hóa
+* Độn thái dương/ độn cằm
 * Hút mỡ tiêm lên mặt`;
 
-  await messengerService.sendMessage(sender_psid, { text: menuText });
-}
+await messengerService.sendMessage(sender_psid, { text: menuText });
+
 
 // ====== FLOW: BẢNG GIÁ ONLY ======
 async function sendBangGiaOnlyFlow(sender_psid, parentService) {
@@ -811,17 +813,16 @@ if (
       }
 
       // 4️⃣ Lời chào và menu dịch vụ
-      const loiChaoKeywords = [
-        "hi", "hello", "alo", "xin chao",
-        "cho chi hoi", "toi can tu van", "can tu van",
-        "dich vu", "tu van dich vu"
-      ];
+		const loiChaoKeywords = [
+		  "hi", "hello", "alo", "xin chao",
+		  "cho chi hoi", "toi can tu van", "can tu van",
+		  "dich vu", "tu van dich vu"
+		];
 
-      if (loiChaoKeywords.includes(textMessage)) {
-        await sendMenuDichVu(senderId);
-        continue;
-      }
-
+		if (loiChaoKeywords.some(keyword => textMessage.includes(keyword))) {
+		  await sendMenuDichVu(sender_psid);
+		  continue;
+		}
       // 5️⃣ Cuối cùng kiểm tra FAQ
       await handleFollowUp(sender_psid, textMessage);
     } catch (error) {
