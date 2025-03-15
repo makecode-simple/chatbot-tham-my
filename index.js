@@ -23,7 +23,6 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 const flowFullServicesRaw = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
 
 const flowFullServices = {
@@ -33,6 +32,8 @@ const flowFullServices = {
     answer: item.answer
   }))
 };
+
+const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 
 // ====== SESSION USERS ======
 const completedUsers = new Set();
@@ -51,7 +52,7 @@ const countryCodes = Object.keys(countryDigitRules);
 
 function isValidPhoneNumber(message) {
   if (!message) return false;
-  let cleanNumber = message.replace(/\s|-/g, '');
+  let cleanNumber = message.replace(/\\s|-/g, '');
 
   if (cleanNumber.startsWith('0')) {
     cleanNumber = '+84' + cleanNumber.slice(1);
@@ -61,7 +62,7 @@ function isValidPhoneNumber(message) {
 
   const countryCode = countryCodes.find(code => cleanNumber.startsWith(code));
   if (!countryCode) {
-    const genericPhone = /^\+\d{6,15}$/.test(cleanNumber);
+    const genericPhone = /^\\+\\d{6,15}$/.test(cleanNumber);
     return genericPhone ? "unknown" : false;
   }
 
@@ -72,7 +73,6 @@ function isValidPhoneNumber(message) {
   const length = numberWithoutCode.length;
   return length >= digitRule.min && length <= digitRule.max;
 }
-
 // ====== CLOUDINARY FUNCTIONS ======
 async function getFeedbackImages(folder) {
   try {
@@ -103,6 +103,8 @@ async function getBangGiaImage(publicId) {
   }
 }
 
+// ====== FLOW FUNCTIONS ======
+
 // ====== FLOW: MENU DỊCH VỤ ======
 async function sendMenuDichVu(sender_psid) {
   const menuText = `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:\n
@@ -125,6 +127,41 @@ async function sendMenuDichVu(sender_psid) {
   await messengerService.sendMessage(sender_psid, { text: menuText });
 }
 
+// ====== FLOW: BẢNG GIÁ ONLY ======
+async function sendBangGiaOnlyFlow(sender_psid, parentService) {
+  console.log(`🚀 Trigger bảng giá only flow for ${parentService}`);
+
+  const bangGiaMap = {
+    "nguc": "banggia_nangnguc",
+    "mui": "banggia_thammymui",
+    "mat": "banggia_thammymat",
+    "bung": "banggia_hutmobung",
+    "vungkin": "banggia_thammyvungkan",
+    "damat": "banggiathammy_damat",
+    "cacdichvu": "banggia_cacdichvukhac"
+  };
+
+  const bangGiaPublicId = bangGiaMap[parentService];
+
+  if (!bangGiaPublicId) {
+    await messengerService.sendMessage(sender_psid, {
+      text: "Dạ chị ơi, bên em sẽ gửi bảng giá chi tiết cho mình sau nhé!"
+    });
+    return;
+  }
+
+  const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  } else {
+    await messengerService.sendMessage(sender_psid, {
+      text: "Dạ chị ơi, hiện tại bên em chưa cập nhật bảng giá này trên hệ thống. Chị để lại số để em gửi chi tiết hơn ạ!"
+    });
+  }
+}
 // ====== FLOW: NÂNG NGỰC ======
 async function sendNangNgucFlow(sender_psid) {
   console.log("🚀 Trigger Nâng Ngực Flow");
@@ -192,6 +229,7 @@ Bên em áp dụng công nghệ Nâng mũi tái cấu trúc, sử dụng sụn s
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+
 // ====== FLOW: THẨM MỸ MẮT ======
 async function sendThamMyMatFlow(sender_psid) {
   console.log("🚀 Trigger Thẩm Mỹ Mắt Flow");
@@ -222,7 +260,6 @@ Em gửi hình ảnh 1 vài ca thẩm mỹ vùng mắt bác từng làm ạ!`
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
-
 // ====== FLOW: THẨM MỸ CẰM ======
 async function sendThamMyCamFlow(sender_psid) {
   console.log("🚀 Trigger Thẩm Mỹ Cằm Flow");
@@ -242,6 +279,85 @@ Bác sĩ sẽ kiểm tra và tư vấn chi tiết để mình có kết quả t�
 
   await messengerService.sendMessage(sender_psid, {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+// ====== FLOW: HÚT MỠ BỤNG ======
+async function sendHutMoBungFlow(sender_psid) {
+  console.log("🚀 Trigger Hút Mỡ Bụng Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ em gửi chị thông tin về dịch vụ hút mỡ bụng bên bác Vũ nha!\n
+Không đau - Không cần nghỉ dưỡng - Về ngay trong ngày.`
+  });
+
+  const feedbackImages = await getFeedbackImages("bung");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_hutmobung");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+// ====== FLOW: CĂNG DA MẶT ======
+async function sendCangDaMatFlow(sender_psid) {
+  console.log("🚀 Trigger Căng Da Mặt Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ thực hiện căng da mặt toàn diện không đau, hồi phục nhanh, không để lại sẹo chị nha!`
+  });
+
+  const feedbackImages = await getFeedbackImages("damat");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_cangdamat");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+// ====== FLOW: PHẪU THUẬT KHÁC ======
+async function sendPhauThuatKhacFlow(sender_psid) {
+  console.log("🚀 Trigger Phẫu Thuật Khác Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị ơi, em gửi các dịch vụ phẫu thuật khác bên bác Vũ để mình tham khảo ạ!`
+  });
+
+  const bangGiaImage = await getBangGiaImage("banggia_cacdichvukhac");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để em tư vấn chi tiết hơn cho mình nha!"
   });
 }
 
@@ -265,37 +381,6 @@ async function sendThamMyVungKinFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
-
-// ====== FLOW: TREO CUNG MÀY ======
-async function sendTreoCungMayFlow(sender_psid) {
-  console.log("🚀 Trigger Treo Cung Mày Flow");
-
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ em gửi các ca treo cung mày gần đây bác Vũ làm chị tham khảo ạ.\nKhông đau - Không sẹo - Không sưng bầm!`
-  });
-
-  const feedbackImages = await getFeedbackImages("mat");
-
-  for (const url of feedbackImages) {
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url, is_reusable: true } }
-    });
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
-
-  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
-
-  if (bangGiaImage) {
-    await messengerService.sendMessage(sender_psid, {
-      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
-    });
-  }
-
-  await messengerService.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
-  });
-}
-
 // ====== FLOW: CHỈNH MŨI LỖI ======
 async function sendChinhMuiLoiFlow(sender_psid) {
   console.log("🚀 Trigger Chỉnh Mũi Lỗi Flow");
@@ -347,60 +432,63 @@ async function sendThaoTuiNgucFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
-// ====== FLOW: BẢNG GIÁ ONLY ======
-async function sendBangGiaOnlyFlow(sender_psid, parentService) {
-  console.log(`🚀 Trigger bảng giá only flow for ${parentService}`);
 
-  const bangGiaMap = {
-    "nguc": "banggia_nangnguc",
-    "mui": "banggia_thammymui",
-    "mat": "banggia_thammymat",
-    "bung": "banggia_hutmobung",
-    "vungkin": "banggia_thammyvungkan",
-    "damat": "banggiathammy_damat",
-    "cacdichvu": "banggia_cacdichvukhac"
-  };
+// ====== FLOW: XIN SỐ ĐIỆN THOẠI ======
+async function sendXinSoDienThoai(sender_psid) {
+  console.log("🚀 Xin số điện thoại khách");
 
-  const bangGiaPublicId = bangGiaMap[parentService];
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
 
-  if (!bangGiaPublicId) {
+// ====== FLOW: TREO CUNG MÀY ======
+async function sendTreoCungMayFlow(sender_psid) {
+  console.log("🚀 Trigger Treo Cung Mày Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ em gửi các ca treo cung mày gần đây bác Vũ làm chị tham khảo ạ.\nKhông đau - Không sẹo - Không sưng bầm!`
+  });
+
+  const feedbackImages = await getFeedbackImages("mat");
+
+  for (const url of feedbackImages) {
     await messengerService.sendMessage(sender_psid, {
-      text: "Dạ chị ơi, bên em sẽ gửi bảng giá chi tiết cho mình sau nhé!"
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
     });
-    return;
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  const bangGiaImage = await getBangGiaImage(bangGiaPublicId);
+  const bangGiaImage = await getBangGiaImage("banggia_thammymat");
 
   if (bangGiaImage) {
     await messengerService.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
     });
-  } else {
-    await messengerService.sendMessage(sender_psid, {
-      text: "Dạ chị ơi, hiện tại bên em chưa cập nhật bảng giá này trên hệ thống. Chị để lại số để em gửi chi tiết hơn ạ!"
-    });
   }
-}
 
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
+// ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
   if (!flowFullServices || !flowFullServices.faqs) {
     console.log("❌ FAQs bị null hoặc không load được");
     return;
   }
 
-  console.log("🔍 So khớp textMessage:", textMessage);
+  console.log("🔍 User hỏi gì:", textMessage);
 
-  const found = flowFullServices.faqs.find(item => {
-    console.log("👉 Kiểm tra câu hỏi: ", item.questions);
-    return item.questions.includes(textMessage);
-  });
+  const found = flowFullServices.faqs.find(item =>
+    item.questions.includes(textMessage)
+  );
 
   if (found) {
-    console.log("✅ Tìm thấy câu trả lời:", found.answer);
+    console.log("✅ Trả lời câu hỏi:", found.answer);
     await messengerService.sendMessage(sender_psid, { text: found.answer });
   } else {
-    console.log("❌ Không tìm thấy câu nào phù hợp, handoff!");
+    console.log(`🚀 Handoff triggered for ${sender_psid}`);
     handoffUsers.add(sender_psid);
   }
 }
@@ -435,17 +523,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // 2️⃣ FAQ
-      const foundFAQ = flowFullServices.faqs.find(item =>
-        textMessage.includes(normalizeText(item.question))
-      );
-
-      if (foundFAQ) {
-        await messengerService.sendMessage(senderId, { text: foundFAQ.answer });
-        continue;
-      }
-
-      // 3️⃣ Các flow dịch vụ
+      // 2️⃣ Các flow dịch vụ
       if (textMessage.includes("nang nguc") || textMessage.includes("nâng ngực")) {
         await sendNangNgucFlow(senderId);
         continue;
@@ -487,21 +565,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      if (
-        textMessage.includes("chinh mui loi") || textMessage.includes("chỉnh mũi lỗi")
-      ) {
-        await sendChinhMuiLoiFlow(senderId);
-        continue;
-      }
-
-      if (
-        textMessage.includes("thao tui nguc") || textMessage.includes("tháo túi ngực")
-      ) {
-        await sendThaoTuiNgucFlow(senderId);
-        continue;
-      }
-
-      // 4️⃣ Xin bảng giá only
+      // 3️⃣ Xin bảng giá only
       if (textMessage.includes("bảng giá")) {
         if (textMessage.includes("nâng ngực")) {
           await sendBangGiaOnlyFlow(senderId, "nguc");
@@ -539,20 +603,19 @@ app.post("/webhook", async (req, res) => {
         }
       }
 
-		// 5️⃣ Lời chào và menu dịch vụ
-		const loiChaoKeywords = [
-		  "hi", "hello", "alo", "xin chao",
-		  "cho chi hoi", "toi can tu van", "can tu van",
-		  "dich vu", "tu van dich vu"
-		];
+      // 4️⃣ Lời chào và menu dịch vụ
+      const loiChaoKeywords = [
+        "hi", "hello", "alo", "xin chao",
+        "cho chi hoi", "toi can tu van", "can tu van",
+        "dich vu", "tu van dich vu"
+      ];
 
-		// ✅ Sử dụng includes() → sai → đổi thành kiểm tra đúng nguyên câu!
-		if (loiChaoKeywords.includes(textMessage)) {
-		  await sendMenuDichVu(senderId);
-		  continue;
-		}
+      if (loiChaoKeywords.includes(textMessage)) {
+        await sendMenuDichVu(senderId);
+        continue;
+      }
 
-      // 6️⃣ Nếu không khớp, handoff
+      // 5️⃣ Cuối cùng kiểm tra FAQ
       await handleFollowUp(senderId, textMessage);
 
     } catch (error) {
@@ -562,7 +625,6 @@ app.post("/webhook", async (req, res) => {
 
   res.status(200).send("EVENT_RECEIVED");
 });
-
 // ====== VERIFY WEBHOOK ======
 app.get("/webhook", (req, res) => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;

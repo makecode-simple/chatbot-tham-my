@@ -90,88 +90,114 @@
       ]
     }
   ],
-  "faqs": [
-    {
-      "questions": [
-        "nâng ngực có đau không",
-        "nang nguc co dau khong"
-      ],
-      "answer": "Dạ chị ơi, bên em sử dụng dao siêu âm Ultrasonic giúp giảm đau tới 90%. Sau phẫu thuật chỉ cần nghỉ dưỡng nhẹ nhàng thôi ạ!"
-    },
-    {
-      "questions": [
-        "nâng ngực bảo hành thế nào",
-        "nang nguc bao hanh the nao"
-      ],
-      "answer": "Dạ chị yên tâm, túi ngực bên em là Mentor được bảo hành chính hãng trọn đời và có giấy tờ đầy đủ ạ!"
-    },
-    {
-      "questions": [
-        "nâng ngực có sẹo không",
-        "nang nguc co seo khong"
-      ],
-      "answer": "Dạ phẫu thuật bên em cam kết không để lại sẹo, đường mổ được giấu kín và chăm sóc cẩn thận sau mổ ạ!"
-    },
-    {
-      "questions": [
-        "bao lâu thì lành",
-        "bao lau thi lanh",
-        "co can nghi duong khong",
-        "có cần nghỉ dưỡng không"
-      ],
-      "answer": "Sau phẫu thuật nâng ngực chị nằm viện tối đa 12 tiếng, tuy nhiên thông thường thì 6-10 tiếng là khách bác Vũ đã khoẻ đi lại nhẹ nhàng bình thường nên có thể xuất viện sớm hơn. Sau phẫu thuật không cần uống thêm giảm đau, kháng sinh, không cần đặt ống dẫn lưu, không cần nghỉ dưỡng ạ. Bên bác Vũ cũng hỗ trợ quay video full 100% ca mổ, sử dụng dao siêu âm mới 100%, khách hàng trực tiếp ký tên lên hộp dao trước khi mổ. Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ!"
-    },
-    {
-      "questions": [
-        "địa chỉ ở đâu",
-        "dia chi o dau",
-        "d/c o dau",
-        "dia chi",
-        "d.c phong kham"
-      ],
-      "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị! * Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
-    },
-    {
-      "questions": [
-        "tháo túi có đau không",
-        "thao tui co dau khong"
-      ],
-      "answer": "Bác Vũ tháo túi không đau, không cần nghĩ dưỡng ạ."
-    },
-    {
-      "questions": [
-        "ưu điểm của nâng ngực",
-        "uu diem cua nang nguc"
-      ],
-      "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%"
-    },
-    {
-      "questions": [
-        "giá nâng ngực bao nhiêu",
-        "gia nang nguc bao nhieu"
-      ],
-      "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
-    },
-    {
-      "questions": [
-        "hút mỡ bụng có đau không",
-        "hut mo bung co dau khong"
-      ],
-      "answer": "Dạ bên em áp dụng công nghệ hút mỡ không đau, sau 24 giờ có thể đi lại và sinh hoạt nhẹ nhàng ạ!"
-    },
-    {
-      "questions": [
-        "cắt mí có để lại sẹo không",
-        "cat mi co de lai seo khong"
-      ],
-      "answer": "Dạ không chị nhé! Cắt mí được bác Vũ thực hiện tỉ mỉ, không để lại sẹo và hồi phục nhanh ạ!"
-    },
-    {
-      "questions": [
-        "bác sĩ nào làm",
-        "bac si nao lam"
-      ],
-      "answer": "Dạ bác Vũ trực tiếp thực hiện phẫu thuật và tư vấn chị nha! Hơn 20 năm kinh nghiệm, chuyên điều trị các ca khó và tái phẫu thuật."
-    }
-  ]
-}
+ "faqs": [
+  {
+    "questions": [
+      "nâng ngực có đau không",
+      "nang nguc co dau khong"
+    ],
+    "answer": "Dạ chị ơi, bên em sử dụng dao siêu âm Ultrasonic giúp giảm đau tới 90%. Sau phẫu thuật chỉ cần nghỉ dưỡng nhẹ nhàng thôi ạ!"
+  },
+  {
+    "questions": [
+      "nâng ngực bảo hành thế nào",
+      "nang nguc bao hanh the nao"
+    ],
+    "answer": "Dạ chị yên tâm, túi ngực bên em là Mentor được bảo hành chính hãng trọn đời và có giấy tờ đầy đủ ạ!"
+  },
+  {
+    "questions": [
+      "nâng ngực có sẹo không",
+      "nang nguc co seo khong"
+    ],
+    "answer": "Dạ phẫu thuật bên em cam kết không để lại sẹo, đường mổ được giấu kín và chăm sóc cẩn thận sau mổ ạ!"
+  },
+  {
+    "questions": [
+      "bao lâu thì lành",
+      "bao lau thi lanh",
+      "co can nghi duong khong",
+      "có cần nghỉ dưỡng không"
+    ],
+    "answer": "Sau phẫu thuật nâng ngực chị nằm viện tối đa 12 tiếng, tuy nhiên thông thường thì 6-10 tiếng là khách bác Vũ đã khoẻ đi lại nhẹ nhàng bình thường nên có thể xuất viện sớm hơn. Sau phẫu thuật không cần uống thêm giảm đau, kháng sinh, không cần đặt ống dẫn lưu, không cần nghỉ dưỡng ạ. Bên bác Vũ cũng hỗ trợ quay video full 100% ca mổ, sử dụng dao siêu âm mới 100%, khách hàng trực tiếp ký tên lên hộp dao trước khi mổ. Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ!"
+  },
+  {
+    "questions": [
+      "địa chỉ ở đâu",
+      "dia chi o dau",
+      "d/c o dau",
+      "dia chi",
+      "d.c phong kham"
+    ],
+    "answer": "Dạ bác Vũ hiện tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7. Phẫu thuật thực hiện tại bệnh viện quốc tế Nam Sài Gòn nha chị! * Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
+  },
+  {
+    "questions": [
+      "tháo túi có đau không",
+      "thao tui co dau khong"
+    ],
+    "answer": "Bác Vũ tháo túi không đau, không cần nghỉ dưỡng ạ."
+  },
+  {
+    "questions": [
+      "ưu điểm của nâng ngực",
+      "uu diem cua nang nguc"
+    ],
+    "answer": "Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%"
+  },
+  {
+    "questions": [
+      "giá nâng ngực bao nhiêu",
+      "gia nang nguc bao nhieu"
+    ],
+    "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
+  },
+  {
+    "questions": [
+      "hút mỡ bụng có đau không",
+      "hut mo bung co dau khong",
+      "hut mo bung"
+    ],
+    "answer": "Dạ bên em áp dụng công nghệ hút mỡ bụng không đau, không cần nghỉ dưỡng. Sau 24 giờ có thể đi lại và sinh hoạt nhẹ nhàng nha chị!"
+  },
+  {
+    "questions": [
+      "cắt mí có để lại sẹo không",
+      "cat mi co de lai seo khong"
+    ],
+    "answer": "Dạ không chị nhé! Cắt mí được bác Vũ thực hiện tỉ mỉ, không để lại sẹo và hồi phục nhanh ạ!"
+  },
+  {
+    "questions": [
+      "bác sĩ nào làm",
+      "bac si nao lam"
+    ],
+    "answer": "Dạ bác Vũ trực tiếp thực hiện phẫu thuật và tư vấn chị nha! Hơn 20 năm kinh nghiệm, chuyên điều trị các ca khó và tái phẫu thuật."
+  },
+  {
+    "questions": [
+      "căng da mặt có đau không",
+      "cang da mat co dau khong",
+      "cang da mat"
+    ],
+    "answer": "Dạ bên bác Vũ thực hiện căng da mặt toàn diện không đau, hồi phục nhanh, không để lại sẹo chị nha!"
+  },
+  {
+    "questions": [
+      "phẫu thuật khác",
+      "phau thuat khac",
+      "dich vu khac",
+      "dịch vụ khác"
+    ],
+    "answer": "Dạ bên em có nhiều dịch vụ thẩm mỹ khác như hút mỡ tay, hút mỡ đùi, tạo hình rốn, căng chỉ collagen… Chị để lại số điện thoại/Zalo để bên em tư vấn chi tiết hơn cho mình nha!"
+  },
+  {
+    "questions": [
+      "cho xin so dien thoai",
+      "cho xin sdt",
+      "co so dt nao",
+      "co zalo khong"
+    ],
+    "answer": "Dạ chị để lại số điện thoại/Zalo/Viber để bên em liên hệ tư vấn chi tiết hơn cho mình nha!"
+  }
+]
