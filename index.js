@@ -127,7 +127,7 @@ async function sendMenuDichVu(sender_psid) {
 * Hút mỡ tiêm lên mặt`;
 
 await messengerService.sendMessage(sender_psid, { text: menuText });
-
+}
 
 // ====== FLOW: BẢNG GIÁ ONLY ======
 async function sendBangGiaOnlyFlow(sender_psid, parentService) {
