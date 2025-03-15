@@ -595,7 +595,7 @@ async function handleFollowUp(sender_psid, textMessage) {
   console.log("🔍 User hỏi gì:", textMessage);
 
   const found = flowFullServices.faqs.find(item =>
-    item.questions.includes(textMessage)
+    item.questions.some(q => textMessage.includes(q))
   );
 
   if (found) {
@@ -606,6 +606,7 @@ async function handleFollowUp(sender_psid, textMessage) {
     handoffUsers.add(sender_psid);
   }
 }
+
 
 // ====== MAIN WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
