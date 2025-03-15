@@ -617,12 +617,13 @@ app.post("/webhook", async (req, res) => {
 
   for (const entry of body.entry) {
     const webhook_event = entry.messaging[0];
-    const senderId = webhook_event.sender.id;
 
     if (!webhook_event.message || !webhook_event.message.text) {
       console.log("❌ Không có message text");
       continue;
     }
+
+    const sender_psid = webhook_event.sender.id;  // ✅ fix chỗ này, đổi senderId -> sender_psid
 
     const message = webhook_event.message.text.trim();
     const textMessage = normalizeText(message);
@@ -630,8 +631,8 @@ app.post("/webhook", async (req, res) => {
     try {
       // 1️⃣ Kiểm tra số điện thoại
       if (isValidPhoneNumber(message)) {
-        completedUsers.add(senderId);
-        await messengerService.sendMessage(senderId, {
+        completedUsers.add(sender_psid);
+        await messengerService.sendMessage(sender_psid, {
           text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
         });
         continue;
@@ -822,9 +823,8 @@ if (
 
       // 5️⃣ Cuối cùng kiểm tra FAQ
       await handleFollowUp(sender_psid, textMessage);
-
     } catch (error) {
-      console.error(`❌ Lỗi xử lý message từ ${senderId}:`, error);
+      console.error(`❌ Lỗi xử lý message từ ${sender_psid}:`, error);
     }
   }
 
