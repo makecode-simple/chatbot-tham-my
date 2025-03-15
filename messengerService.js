@@ -117,24 +117,29 @@ async function getChatGPTResponse(userMessage, currentService, flowData) {
         .flatMap(f => f.sub_flows.map(sf => sf.sub_service))
         .join(", ");
 
-    const prompt = `
-Bạn là trợ lý tư vấn thẩm mỹ Dr. Học Cao Vũ.
-Danh sách dịch vụ: ${availableServices}.
-Dịch vụ hiện tại khách đang tư vấn: ${currentService || "Chưa có"}.
-Câu hỏi khách hàng: "${userMessage}"
+const prompt = `
+Bạn là một hệ thống điều hướng kịch bản tư vấn thẩm mỹ cho Dr. Học Cao Vũ.
 
-Hãy trả lời JSON như sau:
+QUY ĐỊNH BẮT BUỘC:
+- KHÔNG được tự trả lời câu hỏi của khách hàng.
+- KHÔNG được viết câu trả lời tư vấn, mô tả dịch vụ hay bất kỳ nội dung nào không có trong flow.
+- CHỈ được phân loại intent và trả về dịch vụ khách quan tâm.
+- NẾU khách hỏi dịch vụ hoặc muốn xem danh sách dịch vụ => intent: show_services.
+- NẾU khách hỏi chi tiết dịch vụ đang tư vấn => intent: service_detail.
+- NẾU không hiểu khách hỏi gì => intent: unknown.
+
+ĐẦU VÀO:
+- Danh sách dịch vụ: ${availableServices}.
+- Dịch vụ hiện tại khách đang tư vấn: ${currentService || "Chưa có"}.
+- Câu hỏi khách hàng: "${userMessage}"
+
+KẾT QUẢ JSON PHẢI TRẢ VỀ (CHỈ JSON):
 {
   "intent": "show_services" | "service_detail" | "unknown",
-  "reply": "Nội dung trả lời thân thiện, chính xác theo flow",
+  "reply": "Đã trigger flow dịch vụ [Tên dịch vụ] hoặc trả lời điều hướng đơn giản",
   "newService": "Tên dịch vụ hoặc null"
 }
-
-Quy tắc:
-- Nếu khách hỏi dịch vụ hoặc danh sách dịch vụ => intent: show_services.
-- Nếu khách hỏi chi tiết dịch vụ hiện tại => intent: service_detail.
-- Nếu khách lạc đề => intent: unknown.
-    `;
+`;
 
     try {
         const completion = await openai.chat.completions.create({
