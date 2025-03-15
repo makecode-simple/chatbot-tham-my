@@ -73,7 +73,8 @@
           "next_step": "feedback_mat"
         }
       ]
-    },
+    }
+  ],
     {
       "parent_service": "bung",
       "sub_flows": [
@@ -254,8 +255,7 @@
         "báo giá nâng ngực"
       ],
       "answer": "Dạ chị ơi, giá nâng ngực dao động tùy vào loại túi (Mentor Classic/Extra) và phương pháp thực hiện. Chị để lại SĐT/Zalo để bên em tư vấn chi tiết hơn nha!"
-    }
-  ],
+    },
     {
       "questions": [
         "hút mỡ bụng có đau không",
