@@ -98,6 +98,7 @@ async function handleUserMessage(senderId, userMessage, flowData) {
     } else {
         await sendMessage(senderId, { text: reply });
     }
+}
 
 // ====== GPT XỬ LÝ ĐOÁN Ý ======
 async function getChatGPTResponse(userMessage, currentService, flowData) {
@@ -151,7 +152,7 @@ Quy tắc:
         console.error("Lỗi GPT:", err);
         return {
             intent: "unknown",
-            reply: "Dạ, Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn thêm cho mình nha!",
+            reply: "Dạ, chị vui lòng để lại số điện thoại để bên em hỗ trợ chi tiết hơn ạ!",
             newService: null
         };
     }
