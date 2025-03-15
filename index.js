@@ -385,22 +385,25 @@ async function sendBangGiaOnlyFlow(sender_psid, parentService) {
 
 async function handleFollowUp(sender_psid, textMessage) {
   if (!flowFullServices || !flowFullServices.faqs) {
-    console.log("❌ flowFullServices.faqs not found");
+    console.log("❌ FAQs bị null hoặc không load được");
     return;
   }
 
-  const found = flowFullServices.faqs.find(item =>
-    item.questions.includes(textMessage)   // Chính xác 100%
-  );
+  console.log("🔍 So khớp textMessage:", textMessage);
+
+  const found = flowFullServices.faqs.find(item => {
+    console.log("👉 Kiểm tra câu hỏi: ", item.questions);
+    return item.questions.includes(textMessage);
+  });
 
   if (found) {
+    console.log("✅ Tìm thấy câu trả lời:", found.answer);
     await messengerService.sendMessage(sender_psid, { text: found.answer });
   } else {
+    console.log("❌ Không tìm thấy câu nào phù hợp, handoff!");
     handoffUsers.add(sender_psid);
-    console.log(`🚀 Handoff triggered for ${sender_psid}`);
   }
 }
-
 
 // ====== MAIN WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
