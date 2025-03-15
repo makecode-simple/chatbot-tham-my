@@ -383,16 +383,15 @@ async function sendBangGiaOnlyFlow(sender_psid, parentService) {
   }
 }
 
-// ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
   if (!flowFullServices || !flowFullServices.faqs) {
     console.log("❌ flowFullServices.faqs not found");
     return;
   }
 
-const found = flowFullServices.faqs.find(item =>
-  item.questions.some(q => textMessage === q)
-);
+  const found = flowFullServices.faqs.find(item =>
+    item.questions.includes(textMessage)   // Chính xác 100%
+  );
 
   if (found) {
     await messengerService.sendMessage(sender_psid, { text: found.answer });
@@ -401,6 +400,7 @@ const found = flowFullServices.faqs.find(item =>
     console.log(`🚀 Handoff triggered for ${sender_psid}`);
   }
 }
+
 
 // ====== MAIN WEBHOOK HANDLER ======
 app.post("/webhook", async (req, res) => {
