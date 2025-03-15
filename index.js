@@ -586,6 +586,35 @@ async function sendHutMoTiemLenMatFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+// ====== FLOW: TẠO HÌNH THÀNH BỤNG SAU SINH ======
+async function sendTaoHinhThanhBungFlow(sender_psid) {
+  console.log("🚀 Trigger Tạo Hình Thành Bụng Flow");
+
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ bên bác Vũ chuyên tạo hình thành bụng sau sinh, áp dụng công nghệ hút mỡ hiện đại và căng da, đảm bảo an toàn, không đau, hồi phục nhanh và mang lại dáng bụng thon gọn tự nhiên chị nhé!`
+  });
+
+  const feedbackImages = await getFeedbackImages("bung");
+
+  for (const url of feedbackImages) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url, is_reusable: true } }
+    });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  const bangGiaImage = await getBangGiaImage("banggia_hutmobung");
+
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+
+  await messengerService.sendMessage(sender_psid, {
+    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+  });
+}
 
 // ====== FOLLOW UP QUESTION HANDLER ======
 async function handleFollowUp(sender_psid, textMessage) {
