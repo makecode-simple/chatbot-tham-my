@@ -3,17 +3,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const messengerService = require('./messengerService');
 const fs = require('fs');
-const OpenAI = require('openai');
 const cloudinary = require('cloudinary').v2;
+const { predictIntent } = require('./intentEngine');
 
 // ====== APP INIT ======
 const app = express();
 app.use(bodyParser.json());
 
 // ====== CONFIG OPENAI ======
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 // ====== CONFIG CLOUDINARY ======
 cloudinary.config({
@@ -116,10 +113,19 @@ app.post('/webhook', async (req, res) => {
       const message = webhookEvent.message?.text;
 
       if (message) {
-        // Xử lý message qua handler chính, truyền flowFullServices đã load vào
-        await handleUserMessage(senderId, message, flowFullServices);
-      }
-    });
+const result = await predictIntent(message);
+
+if (result.intent === 'nang_nguc') {
+  await sendNangNgucFlow(senderId);
+} else if (result.intent === 'nang_mui') {
+  await sendNangMuiFlow(senderId);
+} else if (result.intent === 'faq') {
+  await handleFollowUp(senderId, message);
+} else {
+  await messengerService.sendMessage(senderId, {
+    text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
+  });
+}
 
     res.status(200).send('EVENT_RECEIVED');
   } else {
