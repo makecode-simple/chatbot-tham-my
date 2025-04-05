@@ -113,25 +113,27 @@ app.post('/webhook', async (req, res) => {
       const message = webhookEvent.message?.text;
 
       if (message) {
-const result = await predictIntent(message);
+        const result = await predictIntent(message);
 
-if (result.intent === 'nang_nguc') {
-  await sendNangNgucFlow(senderId);
-} else if (result.intent === 'nang_mui') {
-  await sendNangMuiFlow(senderId);
-} else if (result.intent === 'faq') {
-  await handleFollowUp(senderId, message);
-} else {
-  await messengerService.sendMessage(senderId, {
-    text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
-  });
-}
-
+        if (result.intent === 'nang_nguc') {
+          await sendNangNgucFlow(senderId);
+        } else if (result.intent === 'nang_mui') {
+          await sendNangMuiFlow(senderId);
+        } else if (result.intent === 'faq') {
+          await handleFollowUp(senderId, message);
+        } else {
+          await messengerService.sendMessage(senderId, {
+            text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
+          });
+        }
+      } // ✅ ← thêm dòng này để đóng if (message)
+    });
     res.status(200).send('EVENT_RECEIVED');
   } else {
     res.sendStatus(404);
   }
 });
+
 
 // ====== FLOW FUNCTIONS ======
 
