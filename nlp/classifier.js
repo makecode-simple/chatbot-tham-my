@@ -1,5 +1,6 @@
 const natural = require('natural');
 const fs = require('fs');
+const path = require('path');
 
 class SimpleNLPClassifier {
     constructor() {
@@ -8,22 +9,38 @@ class SimpleNLPClassifier {
     }
 
     async train() {
-        const trainingData = JSON.parse(fs.readFileSync('./data/training_data.json', 'utf8'));
-        
-        trainingData.forEach(item => {
-            item.examples.forEach(example => {
-                this.classifier.addDocument(this.normalizeText(example), item.intent);
-            });
-        });
+        try {
+            const trainingData = {
+                "nang_nguc": [
+                    "tư vấn nâng ngực",
+                    "nâng ngực giá bao nhiêu",
+                    "phẫu thuật ngực có đau không",
+                    "muốn nâng ngực",
+                    "chi phí đặt túi ngực"
+                ],
+                "nang_mui": [
+                    "nâng mũi hết bao nhiêu",
+                    "tư vấn nâng mũi",
+                    "phẫu thuật mũi",
+                    "muốn sửa mũi",
+                    "nâng mũi sụn sườn"
+                ]
+            };
 
-        this.classifier.train();
-        this.trained = true;
-        
-        // Save model
-        this.classifier.save('model.json', (err) => {
-            if (err) console.error('Error saving model:', err);
-            else console.log('Model saved successfully');
-        });
+            // Add documents to classifier
+            Object.keys(trainingData).forEach(intent => {
+                trainingData[intent].forEach(text => {
+                    this.classifier.addDocument(this.normalizeText(text), intent);
+                });
+            });
+
+            this.classifier.train();
+            this.trained = true;
+            console.log('✅ Model trained successfully');
+        } catch (err) {
+            console.error('❌ Error training model:', err);
+            throw err;
+        }
     }
 
     normalizeText(text) {
