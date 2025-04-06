@@ -106,38 +106,38 @@ async function getBangGiaImage(publicId) {
 
 // Continue with webhook route
 // ====== WEBHOOK ROUTE ======
-app.post("/webhook", async (req, res) => {
-  const body = req.body;
+// Remove this duplicate webhook handler
+// app.post("/webhook", async (req, res) => {
+//   const body = req.body;
+//   if (body.object === 'page') {
+//     body.entry.forEach(async function(entry) {
+//       const webhookEvent = entry.messaging[0];
+//       const senderId = webhookEvent.sender.id;
+//       const message = webhookEvent.message?.text;
 
-  if (body.object === 'page') {
-    body.entry.forEach(async function(entry) {
-      const webhookEvent = entry.messaging[0];
-      const senderId = webhookEvent.sender.id;
-      const message = webhookEvent.message?.text;
+//       if (message) {
+//         const result = await predictIntent(message);
 
-      if (message) {
-        const result = await predictIntent(message);
+//         if (result.intent === 'nang_nguc') {
+//           await sendNangNgucFlow(senderId);
+//         } else if (result.intent === 'nang_mui') {
+//           await sendNangMuiFlow(senderId);
+//         } else if (result.intent === 'faq') {
+//           await handleFollowUp(senderId, message);
+//         } else {
+//           await messengerService.sendMessage(senderId, {
+//             text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
+//           });
+//         }
+//       }
+//     });
+//     res.status(200).send('EVENT_RECEIVED');
+//   } else {
+//     res.sendStatus(404);
+//   }
+// });
 
-        if (result.intent === 'nang_nguc') {
-          await sendNangNgucFlow(senderId);
-        } else if (result.intent === 'nang_mui') {
-          await sendNangMuiFlow(senderId);
-        } else if (result.intent === 'faq') {
-          await handleFollowUp(senderId, message);
-        } else {
-          await messengerService.sendMessage(senderId, {
-            text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
-          });
-        }
-      }
-    });
-    res.status(200).send('EVENT_RECEIVED');
-  } else {
-    res.sendStatus(404);
-  }
-});
-
-// MAIN WEBHOOK HANDLER
+// Keep only this MAIN WEBHOOK HANDLER
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
@@ -167,8 +167,7 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // 2️⃣ Các flow dịch vụ (ưu tiên rõ ràng)
-      // In the webhook route handler, add to serviceKeywords array
+      // 2️⃣ Các flow dịch vụ
       const serviceKeywords = [
           { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
           { keywords: ["thao tui nguc", "tháo túi ngực"], action: sendThaoTuiNgucFlow },
@@ -205,40 +204,48 @@ app.post("/webhook", async (req, res) => {
         continue;
       }
 
-      // 4️⃣ Lời chào và menu dịch vụ (check chính xác hơn tránh xung đột FAQ)
+      // 4️⃣ Lời chào và menu dịch vụ
       const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "menu", "thong tin dich vu khac"];
       if (loiChaoKeywords.includes(textMessage)) {
-        // In the webhook route handler
+        const intent = await predictIntent(message);
         switch(intent) {
-            case 'gia_nang_nguc':
-                await sendBangGiaOnlyFlow(senderId, 'nguc');
-                break;
-            case 'gia_nang_mui':
-                await sendBangGiaOnlyFlow(senderId, 'mui');
-                break;
-            case 'gia_mat':
-                await sendBangGiaOnlyFlow(senderId, 'mat');
-                break;
-            case 'gia_tham_my_cam':
-                await sendBangGiaOnlyFlow(senderId, 'mat');  // assuming cam pricing is in mat category
-                break;
-            case 'gia_hut_mo':
-                await sendBangGiaOnlyFlow(senderId, 'bung');
-                break;
-            case 'gia_cang_da':
-                await sendBangGiaOnlyFlow(senderId, 'damat');
-                break;
-            case 'gia_vung_kin':
-                await sendBangGiaOnlyFlow(senderId, 'vungkin');
-                break;
-            case 'hoi_gia':
-                // Send general pricing menu or all price lists
-                await sendMenuBangGia(senderId);
-                break;
-            // ... other cases ...
+          case 'gia_nang_nguc':
+            await sendBangGiaOnlyFlow(sender_psid, 'nguc');
+            break;
+          case 'gia_nang_mui':
+            await sendBangGiaOnlyFlow(sender_psid, 'mui');
+            break;
+          case 'gia_mat':
+            await sendBangGiaOnlyFlow(sender_psid, 'mat');
+            break;
+          case 'gia_tham_my_cam':
+            await sendBangGiaOnlyFlow(sender_psid, 'mat');
+            break;
+          case 'gia_hut_mo':
+            await sendBangGiaOnlyFlow(sender_psid, 'bung');
+            break;
+          case 'gia_cang_da':
+            await sendBangGiaOnlyFlow(sender_psid, 'damat');
+            break;
+          case 'gia_vung_kin':
+            await sendBangGiaOnlyFlow(sender_psid, 'vungkin');
+            break;
+          case 'hoi_gia':
+            await sendMenuBangGia(sender_psid);
+            break;
+          default:
+            await sendMenuDichVu(sender_psid);
         }
-    });
-    res.status(200).send("EVENT_RECEIVED");
+      }
+    } catch (error) {
+      console.error('❌ Error processing message:', error);
+      await messengerService.sendMessage(sender_psid, {
+        text: "Xin lỗi chị, hiện tại hệ thống đang bận. Chị vui lòng thử lại sau ạ!"
+      });
+    }
+  }
+  
+  res.status(200).send("EVENT_RECEIVED");
 });
 
 // ====== VERIFY WEBHOOK ======
