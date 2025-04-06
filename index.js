@@ -137,7 +137,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// Giữ lại phần MAIN WEBHOOK HANDLER FINAL này vì đây là version mới nhất và đầy đủ nhất
+// MAIN WEBHOOK HANDLER
 app.post("/webhook", async (req, res) => {
   const body = req.body;
 
