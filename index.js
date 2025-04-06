@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const messengerService = require('./messengerService');
+const { handleIntent } = require('./nlp/intentHandler');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
 const { predictIntent } = require('./intentEngine');
