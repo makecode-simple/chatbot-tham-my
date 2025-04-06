@@ -1,0 +1,28 @@
+{
+  "intents": [
+    {
+      "intent": "nang_nguc",
+      "examples": [
+        "tư vấn nâng ngực",
+        "phẫu thuật nâng ngực giá bao nhiêu",
+        "nâng ngực có đau không",
+        "chi phí đặt túi ngực",
+        "nâng ngực ở đâu tốt",
+        "muốn nâng ngực",
+        "nâng ngực bao lâu thì lành"
+      ]
+    },
+    {
+      "intent": "nang_mui",
+      "examples": [
+        "nâng mũi giá bao nhiêu",
+        "phẫu thuật mũi",
+        "sửa mũi hết bao nhiêu",
+        "nâng mũi có đau không",
+        "tư vấn nâng mũi",
+        "chi phí nâng mũi"
+      ]
+    }
+    // Thêm các intent khác...
+  ]
+}
