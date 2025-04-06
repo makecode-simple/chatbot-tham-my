@@ -1,9 +1,9 @@
-const messengerService = require('./messengerService');
+const messengerClient = require('./services/messengerClient');
 const { getFeedbackImages, getBangGiaImage } = require('./cloudinaryService');
 
 async function sendMenuDichVu(sender_psid) {
   console.log("🚀 Trigger Menu Dịch Vụ");
-  await messengerService.sendMessage(sender_psid, {
+  await messengerClient.sendMessage(sender_psid, {
     text: "Dạ chị, em gửi chị các dịch vụ của bác Vũ ạ:\n\n1. Nâng Ngực\n2. Nâng Mũi\n3. Thẩm Mỹ Mắt\n4. Thẩm Mỹ Cằm\n5. Hút Mỡ\n6. Căng Da Mặt\n7. Thẩm Mỹ Vùng Kín\n\nChị quan tâm dịch vụ nào ạ?"
   });
 }
