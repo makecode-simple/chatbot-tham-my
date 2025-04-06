@@ -1,21 +1,33 @@
 const natural = require('natural');
 const fs = require('fs');
+const path = require('path');
 
 class IntentClassifier {
     constructor() {
         this.classifier = new natural.BayesClassifier();
-        this.loadModel();
+        this.trainModel();
     }
 
-    loadModel() {
+    trainModel() {
         try {
-            const modelData = JSON.parse(fs.readFileSync('model.json', 'utf8'));
-            this.classifier = natural.BayesClassifier.restore(modelData);
-            console.log('✅ NLP model loaded successfully!');
+            const trainingData = JSON.parse(
+                fs.readFileSync(
+                    path.join(__dirname, '../data/training_data.json'),
+                    'utf8'
+                )
+            );
+
+            trainingData.intents.forEach(item => {
+                item.examples.forEach(example => {
+                    this.classifier.addDocument(this.normalizeText(example), item.intent);
+                });
+            });
+
+            this.classifier.train();
+            console.log('✅ NLP model trained successfully!');
         } catch (err) {
-            console.error('❌ Error loading model:', err);
-            // Initialize with empty classifier if model fails to load
-            this.classifier = new natural.BayesClassifier();
+            console.error('❌ Error training model:', err);
+            throw err;
         }
     }
 
@@ -27,8 +39,14 @@ class IntentClassifier {
     }
 
     predict(message) {
+        if (!message) return 'unknown';
         const normalizedText = this.normalizeText(message);
-        return this.classifier.classify(normalizedText);
+        try {
+            return this.classifier.classify(normalizedText);
+        } catch (err) {
+            console.error('❌ Error predicting:', err);
+            return 'unknown';
+        }
     }
 }
 
