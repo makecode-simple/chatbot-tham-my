@@ -131,13 +131,20 @@ class SimpleNLPClassifier {
                 "hoi_gia": [  // keep this for general pricing questions
                     "bảng giá", "giá các dịch vụ",
                     "chi phí thẩm mỹ", "phí dịch vụ",
-                    "giá cả thế nào", "báo giá tổng"
-                ],
+                    "giá cả thế nào", "báo giá tổng",
                     "giá bao nhiêu", "chi phí", "bảng giá",
                     "phí phẫu thuật", "giá cả thế nào", "báo giá",
                     "giá tiền", "tổng chi phí", "phí dịch vụ",
                     "giá phẫu thuật", "chi phí thẩm mỹ"
                 ]
+                // Remove this problematic part:
+                /*
+                    "giá bao nhiêu", "chi phí", "bảng giá",
+                    "phí phẫu thuật", "giá cả thế nào", "báo giá",
+                    "giá tiền", "tổng chi phí", "phí dịch vụ",
+                    "giá phẫu thuật", "chi phí thẩm mỹ"
+                ]
+                */
             };
 
             // Add documents to classifier
