@@ -24,7 +24,10 @@ const {
     sendCangChiDaMatFlow,
     sendDonThaiDuongFlow,
     sendHutMoTiemLenMatFlow,
-    sendDiaChiFlow
+    sendDiaChiFlow,
+    sendMenuDichVu,
+    sendBangGiaOnlyFlow,
+    sendMenuBangGia
 } = require('./servicesFlow');
 
 // ====== APP INIT ======
@@ -188,9 +191,8 @@ app.post("/webhook", async (req, res) => {
       }
 
       // 2️⃣ Các flow dịch vụ
-      // In the serviceKeywords array
       const serviceKeywords = [
-          // ... existing services ...
+          { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
           { 
               keywords: [
                   "dia chi", "địa chỉ", "d/c", "address", "add",
