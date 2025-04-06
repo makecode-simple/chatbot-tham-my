@@ -200,7 +200,7 @@ app.post("/webhook", async (req, res) => {
                   "xin thong tin dich vu", "xin thông tin dịch vụ",
                   "tong quan dich vu", "tổng quan dịch vụ",
                   "danh sach dich vu", "danh sách dịch vụ",
-                  "list dich vu", "list services", "lixt dv", 
+                  "list dich vu", "list services", "lixt dv", "list dv",
                   "list dih vu", "the loai dich vụ", "loại hình dịch vụ",
                   "thong tin dich vu", "o day co gi", "ben em co gi",
                   "bên đây có gì", "bác vũ có dịch vụ nào", "bác vũ có gì",
@@ -219,7 +219,9 @@ app.post("/webhook", async (req, res) => {
                   "dia chi", "địa chỉ", "d/c", "address", "add",
                   "cho kham", "chỗ khám", "van phong", "văn phòng",
                   "co so", "cơ sở", "dia diem", "địa điểm",
-                  "noi kham", "nơi khám"
+                  "noi kham", "nơi khám", "phong kham", "phòng khám",
+                  "phòng mạch", "location", "local", "nơi hẹn", "điểm khám",
+                  "điểm thăm khám", "diem tham kham"
               ], 
               action: sendDiaChiFlow 
           },
