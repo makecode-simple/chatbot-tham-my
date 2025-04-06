@@ -1,3 +1,6 @@
+const messengerService = require('./messengerService');
+const { getFeedbackImages, getBangGiaImage } = require('./cloudinaryService');
+
 async function sendNangNgucFlow(sender_psid) {
   console.log("🚀 Trigger Nâng Ngực Flow");
 
@@ -469,9 +472,60 @@ async function sendTaoHinhThanhBungFlow(sender_psid) {
 }
 
 async function sendDiaChiFlow(sender_psid) {
-    console.log("🚀 Trigger Địa Chỉ Flow");
-    
-    await messengerService.sendMessage(sender_psid, {
-        text: "Dạ bác Vũ tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7\n\n• Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.\n• Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
-    });
+  console.log("🚀 Trigger Địa Chỉ Flow");
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 Số 12 Đường số 12, P.Bình An, TP.Thủ Đức (Q2 cũ)\n☎️ Hotline: 0909.444.222`
+  });
 }
+
+async function sendMenuDichVu(sender_psid) {
+  console.log("🚀 Trigger Menu Dịch Vụ");
+  await messengerService.sendMessage(sender_psid, {
+    text: "Dạ chị, em gửi chị các dịch vụ của bác Vũ ạ:\n\n1. Nâng Ngực\n2. Nâng Mũi\n3. Thẩm Mỹ Mắt\n4. Thẩm Mỹ Cằm\n5. Hút Mỡ\n6. Căng Da Mặt\n7. Thẩm Mỹ Vùng Kín\n\nChị quan tâm dịch vụ nào ạ?"
+  });
+}
+
+async function sendBangGiaOnlyFlow(sender_psid, type) {
+  console.log("🚀 Trigger Bảng Giá Flow:", type);
+  const bangGiaImage = await getBangGiaImage(`banggia_${type}`);
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+}
+
+async function sendMenuBangGia(sender_psid) {
+  console.log("🚀 Trigger Menu Bảng Giá");
+  const bangGiaImage = await getBangGiaImage("banggia_cacdichvu");
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+}
+
+// Export all functions
+module.exports = {
+  sendNangNgucFlow: require('./flows/nangNgucFlow'),
+  sendThaoTuiNgucFlow: require('./flows/thaoTuiNgucFlow'),
+  sendNangMuiFlow: require('./flows/nangMuiFlow'),
+  sendThamMyMatFlow: require('./flows/thamMyMatFlow'),
+  sendHutMoBungFlow: require('./flows/hutMoBungFlow'),
+  sendThamMyVungKinFlow: require('./flows/thamMyVungKinFlow'),
+  sendCangDaMatFlow: require('./flows/cangDaMatFlow'),
+  sendThamMyCamFlow: require('./flows/thamMyCamFlow'),
+  sendTreoCungMayFlow: require('./flows/treoCungMayFlow'),
+  sendTaiTaoVuFlow: require('./flows/taiTaoVuFlow'),
+  sendTaoHinhThanhBungFlow: require('./flows/taoHinhThanhBungFlow'),
+  sendChinhMatLoiFlow: require('./flows/chinhMatLoiFlow'),
+  sendChinhMuiLoiFlow: require('./flows/chinhMuiLoiFlow'),
+  sendHutMoBodyFlow: require('./flows/hutMoBodyFlow'),
+  sendCangChiDaMatFlow: require('./flows/cangChiDaMatFlow'),
+  sendDonThaiDuongFlow: require('./flows/donThaiDuongFlow'),
+  sendHutMoTiemLenMatFlow: require('./flows/hutMoTiemLenMatFlow'),
+  sendDiaChiFlow,
+  sendMenuDichVu,
+  sendBangGiaOnlyFlow,
+  sendMenuBangGia
+};
