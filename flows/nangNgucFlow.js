@@ -5,14 +5,7 @@ async function sendNangNgucFlow(sender_psid) {
   console.log("🚀 Trigger Nâng Ngực Flow");
   
   await messengerService.sendMessage(sender_psid, {
-    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với cơ địa và mong muốn của chị.\n\n
-Bên em áp dụng công nghệ Nâng ngực nội soi 4.0 với ưu điểm:\n
-1. Không đau\n
-2. Không gây chảy máu\n
-3. Không tiết dịch\n
-4. Không gây co thắt bao xơ\n
-5. Không cần nghỉ dưỡng\n
-6. Không để lại sẹo`
+    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với cơ địa và mong muốn của chị.\n\nBên em áp dụng công nghệ Nâng ngực nội soi 4.0 với ưu điểm:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo`
   });
 
   const feedbackImages = await getFeedbackImages("nguc");

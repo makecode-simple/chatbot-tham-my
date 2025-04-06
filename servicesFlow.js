@@ -1,7 +1,28 @@
 const messengerService = require('./messengerService');
 const { getFeedbackImages, getBangGiaImage } = require('./cloudinaryService');
 
-// Default flow handler if specific flow not implemented
+async function sendMenuDichVu(sender_psid) {
+  console.log("🚀 Trigger Menu Dịch Vụ");
+  await messengerService.sendMessage(sender_psid, {
+    text: "Dạ chị, em gửi chị các dịch vụ của bác Vũ ạ:\n\n1. Nâng Ngực\n2. Nâng Mũi\n3. Thẩm Mỹ Mắt\n4. Thẩm Mỹ Cằm\n5. Hút Mỡ\n6. Căng Da Mặt\n7. Thẩm Mỹ Vùng Kín\n\nChị quan tâm dịch vụ nào ạ?"
+  });
+}
+
+async function sendBangGiaOnlyFlow(sender_psid, type) {
+  console.log("🚀 Trigger Bảng Giá Flow:", type);
+  const bangGiaImage = await getBangGiaImage(`banggia_${type}`);
+  if (bangGiaImage) {
+    await messengerService.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
+  }
+}
+
+async function sendMenuBangGia(sender_psid) {
+  console.log("🚀 Trigger Menu Bảng Giá");
+  await sendBangGiaOnlyFlow(sender_psid, "cacdichvu");
+}
+
 async function defaultServiceFlow(sender_psid, serviceName) {
   console.log(`🚀 Trigger ${serviceName} Flow`);
   
@@ -14,10 +35,16 @@ async function defaultServiceFlow(sender_psid, serviceName) {
   });
 }
 
-// Export all functions with fallback to default handler
-module.exports = {
+async function sendDiaChiFlow(sender_psid) {
+  console.log("🚀 Trigger Địa Chỉ Flow");
+  await messengerService.sendMessage(sender_psid, {
+    text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 Số 12 Đường số 12, P.Bình An, TP.Thủ Đức (Q2 cũ)\n☎️ Hotline: 0909.444.222`
+  });
+}
+
+const serviceFlows = {
   sendNangNgucFlow: require('./flows/nangNgucFlow'),
-  sendThaoTuiNgucFlow: require('./flows/thaoTuiNgucFlow'),
+  sendThaoTuiNgucFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Tháo Túi Ngực"),
   sendNangMuiFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Nâng Mũi"),
   sendThamMyMatFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Thẩm Mỹ Mắt"),
   sendHutMoBungFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Hút Mỡ Bụng"),
@@ -33,12 +60,10 @@ module.exports = {
   sendCangChiDaMatFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Căng Chỉ Da Mặt"),
   sendDonThaiDuongFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Độn Thái Dương"),
   sendHutMoTiemLenMatFlow: (sender_psid) => defaultServiceFlow(sender_psid, "Hút Mỡ Tiêm Lên Mặt"),
-  sendDiaChiFlow: async (sender_psid) => {
-    await messengerService.sendMessage(sender_psid, {
-      text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 Số 12 Đường số 12, P.Bình An, TP.Thủ Đức (Q2 cũ)\n☎️ Hotline: 0909.444.222`
-    });
-  },
+  sendDiaChiFlow,
   sendMenuDichVu,
   sendBangGiaOnlyFlow,
   sendMenuBangGia
 };
+
+module.exports = serviceFlows;
