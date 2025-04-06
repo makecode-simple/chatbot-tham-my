@@ -37,8 +37,8 @@ async function defaultServiceFlow(sender_psid, serviceName) {
 
 async function sendDiaChiFlow(sender_psid) {
   console.log("🚀 Trigger Địa Chỉ Flow");
-  await messengerService.sendMessage(sender_psid, {
-    text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 Số 12 Đường số 12, P.Bình An, TP.Thủ Đức (Q2 cũ)\n☎️ Hotline: 0909.444.222`
+  await messengerClient.sendMessage(sender_psid, {
+    text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7\n\n* Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.\n* Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ.\n\n☎️ Hotline: 0909.444.222`
   });
 }
 
