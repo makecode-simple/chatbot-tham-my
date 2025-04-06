@@ -192,7 +192,28 @@ app.post("/webhook", async (req, res) => {
 
       // 2️⃣ Các flow dịch vụ
       const serviceKeywords = [
-          { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
+          // Add menu service keywords
+          {
+              keywords: [
+                  "menu", "dich vu", "dịch vụ",
+                  "dich vu la gi", "dịch vụ là gì",
+                  "xin thong tin dich vu", "xin thông tin dịch vụ",
+                  "tong quan dich vu", "tổng quan dịch vụ",
+                  "danh sach dich vu", "danh sách dịch vụ",
+                  "list dich vu", "list services", "lixt dv", 
+                  "list dih vu", "the loai dich vụ", "loại hình dịch vụ",
+                  "thong tin dich vu", "o day co gi", "ben em co gi",
+                  "bên đây có gì", "bác vũ có dịch vụ nào", "bác vũ có gì",
+                  "bên bác làm gì", "ben bac lam dv gi",
+                  "các gói dịch vụ", "goi dv", "thông tin dịch vụ"
+              
+              ],
+              action: sendMenuDichVu
+          },
+          { 
+              keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], 
+              action: sendNangNgucFlow 
+          },
           { 
               keywords: [
                   "dia chi", "địa chỉ", "d/c", "address", "add",
