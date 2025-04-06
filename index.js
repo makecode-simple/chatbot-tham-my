@@ -6,6 +6,26 @@ const { handleIntent } = require('./nlp/intentHandler');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
 const { predictIntent } = require('./intentEngine');
+const { 
+    sendNangNgucFlow,
+    sendThaoTuiNgucFlow,
+    sendNangMuiFlow,
+    sendThamMyMatFlow,
+    sendHutMoBungFlow,
+    sendThamMyVungKinFlow,
+    sendCangDaMatFlow,
+    sendThamMyCamFlow,
+    sendTreoCungMayFlow,
+    sendTaiTaoVuFlow,
+    sendTaoHinhThanhBungFlow,
+    sendChinhMatLoiFlow,
+    sendChinhMuiLoiFlow,
+    sendHutMoBodyFlow,
+    sendCangChiDaMatFlow,
+    sendDonThaiDuongFlow,
+    sendHutMoTiemLenMatFlow,
+    sendDiaChiFlow
+} = require('./servicesFlow');
 
 // ====== APP INIT ======
 const app = express();
@@ -168,8 +188,18 @@ app.post("/webhook", async (req, res) => {
       }
 
       // 2️⃣ Các flow dịch vụ
+      // In the serviceKeywords array
       const serviceKeywords = [
-          { keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], action: sendNangNgucFlow },
+          // ... existing services ...
+          { 
+              keywords: [
+                  "dia chi", "địa chỉ", "d/c", "address", "add",
+                  "cho kham", "chỗ khám", "van phong", "văn phòng",
+                  "co so", "cơ sở", "dia diem", "địa điểm",
+                  "noi kham", "nơi khám"
+              ], 
+              action: sendDiaChiFlow 
+          },
           { keywords: ["thao tui nguc", "tháo túi ngực"], action: sendThaoTuiNgucFlow },
           { keywords: ["nang mui", "nâng mũi"], action: sendNangMuiFlow },
           { keywords: ["cat mi", "cắt mí", "tham my mat", "thẩm mỹ mắt"], action: sendThamMyMatFlow },
