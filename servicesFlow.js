@@ -467,3 +467,11 @@ async function sendTaoHinhThanhBungFlow(sender_psid) {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
+
+async function sendDiaChiFlow(sender_psid) {
+    console.log("🚀 Trigger Địa Chỉ Flow");
+    
+    await messengerService.sendMessage(sender_psid, {
+        text: "Dạ bác Vũ tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7\n\n• Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.\n• Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ."
+    });
+}

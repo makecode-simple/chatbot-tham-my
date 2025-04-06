@@ -5,6 +5,28 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "menu_dich_vu": [
+        "xem các dịch vụ",
+        "menu dịch vụ",
+        "các dịch vụ khác",
+        "dịch vụ làm đẹp",
+        "dv làm đẹp",
+        "dịch vụ thẩm mỹ",
+        "tư vấn dịch vụ",
+        "có những dịch vụ nào",
+        "danh sách dịch vụ",
+        "dịch vụ gì",
+        "thẩm mỹ gì",
+        "làm đẹp gì",
+        "menu",
+        "dịch vụ",
+        "tư vấn làm đẹp",
+        "muốn làm đẹp",
+        "dv thẩm mỹ",
+        "dv khác",
+        "các dv",
+        "tất cả dịch vụ"
+    ],
     "nang_nguc": [
         "tư vấn nâng ngực",
         "nâng ngực giá bao nhiêu",
