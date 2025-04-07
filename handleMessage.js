@@ -80,6 +80,27 @@ async function handleMessage(sender_psid, received_message) {
       case 'dat_lich':
         await serviceFlows.sendBookingFlow(sender_psid);
         break;
+      case 'nang_nguc':
+        await serviceFlows.sendNangNgucFlow(sender_psid);
+        break;
+      case 'nang_mui':
+        await serviceFlows.sendNangMuiFlow(sender_psid);
+        break;
+      case 'tham_my_mat':
+        await serviceFlows.sendThamMyMatFlow(sender_psid);
+        break;
+      case 'tham_my_cam':
+        await serviceFlows.sendThamMyCamFlow(sender_psid);
+        break;
+      case 'cang_da':
+        await serviceFlows.sendCangDaMatFlow(sender_psid);
+        break;
+      case 'hut_mo':
+        await serviceFlows.sendHutMoBungFlow(sender_psid);
+        break;
+      case 'tham_my_vung_kin':
+        await serviceFlows.sendThamMyVungKinFlow(sender_psid);
+        break;
       case 'menu_dich_vu':
         await serviceFlows.sendMenuDichVu(sender_psid);
         break;
