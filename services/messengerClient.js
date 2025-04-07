@@ -1,4 +1,7 @@
 const axios = require('axios');
+const logger = require('./loggingService');
+const fs = require('fs');
+const path = require('path');
 
 class MessengerClient {
   constructor() {
@@ -15,8 +18,15 @@ class MessengerClient {
       }, {
         params: { access_token: this.pageAccessToken }
       });
-      
-      console.log('Gửi tin nhắn thành công:', response.data);
+
+      // Log chỉ những thông tin cần thiết cho training
+      await logger.logInteraction({
+        sender_psid: recipient_id,
+        userMessage: message.text,
+        intent: message.intent || null,
+        timestamp: new Date()
+      });
+
       return response.data;
     } catch (error) {
       console.error('❌ Error sending message:', error.response?.data || error.message);
@@ -25,4 +35,9 @@ class MessengerClient {
   }
 }
 
+// Trong hàm xử lý message
+// In handleMessage function, add logging
+async function handleMessage(sender_psid, received_message) {
+  // ... xử lý message như cũ ...
+}
 module.exports = new MessengerClient();

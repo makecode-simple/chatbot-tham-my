@@ -14,7 +14,7 @@ async function sendNangNgucFlow(sender_psid) {
 
   // Send feedback images with delay between each
   const feedbackImages = await getFeedbackImages("nguc");
-  const maxImages = 3; // Limit number of images
+  const maxImages = 7; // Limit number of images
   
   for (let i = 0; i < Math.min(feedbackImages.length, maxImages); i++) {
     await messengerClient.sendMessage(sender_psid, {

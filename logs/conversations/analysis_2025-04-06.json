@@ -1,0 +1,88 @@
+{
+  "totalConversations": 0,
+  "commonQuestions": {},
+  "failedIntents": [],
+  "servicePopularity": {},
+  "timeAnalysis": {
+    "hourly": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "daily": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "monthly": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "conversationFlow": {
+    "averageLength": null,
+    "commonPaths": {},
+    "dropOffPoints": {}
+  },
+  "userRetention": {},
+  "responseEffectiveness": {
+    "leadGeneration": 0,
+    "phoneNumbers": 0,
+    "appointments": 0
+  },
+  "summary": {
+    "totalUsers": 0,
+    "avgMessagesPerConversation": null,
+    "peakHours": [
+      {
+        "hour": 0,
+        "count": 0
+      },
+      {
+        "hour": 1,
+        "count": 0
+      },
+      {
+        "hour": 2,
+        "count": 0
+      }
+    ],
+    "mostPopularServices": [],
+    "conversionRate": "NaN%"
+  }
+}
