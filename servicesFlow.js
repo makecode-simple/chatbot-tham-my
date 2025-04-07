@@ -28,7 +28,7 @@ async function sendBangGiaOnlyFlow(sender_psid, type) {
   console.log("🚀 Trigger Bảng Giá Flow:", type);
   const bangGiaImage = await getBangGiaImage(`banggia_${type}`);
   if (bangGiaImage) {
-    await messengerService.sendMessage(sender_psid, {
+    await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
     });
   }
@@ -42,11 +42,11 @@ async function sendMenuBangGia(sender_psid) {
 async function defaultServiceFlow(sender_psid, serviceName) {
   console.log(`🚀 Trigger ${serviceName} Flow`);
   
-  await messengerService.sendMessage(sender_psid, {
+  await messengerClient.sendMessage(sender_psid, {
     text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với cơ địa và mong muốn của chị.`
   });
 
-  await messengerService.sendMessage(sender_psid, {
+  await messengerClient.sendMessage(sender_psid, {
     text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
   });
 }
