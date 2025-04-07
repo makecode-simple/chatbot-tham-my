@@ -12,13 +12,12 @@ function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/\D/g, '');
   
-  // Convert local VN format to international
-  if (cleanNumber.startsWith('0')) {
+  // Handle common formats
+  if (cleanNumber.startsWith('0')) { // Vietnam local format
     cleanNumber = '84' + cleanNumber.slice(1);
-  }
-  
-  // Add + if not present
-  if (!cleanNumber.startsWith('+')) {
+  } else if (cleanNumber.startsWith('1') && cleanNumber.length === 10) { // US/Canada format
+    cleanNumber = '+' + cleanNumber;
+  } else if (!cleanNumber.startsWith('+')) {
     cleanNumber = '+' + cleanNumber;
   }
 
@@ -34,6 +33,12 @@ function isValidPhoneNumber(message) {
   const rule = countryDigitRules[countryCode];
   const length = numberWithoutCode.length;
   
+  console.log(`📱 Phone validation:
+    Original: ${message}
+    Cleaned: ${cleanNumber}
+    Country: ${countryCode}
+    Length: ${length} (required: ${rule.min}-${rule.max})`);
+  
   return length >= rule.min && length <= rule.max;
 }
 
@@ -43,11 +48,18 @@ async function handleMessage(sender_psid, received_message) {
   const messageText = received_message.text;
   if (!messageText) return;
 
-  // Check if message contains valid phone number
-  if (isValidPhoneNumber(messageText)) {
-    await messengerClient.sendMessage(sender_psid, {
-      text: "Dạ em cảm ơn chị đã để lại thông tin. Ngân trợ lý sẽ liên hệ tư vấn chi tiết cho chị trong thời gian sớm nhất ạ!"
-    });
+  // Check for phone number pattern but might be invalid
+  const phonePattern = /(?:\d[\s-]*){9,}/;
+  if (phonePattern.test(messageText.replace(/\D/g, ''))) {
+    if (isValidPhoneNumber(messageText)) {
+      await messengerClient.sendMessage(sender_psid, {
+        text: "Dạ em cảm ơn chị đã để lại thông tin. Ngân trợ lý sẽ liên hệ tư vấn chi tiết cho chị trong thời gian sớm nhất ạ!"
+      });
+    } else {
+      await messengerClient.sendMessage(sender_psid, {
+        text: "Dạ số điện thoại chị cung cấp chưa chính xác. Chị vui lòng kiểm tra và gửi lại giúp em ạ!"
+      });
+    }
     return;
   }
 
