@@ -189,7 +189,64 @@ Object.keys(trainingData).forEach(intent => {
     });
 });
 
+// Remove conflicting data from nang_mui
+const nangMuiData = trainingData.nang_mui.filter(text => 
+  !text.includes('biến chứng') && !text.includes('hỏng')
+);
+trainingData.nang_mui = nangMuiData;
+
+// Add weighted training data
+// Biến chứng with high weight
+classifier.addDocument(normalizeText('biến chứng'), 'bien_chung', 10);
+classifier.addDocument(normalizeText('bị biến chứng'), 'bien_chung', 10);
+classifier.addDocument(normalizeText('có biến chứng'), 'bien_chung', 10);
+
+// Clear previous nang_mui training data
+trainingData.nang_mui = [
+    "nâng mũi hết bao nhiêu",
+    "tư vấn nâng mũi",
+    "phẫu thuật mũi",
+    "muốn sửa mũi",
+    "nâng mũi sụn sườn",
+    "nâng mũi có đau không",
+    "cho em hỏi về nâng mũi",
+    "muốn nâng mũi",
+    "tư vấn về mũi",
+    "phẫu thuật nâng mũi",
+    "nâng mũi thẩm mỹ",
+    "làm mũi"
+];
+
+// Add nang_mui with high weight
+trainingData.nang_mui.forEach(text => {
+    classifier.addDocument(normalizeText(text), 'nang_mui', 8);
+});
+
+// Remove any duplicate training
+const addedPhrases = new Set();
+Object.keys(trainingData).forEach(intent => {
+    trainingData[intent] = trainingData[intent].filter(text => {
+        const normalized = normalizeText(text);
+        if (addedPhrases.has(normalized)) return false;
+        addedPhrases.add(normalized);
+        return true;
+    });
+});
+
+// Thẩm mỹ mắt with proper weight
+classifier.addDocument(normalizeText('bác sĩ tư vấn cắt mí giúp em'), 'tham_my_mat', 5);
+classifier.addDocument(normalizeText('tư vấn về mắt'), 'tham_my_mat', 5);
+classifier.addDocument('biến chứng', 'bien_chung');
 classifier.addDocument('bị biến chứng', 'bien_chung');
+classifier.addDocument('có biến chứng', 'bien_chung');
+classifier.addDocument('gặp biến chứng', 'bien_chung');
+classifier.addDocument('biến chứng phẫu thuật', 'bien_chung');
+classifier.addDocument('biến chứng thẩm mỹ', 'bien_chung');
+classifier.addDocument('biến chứng sau phẫu thuật', 'bien_chung');
+classifier.addDocument('tư vấn biến chứng', 'bien_chung');
+classifier.addDocument('hỏi về biến chứng', 'bien_chung');
+classifier.addDocument('lo biến chứng', 'bien_chung');
+classifier.addDocument('sợ biến chứng', 'bien_chung');
 classifier.addDocument('bị hỏng', 'bien_chung');
 classifier.addDocument('bị lỗi', 'bien_chung');
 classifier.addDocument('bị hư', 'bien_chung');
@@ -201,9 +258,40 @@ classifier.addDocument('phẫu thuật lại', 'bien_chung');
 classifier.addDocument('chỉnh sửa lại', 'bien_chung');
 classifier.addDocument('khắc phục', 'bien_chung');
 classifier.addDocument('giải cứu', 'bien_chung');
-classifier.addDocument('treo sa trễ', 'treo_sa_tre');
-classifier.addDocument('ngực sa trễ', 'treo_sa_tre');
-classifier.addDocument('ngực chảy xệ', 'treo_sa_tre');
+// Add more specific training data for treo_sa_tre
+classifier.addDocument('treo_sa_tre': {
+    weight: 12,  // Increased weight
+    phrases: [
+        "treo sa trễ",
+        "sa trễ",
+        "ngực sa",
+        "ngực trễ",
+        "sa trễ ngực",
+        "treo ngực sa",
+        "treo sa",
+        "treo ngực",
+        "phẫu thuật sa trễ",
+        "khắc phục ngực sa",
+        "khắc phục ngực trễ",
+        "nâng ngực sa trễ",
+        "phẫu thuật treo ngực",
+        "tư vấn treo sa trễ",
+        "tư vấn ngực sa",
+        "hỏi về sa trễ",
+        "ngực bị sa",
+        "ngực bị trễ"
+    ]
+},
+classifier.addDocument('treo ngực sa', 'treo_sa_tre');
+classifier.addDocument('treo sa', 'treo_sa_tre');
+classifier.addDocument('treo ngực', 'treo_sa_tre');
+classifier.addDocument('phẫu thuật sa trễ', 'treo_sa_tre');
+
+// Make sure there's no overlap with cang_da
+classifier.addDocument('căng da', 'cang_da');
+classifier.addDocument('căng da mặt', 'cang_da');
+classifier.addDocument('căng chỉ', 'cang_da');
+classifier.addDocument('căng chỉ mặt', 'cang_da');
 classifier.addDocument('nâng ngực sa trễ', 'treo_sa_tre');
 classifier.addDocument('phẫu thuật treo ngực', 'treo_sa_tre');
 classifier.addDocument('khắc phục ngực sa', 'treo_sa_tre');
@@ -222,7 +310,7 @@ classifier.addDocument('xuất viện sau nâng ngực', 'faq_nguc_bay');
 classifier.addDocument('chỉnh sửa lại', 'bien_chung');
 classifier.addDocument('khắc phục', 'bien_chung');
 classifier.addDocument('giải cứu', 'bien_chung');
-// Train the classifier
+// Make sure to retrain
 classifier.train();
 
 // Save the trained model
@@ -239,10 +327,19 @@ classifier.save('model.json', (err) => {
             "cho em hỏi về nâng mũi",
             "bác sĩ tư vấn cắt mí giúp em",
             "chi phí phẫu thuật là bao nhiêu",
-            "em muốn đặt lịch khám"
+            "em muốn đặt lịch khám",
+            "biến chứng",
+            "sa trễ",
+            "tháo túi ngực",
+            "nâng ngực dao siêu âm",
+            "đi máy bay sau nâng ngực"
         ].forEach(text => {
+            const normalizedText = normalizeText(text);
+            const intent = classifier.classify(normalizedText);
             console.log(`Input: "${text}"`);
-            console.log(`Predicted intent: ${classifier.classify(normalizeText(text))}\n`);
+            console.log(`Normalized: "${normalizedText}"`);
+            console.log(`Predicted intent: ${intent}`);
+            console.log('---');
         });
     }
 });

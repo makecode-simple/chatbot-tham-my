@@ -82,6 +82,16 @@ const serviceFlows = {
   sendDonThaiDuongFlow: require('./flows/donThaiDuongFlow'),
   sendHutMoTiemLenMatFlow: require('./flows/hutMoTiemLenMatFlow'),
   sendFeedbackFlow: require('./flows/feedbackFlow'),
+  // Add FAQ flows
+  sendFaqThaoTuiFlow: require('./flows/faqThaoTuiFlow'),
+  sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
+  sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
+  
+  // Add missing flows
+  sendHoiGiaFlow: require('./flows/hoiGiaFlow'),
+  sendXemFeedbackFlow: require('./flows/xemFeedbackFlow'),
+  
+  // Existing flows
   sendBienChungFlow,
   sendDiaChiFlow,
   sendMenuDichVu,
