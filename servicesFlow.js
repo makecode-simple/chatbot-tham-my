@@ -1,5 +1,6 @@
 const messengerClient = require('./services/messengerClient');
 const { getFeedbackImages, getBangGiaImage } = require('./cloudinaryService');
+const sendBienChungFlow = require('./flows/bienChungFlow');
 
 async function sendMenuDichVu(sender_psid) {
   console.log("🚀 Trigger Menu Dịch Vụ");
@@ -80,6 +81,7 @@ const serviceFlows = {
   sendDonThaiDuongFlow: require('./flows/donThaiDuongFlow'),
   sendHutMoTiemLenMatFlow: require('./flows/hutMoTiemLenMatFlow'),
   sendFeedbackFlow: require('./flows/feedbackFlow'),
+  sendBienChungFlow,
   sendDiaChiFlow,
   sendMenuDichVu,
   sendBangGiaOnlyFlow,

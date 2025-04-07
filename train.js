@@ -189,6 +189,18 @@ Object.keys(trainingData).forEach(intent => {
     });
 });
 
+classifier.addDocument('bị biến chứng', 'bien_chung');
+classifier.addDocument('bị hỏng', 'bien_chung');
+classifier.addDocument('bị lỗi', 'bien_chung');
+classifier.addDocument('bị hư', 'bien_chung');
+classifier.addDocument('bị hỏng mũi', 'bien_chung');
+classifier.addDocument('bị hỏng ngực', 'bien_chung');
+classifier.addDocument('bị biến dạng', 'bien_chung');
+classifier.addDocument('sửa lại', 'bien_chung');
+classifier.addDocument('phẫu thuật lại', 'bien_chung');
+classifier.addDocument('chỉnh sửa lại', 'bien_chung');
+classifier.addDocument('khắc phục', 'bien_chung');
+classifier.addDocument('giải cứu', 'bien_chung');
 // Train the classifier
 classifier.train();
 

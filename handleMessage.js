@@ -2,6 +2,7 @@ const natural = require('natural');
 const fs = require('fs');
 const serviceFlows = require('./servicesFlow');
 const messengerClient = require('./services/messengerClient');
+const { completedUsers, userResponses } = require('./index.js');
 
 // Load classifier and country rules
 const modelData = JSON.parse(fs.readFileSync('model.json', 'utf8'));
@@ -49,6 +50,30 @@ async function handleMessage(sender_psid, received_message) {
   
   const messageText = received_message.text;
   if (!messageText) return;
+
+  // Check for session completion phrases
+  const completionPhrases = ['ok em', 'ok', 'cam on em', 'cảm ơn em', 'thank you', 'thanks'];
+  if (completionPhrases.some(phrase => messageText.toLowerCase().includes(phrase))) {
+    const responseCount = userResponses.get(sender_psid) || 0;
+    userResponses.set(sender_psid, responseCount + 1);
+    
+    if (responseCount === 0) {
+      await messengerClient.sendMessage(sender_psid, {
+        text: "Dạ em cảm ơn chị đã quan tâm ạ!"
+      });
+    } else if (responseCount === 1) {
+      await messengerClient.sendMessage(sender_psid, {
+        text: "Dạ chị!"
+      });
+    }
+    // Silent for subsequent OKs
+    return;
+  }
+
+  // Reset counter if user asks something new
+  if (!completionPhrases.some(phrase => messageText.toLowerCase().includes(phrase))) {
+    userResponses.delete(sender_psid);
+  }
 
   // Check for phone number pattern but might be invalid
   const phonePattern = /(?:\d[\s-]*){9,}/;
@@ -112,6 +137,9 @@ async function handleMessage(sender_psid, received_message) {
         break;
       case 'xem_feedback':
         await serviceFlows.sendFeedbackFlow(sender_psid);
+        break;
+      case 'bien_chung':
+        await serviceFlows.sendBienChungFlow(sender_psid);
         break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);
