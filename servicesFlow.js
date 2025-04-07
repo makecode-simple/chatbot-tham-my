@@ -4,7 +4,23 @@ const { getFeedbackImages, getBangGiaImage } = require('./cloudinaryService');
 async function sendMenuDichVu(sender_psid) {
   console.log("🚀 Trigger Menu Dịch Vụ");
   await messengerClient.sendMessage(sender_psid, {
-    text: "Dạ chị, em gửi chị các dịch vụ của bác Vũ ạ:\n\n1. Nâng Ngực\n2. Nâng Mũi\n3. Thẩm Mỹ Mắt\n4. Thẩm Mỹ Cằm\n5. Hút Mỡ\n6. Căng Da Mặt\n7. Thẩm Mỹ Vùng Kín\n\nChị quan tâm dịch vụ nào ạ?"
+    text: `Dạ chào chị, chị muốn tư vấn dịch vụ thẩm mỹ tạo hình nào dưới đây ạ:
+
+* Phẫu thuật nâng ngực/ tháo túi ngực/ bóc bao xơ
+* Tái tạo vú sau khi điều trị ung thư
+* Hút mỡ bụng, tạo hình thành bụng sau sinh
+* Tiểu phẫu cắt mí
+* Tiểu phẫu treo cung mày
+* Chỉnh mắt lỗi
+* Nâng mũi tái cấu trúc/ nâng mũi sụn sườn
+* Chỉnh mũi lỗi
+* Phẫu thuật căng da mặt
+* Hút mỡ bụng/tay/ đùi/ lưng
+* Thẩm mỹ vùng kín
+* Căng da mặt toàn diện
+* Căng chỉ da mặt/ PRP trẻ hóa
+* Độn thái dương/ độn cằm
+* Hút mỡ tiêm lên mặt`
   });
 }
 
@@ -38,7 +54,10 @@ async function defaultServiceFlow(sender_psid, serviceName) {
 async function sendDiaChiFlow(sender_psid) {
   console.log("🚀 Trigger Địa Chỉ Flow");
   await messengerClient.sendMessage(sender_psid, {
-    text: `Dạ chị, địa chỉ phòng khám của bác Vũ ạ:\n\n🏥 Phòng khám Thẩm mỹ Bác sĩ Hồ Cao Vũ\n📍 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7\n\n* Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.\n* Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ.\n\n☎️ Hotline: 0909.444.222`
+    text: `Dạ bác Vũ tư vấn tại 134 Hà Huy Tập, Phú Mỹ Hưng, Quận 7
+
+* Phẫu thuật tại bệnh viện quốc tế Nam Sài Gòn.
+* Hiện tại bác Vũ chỉ nhận khám và tư vấn theo lịch hẹn trước ạ.`
   });
 }
 
