@@ -47,16 +47,6 @@ cloudinary.config({
 });
 
 // ====== LOAD DATA ======
-const flowFullServicesRaw = JSON.parse(fs.readFileSync('./Flow_Full_Services_DrHoCaoVu.json', 'utf-8'));
-
-const flowFullServices = {
-  ...flowFullServicesRaw,
-  faqs: flowFullServicesRaw.faqs.map(item => ({
-    questions: item.questions.map(q => normalizeText(q)),
-    answer: item.answer
-  }))
-};
-
 const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 
 // ====== SESSION USERS ======
