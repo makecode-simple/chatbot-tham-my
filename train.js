@@ -201,6 +201,27 @@ classifier.addDocument('phẫu thuật lại', 'bien_chung');
 classifier.addDocument('chỉnh sửa lại', 'bien_chung');
 classifier.addDocument('khắc phục', 'bien_chung');
 classifier.addDocument('giải cứu', 'bien_chung');
+classifier.addDocument('treo sa trễ', 'treo_sa_tre');
+classifier.addDocument('ngực sa trễ', 'treo_sa_tre');
+classifier.addDocument('ngực chảy xệ', 'treo_sa_tre');
+classifier.addDocument('nâng ngực sa trễ', 'treo_sa_tre');
+classifier.addDocument('phẫu thuật treo ngực', 'treo_sa_tre');
+classifier.addDocument('khắc phục ngực sa', 'treo_sa_tre');
+classifier.addDocument('khắc phục ngực trễ', 'treo_sa_tre');
+classifier.addDocument('chỉnh sửa lại', 'bien_chung');
+classifier.addDocument('khắc phục', 'bien_chung');
+classifier.addDocument('giải cứu', 'bien_chung');
+// Add FAQ intents
+classifier.addDocument('tháo túi ngực', 'faq_thao_tui');
+classifier.addDocument('tháo túi không đau', 'faq_thao_tui');
+classifier.addDocument('nâng ngực dao siêu âm', 'faq_nang_nguc_dao');
+classifier.addDocument('nâng ngực không đau', 'faq_nang_nguc_dao');
+classifier.addDocument('bay sau nâng ngực', 'faq_nguc_bay');
+classifier.addDocument('đi máy bay sau nâng ngực', 'faq_nguc_bay');
+classifier.addDocument('xuất viện sau nâng ngực', 'faq_nguc_bay');
+classifier.addDocument('chỉnh sửa lại', 'bien_chung');
+classifier.addDocument('khắc phục', 'bien_chung');
+classifier.addDocument('giải cứu', 'bien_chung');
 // Train the classifier
 classifier.train();
 

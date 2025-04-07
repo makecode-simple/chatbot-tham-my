@@ -82,6 +82,16 @@ async function handleMessage(sender_psid, received_message) {
       await messengerClient.sendMessage(sender_psid, {
         text: "Dạ em cảm ơn chị đã để lại thông tin. Ngân trợ lý sẽ liên hệ tư vấn chi tiết cho chị trong thời gian sớm nhất ạ!"
       });
+      
+      // Add delay before sending warning
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Send warning about fake products
+      await messengerClient.sendMessage(sender_psid, {
+        text: `https://www.facebook.com/106197712068075/posts/352369154209319
+
+Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị tham khảo thêm bài viết để lấy kinh nghiệm cho bản thân nhé ạ!`
+      });
     } else {
       await messengerClient.sendMessage(sender_psid, {
         text: "Dạ số điện thoại chị cung cấp chưa chính xác. Chị vui lòng kiểm tra và gửi lại giúp em ạ!"
@@ -140,6 +150,18 @@ async function handleMessage(sender_psid, received_message) {
         break;
       case 'bien_chung':
         await serviceFlows.sendBienChungFlow(sender_psid);
+        break;
+      case 'treo_sa_tre':
+        await serviceFlows.sendTreoSaTreFlow(sender_psid);
+        break;
+      case 'faq_thao_tui':
+        await serviceFlows.sendThaoTuiFaq(sender_psid);
+        break;
+      case 'faq_nang_nguc_dao':
+        await serviceFlows.sendNangNgucDaoFaq(sender_psid);
+        break;
+      case 'faq_nguc_bay':
+        await serviceFlows.sendNgucBayFaq(sender_psid);
         break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);

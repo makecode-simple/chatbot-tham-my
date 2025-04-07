@@ -52,12 +52,13 @@ const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.j
 // ====== SESSION USERS ======
 const completedUsers = new Set();
 const handoffUsers = new Set();
-const userResponses = new Map();
+const userResponses = new Map(); // Initialize as Map
 
+// Make sure to export all session variables
 module.exports = {
   completedUsers,
   handoffUsers,
-  userResponses
+  userResponses // Export userResponses
 };
 
 // ====== TEXT NORMALIZATION ======

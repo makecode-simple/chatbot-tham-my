@@ -6,25 +6,38 @@ async function sendNangNgucFlow(sender_psid) {
   
   // Send initial message
   await messengerClient.sendMessage(sender_psid, {
-    text: `Dạ với hơn 10 năm kinh nghiệm, thẩm mỹ hơn 5000 ca mắt - mũi - ngực, chị yên tâm Bác sẽ đưa ra giải pháp tốt nhất phù hợp với cơ địa và mong muốn của chị.\n\nBên em áp dụng công nghệ Nâng ngực nội soi 4.0 với ưu điểm:\n1. Không đau\n2. Không gây chảy máu\n3. Không tiết dịch\n4. Không gây co thắt bao xơ\n5. Không cần nghỉ dưỡng\n6. Không để lại sẹo`
+    text: `Dạ chào chị, xin phép chị cho em giới thiệu về phương pháp phẫu thuật NÂNG NGỰC KHÔNG ĐAU bằng dao mổ siêu âm Ultrasonic Surgical Scalpel chị xem qua ạ.
+
+* Dao Ultrasonic Surgical Scalpel là dao siêu âm. Có ưu điểm ĐỐT - HÀN - CẮT vì thế bác sĩ tạo khoang ngực đặt túi không chảy máu, không chảy dịch, giảm đau sau phẫu thuật đến 90%, lành thương nhanh, không gây ra các biến chứng và biến chứng muộn.
+
+* Thời gian nghỉ dưỡng rất ít, chỉ sau 6-12H phẫu thuật chị có thể sinh hoạt, đi làm bình thường, không cần nghỉ dưỡng.
+* Sau phẫu thuật KHÔNG ĐẶT ỐNG DẪN LƯU, KHÔNG DÙNG THÊM THUỐC GIẢM ĐAU HAY KHÁNG SINH.
+
+* Phương pháp sử dụng dao Ultrasonic Surgical Scalpel đạt được 6 tiêu chí
+1. Không đau
+2. Không gây chảy máu
+3. Không tiết dịch
+4. Không gây co thắt bao xơ
+5. Không cần nghỉ dưỡng
+6. Không để lại sẹo`
   });
 
-  // Wait 1 second before sending images
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // Wait shorter time before sending images
+  await new Promise(resolve => setTimeout(resolve, 500)); // Reduced from 1000ms to 500ms
 
-  // Send feedback images with delay between each
+  // Send feedback images with shorter delay between each
   const feedbackImages = await getFeedbackImages("nguc");
-  const maxImages = 7; // Limit number of images
+  const maxImages = 7;
   
   for (let i = 0; i < Math.min(feedbackImages.length, maxImages); i++) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: feedbackImages[i], is_reusable: true } }
     });
-    await new Promise(resolve => setTimeout(resolve, 1500)); // 1.5s delay between images
+    await new Promise(resolve => setTimeout(resolve, 800)); // Reduced from 1500ms to 800ms
   }
 
-  // Wait before sending price
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // Shorter wait before sending price
+  await new Promise(resolve => setTimeout(resolve, 500)); // Reduced from 1000ms to 500ms
 
   // Send price image if available
   const bangGiaImage = await getBangGiaImage("banggia_nangnguc");
