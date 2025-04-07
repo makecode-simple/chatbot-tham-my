@@ -1,7 +1,9 @@
 // ====== IMPORTS ======
 const express = require('express');
 const bodyParser = require('body-parser');
-const messengerService = require('./messengerService');
+
+// Replace with:
+const messengerClient = require('./services/messengerClient');
 const { handleIntent } = require('./nlp/intentHandler');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
