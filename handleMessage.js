@@ -45,6 +45,9 @@ function isValidPhoneNumber(message) {
   return length >= rule.min && length <= rule.max;
 }
 
+// Replace userResponses Map with simple object
+const userResponseCounts = {};
+
 async function handleMessage(sender_psid, received_message) {
   console.log("📥 Received message:", received_message);
   
@@ -54,8 +57,8 @@ async function handleMessage(sender_psid, received_message) {
   // Check for session completion phrases
   const completionPhrases = ['ok em', 'ok', 'cam on em', 'cảm ơn em', 'thank you', 'thanks'];
   if (completionPhrases.some(phrase => messageText.toLowerCase().includes(phrase))) {
-    const responseCount = userResponses.get(sender_psid) || 0;
-    userResponses.set(sender_psid, responseCount + 1);
+    const responseCount = userResponseCounts[sender_psid] || 0;
+    userResponseCounts[sender_psid] = responseCount + 1;
     
     if (responseCount === 0) {
       await messengerClient.sendMessage(sender_psid, {
@@ -66,13 +69,12 @@ async function handleMessage(sender_psid, received_message) {
         text: "Dạ chị!"
       });
     }
-    // Silent for subsequent OKs
     return;
   }
 
-  // Reset counter if user asks something new
+  // Update reset counter section
   if (!completionPhrases.some(phrase => messageText.toLowerCase().includes(phrase))) {
-    userResponses.delete(sender_psid);
+    delete userResponseCounts[sender_psid];
   }
 
   // Check for phone number pattern but might be invalid

@@ -50,15 +50,16 @@ cloudinary.config({
 const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
 
 // ====== SESSION USERS ======
+// Move these declarations to the top of the file, before any requires
 const completedUsers = new Set();
 const handoffUsers = new Set();
-const userResponses = new Map(); // Initialize as Map
+const userResponses = new Map();
 
-// Make sure to export all session variables
+// Export them immediately after declaration
 module.exports = {
   completedUsers,
   handoffUsers,
-  userResponses // Export userResponses
+  userResponses
 };
 
 // ====== TEXT NORMALIZATION ======
