@@ -52,9 +52,8 @@ const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.j
 // ====== SESSION USERS ======
 const completedUsers = new Set();
 const handoffUsers = new Set();
-const userResponses = new Map(); // Track number of OK responses
+const userResponses = new Map();
 
-// Export for use in handleMessage.js
 module.exports = {
   completedUsers,
   handoffUsers,
