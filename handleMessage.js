@@ -12,32 +12,34 @@ function isValidPhoneNumber(message) {
   if (!message) return false;
   let cleanNumber = message.replace(/\D/g, '');
   
-  // Handle common formats
-  if (cleanNumber.startsWith('0')) { // Vietnam local format
-    cleanNumber = '84' + cleanNumber.slice(1);
-  } else if (cleanNumber.startsWith('1') && cleanNumber.length === 10) { // US/Canada format
-    cleanNumber = '+' + cleanNumber;
-  } else if (!cleanNumber.startsWith('+')) {
+  // Special handling for Vietnamese numbers
+  if (cleanNumber.startsWith('0') && cleanNumber.length === 10) {
+    return true; // Valid VN number format: 0xxxxxxxxx
+  }
+  
+  // Handle international format
+  if (cleanNumber.startsWith('84') && cleanNumber.length === 11) {
+    return true; // Valid VN international format: 84xxxxxxxxx
+  }
+  
+  if (cleanNumber.startsWith('+84') && cleanNumber.length === 12) {
+    return true; // Valid VN international format: +84xxxxxxxxx
+  }
+
+  // For other international numbers, use countryDigitRules
+  if (!cleanNumber.startsWith('+')) {
     cleanNumber = '+' + cleanNumber;
   }
 
-  // Find matching country code
   const countryCode = Object.keys(countryDigitRules).find(code => 
-    cleanNumber.startsWith(code)
+    cleanNumber.startsWith(code) && code !== '+84' // Skip VN as we handled it above
   );
 
   if (!countryCode) return false;
 
-  // Validate number length based on country rules
   const numberWithoutCode = cleanNumber.slice(countryCode.length);
   const rule = countryDigitRules[countryCode];
   const length = numberWithoutCode.length;
-  
-  console.log(`📱 Phone validation:
-    Original: ${message}
-    Cleaned: ${cleanNumber}
-    Country: ${countryCode}
-    Length: ${length} (required: ${rule.min}-${rule.max})`);
   
   return length >= rule.min && length <= rule.max;
 }
