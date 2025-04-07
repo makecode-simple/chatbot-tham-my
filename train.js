@@ -91,7 +91,86 @@ const trainingData = {
         "hẹn khám",
         "đăng ký tư vấn",
         "muốn gặp bác sĩ",
-        "lịch khám"
+        "lịch khám",
+        "cho em xin số điện thoại",
+        "xin số zalo",
+        "xin số viber",
+        "muốn tư vấn",
+        "tư vấn trực tiếp",
+        "gặp trực tiếp",
+        "muốn đến khám",
+        "đặt hẹn",
+        "xin số điện thoại tư vấn",
+        "muốn được tư vấn",
+        "cần tư vấn",
+        "tư vấn giúp em",
+        "cho em đặt lịch",
+        "muốn book lịch",
+        "book lịch khám",
+        "đặt lịch",
+        "đặt hẹn",
+        "đặt lịch khám",
+        "đặt lịch tư vấn",
+        "xin số điện thoại",
+        "cho xin số điện thoại",
+        "số điện thoại của chị là",
+        "số điện thoại của em là",
+        "số của chị là",
+        "số của em là",
+        "số điện thoại:",
+        "sđt:",
+        "sdt:",
+        "số điện thoại",
+        "đây là số của chị",
+        "đây là số của em",
+        "số zalo của chị là",
+        "số zalo của em là",
+        "zalo của chị",
+        "zalo của em",
+        "viber của chị là",
+        "viber của em là"
+    ],
+    "dia_chi": [
+        "phòng khám ở đâu",
+        "địa chỉ phòng khám",
+        "chỗ khám ở đâu",
+        "địa điểm phòng khám",
+        "văn phòng ở đâu",
+        "địa chỉ bác sĩ",
+        "phòng khám nằm ở đâu",
+        "tìm đường đến phòng khám",
+        "chỉ đường đến phòng khám"
+    ],
+    
+    "hut_mo": [
+        "hút mỡ bụng",
+        "giảm mỡ bụng",
+        "hút mỡ đùi",
+        "hút mỡ toàn thân",
+        "giảm béo không phẫu thuật",
+        "hút mỡ body",
+        "hút mỡ bắp tay",
+        "giảm mỡ nhanh",
+        "hút mỡ có đau không"
+    ],
+
+    "tham_my_vung_kin": [
+        "thu hẹp vùng kín",
+        "tư vấn thẩm mỹ vùng kín",
+        "phẫu thuật vùng kín",
+        "làm hồng vùng kín",
+        "tạo hình vùng kín"
+    ],
+
+    "xem_feedback": [
+        "xem kết quả",
+        "hình ảnh trước sau",
+        "khách hàng đã làm",
+        "review kết quả",
+        "feedback khách hàng",
+        "before after",
+        "kết quả thẩm mỹ",
+        "hình ảnh thực tế"
     ]
 };
 

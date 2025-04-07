@@ -29,6 +29,7 @@ const {
     sendBangGiaOnlyFlow,
     sendMenuBangGia
 } = require('./servicesFlow');
+const handleMessage = require('./handleMessage');
 
 // ====== APP INIT ======
 const app = express();
@@ -161,146 +162,23 @@ async function getBangGiaImage(publicId) {
 // });
 
 // Keep only this MAIN WEBHOOK HANDLER
-app.post("/webhook", async (req, res) => {
-  const body = req.body;
+app.post('/webhook', (req, res) => {
+  let body = req.body;
 
-  if (body.object !== "page") {
-    return res.sendStatus(404);
+  if (body.object === 'page') {
+    body.entry.forEach(function(entry) {
+      let webhook_event = entry.messaging[0];
+      let sender_psid = webhook_event.sender.id;
+
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      }
+    });
+
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
+    res.sendStatus(404);
   }
-
-  for (const entry of body.entry) {
-    const webhook_event = entry.messaging[0];
-
-    if (!webhook_event.message || !webhook_event.message.text) {
-      console.log("❌ Không có message text");
-      continue;
-    }
-
-    const sender_psid = webhook_event.sender.id;
-    const message = webhook_event.message.text.trim();
-    const textMessage = normalizeText(message);
-
-    try {
-      // 1️⃣ Kiểm tra số điện thoại
-      if (isValidPhoneNumber(message)) {
-        completedUsers.add(sender_psid);
-        await messengerService.sendMessage(sender_psid, {
-          text: "Dạ em ghi nhận thông tin rồi ạ! Bạn Ngân - trợ lý bác sĩ sẽ liên hệ ngay với mình nha chị!"
-        });
-        continue;
-      }
-
-      // 2️⃣ Các flow dịch vụ
-      const serviceKeywords = [
-          // Add menu service keywords
-          {
-              keywords: [
-                  "menu", "dich vu", "dịch vụ",
-                  "dich vu la gi", "dịch vụ là gì",
-                  "xin thong tin dich vu", "xin thông tin dịch vụ",
-                  "tong quan dich vu", "tổng quan dịch vụ",
-                  "danh sach dich vu", "danh sách dịch vụ",
-                  "list dich vu", "list services", "lixt dv", "list dv",
-                  "list dih vu", "the loai dich vụ", "loại hình dịch vụ",
-                  "thong tin dich vu", "o day co gi", "ben em co gi",
-                  "bên đây có gì", "bác vũ có dịch vụ nào", "bác vũ có gì",
-                  "bên bác làm gì", "ben bac lam dv gi",
-                  "các gói dịch vụ", "goi dv", "thông tin dịch vụ"
-              
-              ],
-              action: sendMenuDichVu
-          },
-          { 
-              keywords: ["nang nguc", "nâng ngực", "dat tui nguc", "đặt túi ngực", "don nguc", "độn ngực"], 
-              action: sendNangNgucFlow 
-          },
-          { 
-              keywords: [
-                  "dia chi", "địa chỉ", "d/c", "address", "add",
-                  "cho kham", "chỗ khám", "van phong", "văn phòng",
-                  "co so", "cơ sở", "dia diem", "địa điểm",
-                  "noi kham", "nơi khám", "phong kham", "phòng khám",
-                  "phòng mạch", "location", "local", "nơi hẹn", "điểm khám",
-                  "điểm thăm khám", "diem tham kham"
-              ], 
-              action: sendDiaChiFlow 
-          },
-          { keywords: ["thao tui nguc", "tháo túi ngực"], action: sendThaoTuiNgucFlow },
-          { keywords: ["nang mui", "nâng mũi"], action: sendNangMuiFlow },
-          { keywords: ["cat mi", "cắt mí", "tham my mat", "thẩm mỹ mắt"], action: sendThamMyMatFlow },
-          { keywords: ["hut mo bung", "hút mỡ bụng"], action: sendHutMoBungFlow },
-          { keywords: ["tham my vung kin", "thẩm mỹ vùng kín"], action: sendThamMyVungKinFlow },
-          { keywords: ["cang da mat", "căng da mặt"], action: sendCangDaMatFlow },
-          { keywords: ["tham my cam", "thẩm mỹ cằm", "don cam", "độn cằm"], action: sendThamMyCamFlow },
-          { keywords: ["treo cung may", "treo cung mày"], action: sendTreoCungMayFlow },
-          { keywords: ["tai tao vu", "tái tạo vú", "ung thu vu", "ung thư vú"], action: sendTaiTaoVuFlow },
-          { keywords: ["tao hinh thanh bung", "tạo hình thành bụng"], action: sendTaoHinhThanhBungFlow },
-          { keywords: ["chinh mat loi", "chỉnh mắt lỗi"], action: sendChinhMatLoiFlow },
-          { keywords: ["chinh mui loi", "chỉnh mũi lỗi"], action: sendChinhMuiLoiFlow },
-          { keywords: ["hut mo tay", "hút mỡ tay", "hut mo dui", "hút mỡ đùi", "hut mo lung", "hút mỡ lưng"], action: sendHutMoBodyFlow },
-          { keywords: ["cang chi da mat", "căng chỉ da mặt", "prp tre hoa", "prp trẻ hóa"], action: sendCangChiDaMatFlow },
-          { keywords: ["don thai duong", "độn thái dương"], action: sendDonThaiDuongFlow },
-          { keywords: ["hut mo tiem len mat", "hút mỡ tiêm lên mặt"], action: sendHutMoTiemLenMatFlow }
-      ];
-      let serviceMatched = false;
-      for (const service of serviceKeywords) {
-        if (service.keywords.some(keyword => textMessage.includes(keyword))) {
-          await service.action(sender_psid);
-          serviceMatched = true;
-          break;
-        }
-      }
-
-      if (serviceMatched) continue;
-
-      // 3️⃣ Xin bảng giá only
-      if (textMessage.includes("bảng giá")) {
-        await sendBangGiaOnlyFlow(sender_psid, "cacdichvu");
-        continue;
-      }
-
-      // 4️⃣ Lời chào và menu dịch vụ
-      const loiChaoKeywords = ["hi", "hello", "alo", "xin chao", "toi can tu van", "can tu van", "menu", "thong tin dich vu khac"];
-      if (loiChaoKeywords.includes(textMessage)) {
-        const intent = await predictIntent(message);
-        switch(intent) {
-          case 'gia_nang_nguc':
-            await sendBangGiaOnlyFlow(sender_psid, 'nguc');
-            break;
-          case 'gia_nang_mui':
-            await sendBangGiaOnlyFlow(sender_psid, 'mui');
-            break;
-          case 'gia_mat':
-            await sendBangGiaOnlyFlow(sender_psid, 'mat');
-            break;
-          case 'gia_tham_my_cam':
-            await sendBangGiaOnlyFlow(sender_psid, 'mat');
-            break;
-          case 'gia_hut_mo':
-            await sendBangGiaOnlyFlow(sender_psid, 'bung');
-            break;
-          case 'gia_cang_da':
-            await sendBangGiaOnlyFlow(sender_psid, 'damat');
-            break;
-          case 'gia_vung_kin':
-            await sendBangGiaOnlyFlow(sender_psid, 'vungkin');
-            break;
-          case 'hoi_gia':
-            await sendMenuBangGia(sender_psid);
-            break;
-          default:
-            await sendMenuDichVu(sender_psid);
-        }
-      }
-    } catch (error) {
-      console.error('❌ Error processing message:', error);
-      await messengerService.sendMessage(sender_psid, {
-        text: "Xin lỗi chị, hiện tại hệ thống đang bận. Chị vui lòng thử lại sau ạ!"
-      });
-    }
-  }
-  
-  res.status(200).send("EVENT_RECEIVED");
 });
 
 // ====== VERIFY WEBHOOK ======
