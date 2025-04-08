@@ -85,7 +85,8 @@ const serviceFlows = {
   // Add FAQ flows
   sendFaqThaoTuiFlow: require('./flows/faqThaoTuiFlow'),
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
-  sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
+  // Fix FAQ flow name from sendFaqNgucBayFlow to sendNgucBayFaq
+  sendNgucBayFaq: require('./flows/faqNgucBayFlow'),
   sendFaqSizeTuiFlow: require('./flows/faqSizeTuiFlow'),
   
   // Add missing flows

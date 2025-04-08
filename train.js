@@ -786,4 +786,4 @@ classifier.addDocument('tư vấn size túi', 'faq_size_tui');
 classifier.addDocument('tư vấn form túi', 'faq_size_tui');
 classifier.addDocument('túi ngực size nào', 'faq_size_tui');
 classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'fa
+classifier.addDocument('túi ngực loại nào', 'faq_size_tui);
