@@ -338,6 +338,26 @@ const intents = {
         "phương pháp nâng ngực bằng dao siêu âm"
     ]
 },
+"faq_size_tui": {
+    weight: 12,  // Increased weight for better matching
+    phrases: [
+        "size túi ngực",
+        "form túi ngực",
+        "kích thước túi",
+        "size nâng ngực",
+        "chọn size túi",
+        "túi ngực size nào",
+        "form túi thế nào",
+        "túi ngực loại nào",
+        "size phù hợp",
+        "kích cỡ túi ngực",
+        "tư vấn size túi",
+        "tư vấn form túi",
+        "chọn form túi",
+        "size túi phù hợp",
+        "form túi phù hợp"
+    ]
+},
 
 "faq_thao_tui": {
     weight: 10,
