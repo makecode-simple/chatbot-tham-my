@@ -1,31 +1,19 @@
 const messengerClient = require('../services/messengerClient');
 
 async function sendFaqNangNgucDaoFlow(sender_psid) {
-  console.log("🚀 Trigger FAQ Nâng Ngực Dao Flow");
+  console.log("🚀 Trigger FAQ Nâng Ngực Dao Siêu Âm Flow");
   
   await messengerClient.sendMessage(sender_psid, {
-    text: `Dạ chào chị, em xin phép chia sẻ về phương pháp NÂNG NGỰC KHÔNG ĐAU bằng dao mổ siêu âm Ultrasonic Surgical Scalpel:
+    text: `Nâng Ngực Không Đau Với Dao Siêu Âm Thế Hệ Mới - Không Cần Uống Giảm Đau, Kháng Sinh Sau Xuất Viện, Phục Hồi Sau 12H - Hỗ Trợ Quay 100% Ca Mổ - Sử Dụng Dao Siêu Âm Mới 100%
 
-* Bác sĩ Vũ là bác sĩ đầu tiên và duy nhất hiện nay ứng dụng dao mổ siêu âm trong phẫu thuật nâng ngực.
-
-* Ưu điểm của phương pháp:
-- Không đau sau mổ
-- Không chảy máu 
-- Không tiết dịch
-- Không co thắt bao xơ
-- Không cần nghỉ dưỡng dài ngày
-
-* Sau 12-18h phẫu thuật:
-- Có thể sinh hoạt bình thường
-- Đi làm bình thường
-- Không cần nghỉ dưỡng
-
-* KHÔNG ĐẶT ỐNG DẪN LƯU
-* KHÔNG DÙNG THÊM THUỐC GIẢM ĐAU HAY KHÁNG SINH`
-  });
-
-  await messengerClient.sendMessage(sender_psid, {
-    text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+Nâng ngực với dao siêu âm thế hệ mới Ultrasonic Surgical Scalpel do Thạc sĩ - Bác sĩ Hồ Cao Vũ trực tiếp thực hiện:
+• Không đau, không chảy máu
+• Xuất viện và trở lại cuộc sống bình thường ngay sau 6 tiếng
+• Không cần hệ thống dẫn dịch trong và sau phẫu thuật
+• Không cần sử dụng giảm đau, kháng sinh sau khi xuất viện
+• Sau phẫu thuật 2 ngày bay nội địa, 7 ngày bay quốc tế
+• Không co thắt bao xơ
+• Không để lại sẹo xấu`
   });
 }
 
