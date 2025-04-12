@@ -85,13 +85,12 @@ const serviceFlows = {
   // Add FAQ flows
   sendFaqThaoTuiFlow: require('./flows/faqThaoTuiFlow'),
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
-  // Fix FAQ flow name from sendFaqNgucBayFlow to sendNgucBayFaq
-  sendNgucBayFaq: require('./flows/faqNgucBayFlow'),
+  // Fix: Use consistent naming for the faqNgucBayFlow
+  sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
   sendFaqSizeTuiFlow: require('./flows/faqSizeTuiFlow'),
   
   // Add missing flows
   sendHoiGiaFlow: require('./flows/hoiGiaFlow'),
-  // Remove sendXemFeedbackFlow
   
   // Existing flows
   sendBienChungFlow,
@@ -104,14 +103,3 @@ const serviceFlows = {
 };
 
 module.exports = serviceFlows;
-
-// Import the faqNgucBayFlow
-const faqNgucBayFlow = require('./flows/faqNgucBayFlow');
-
-// Register the faqNgucBayFlow in your dialog set or router
-dialogSet.add(faqNgucBayFlow);
-
-// Make sure to handle the intent in your main dialog or router
-if (intent === 'faq_nguc_bay') {
-    return await dc.beginDialog('faqNgucBayFlow');
-}
