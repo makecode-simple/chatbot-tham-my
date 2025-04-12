@@ -52,7 +52,40 @@
 "anh": 3,
 "huong": 1,
 "that": 2,
-"can": 1,
+"can": 1,{
+  "classifier": {
+    "classFeatures": {
+      "menu_dich_vu": {"0":2,"1":4,"2":12,"3":12,"4":3,"5":3,"6":6,"7":6,"8":5,"9":4,"10":3,"11":3,"12":2,"13":2,"14":2,"15":2,"16":2,"17":4,"18":2,"19":2,"20":2},
+      "nang_nguc": {"10":2,"11":2,"12":3,"18":2,"21":7,"22":11,"23":2,"24":3,"25":2,"26":2,"27":2,"28":3,"29":3,"30":2,"31":2,"32":4,"33":2,"34":2,"35":2,"36":2,"37":2,"38":2,"39":2,"40":2,"41":2},
+      // ... other class features ...
+    },
+    "classTotals": {
+      "menu_dich_vu": 21,
+      "nang_nguc": 11,
+      "nang_mui": 23,
+      // ... other class totals ...
+    },
+    "totalExamples": 204,
+    "smoothing": 1
+  },
+  "docs": [
+    {"label": "menu_dich_vu", "text": ["xem", "cac", "dich", "vu"]},
+    {"label": "menu_dich_vu", "text": ["menu", "dich", "vu"]},
+    // ... other docs ...
+  ],
+  "features": {
+    "xem": 2,
+    "cac": 3,
+    "dich": 11,
+    // ... other features ...
+  },
+  "stemmer": {},
+  "lastAdded": 203,
+  "events": {
+    "_events": {},
+    "_eventsCount": 0
+  }
+}
 "doi": 1,
 "dang": 1,
 "lien": 1,
