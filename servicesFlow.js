@@ -86,7 +86,6 @@ const serviceFlows = {
   // Change from sendFaqThaoTuiFlow to sendThaoTuiFaq to match the intent handler
   sendThaoTuiFaq: require('./flows/faqThaoTuiFlow'),
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
-  // Fix: Use consistent naming for the faqNgucBayFlow
   sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
   sendFaqSizeTuiFlow: require('./flows/faqSizeTuiFlow'),
   
