@@ -86,8 +86,8 @@ const serviceFlows = {
   // Change from sendFaqThaoTuiFlow to sendThaoTuiFaq to match the intent handler
   sendThaoTuiFaq: require('./flows/faqThaoTuiFlow'),
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
-  // Change from sendFaqNgucBayFlow to sendNgucBayFaq to match handleMessage.js
-  sendNgucBayFaq: require('./flows/faqNgucBayFlow'),
+  // Change from sendNgucBayFaq to match handleMessage.js
+  sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
   sendFaqSizeTuiFlow: require('./flows/faqSizeTuiFlow'),
   
   // Add missing flows

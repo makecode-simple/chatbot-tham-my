@@ -69,6 +69,24 @@
               "content": "Dạ chị quan tâm các dịch vụ khác về ngực phải không ạ? Bên em có đầy đủ các dịch vụ từ chỉnh sửa, nâng cấp đến tái tạo theo yêu cầu."
             }
           ]
+        },
+        {
+          "payload": "ngực-thời-gian-bay",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ sau phẫu thuật nâng ngực chị nằm viện tối đa 12 tiếng, thông thường 6-10 tiếng là có thể đi lại. Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ."
+            }
+          ]
+        },
+        {
+          "payload": "ngực-size-túi",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ với kinh nghiệm hơn 5000 ca phẫu thuật, bác Vũ sẽ tư vấn size túi phù hợp với vóc dáng và mong muốn của chị. Bên em có đầy đủ các form túi từ tròn đến giọt nước, size từ 200-800cc ạ."
+            }
+          ]
         }
       ]
     },
@@ -145,7 +163,58 @@
           "steps": [
             {
               "type": "text",
-              "content": "Dạ chào chị! Bên em có dịch vụ thẩm mỹ vùng kín, se khít và làm hồng không phẫu thuật, an toàn, không đau và phục hồi nhanh."
+              "content": "Dạ chào chị! Bên em có dịch vụ thẩm mỹ vùng kín, se khít và làm hồng không phẫu thuật, an toàn, không để lại sẹo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Thái Dương & Cằm",
+      "sub_flows": [
+        {
+          "payload": "thái-dương-độn-thái-dương",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Dịch vụ độn thái dương giúp khuôn mặt đầy đặn, cân đối tự nhiên. Bác Vũ sử dụng kỹ thuật tiên tiến, an toàn tuyệt đối."
+            }
+          ]
+        },
+        {
+          "payload": "cằm-độn-cằm",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Độn cằm V-line giúp khuôn mặt thon gọn, cân đối. Bác Vũ có nhiều năm kinh nghiệm, đảm bảo kết quả tự nhiên."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Treo cung mày",
+      "sub_flows": [
+        {
+          "payload": "mắt-treo-cung-mày",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Tiểu phẫu treo cung mày giúp mắt trẻ trung, sáng đẹp tự nhiên. Thời gian phục hồi nhanh, không để lại sẹo ạ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent_service": "Căng chỉ",
+      "sub_flows": [
+        {
+          "payload": "mặt-căng-chỉ",
+          "steps": [
+            {
+              "type": "text",
+              "content": "Dạ chào chị! Căng chỉ da mặt/ PRP trẻ hóa giúp làn da săn chắc, trẻ trung tự nhiên. Không phẫu thuật, phục hồi nhanh chóng ạ."
             }
           ]
         }

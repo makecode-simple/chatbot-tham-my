@@ -17,7 +17,19 @@ const intentFlowMapping = {
     'treo_sa_tre': 'treoSaTreFlow',
     'faq_thao_tui': 'faqThaoTuiFlow',
     'faq_nang_nguc_dao': 'faqNangNgucDaoFlow',
-    'faq_nguc_bay': 'faqNgucBayFlow'
+    'faq_nguc_bay': 'faqNgucBayFlow',
+    // Add missing mappings
+    'faq_size_tui': 'faqSizeTuiFlow',
+    'thao_tui_nguc': 'thaoTuiNgucFlow',
+    'treo_cung_may': 'treoCungMayFlow',
+    'tai_tao_vu': 'taiTaoVuFlow',
+    'tao_hinh_thanh_bung': 'taoHinhThanhBungFlow',
+    'chinh_mat_loi': 'chinhMatLoiFlow',
+    'chinh_mui_loi': 'chinhMuiLoiFlow',
+    'hut_mo_body': 'hutMoBodyFlow',
+    'cang_chi_da_mat': 'cangChiDaMatFlow',
+    'don_thai_duong': 'donThaiDuongFlow',
+    'hut_mo_tiem_len_mat': 'hutMoTiemLenMatFlow'
 };
 
 module.exports = intentFlowMapping;

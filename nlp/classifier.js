@@ -137,14 +137,6 @@ class SimpleNLPClassifier {
                     "giá tiền", "tổng chi phí", "phí dịch vụ",
                     "giá phẫu thuật", "chi phí thẩm mỹ"
                 ]
-                // Remove this problematic part:
-                /*
-                    "giá bao nhiêu", "chi phí", "bảng giá",
-                    "phí phẫu thuật", "giá cả thế nào", "báo giá",
-                    "giá tiền", "tổng chi phí", "phí dịch vụ",
-                    "giá phẫu thuật", "chi phí thẩm mỹ"
-                ]
-                */
             };
 
             // Add documents to classifier

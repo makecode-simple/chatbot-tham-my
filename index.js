@@ -1,6 +1,10 @@
 // ====== IMPORTS ======
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+require('dotenv').config();
 
 // Replace with:
 const messengerClient = require('./services/messengerClient');
@@ -35,172 +39,76 @@ const handleMessage = require('./handleMessage');
 
 // ====== APP INIT ======
 const app = express();
+
+// Add security and logging middleware
+app.use(helmet());
+app.use(cors());
+app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-// ====== CONFIG OPENAI ======
-
-// ====== CONFIG CLOUDINARY ======
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+// Add error handling middleware
+app.use((err, req, res, next) => {
+  console.error('❌ Server error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
-// ====== LOAD DATA ======
-const countryDigitRules = JSON.parse(fs.readFileSync('./data/countryDigitRules.json', 'utf-8'));
+// Add basic health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
-// ====== SESSION USERS ======
-// Move these declarations to the top of the file, before any requires
-const completedUsers = new Set();
-const handoffUsers = new Set();
-const userResponses = new Map();
-
-// Export them immediately after declaration
-module.exports = {
-  completedUsers,
-  handoffUsers,
-  userResponses
-};
-
-// ====== TEXT NORMALIZATION ======
-function normalizeText(msg) {
-  return msg?.toLowerCase()
-    .normalize("NFD").replace(/\p{Diacritic}/gu, "")
-    .replace(/[!.,?~]/g, "")
-    .trim() || "";
-}
-
-// ====== VALIDATE PHONE ======
-const countryCodes = Object.keys(countryDigitRules);
-
-function isValidPhoneNumber(message) {
-  if (!message) return false;
-  let cleanNumber = message.replace(/\\s|-/g, '');
-
-  if (cleanNumber.startsWith('0')) {
-    cleanNumber = '+84' + cleanNumber.slice(1);
-  }
-
-  if (!cleanNumber.startsWith('+')) return false;
-
-  const countryCode = countryCodes.find(code => cleanNumber.startsWith(code));
-  if (!countryCode) {
-    const genericPhone = /^\\+\\d{6,15}$/.test(cleanNumber);
-    return genericPhone ? "unknown" : false;
-  }
-
-  const numberWithoutCode = cleanNumber.slice(countryCode.length);
-  const digitRule = countryDigitRules[countryCode];
-  if (!digitRule) return false;
-
-  const length = numberWithoutCode.length;
-  return length >= digitRule.min && length <= digitRule.max;
-}
-// Remove ChatGPT section
-// ====== CLOUDINARY FUNCTIONS ======
-async function getFeedbackImages(folder) {
+// Enhance webhook handler with error handling
+app.post('/webhook', async (req, res) => {
   try {
-    const result = await cloudinary.search
-      .expression(`folder:feedback/${folder} AND resource_type:image`)
-      .sort_by('public_id', 'desc')
-      .max_results(10)
-      .execute();
+    let body = req.body;
 
-    return result.resources.map(file => file.secure_url);
-  } catch (error) {
-    console.error('❌ Cloudinary fetch error:', error);
-    return [];
-  }
-}
+    if (body.object === 'page') {
+      for (const entry of body.entry) {
+        const webhook_event = entry.messaging[0];
+        const sender_psid = webhook_event.sender.id;
 
-async function getBangGiaImage(publicId) {
-  try {
-    const result = await cloudinary.search
-      .expression(`folder:banggia AND public_id:${publicId} AND resource_type:image`)
-      .max_results(1)
-      .execute();
-
-    return result.resources[0]?.secure_url || null;
-  } catch (error) {
-    console.error('❌ Cloudinary fetch bảng giá error:', error);
-    return null;
-  }
-}
-// Remove this line
-// const { handleUserMessage } = require('./messengerService');
-
-// Continue with webhook route
-// ====== WEBHOOK ROUTE ======
-// Remove this duplicate webhook handler
-// app.post("/webhook", async (req, res) => {
-//   const body = req.body;
-//   if (body.object === 'page') {
-//     body.entry.forEach(async function(entry) {
-//       const webhookEvent = entry.messaging[0];
-//       const senderId = webhookEvent.sender.id;
-//       const message = webhookEvent.message?.text;
-
-//       if (message) {
-//         const result = await predictIntent(message);
-
-//         if (result.intent === 'nang_nguc') {
-//           await sendNangNgucFlow(senderId);
-//         } else if (result.intent === 'nang_mui') {
-//           await sendNangMuiFlow(senderId);
-//         } else if (result.intent === 'faq') {
-//           await handleFollowUp(senderId, message);
-//         } else {
-//           await messengerService.sendMessage(senderId, {
-//             text: "Dạ chị ơi, em chưa rõ mình cần tư vấn dịch vụ nào ạ. Chị nói rõ giúp em nha!"
-//           });
-//         }
-//       }
-//     });
-//     res.status(200).send('EVENT_RECEIVED');
-//   } else {
-//     res.sendStatus(404);
-//   }
-// });
-
-// Keep only this MAIN WEBHOOK HANDLER
-app.post('/webhook', (req, res) => {
-  let body = req.body;
-
-  if (body.object === 'page') {
-    body.entry.forEach(function(entry) {
-      let webhook_event = entry.messaging[0];
-      let sender_psid = webhook_event.sender.id;
-
-      if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);
+        if (webhook_event.message) {
+          await handleMessage(sender_psid, webhook_event.message);
+        } else if (webhook_event.postback) {
+          // Handle postback events
+          await handlePostback(sender_psid, webhook_event.postback);
+        }
       }
-    });
-
-    res.status(200).send('EVENT_RECEIVED');
-  } else {
-    res.sendStatus(404);
-  }
-});
-
-// ====== VERIFY WEBHOOK ======
-app.get("/webhook", (req, res) => {
-  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-  const mode = req.query["hub.mode"];
-  const token = req.query["hub.verify_token"];
-  const challenge = req.query["hub.challenge"];
-
-  if (mode && token) {
-    if (mode === "subscribe" && token === VERIFY_TOKEN) {
-      console.log("WEBHOOK_VERIFIED");
-      res.status(200).send(challenge);
+      res.status(200).send('EVENT_RECEIVED');
     } else {
-      res.sendStatus(403);
+      res.sendStatus(404);
     }
+  } catch (error) {
+    console.error('❌ Webhook error:', error);
+    res.sendStatus(500);
   }
 });
+
+// Add postback handler
+async function handlePostback(sender_psid, postback) {
+  try {
+    const payload = postback.payload;
+    await handleMessage(sender_psid, { text: payload });
+  } catch (error) {
+    console.error('❌ Postback error:', error);
+  }
+}
+
+// Add graceful shutdown
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
+
+function shutdown() {
+  console.log('🛑 Shutting down gracefully...');
+  server.close(() => {
+    console.log('✅ Server closed');
+    process.exit(0);
+  });
+}
 
 // ====== START SERVER ======
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log('Environment:', process.env.NODE_ENV || 'development');
 });
