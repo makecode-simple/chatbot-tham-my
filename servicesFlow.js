@@ -83,7 +83,8 @@ const serviceFlows = {
   sendHutMoTiemLenMatFlow: require('./flows/hutMoTiemLenMatFlow'),
   sendFeedbackFlow: require('./flows/feedbackFlow'),
   // Add FAQ flows
-  sendFaqThaoTuiFlow: require('./flows/faqThaoTuiFlow'),
+  // Change from sendFaqThaoTuiFlow to sendThaoTuiFaq to match the intent handler
+  sendThaoTuiFaq: require('./flows/faqThaoTuiFlow'),
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
   // Fix: Use consistent naming for the faqNgucBayFlow
   sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
