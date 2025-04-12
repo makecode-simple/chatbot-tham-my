@@ -9,7 +9,21 @@
         "chi phí đặt túi ngực",
         "nâng ngực ở đâu tốt",
         "muốn nâng ngực",
-        "nâng ngực bao lâu thì lành"
+        "nâng ngực bao lâu thì lành",
+        "tháo túi ngực",
+        "thay túi ngực",
+        "nâng ngực an toàn không",
+        "đặt túi ngực",
+        "độn ngực",
+        "độn túi ngực",
+        "nâng ngực nội soi",
+        "phẫu thuật ngực",
+        "làm ngực",
+        "ngực to hơn",
+        "tháo túi ngực cũ",
+        "bóc bao xơ",
+        "tái tạo vú sau ung thư",
+        "nâng ngực chảy xệ"
       ]
     },
     {
@@ -20,7 +34,495 @@
         "sửa mũi hết bao nhiêu",
         "nâng mũi có đau không",
         "tư vấn nâng mũi",
-        "chi phí nâng mũi"
+        "chi phí nâng mũi",
+        "muốn sửa mũi",
+        "nâng mũi sụn sườn",
+        "chỉnh sửa mũi hỏng",
+        "mũi bị lệch",
+        "mũi bị biến chứng",
+        "sửa mũi hỏng",
+        "nâng mũi tái cấu trúc",
+        "làm mũi",
+        "độn mũi",
+        "nâng cao sống mũi",
+        "mũi tẹt",
+        "mũi ngắn",
+        "mũi to",
+        "sửa đầu mũi",
+        "chỉnh mũi lỗi"
+      ]
+    },
+    {
+      "intent": "tham_my_mat",
+      "examples": [
+        "cắt mí mắt",
+        "nhấn mí",
+        "bấm mí",
+        "tư vấn về mắt",
+        "phẫu thuật mắt",
+        "mắt bị xệ",
+        "mắt một mí",
+        "mắt không đều",
+        "treo cung mày",
+        "chỉnh sửa mắt",
+        "mắt to",
+        "mắt nhỏ",
+        "mắt xếch",
+        "mắt ba rọi",
+        "lấy mỡ mí mắt",
+        "chữa sụp mí",
+        "mở rộng góc mắt"
+      ]
+    },
+    {
+      "intent": "tham_my_cam",
+      "examples": [
+        "độn cằm",
+        "gọt cằm",
+        "cằm ngắn",
+        "cằm lệch",
+        "chỉnh cằm",
+        "làm cằm vline",
+        "cằm bị hô",
+        "cằm chẻ",
+        "cằm nhọn",
+        "cằm vuông",
+        "thẩm mỹ cằm",
+        "làm thon gọn cằm"
+      ]
+    },
+    {
+      "intent": "hut_mo",
+      "examples": [
+        "hút mỡ bụng",
+        "giảm mỡ bụng",
+        "lipo bụng",
+        "giảm béo bụng",
+        "hút mỡ nội soi",
+        "hút mỡ tay",
+        "hút mỡ đùi",
+        "hút mỡ lưng",
+        "tạo hình thành bụng",
+        "giảm mỡ không phẫu thuật",
+        "hút mỡ body",
+        "hút mỡ bắp tay",
+        "giảm mỡ nhanh",
+        "hút mỡ có đau không"
+      ]
+    },
+    {
+      "intent": "cang_da",
+      "examples": [
+        "căng da mặt",
+        "trẻ hóa da",
+        "căng chỉ",
+        "căng da chảy xệ",
+        "xóa nhăn",
+        "làm căng da mặt",
+        "căng da không phẫu thuật",
+        "căng da bằng chỉ",
+        "căng chỉ collagen",
+        "xóa nếp nhăn mặt",
+        "căng da toàn diện",
+        "trẻ hóa da mặt"
+      ]
+    },
+    {
+      "intent": "tham_my_vung_kin",
+      "examples": [
+        "thẩm mỹ vùng kín",
+        "se khít vùng kín",
+        "trẻ hóa vùng kín",
+        "phẫu thuật vùng kín",
+        "làm hồng vùng kín",
+        "tạo hình vùng kín",
+        "thu hẹp vùng kín"
+      ]
+    },
+    {
+      "intent": "dia_chi",
+      "examples": [
+        "địa chỉ ở đâu",
+        "phòng khám ở đâu",
+        "cho hỏi địa chỉ",
+        "địa điểm phòng khám",
+        "bệnh viện ở đâu",
+        "địa chỉ bác sĩ",
+        "phòng khám nằm ở đâu",
+        "đường đi đến phòng khám",
+        "d/c ở đâu",
+        "d/c o dau",
+        "địa chỉ phòng khám",
+        "dia chi phong kham",
+        "địa chỉ bác sĩ vũ",
+        "dia chi bac si vu",
+        "address ở đâu",
+        "address o dau",
+        "add ở đâu",
+        "add o dau",
+        "chỗ khám ở đâu",
+        "cho kham o dau",
+        "văn phòng ở đâu",
+        "van phong o dau",
+        "cơ sở ở đâu",
+        "co so o dau",
+        "địa điểm",
+        "dia diem",
+        "nơi khám",
+        "noi kham"
+      ]
+    },
+    {
+      "intent": "dat_lich",
+      "examples": [
+        "đặt lịch",
+        "hẹn khám",
+        "đăng ký tư vấn",
+        "muốn gặp bác sĩ",
+        "lịch khám",
+        "đặt hẹn",
+        "xin số điện thoại",
+        "cho xin địa chỉ",
+        "muốn được tư vấn",
+        "tư vấn trực tiếp",
+        "book lịch",
+        "lịch trống",
+        "cho em xin điện thoại",
+        "xin zalo",
+        "xin viber",
+        "muốn tư vấn",
+        "gặp trực tiếp",
+        "muốn đến khám",
+        "hẹn",
+        "xin điện thoại tư vấn",
+        "tư vấn",
+        "tư vấn giúp em",
+        "cho em lịch",
+        "muốn book lịch",
+        "book lịch khám",
+        "lịch tư vấn",
+        "cho xin điện thoại",
+        "điện thoại của chị là",
+        "điện thoại của em là",
+        "số của chị là",
+        "số của em là",
+        "điện thoại",
+        "sdt",
+        "đây là số của chị",
+        "đây là số của em",
+        "zalo của chị là",
+        "zalo của em là",
+        "zalo của chị",
+        "zalo của em",
+        "viber của chị là",
+        "viber của em là"
+      ]
+    },
+    {
+      "intent": "gia_nang_nguc",
+      "examples": [
+        "giá nâng ngực",
+        "chi phí nâng ngực",
+        "phí đặt túi ngực",
+        "nâng ngực giá bao nhiêu",
+        "chi phí phẫu thuật ngực",
+        "giá thay túi ngực",
+        "chi phí tháo túi ngực",
+        "phí bóc bao xơ",
+        "báo giá nâng ngực",
+        "nâng ngực hết bao nhiêu tiền"
+      ]
+    },
+    {
+      "intent": "gia_nang_mui",
+      "examples": [
+        "giá nâng mũi",
+        "chi phí nâng mũi",
+        "phí sửa mũi",
+        "nâng mũi giá bao nhiêu",
+        "chi phí phẫu thuật mũi",
+        "giá nâng mũi sụn sườn",
+        "chi phí chỉnh mũi",
+        "sửa mũi hết bao nhiêu",
+        "báo giá nâng mũi",
+        "phí nâng mũi cấu trúc"
+      ]
+    },
+    {
+      "intent": "gia_mat",
+      "examples": [
+        "giá cắt mí",
+        "chi phí nhấn mí",
+        "phí bấm mí",
+        "cắt mí giá bao nhiêu",
+        "chi phí phẫu thuật mắt",
+        "giá treo cung mày",
+        "chi phí chỉnh mắt",
+        "phẫu thuật mắt giá bao nhiêu",
+        "báo giá cắt mí"
+      ]
+    },
+    {
+      "intent": "gia_tham_my_cam",
+      "examples": [
+        "giá độn cằm",
+        "chi phí gọt cằm",
+        "phí chỉnh cằm",
+        "độn cằm giá bao nhiêu",
+        "chi phí làm cằm v-line",
+        "giá phẫu thuật cằm",
+        "thẩm mỹ cằm giá bao nhiêu"
+      ]
+    },
+    {
+      "intent": "gia_hut_mo",
+      "examples": [
+        "giá hút mỡ",
+        "chi phí hút mỡ bụng",
+        "phí giảm mỡ",
+        "hút mỡ giá bao nhiêu",
+        "chi phí hút mỡ đùi",
+        "giá hút mỡ lưng",
+        "chi phí hút mỡ tay",
+        "phí tạo hình thành bụng"
+      ]
+    },
+    {
+      "intent": "gia_cang_da",
+      "examples": [
+        "giá căng da mặt",
+        "chi phí trẻ hóa da",
+        "phí căng chỉ",
+        "căng da giá bao nhiêu",
+        "chi phí xóa nhăn",
+        "giá căng da toàn diện",
+        "phí căng chỉ collagen"
+      ]
+    },
+    {
+      "intent": "gia_vung_kin",
+      "examples": [
+        "giá thẩm mỹ vùng kín",
+        "chi phí se khít",
+        "phí tạo hình vùng kín",
+        "thẩm mỹ vùng kín giá bao nhiêu",
+        "chi phí trẻ hóa vùng kín"
+      ]
+    },
+    {
+      "intent": "hoi_gia",
+      "examples": [
+        "bảng giá",
+        "giá các dịch vụ",
+        "chi phí thẩm mỹ",
+        "phí dịch vụ",
+        "giá cả thế nào",
+        "báo giá tổng",
+        "giá bao nhiêu",
+        "chi phí",
+        "phí phẫu thuật",
+        "giá tiền",
+        "tổng chi phí",
+        "giá phẫu thuật"
+      ]
+    },
+    {
+      "intent": "xem_feedback",
+      "examples": [
+        "xem kết quả",
+        "hình ảnh trước sau",
+        "khách hàng làm",
+        "review kết quả",
+        "feedback khách hàng",
+        "kết quả thẩm mỹ",
+        "hình ảnh thực tế"
+      ]
+    },
+    {
+      "intent": "bien_chung",
+      "examples": [
+        "biến chứng",
+        "bị biến chứng",
+        "có biến chứng",
+        "bị biến chứng phẫu thuật",
+        "bị biến chứng thẩm mỹ",
+        "bị biến chứng sau phẫu thuật",
+        "lo bị biến chứng",
+        "phẫu thuật có nguy hiểm không",
+        "có rủi ro gì không"
+      ]
+    },
+    {
+      "intent": "treo_sa_tre",
+      "examples": [
+        "sa trễ",
+        "ngực sa",
+        "ngực trễ",
+        "sa trễ ngực",
+        "treo ngực sa",
+        "treo sa",
+        "treo ngực",
+        "phẫu thuật sa trễ",
+        "phẫu thuật treo ngực"
+      ]
+    },
+    {
+      "intent": "faq_thao_tui",
+      "examples": [
+        "tháo túi ngực",
+        "tháo túi không đau"
+      ]
+    },
+    {
+      "intent": "faq_nang_nguc_dao",
+      "examples": [
+        "nâng ngực dao siêu âm",
+        "nâng ngực không đau"
+      ]
+    },
+    {
+      "intent": "faq_nguc_bay",
+      "examples": [
+        "bài tập sau nâng ngực",
+        "bài tập sau phẫu thuật ngực",
+        "xử lý vết sẹo sau nâng ngực"
+      ]
+    },
+    {
+      "intent": "chao_hoi",
+      "examples": [
+        "xin chào",
+        "chào bạn",
+        "hello",
+        "hi",
+        "chào",
+        "xin chào bác sĩ",
+        "chào em",
+        "có ai ở đó không",
+        "bạn ơi",
+        "em ơi",
+        "chào buổi sáng",
+        "chào buổi chiều"
+      ]
+    },
+    {
+      "intent": "cam_on",
+      "examples": [
+        "cảm ơn",
+        "cảm ơn bạn",
+        "cảm ơn nhiều",
+        "thank you",
+        "thanks",
+        "cám ơn nhé",
+        "cám ơn em",
+        "cám ơn bác sĩ"
+      ]
+    },
+    {
+      "intent": "hoi_kinh_nghiem",
+      "examples": [
+        "bác sĩ có kinh nghiệm không",
+        "bác sĩ làm được bao nhiêu ca",
+        "kinh nghiệm của bác sĩ",
+        "bác sĩ làm được bao lâu rồi",
+        "bác sĩ có giỏi không",
+        "bác sĩ có chuyên môn không",
+        "bác sĩ đã làm bao nhiêu ca phẫu thuật",
+        "bác sĩ có chứng chỉ không"
+      ]
+    },
+    {
+      "intent": "thoi_gian_phuc_hoi",
+      "examples": [
+        "thời gian hồi phục",
+        "bao lâu thì lành",
+        "bao lâu thì hết sưng",
+        "phục hồi mất bao lâu",
+        "bao lâu thì đi làm lại được",
+        "thời gian nghỉ dưỡng",
+        "bao lâu thì ổn định",
+        "khi nào thì lành hẳn",
+        "thời gian nghỉ ngơi sau phẫu thuật"
+      ]
+    },
+    {
+      "intent": "bao_hanh",
+      "examples": [
+        "bảo hành bao lâu",
+        "có bảo hành không",
+        "chế độ bảo hành",
+        "thời gian bảo hành",
+        "bảo hành trọn đời không",
+        "nếu có vấn đề thì sao",
+        "bảo hành như thế nào",
+        "chính sách bảo hành"
+      ]
+    },
+    {
+      "intent": "thanh_toan",
+      "examples": [
+        "thanh toán như thế nào",
+        "phương thức thanh toán",
+        "trả góp được không",
+        "có thể trả góp không",
+        "thanh toán bằng thẻ được không",
+        "có thanh toán online không",
+        "chuyển khoản được không",
+        "có giảm giá không",
+        "có khuyến mãi không"
+      ]
+    },
+    {
+      "intent": "ket_thuc",
+      "examples": [
+        "tạm biệt",
+        "bye",
+        "goodbye",
+        "hẹn gặp lại",
+        "chào tạm biệt",
+        "kết thúc",
+        "kết thúc cuộc trò chuyện"
+      ]
+    },
+    {
+      "intent": "hoi_dau",
+      "examples": [
+        "có đau không",
+        "đau lắm không",
+        "mức độ đau",
+        "có đau nhiều không",
+        "đau trong bao lâu",
+        "có gây mê không",
+        "có tê không",
+        "cảm giác đau thế nào",
+        "có cách giảm đau không"
+      ]
+    },
+    {
+      "intent": "hoi_an_toan",
+      "examples": [
+        "có an toàn không",
+        "độ an toàn",
+        "rủi ro là gì",
+        "nguy hiểm không",
+        "tỉ lệ thành công",
+        "có nguy cơ gì không",
+        "có ai gặp vấn đề không",
+        "có an toàn tuyệt đối không",
+        "mức độ an toàn"
+      ]
+    },
+    {
+      "intent": "hoi_san_pham",
+      "examples": [
+        "sử dụng sản phẩm gì",
+        "túi ngực hãng nào",
+        "chất liệu túi ngực",
+        "sản phẩm có chất lượng không",
+        "nguồn gốc sản phẩm",
+        "sản phẩm nhập từ đâu",
+        "có chứng nhận không",
+        "sản phẩm chính hãng không"
       ]
     }
   ]
