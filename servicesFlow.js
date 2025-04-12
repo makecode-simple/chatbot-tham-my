@@ -104,3 +104,14 @@ const serviceFlows = {
 };
 
 module.exports = serviceFlows;
+
+// Import the faqNgucBayFlow
+const faqNgucBayFlow = require('./flows/faqNgucBayFlow');
+
+// Register the faqNgucBayFlow in your dialog set or router
+dialogSet.add(faqNgucBayFlow);
+
+// Make sure to handle the intent in your main dialog or router
+if (intent === 'faq_nguc_bay') {
+    return await dc.beginDialog('faqNgucBayFlow');
+}
