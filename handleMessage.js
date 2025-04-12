@@ -163,7 +163,7 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
         await serviceFlows.sendNangNgucDaoFaq(sender_psid);
         break;
       case 'faq_nguc_bay':
-        await serviceFlows.sendNgucBayFaq(sender_psid);
+        await serviceFlows.sendFaqNgucBayFlow(sender_psid);
         break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);
