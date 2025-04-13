@@ -308,7 +308,62 @@ classifier.addDocument('bay sau nâng ngực', 'faq_nguc_bay');
 const intents = {
     weight: 10,
     phrases: [
-        "đi máy bay sau nâng ngực",
+        "đi // ... existing code ...
+
+// Add training data for treo_sa_tre
+const treoSaTreData = [
+    "treo sa trễ",
+    "sa trễ",
+    "ngực sa",
+    "ngực trễ",
+    "sa trễ ngực",
+    "treo ngực sa",
+    "treo sa",
+    "treo ngực",
+    "phẫu thuật sa trễ",
+    "khắc phục ngực sa",
+    "khắc phục ngực trễ",
+    "nâng ngực sa trễ",
+    "phẫu thuật treo ngực",
+    "tư vấn treo sa trễ",
+    "tư vấn ngực sa",
+    "hỏi về sa trễ",
+    "ngực bị sa",
+    "ngực bị trễ"
+];
+
+treoSaTreData.forEach(text => {
+    classifier.addDocument(normalizeText(text), 'treo_sa_tre', 12);
+});
+
+// Add FAQ intents with proper structure
+const faqIntents = {
+    "faq_nguc_bay": {
+        weight: 10,
+        phrases: [
+            "đi máy bay sau nâng ngực",
+            "bay sau nâng ngực",
+            "khi nào được đi máy bay",
+            "xuất viện sau bao lâu",
+            "thời gian nằm viện",
+            "bao lâu thì xuất viện",
+            "thời gian hồi phục",
+            "bao giờ được bay",
+            "có thể đi máy bay không",
+            "bay quốc tế sau nâng ngực",
+            "bay nội địa sau nâng ngực"
+        ]
+    }
+};
+
+// Add FAQ documents with weights
+Object.entries(faqIntents).forEach(([intent, data]) => {
+    data.phrases.forEach(text => {
+        classifier.addDocument(normalizeText(text), intent, data.weight);
+    });
+});
+
+// ... rest of your code ... sau nâng ngực",
         "bay sau nâng ngực",
         "khi nào được đi máy bay",
         "xuất viện sau bao lâu",
@@ -806,4 +861,374 @@ classifier.addDocument('tư vấn size túi', 'faq_size_tui');
 classifier.addDocument('tư vấn form túi', 'faq_size_tui');
 classifier.addDocument('túi ngực size nào', 'faq_size_tui');
 classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui);
+classifier.addDocument('túi ngực loại nào', 'faq_size_tui);// ... existing code ...
+
+// Fix the syntax error in the last line
+classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
+
+// Add missing intents from training_data.json that aren't already in the file
+// Add chao_hoi intent if not already present
+if (!trainingData.chao_hoi) {
+    trainingData.chao_hoi = [
+        "xin chào",
+        "chào bạn",
+        "hello",
+        "hi",
+        "chào",
+        "xin chào bác sĩ",
+        "chào em",
+        "có ai ở đó không",
+        "bạn ơi",
+        "em ơi",
+        "chào buổi sáng",
+        "chào buổi chiều"
+    ];
+    
+    trainingData.chao_hoi.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'chao_hoi');
+    });
+}
+
+// Add cam_on intent if not already present
+if (!trainingData.cam_on) {
+    trainingData.cam_on = [
+        "cảm ơn",
+        "cảm ơn bạn",
+        "cảm ơn nhiều",
+        "thank you",
+        "thanks",
+        "cám ơn nhé",
+        "cám ơn em",
+        "cám ơn bác sĩ"
+    ];
+    
+    trainingData.cam_on.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'cam_on');
+    });
+}
+
+// Add ket_thuc intent if not already present
+if (!trainingData.ket_thuc) {
+    trainingData.ket_thuc = [
+        "tạm biệt",
+        "bye",
+        "goodbye",
+        "hẹn gặp lại",
+        "chào tạm biệt",
+        "kết thúc",
+        "kết thúc cuộc trò chuyện"
+    ];
+    
+    trainingData.ket_thuc.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'ket_thuc');
+    });
+}
+
+// Add hoi_kinh_nghiem intent if not already present
+if (!trainingData.hoi_kinh_nghiem) {
+    trainingData.hoi_kinh_nghiem = [
+        "bác sĩ có kinh nghiệm không",
+        "bác sĩ làm được bao nhiêu ca",
+        "kinh nghiệm của bác sĩ",
+        "bác sĩ làm được bao lâu rồi",
+        "bác sĩ có giỏi không",
+        "bác sĩ có chuyên môn không",
+        "bác sĩ đã làm bao nhiêu ca phẫu thuật",
+        "bác sĩ có chứng chỉ không"
+    ];
+    
+    trainingData.hoi_kinh_nghiem.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'hoi_kinh_nghiem');
+    });
+}
+
+// Add thoi_gian_phuc_hoi intent if not already present
+if (!trainingData.thoi_gian_phuc_hoi) {
+    trainingData.thoi_gian_phuc_hoi = [
+        "thời gian hồi phục",
+        "bao lâu thì lành",
+        "bao lâu thì hết sưng",
+        "phục hồi mất bao lâu",
+        "bao lâu thì đi làm lại được",
+        "thời gian nghỉ dưỡng",
+        "bao lâu thì ổn định",
+        "khi nào thì lành hẳn",
+        "thời gian nghỉ ngơi sau phẫu thuật"
+    ];
+    
+    trainingData.thoi_gian_phuc_hoi.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'thoi_gian_phuc_hoi');
+    });
+}
+
+// Add bao_hanh intent if not already present
+if (!trainingData.bao_hanh) {
+    trainingData.bao_hanh = [
+        "bảo hành bao lâu",
+        "có bảo hành không",
+        "chế độ bảo hành",
+        "thời gian bảo hành",
+        "bảo hành trọn đời không",
+        "nếu có vấn đề thì sao",
+        "bảo hành như thế nào",
+        "chính sách bảo hành"
+    ];
+    
+    trainingData.bao_hanh.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'bao_hanh');
+    });
+}
+
+// Add thanh_toan intent if not already present
+if (!trainingData.thanh_toan) {
+    trainingData.thanh_toan = [
+        "thanh toán như thế nào",
+        "phương thức thanh toán",
+        "trả góp được không",
+        "có thể trả góp không",
+        "thanh toán bằng thẻ được không",
+        "có thanh toán online không",
+        "chuyển khoản được không",
+        "có giảm giá không",
+        "có khuyến mãi không"
+    ];
+    
+    trainingData.thanh_toan.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'thanh_toan');
+    });
+}
+
+// Add hoi_dau intent if not already present
+if (!trainingData.hoi_dau) {
+    trainingData.hoi_dau = [
+        "có đau không",
+        "đau lắm không",
+        "mức độ đau",
+        "có đau nhiều không",
+        "đau trong bao lâu",
+        "có gây mê không",
+        "có tê không",
+        "cảm giác đau thế nào",
+        "có cách giảm đau không"
+    ];
+    
+    trainingData.hoi_dau.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'hoi_dau');
+    });
+}
+
+// Add hoi_an_toan intent if not already present
+if (!trainingData.hoi_an_toan) {
+    trainingData.hoi_an_toan = [
+        "có an toàn không",
+        "độ an toàn",
+        "rủi ro là gì",
+        "nguy hiểm không",
+        "tỉ lệ thành công",
+        "có nguy cơ gì không",
+        "có ai gặp vấn đề không",
+        "có an toàn tuyệt đối không",
+        "mức độ an toàn"
+    ];
+    
+    trainingData.hoi_an_toan.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'hoi_an_toan');
+    });
+}
+
+// Add hoi_san_pham intent if not already present
+if (!trainingData.hoi_san_pham) {
+    trainingData.hoi_san_pham = [
+        "sử dụng sản phẩm gì",
+        "túi ngực hãng nào",
+        "chất liệu túi ngực",
+        "sản phẩm có chất lượng không",
+        "nguồn gốc sản phẩm",
+        "sản phẩm nhập từ đâu",
+        "có chứng nhận không",
+        "sản phẩm chính hãng không"
+    ];
+    
+    trainingData.hoi_san_pham.forEach(text => {
+        classifier.addDocument(normalizeText(text), 'hoi_san_pham');
+    });
+}
+
+// Fix the treo_sa_tre object definition
+const treo_sa_tre_phrases = [
+    "treo sa trễ",
+    "sa trễ",
+    "ngực sa",
+    "ngực trễ",
+    "sa trễ ngực",
+    "treo ngực sa",
+    "treo sa",
+    "treo ngực",
+    "phẫu thuật sa trễ",
+    "khắc phục ngực sa",
+    "khắc phục ngực trễ",
+    "nâng ngực sa trễ",
+    "phẫu thuật treo ngực",
+    "tư vấn treo sa trễ",
+    "tư vấn ngực sa",
+    "hỏi về sa trễ",
+    "ngực bị sa",
+    "ngực bị trễ"
+];
+
+treo_sa_tre_phrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'treo_sa_tre', 12);
+});
+
+// Fix the faq_nguc_bay object definition
+const faq_nguc_bay_phrases = [
+    "đi máy bay sau nâng ngực",
+    "bay sau nâng ngực",
+    "khi nào được đi máy bay",
+    "xuất viện sau bao lâu",
+    "thời gian nằm viện",
+    "bao lâu thì xuất viện",
+    "thời gian hồi phục",
+    "bao giờ được bay",
+    "có thể đi máy bay không",
+    "bay quốc tế sau nâng ngực",
+    "bay nội địa sau nâng ngực",
+    "xuất viện sau nâng ngực"
+];
+
+faq_nguc_bay_phrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'faq_nguc_bay', 10);
+});
+
+// Fix the faq_nang_nguc_dao object definition
+const faq_nang_nguc_dao_phrases = [
+    "nâng ngực dao siêu âm",
+    "nâng ngực không đau",
+    "dao mổ siêu âm",
+    "nâng ngực ultrasonic",
+    "phương pháp nâng ngực không đau",
+    "nâng ngực có đau không",
+    "nâng ngực bằng dao siêu âm",
+    "dao siêu âm nâng ngực",
+    "pp nang nguc dao sieu am",
+    "phuong pahp nang nguc dao sieu am",
+    "phương pháp nâng ngực bằng dao siêu âm"
+];
+
+faq_nang_nguc_dao_phrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'faq_nang_nguc_dao', 10);
+});
+
+// Fix the faq_thao_tui object definition
+const faq_thao_tui_phrases = [
+    "tháo túi ngực",
+    "rút túi ngực",
+    "tháo túi ngực cũ",
+    "thay túi ngực",
+    "tháo túi silicon",
+    "tháo túi không đau",
+    "tháo túi ngực có đau không",
+    "tháo túi ngực bao lâu"
+];
+
+faq_thao_tui_phrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'faq_thao_tui', 10);
+});
+
+// Add missing price-related intents
+const price_intents = {
+    "gia_nang_nguc": [
+        "giá nâng ngực",
+        "chi phí nâng ngực",
+        "phí đặt túi ngực",
+        "nâng ngực giá bao nhiêu",
+        "chi phí phẫu thuật ngực",
+        "giá thay túi ngực",
+        "chi phí tháo túi ngực",
+        "phí bóc bao xơ",
+        "báo giá nâng ngực",
+        "nâng ngực hết bao nhiêu tiền"
+    ],
+    "gia_nang_mui": [
+        "giá nâng mũi",
+        "chi phí nâng mũi",
+        "phí sửa mũi",
+        "nâng mũi giá bao nhiêu",
+        "chi phí phẫu thuật mũi",
+        "giá nâng mũi sụn sườn",
+        "chi phí chỉnh mũi",
+        "sửa mũi hết bao nhiêu",
+        "báo giá nâng mũi",
+        "phí nâng mũi cấu trúc"
+    ],
+    "gia_mat": [
+        "giá cắt mí",
+        "chi phí nhấn mí",
+        "phí bấm mí",
+        "cắt mí giá bao nhiêu",
+        "chi phí phẫu thuật mắt",
+        "giá treo cung mày",
+        "chi phí chỉnh mắt",
+        "phẫu thuật mắt giá bao nhiêu",
+        "báo giá cắt mí"
+    ],
+    "gia_tham_my_cam": [
+        "giá độn cằm",
+        "chi phí gọt cằm",
+        "phí chỉnh cằm",
+        "độn cằm giá bao nhiêu",
+        "chi phí làm cằm v-line",
+        "giá phẫu thuật cằm",
+        "thẩm mỹ cằm giá bao nhiêu"
+    ],
+    "gia_hut_mo": [
+        "giá hút mỡ",
+        "chi phí hút mỡ bụng",
+        "phí giảm mỡ",
+        "hút mỡ giá bao nhiêu",
+        "chi phí hút mỡ đùi",
+        "giá hút mỡ lưng",
+        "chi phí hút mỡ tay",
+        "phí tạo hình thành bụng"
+    ],
+    "gia_cang_da": [
+        "giá căng da mặt",
+        "chi phí trẻ hóa da",
+        "phí căng chỉ",
+        "căng da giá bao nhiêu",
+        "chi phí xóa nhăn",
+        "giá căng da toàn diện",
+        "phí căng chỉ collagen"
+    ],
+    "gia_vung_kin": [
+        "giá thẩm mỹ vùng kín",
+        "chi phí se khít",
+        "phí tạo hình vùng kín",
+        "thẩm mỹ vùng kín giá bao nhiêu",
+        "chi phí trẻ hóa vùng kín"
+    ]
+};
+
+// Add price-related intents if not already present
+Object.keys(price_intents).forEach(intent => {
+    if (!trainingData[intent]) {
+        trainingData[intent] = price_intents[intent];
+        
+        price_intents[intent].forEach(text => {
+            classifier.addDocument(normalizeText(text), intent, 8);
+        });
+    }
+});
+
+// Add code to train and save the model if not already present
+// Train the classifier
+classifier.train();
+
+// Save the trained model
+classifier.save('model.json', (err) => {
+    if (err) {
+        console.error('Error saving model:', err);
+    } else {
+        console.log('Model trained and saved successfully!');
+    }
+});
