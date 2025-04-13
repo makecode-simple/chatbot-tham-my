@@ -1107,7 +1107,61 @@ const faq_nang_nguc_dao_phrases = [
     "dao mổ siêu âm",
     "nâng ngực ultrasonic",
     "phương pháp nâng ngực không đau",
-    "nâng ngực có đau không",
+    "nâng ngực có đau không",// ... existing code ...
+
+// Define FAQ intents with proper structure
+const faqIntents = {
+  "faq_nang_nguc_dao": {
+    weight: 10,
+    phrases: [
+      "nâng ngực dao siêu âm",
+      "nâng ngực không đau",
+      "nâng ngực có đau không",
+      "dao mổ siêu âm",
+      "nâng ngực ultrasonic",
+      "phương pháp nâng ngực không đau",
+      "nâng ngực bằng dao siêu âm",
+      "dao siêu âm nâng ngực",
+      "pp nang nguc dao sieu am",
+      "phương pháp nâng ngực bằng dao siêu âm"
+    ]
+  },
+  "faq_size_tui": {
+    weight: 12,
+    phrases: [
+      "size túi ngực",
+      "form túi ngực", 
+      "kích thước túi",
+      "size nâng ngực",
+      "chọn size túi",
+      "túi ngực size nào",
+      "form túi thế nào",
+      "túi ngực loại nào",
+      "size phù hợp",
+      "kích cỡ túi ngực",
+      "tư vấn size túi",
+      "tư vấn form túi"
+    ]
+  }
+};
+
+// Add FAQ documents with weights
+Object.entries(faqIntents).forEach(([intent, data]) => {
+  data.phrases.forEach(text => {
+    classifier.addDocument(normalizeText(text), intent, data.weight);
+  });
+});
+
+// Train and save the model
+classifier.train();
+
+classifier.save('model.json', (err) => {
+  if (err) {
+    console.error('Error saving model:', err);
+  } else {
+    console.log('Model trained and saved successfully!');
+  }
+});
     "nâng ngực bằng dao siêu âm",
     "dao siêu âm nâng ngực",
     "pp nang nguc dao sieu am",
