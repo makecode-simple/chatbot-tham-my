@@ -168,6 +168,9 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
       case 'faq_size_tui':
         await serviceFlows.sendFaqSizeTuiFlow(sender_psid);
         break;
+      case 'faq_dau_nghi':
+        await serviceFlows.sendDauNghiFaq(sender_psid);
+        break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);
     }

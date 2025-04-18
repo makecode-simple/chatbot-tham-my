@@ -5,6 +5,20 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "faq_dau_nghi": [
+        "có đau không",
+        "đau không em",
+        "có đau lắm không",
+        "đau nhiều không",
+        "nghỉ dưỡng bao lâu",
+        "cần nghỉ ngơi không",
+        "bao lâu thì hồi phục",
+        "thời gian nghỉ dưỡng",
+        "có phải nằm viện lâu không",
+        "nằm viện mấy ngày",
+        "bao lâu thì đi làm được",
+        "khi nào thì hoạt động bình thường"
+    ],
     "menu_dich_vu": [
         "xem các dịch vụ",
         "menu dịch vụ",

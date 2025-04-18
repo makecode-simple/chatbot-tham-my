@@ -1,5 +1,16 @@
 const messengerClient = require('../services/messengerClient');
 
+async function sendDauNghiFaq(sender_psid) {
+  await messengerClient.sendMessage(sender_psid, {
+    text: `Không đau ạ. Bác Vũ sử dụng dao siêu âm thế hệ mới nên:
+- Không đau, không chảy máu
+- Xuất viện và trở lại cuộc sống bình thường ngay sau 6-10 tiếng
+- Không cần uống thuốc giảm đau hay kháng sinh
+- Không cần nghỉ dưỡng, có thể đi làm bình thường ngay ngày hôm sau
+- Sau 2 ngày có thể bay nội địa, 7 ngày bay quốc tế`
+  });
+}
+
 async function sendThaoTuiFaq(sender_psid) {
   await messengerClient.sendMessage(sender_psid, {
     text: "Bác Vũ tháo túi không đau, không cần nghĩ dưỡng ạ."
@@ -33,6 +44,7 @@ Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ`
 }
 
 module.exports = {
+  sendDauNghiFaq,
   sendThaoTuiFaq,
   sendNangNgucDaoFaq,
   sendNgucBayFaq
