@@ -1,522 +1,7447 @@
-{"classifier":{"classFeatures":{"menu_dich_vu":{"0":2,"1":4,"2":12,"3":12,"4":3,"5":3,"6":6,"7":6,"8":5,"9":4,"10":3,"11":3,"12":2,"13":2,"14":2,"15":2,"16":2,"17":4,"18":2,"19":2,"20":2},"nang_nguc":{"10":2,"11":2,"12":3,"18":2,"21":7,"22":11,"23":2,"24":3,"25":2,"26":2,"27":2,"28":3,"29":3,"30":2,"31":2,"32":4,"33":2,"34":2,"35":2,"36":2,"37":2,"38":2,"39":2,"40":2,"41":2},"nang_mui":{"6":2,"9":2,"10":4,"11":4,"12":3,"18":4,"21":13,"24":3,"25":3,"26":4,"27":4,"28":3,"29":3,"42":23,"43":3,"44":5,"45":3,"46":3,"47":2,"48":3,"49":3,"50":2,"51":2,"52":2,"58":3,"83":2,"84":2,"134":2},"tham_my_mat":{"10":4,"11":4,"26":2,"27":2,"29":2,"44":2,"47":2,"49":2,"53":3,"54":6,"55":9,"56":2,"57":2,"58":3,"59":2,"60":2,"61":2,"62":2,"63":2,"64":2,"81":2,"82":2,"84":2,"94":2},"tham_my_cam":{"6":2,"47":2,"50":2,"65":7,"66":2,"67":2},"cang_da":{"6":2,"30":2,"55":3,"56":2,"59":2,"68":5,"69":7,"70":2,"71":2,"72":2,"73":2,"135":3,"136":5},"hoi_gia":{"14":2,"20":2,"23":4,"24":2,"25":2,"26":2,"27":2,"30":2,"31":3,"74":2},"dat_lich":{"10":9,"11":9,"18":6,"30":7,"75":9,"76":4,"77":6,"78":2,"79":2,"80":3,"81":2,"82":2,"83":4,"84":10,"85":7,"86":9,"87":9,"88":6,"89":4,"90":3,"91":3,"92":2,"93":2,"94":2,"95":3,"96":13,"97":11,"98":2,"99":3},"dia_chi":{"11":2,"28":5,"30":4,"77":8,"81":2,"82":2,"83":2,"92":3,"100":8,"101":4,"102":2,"103":2,"104":2,"105":3},"hut_mo":{"12":2,"26":2,"27":2,"28":2,"29":3,"106":7,"107":9,"108":3,"109":4,"110":2,"111":2,"112":2,"113":2,"114":2,"115":2,"116":2},"tham_my_vung_kin":{"6":2,"9":2,"10":2,"11":2,"26":2,"27":2,"48":2,"117":2,"118":2,"119":6,"120":6,"121":2,"122":2},"xem_feedback":{"0":2,"6":2,"9":2,"122":3,"123":4,"124":4,"125":3,"126":2,"127":2,"128":3,"129":3,"130":2,"131":2,"132":2,"133":2},"bien_chung":{"12":2,"17":4,"49":14,"51":4,"52":4,"117":4,"127":2,"135":15,"136":16,"137":7,"138":2,"139":2,"140":4,"141":4},"treo_sa_tre":{"62":5,"117":3,"136":10,"137":5,"141":3,"142":9,"143":7},"faq_thao_tui":{"28":2,"136":3,"138":3,"141":2},"faq_nang_nguc_dao":{"28":2,"82":2,"136":3,"141":2,"144":2},"faq_nguc_bay":{"127":4,"136":4,"145":3,"146":2,"147":2}},"classTotals":{"menu_dich_vu":21,"nang_nguc":11,"nang_mui":23,"tham_my_mat":13,"tham_my_cam":7,"cang_da":11,"hoi_gia":6,"dat_lich":42,"dia_chi":10,"hut_mo":10,"tham_my_vung_kin":6,"xem_feedback":8,"bien_chung":29,"treo_sa_tre":13,"faq_thao_tui":3,"faq_nang_nguc_dao":3,"faq_nguc_bay":4},"totalExamples":204,"smoothing":1},"docs":[{"label":"menu_dich_vu","text":["xem","cac","dich","vu"]},{"label":"menu_dich_vu","text":["menu","dich","vu"]},{"label":"menu_dich_vu","text":["cac","dich","vu","khac"]},{"label":"menu_dich_vu","text":["dich","vu","lam","ep"]},{"label":"menu_dich_vu","text":["dv","lam","ep"]},{"label":"menu_dich_vu","text":["dich","vu","tham"]},{"label":"menu_dich_vu","text":["tu","van","dich","vu"]},{"label":"menu_dich_vu","text":["co","nhung","dich","vu","nao"]},{"label":"menu_dich_vu","text":["danh","sach","dich","vu"]},{"label":"menu_dich_vu","text":["dich","vu","gi"]},{"label":"menu_dich_vu","text":["tham","gi"]},{"label":"menu_dich_vu","text":["lam","ep","gi"]},{"label":"menu_dich_vu","text":["menu"]},{"label":"menu_dich_vu","text":["dich","vu"]},{"label":"menu_dich_vu","text":["tu","van","lam","ep"]},{"label":"menu_dich_vu","text":["muon","lam","ep"]},{"label":"menu_dich_vu","text":["dv","tham"]},{"label":"menu_dich_vu","text":["dv","khac"]},{"label":"menu_dich_vu","text":["cac","dv"]},{"label":"menu_dich_vu","text":["tat","ca","dich","vu"]},{"label":"nang_nguc","text":["tu","van","nang","nguc"]},{"label":"nang_nguc","text":["nang","nguc","gia","bao","nhieu"]},{"label":"nang_nguc","text":["phau","thuat","nguc","co","au","khong"]},{"label":"nang_nguc","text":["muon","nang","nguc"]},{"label":"nang_nguc","text":["chi","phi","tui","nguc"]},{"label":"nang_nguc","text":["nang","nguc","au","tot"]},{"label":"nang_nguc","text":["nang","nguc","co","lai","seo","khong"]},{"label":"nang_nguc","text":["nang","nguc","bao","lau","thi","lanh"]},{"label":"nang_nguc","text":["thao","tui","nguc","cu"]},{"label":"nang_nguc","text":["thai","tui","nguc"]},{"label":"nang_mui","text":["nang","mui","het","bao","nhieu"]},{"label":"nang_mui","text":["tu","van","nang","mui"]},{"label":"nang_mui","text":["phau","thuat","mui"]},{"label":"nang_mui","text":["muon","sua","mui"]},{"label":"nang_mui","text":["nang","mui","sun","suon"]},{"label":"nang_mui","text":["nang","mui","co","au","khong"]},{"label":"nang_mui","text":["chinh","sua","mui","hong"]},{"label":"nang_mui","text":["mui","bi","lech"]},{"label":"nang_mui","text":["mui","bi","bien","chung"]},{"label":"nang_mui","text":["sua","mui","hong"]},{"label":"tham_my_mat","text":["cat","mi","mat"]},{"label":"tham_my_mat","text":["nhan","mi"]},{"label":"tham_my_mat","text":["bam","mi"]},{"label":"tham_my_mat","text":["tu","van","ve","mat"]},{"label":"tham_my_mat","text":["phau","thuat","mat"]},{"label":"tham_my_mat","text":["mat","bi","xe"]},{"label":"tham_my_mat","text":["mat","mot","mi"]},{"label":"tham_my_mat","text":["mat","khong","eu"]},{"label":"tham_my_mat","text":["treo","cung","mai"]},{"label":"tham_my_mat","text":["chinh","sua","mat"]},{"label":"tham_my_cam","text":["cam"]},{"label":"tham_my_cam","text":["cam"]},{"label":"tham_my_cam","text":["cam","ngan"]},{"label":"tham_my_cam","text":["cam","lech"]},{"label":"tham_my_cam","text":["chinh","cam"]},{"label":"tham_my_cam","text":["lam","cam","vline"]},{"label":"cang_da","text":["cang","da","mat"]},{"label":"cang_da","text":["tre","hoa","da"]},{"label":"cang_da","text":["cang","chi"]},{"label":"cang_da","text":["cang","da","chai","xe"]},{"label":"cang_da","text":["xoa","nhan"]},{"label":"cang_da","text":["lam","cang","da","mat"]},{"label":"hoi_gia","text":["gia","bao","nhieu"]},{"label":"hoi_gia","text":["chi","phi"]},{"label":"hoi_gia","text":["bang","gia"]},{"label":"hoi_gia","text":["phi","phau","thuat"]},{"label":"hoi_gia","text":["gia","ca","nao"]},{"label":"dat_lich","text":["lich"]},{"label":"dat_lich","text":["hen","kham"]},{"label":"dat_lich","text":["ang","ky","tu","van"]},{"label":"dat_lich","text":["muon","gap","bac","si"]},{"label":"dat_lich","text":["lich","kham"]},{"label":"dat_lich","text":["cho","em","xin","ien","thoai"]},{"label":"dat_lich","text":["xin","zalo"]},{"label":"dat_lich","text":["xin","viber"]},{"label":"dat_lich","text":["muon","tu","van"]},{"label":"dat_lich","text":["tu","van","truc","tiep"]},{"label":"dat_lich","text":["gap","truc","tiep"]},{"label":"dat_lich","text":["muon","en","kham"]},{"label":"dat_lich","text":["hen"]},{"label":"dat_lich","text":["xin","ien","thoai","tu","van"]},{"label":"dat_lich","text":["muon","uoc","tu","van"]},{"label":"dat_lich","text":["tu","van"]},{"label":"dat_lich","text":["tu","van","giup","em"]},{"label":"dat_lich","text":["cho","em","lich"]},{"label":"dat_lich","text":["muon","book","lich"]},{"label":"dat_lich","text":["book","lich","kham"]},{"label":"dat_lich","text":["lich"]},{"label":"dat_lich","text":["hen"]},{"label":"dat_lich","text":["lich","kham"]},{"label":"dat_lich","text":["lich","tu","van"]},{"label":"dat_lich","text":["xin","ien","thoai"]},{"label":"dat_lich","text":["cho","xin","ien","thoai"]},{"label":"dat_lich","text":["ien","thoai","cua","chi","la"]},{"label":"dat_lich","text":["ien","thoai","cua","em","la"]},{"label":"dat_lich","text":["cua","chi","la"]},{"label":"dat_lich","text":["cua","em","la"]},{"label":"dat_lich","text":["ien","thoai"]},{"label":"dat_lich","text":["sdt"]},{"label":"dat_lich","text":["ien","thoai"]},{"label":"dat_lich","text":["ay","la","cua","chi"]},{"label":"dat_lich","text":["ay","la","cua","em"]},{"label":"dat_lich","text":["zalo","cua","chi","la"]},{"label":"dat_lich","text":["zalo","cua","em","la"]},{"label":"dat_lich","text":["zalo","cua","chi"]},{"label":"dat_lich","text":["zalo","cua","em"]},{"label":"dat_lich","text":["viber","cua","chi","la"]},{"label":"dat_lich","text":["viber","cua","em","la"]},{"label":"dia_chi","text":["phong","kham","au"]},{"label":"dia_chi","text":["ia","chi","phong","kham"]},{"label":"dia_chi","text":["cho","kham","au"]},{"label":"dia_chi","text":["ia","iem","phong","kham"]},{"label":"dia_chi","text":["van","phong","au"]},{"label":"dia_chi","text":["ia","chi","bac","si"]},{"label":"dia_chi","text":["phong","kham","nam","au"]},{"label":"dia_chi","text":["tim","uong","en","phong","kham"]},{"label":"dia_chi","text":["chi","uong","en","phong","kham"]},{"label":"hut_mo","text":["hut","mo","bung"]},{"label":"hut_mo","text":["giam","mo","bung"]},{"label":"hut_mo","text":["hut","mo","ui"]},{"label":"hut_mo","text":["hut","mo","toan"]},{"label":"hut_mo","text":["giam","beo","khong","phau","thuat"]},{"label":"hut_mo","text":["hut","mo","bodi"]},{"label":"hut_mo","text":["hut","mo","bap","tai"]},{"label":"hut_mo","text":["giam","mo","nhanh"]},{"label":"hut_mo","text":["hut","mo","co","au","khong"]},{"label":"tham_my_vung_kin","text":["thu","hep","vung","kin"]},{"label":"tham_my_vung_kin","text":["tu","van","tham","vung","kin"]},{"label":"tham_my_vung_kin","text":["phau","thuat","vung","kin"]},{"label":"tham_my_vung_kin","text":["lam","hong","vung","kin"]},{"label":"tham_my_vung_kin","text":["tao","hinh","vung","kin"]},{"label":"xem_feedback","text":["xem","ket","qua"]},{"label":"xem_feedback","text":["hinh","anh","truoc","sau"]},{"label":"xem_feedback","text":["khach","hang","lam"]},{"label":"xem_feedback","text":["review","ket","qua"]},{"label":"xem_feedback","text":["feedback","khach","hang"]},{"label":"xem_feedback","text":["ket","qua","tham"]},{"label":"xem_feedback","text":["hinh","anh","thuc","te"]},{"label":"bien_chung","text":["bien","chung"]},{"label":"bien_chung","text":["bi","bien","chung"]},{"label":"bien_chung","text":["co","bien","chung"]},{"label":"nang_mui","text":["nang","mui","het","bao","nhieu"]},{"label":"nang_mui","text":["tu","van","nang","mui"]},{"label":"nang_mui","text":["phau","thuat","mui"]},{"label":"nang_mui","text":["muon","sua","mui"]},{"label":"nang_mui","text":["nang","mui","sun","suon"]},{"label":"nang_mui","text":["nang","mui","co","au","khong"]},{"label":"nang_mui","text":["cho","em","hoi","ve","nang","mui"]},{"label":"nang_mui","text":["muon","nang","mui"]},{"label":"nang_mui","text":["tu","van","ve","mui"]},{"label":"nang_mui","text":["phau","thuat","nang","mui"]},{"label":"nang_mui","text":["nang","mui","tham"]},{"label":"nang_mui","text":["lam","mui"]},{"label":"tham_my_mat","text":["bac","si","tu","van","cat","mi","giup","em"]},{"label":"tham_my_mat","text":["tu","van","ve","mat"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng","ph","thu"]},{"label":"bien_chung","text":["bi","ch","ng","th"]},{"label":"bien_chung","text":["bi","ch","ng","sau","ph","thu"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["lo","bi","ch","ng"]},{"label":"bien_chung","text":["bi","ch","ng"]},{"label":"bien_chung","text":["ng"]},{"label":"bien_chung","text":["ng"]},{"label":"bien_chung","text":["ng","ng"]},{"label":"bien_chung","text":["bi","ng"]},{"label":"bien_chung","text":["ph","thu"]},{"label":"bien_chung","text":["ch","nh"]},{"label":"bien_chung","text":["kh","ph"]},{"label":"bien_chung","text":["gi"]},{"label":"treo_sa_tre","text":["sa","tr"]},{"label":"treo_sa_tre","text":["ng","sa"]},{"label":"treo_sa_tre","text":["ng","tr"]},{"label":"treo_sa_tre","text":["sa","tr","ng"]},{"label":"treo_sa_tre","text":["treo","ng","sa"]},{"label":"treo_sa_tre","text":["treo","sa"]},{"label":"treo_sa_tre","text":["treo","ng"]},{"label":"treo_sa_tre","text":["ph","thu","sa","tr"]},{"label":"cang_da","text":["ng","da"]},{"label":"cang_da","text":["ng","da"]},{"label":"cang_da","text":["ng","ch"]},{"label":"cang_da","text":["ng","ch"]},{"label":"treo_sa_tre","text":["ng","ng","sa","tr"]},{"label":"treo_sa_tre","text":["ph","thu","treo","ng"]},{"label":"treo_sa_tre","text":["kh","ph","ng","sa"]},{"label":"treo_sa_tre","text":["kh","ph","ng","tr"]},{"label":"bien_chung","text":["ch","nh"]},{"label":"bien_chung","text":["kh","ph"]},{"label":"bien_chung","text":["gi"]},{"label":"faq_thao_tui","text":["th","ng"]},{"label":"faq_thao_tui","text":["th","kh","ng","au"]},{"label":"faq_nang_nguc_dao","text":["ng","ng","dao","si"]},{"label":"faq_nang_nguc_dao","text":["ng","ng","kh","ng","au"]},{"label":"faq_nguc_bay","text":["bai","sau","ng","ng"]},{"label":"faq_nguc_bay","text":["bai","sau","ng","ng"]},{"label":"faq_nguc_bay","text":["xu","vi","sau","ng","ng"]},{"label":"bien_chung","text":["ch","nh"]},{"label":"bien_chung","text":["kh","ph"]},{"label":"bien_chung","text":["gi"]}],"features":{"xem":2,"cac":3,"dich":11,"vu":11,"menu":2,"khac":2,"lam":10,"ep":5,"dv":4,"tham":6,"tu":18,"van":19,"co":7,"nhung":1,"nao":2,"danh":1,"sach":1,"gi":6,"muon":10,"tat":1,"ca":2,"nang":18,"nguc":10,"gia":4,"bao":5,"nhieu":4,"phau":8,"thuat":8,"au":11,"khong":7,"chi":12,"phi":3,"tui":3,"tot":1,"lai":1,"seo":1,"lau":1,"thi":1,"lanh":1,"thao":1,"cu":1,"thai":1,"mui":22,"het":2,"sua":5,"sun":2,"suon":2,"chinh":3,"hong":3,"bi":16,"lech":2,"bien":4,"chung":4,"cat":2,"mi":5,"mat":10,"nhan":2,"bam":1,"ve":4,"xe":2,"mot":1,"eu":1,"treo":5,"cung":1,"mai":1,"cam":6,"ngan":1,"vline":1,"cang":4,"da":6,"tre":1,"hoa":1,"chai":1,"xoa":1,"bang":1,"lich":8,"hen":3,"kham":12,"ang":1,"ky":1,"gap":2,"bac":3,"si":4,"cho":5,"em":11,"xin":6,"ien":8,"thoai":8,"zalo":5,"viber":3,"truc":2,"tiep":2,"en":3,"uoc":1,"giup":2,"book":2,"cua":12,"la":10,"sdt":1,"ay":2,"phong":7,"ia":3,"iem":1,"nam":1,"tim":1,"uong":2,"hut":6,"mo":8,"bung":2,"giam":3,"ui":1,"toan":1,"beo":1,"bodi":1,"bap":1,"tai":1,"nhanh":1,"thu":6,"hep":1,"vung":5,"kin":5,"tao":1,"hinh":3,"ket":3,"qua":3,"anh":2,"truoc":1,"sau":5,"khach":2,"hang":2,"review":1,"feedback":1,"thuc":1,"te":1,"hoi":1,"ch":16,"ng":43,"ph":10,"th":3,"lo":1,"nh":3,"kh":7,"sa":8,"tr":6,"dao":1,"bai":2,"xu":1,"vi":1},"stemmer":{},"lastAdded":203,"events":{"_events":{},"_eventsCount":0}}
 {
-  "classifier":{
-    "classFeatures":{
-      "menu_dich_vu":{
-        "0":2,
-        "1":4,
-        "2":12,
-        "3":12,
-        "4":3,
-        "5":3,
-        "6":6,
-        "7":6,
-        "8":5,
-        "9":4,
-        "10":3,
-        "11":3,
-        "12":2,
-        "13":2,
-        "14":2,
-        "15":2,
-        "16":2,
-        "17":4,
-        "18":2,
-        "19":2,
-        "20":2
+  "classifier": {
+    "classFeatures": {
+      "menu_dich_vu": {
+        "0": 2,
+        "1": 4,
+        "2": 12,
+        "3": 12,
+        "4": 3,
+        "5": 3,
+        "6": 6,
+        "7": 6,
+        "8": 5,
+        "9": 4,
+        "10": 3,
+        "11": 3,
+        "12": 2,
+        "13": 2,
+        "14": 2,
+        "15": 2,
+        "16": 2,
+        "17": 4,
+        "18": 2,
+        "19": 2,
+        "20": 2
       },
-      "nang_nguc":{
-        "10":2,
-        "11":2,
-        "12":3,
-        "18":2,
-        "21":7,
-        "22":11,
-        "23":2,
-        "24":3,
-        "25":2,
-        "26":2,
-        "27":2,
-        "28":3,
-        "29":3,
-        "30":2,
-        "31":2,
-        "32":4,
-        "33":2,
-        "34":2,
-        "35":2,
-        "36":2,
-        "37":2,
-        "38":2,
-        "39":2,
-        "40":2,
-        "41":2
+      "nang_nguc": {
+        "10": 2,
+        "11": 2,
+        "12": 3,
+        "18": 2,
+        "21": 7,
+        "22": 11,
+        "23": 2,
+        "24": 3,
+        "25": 2,
+        "26": 2,
+        "27": 2,
+        "28": 3,
+        "29": 3,
+        "30": 2,
+        "31": 2,
+        "32": 4,
+        "33": 2,
+        "34": 2,
+        "35": 2,
+        "36": 2,
+        "37": 2,
+        "38": 2,
+        "39": 2,
+        "40": 2,
+        "41": 2
       },
-      "nang_mui":{
-        "6":2,
-        "9":2,
-        "10":4,
-        "11":4,
-        "12":3,
-        "18":4,
-        "21":13,
-        "24":3,
-        "25":3,
-        "26":4,
-        "27":4,
-        "28":3,
-        "29":3,
-        "42":23,
-        "43":3,
-        "44":5,
-        "45":3,
-        "46":3,
-        "47":2,
-        "48":3,
-        "49":3,
-        "50":2,
-        "51":2,
-        "52":2,
-        "58":3,
-        "83":2,
-        "84":2,
-        "134":2
+      "nang_mui": {
+        "6": 2,
+        "9": 2,
+        "10": 4,
+        "11": 4,
+        "12": 3,
+        "18": 4,
+        "21": 13,
+        "24": 3,
+        "25": 3,
+        "26": 4,
+        "27": 4,
+        "28": 3,
+        "29": 3,
+        "42": 23,
+        "43": 3,
+        "44": 5,
+        "45": 3,
+        "46": 3,
+        "47": 2,
+        "48": 3,
+        "49": 3,
+        "50": 2,
+        "51": 2,
+        "52": 2,
+        "58": 3,
+        "83": 2,
+        "84": 2,
+        "134": 2
       },
-      "tham_my_mat":{
-        "10":4,
-        "11":4,
-        "26":2,
-        "27":2,
-        "29":2,
-        "44":2,
-        "47":2,
-        "49":2,
-        "53":3,
-        "54":6,
-        "55":9,
-        "56":2,
-        "57":2,
-        "58":3,
-        "59":2,
-        "60":2,
-        "61":2,
-        "62":2,
-        "63":2,
-        "64":2,
-        "81":2,
-        "82":2,
-        "84":2,
-        "94":2
+      "tham_my_mat": {
+        "10": 4,
+        "11": 4,
+        "26": 2,
+        "27": 2,
+        "29": 2,
+        "44": 2,
+        "47": 2,
+        "49": 2,
+        "53": 3,
+        "54": 6,
+        "55": 9,
+        "56": 2,
+        "57": 2,
+        "58": 3,
+        "59": 2,
+        "60": 2,
+        "61": 2,
+        "62": 2,
+        "63": 2,
+        "64": 2,
+        "81": 2,
+        "82": 2,
+        "84": 2,
+        "94": 2
       },
-      "tham_my_cam":{
-        "6":2,
-        "47":2,
-        "50":2,
-        "65":7,
-        "66":2,
-        "67":2
+      "tham_my_cam": {
+        "6": 2,
+        "47": 2,
+        "50": 2,
+        "65": 7,
+        "66": 2,
+        "67": 2
       },
-      "cang_da":{
-        "6":2,
-        "30":2,
-        "55":3,
-        "56":2,
-        "59":2,
-        "68":5,
-        "69":7,
-        "70":2,
-        "71":2,
-        "72":2,
-        "73":2,
-        "135":3,
-        "136":5
+      "cang_da": {
+        "6": 2,
+        "30": 2,
+        "55": 3,
+        "56": 2,
+        "59": 2,
+        "68": 5,
+        "69": 7,
+        "70": 2,
+        "71": 2,
+        "72": 2,
+        "73": 2,
+        "135": 3,
+        "136": 5
       },
-      "hoi_gia":{
-        "14":2,
-        "20":2,
-        "23":4,
-        "24":2,
-        "25":2,
-        "26":2,
-        "27":2,
-        "30":2,
-        "31":3,
-        "74":2
+      "hoi_gia": {
+        "14": 2,
+        "20": 2,
+        "23": 4,
+        "24": 2,
+        "25": 2,
+        "26": 2,
+        "27": 2,
+        "30": 2,
+        "31": 3,
+        "74": 2
       },
-      "dat_lich":{
-        "10":9,
-        "11":9,
-        "18":6,
-        "30":7,
-        "75":9,
-        "76":4,
-        "77":6,
-        "78":2,
-        "79":2,
-        "80":3,
-        "81":2,
-        "82":2,
-        "83":4,
-        "84":10,
-        "85":7,
-        "86":9,
-        "87":9,
-        "88":6,
-        "89":4,
-        "90":3,
-        "91":3,
-        "92":2,
-        "93":2,
-        "94":2,
-        "95":3,
-        "96":13,
-        "97":11,
-        "98":2,
-        "99":3
+      "dat_lich": {
+        "10": 9,
+        "11": 9,
+        "18": 6,
+        "30": 7,
+        "75": 9,
+        "76": 4,
+        "77": 6,
+        "78": 2,
+        "79": 2,
+        "80": 3,
+        "81": 2,
+        "82": 2,
+        "83": 4,
+        "84": 10,
+        "85": 7,
+        "86": 9,
+        "87": 9,
+        "88": 6,
+        "89": 4,
+        "90": 3,
+        "91": 3,
+        "92": 2,
+        "93": 2,
+        "94": 2,
+        "95": 3,
+        "96": 13,
+        "97": 11,
+        "98": 2,
+        "99": 3
       },
-      "dia_chi":{
-        "11":2,
-        "28":5,
-        "30":4,
-        "77":8,
-        "81":2,
-        "82":2,
-        "83":2,
-        "92":3,
-        "100":8,
-        "101":4,
-        "102":2,
-        "103":2,
-        "104":2,
-        "105":3
+      "dia_chi": {
+        "11": 2,
+        "28": 5,
+        "30": 4,
+        "77": 8,
+        "81": 2,
+        "82": 2,
+        "83": 2,
+        "92": 3,
+        "100": 8,
+        "101": 4,
+        "102": 2,
+        "103": 2,
+        "104": 2,
+        "105": 3
       },
-      "hut_mo":{
-        "12":2,
-        "26":2,
-        "27":2,
-        "28":2,
-        "29":3,
-        "106":7,
-        "107":9,
-        "108":3,
-        "109":4,
-        "110":2,
-        "111":2,
-        "112":2,
-        "113":2,
-        "114":2,
-        "115":2,
-        "116":2
+      "hut_mo": {
+        "12": 2,
+        "26": 2,
+        "27": 2,
+        "28": 2,
+        "29": 3,
+        "106": 7,
+        "107": 9,
+        "108": 3,
+        "109": 4,
+        "110": 2,
+        "111": 2,
+        "112": 2,
+        "113": 2,
+        "114": 2,
+        "115": 2,
+        "116": 2
       },
-      "tham_my_vung_kin":{
-        "6":2,
-        "9":2,
-        "10":2,
-        "11":2,
-        "26":2,
-        "27":2,
-        "48":2,
-        "117":2,
-        "118":2,
-        "119":6,
-        "120":6,
-        "121":2,
-        "122":2
+      "tham_my_vung_kin": {
+        "6": 2,
+        "9": 2,
+        "10": 2,
+        "11": 2,
+        "26": 2,
+        "27": 2,
+        "48": 2,
+        "117": 2,
+        "118": 2,
+        "119": 6,
+        "120": 6,
+        "121": 2,
+        "122": 2
       },
-      "xem_feedback":{
-        "0":2,
-        "6":2,
-        "9":2,
-        "122":3,
-        "123":4,
-        "124":4,
-        "125":3,
-        "126":2,
-        "127":2,
-        "128":3,
-        "129":3,
-        "130":2,
-        "131":2,
-        "132":2,
-        "133":2
+      "xem_feedback": {
+        "0": 2,
+        "6": 2,
+        "9": 2,
+        "122": 3,
+        "123": 4,
+        "124": 4,
+        "125": 3,
+        "126": 2,
+        "127": 2,
+        "128": 3,
+        "129": 3,
+        "130": 2,
+        "131": 2,
+        "132": 2,
+        "133": 2
       },
-      "bien_chung":{
-        "12":2,
-        "17":4,
-        "49":14,
-        "51":4,
-        "52":4,
-        "117":4,
-        "127":2,
-        "135":15,
-        "136":16,
-        "137":7,
-        "138":2,
-        "139":2,
-        "140":4,
-        "141":4
+      "bien_chung": {
+        "12": 2,
+        "17": 2,
+        "49": 14,
+        "51": 4,
+        "52": 4,
+        "117": 3,
+        "127": 2,
+        "135": 13,
+        "136": 16,
+        "137": 4,
+        "138": 2,
+        "139": 2,
+        "142": 2,
+        "143": 2
       },
-      "treo_sa_tre":{
-        "62":5,
-        "117":3,
-        "136":10,
-        "137":5,
-        "141":3,
-        "142":9,
-        "143":7
+      "treo_sa_tre": {
+        "10": 3,
+        "11": 3,
+        "22": 9,
+        "26": 2,
+        "27": 2,
+        "49": 3,
+        "58": 2,
+        "62": 10,
+        "70": 8,
+        "117": 3,
+        "134": 2,
+        "136": 7,
+        "137": 5,
+        "140": 16,
+        "141": 4,
+        "142": 3
       },
-      "faq_thao_tui":{
-        "28":2,
-        "136":3,
-        "138":3,
-        "141":2
+      "faq_nang_nguc_dao": {
+        "12": 3,
+        "21": 21,
+        "22": 21,
+        "28": 7,
+        "29": 7,
+        "74": 5,
+        "107": 3,
+        "144": 15,
+        "145": 15,
+        "146": 3,
+        "147": 7,
+        "148": 5,
+        "149": 3,
+        "150": 3
       },
-      "faq_nang_nguc_dao":{
-        "28":2,
-        "82":2,
-        "136":3,
-        "141":2,
-        "144":2
+      "faq_size_tui": {
+        "10": 7,
+        "11": 7,
+        "12": 4,
+        "14": 10,
+        "21": 10,
+        "22": 23,
+        "28": 2,
+        "29": 2,
+        "32": 34,
+        "74": 3,
+        "135": 56,
+        "136": 169,
+        "137": 56,
+        "138": 57,
+        "139": 58,
+        "144": 6,
+        "145": 6,
+        "147": 4,
+        "148": 3,
+        "149": 2,
+        "150": 2,
+        "151": 187,
+        "152": 125,
+        "153": 6,
+        "154": 3,
+        "155": 6,
+        "156": 4,
+        "157": 8,
+        "158": 8
       },
-      "faq_nguc_bay":{
-        "127":4,
-        "136":4,
-        "145":3,
-        "146":2,
-        "147":2
+      "faq_thao_tui": {
+        "12": 4,
+        "22": 19,
+        "24": 4,
+        "28": 7,
+        "29": 7,
+        "32": 25,
+        "36": 4,
+        "39": 19,
+        "40": 4,
+        "41": 4,
+        "159": 4,
+        "160": 4
       },
-      "classTotals":{
-        "menu_dich_vu":21,
-        "nang_nguc":11,
-        "nang_mui":23,
-        "tham_my_mat":13,
-        "tham_my_cam":7,
-        "cang_da":11,
-        "hoi_gia":6,
-        "dat_lich":42,
-        "dia_chi":10,
-        "hut_mo":10,
-        "tham_my_vung_kin":6,
-        "xem_feedback":8,
-        "bien_chung":29,
-        "treo_sa_tre":13,
-        "faq_thao_tui":3,
-        "faq_nang_nguc_dao":3,
-        "faq_nguc_bay":4,
-        "faq_size_tui": 8
+      "chao_hoi": {
+        "12": 2,
+        "29": 2,
+        "81": 2,
+        "82": 2,
+        "84": 3,
+        "85": 3,
+        "161": 8,
+        "162": 3,
+        "163": 2,
+        "164": 2,
+        "165": 2,
+        "166": 3,
+        "167": 3,
+        "168": 2,
+        "169": 2
       },
-      "totalExamples":204,
-      "smoothing":1
+      "cam_on": {
+        "25": 2,
+        "65": 7,
+        "81": 2,
+        "82": 2,
+        "84": 2,
+        "162": 2,
+        "170": 3,
+        "171": 2
+      },
+      "ket_thuc": {
+        "34": 2,
+        "76": 2,
+        "80": 2,
+        "123": 3,
+        "132": 3,
+        "161": 2,
+        "172": 3,
+        "173": 3,
+        "174": 2,
+        "175": 2,
+        "176": 2,
+        "177": 2,
+        "178": 2
+      },
+      "hoi_kinh_nghiem": {
+        "6": 4,
+        "12": 5,
+        "20": 3,
+        "24": 4,
+        "25": 3,
+        "26": 2,
+        "27": 2,
+        "29": 5,
+        "30": 2,
+        "36": 2,
+        "52": 2,
+        "81": 9,
+        "82": 9,
+        "93": 3,
+        "96": 2,
+        "178": 2,
+        "179": 3,
+        "180": 3,
+        "181": 2,
+        "182": 2,
+        "183": 2
+      },
+      "thoi_gian_phuc_hoi": {
+        "6": 2,
+        "14": 2,
+        "24": 6,
+        "26": 2,
+        "27": 2,
+        "34": 2,
+        "36": 6,
+        "37": 6,
+        "38": 3,
+        "43": 2,
+        "55": 2,
+        "93": 2,
+        "127": 2,
+        "134": 3,
+        "184": 4,
+        "185": 4,
+        "186": 3,
+        "187": 2,
+        "188": 3,
+        "189": 2,
+        "190": 2,
+        "191": 2,
+        "192": 2,
+        "193": 2
+      },
+      "bao_hanh": {
+        "11": 2,
+        "12": 3,
+        "14": 2,
+        "16": 2,
+        "24": 8,
+        "29": 3,
+        "36": 2,
+        "37": 2,
+        "47": 2,
+        "166": 2,
+        "184": 2,
+        "185": 2,
+        "194": 8,
+        "195": 2,
+        "196": 2,
+        "197": 2,
+        "198": 2,
+        "199": 2
+      },
+      "thanh_toan": {
+        "12": 5,
+        "14": 2,
+        "23": 2,
+        "29": 8,
+        "64": 2,
+        "74": 2,
+        "93": 4,
+        "109": 2,
+        "111": 5,
+        "132": 2,
+        "147": 2,
+        "178": 2,
+        "199": 2,
+        "200": 5,
+        "201": 3,
+        "202": 3,
+        "203": 2,
+        "204": 2,
+        "205": 2
+      },
+      "hoi_dau": {
+        "6": 2,
+        "12": 6,
+        "14": 2,
+        "24": 2,
+        "25": 2,
+        "28": 8,
+        "29": 7,
+        "36": 2,
+        "65": 2,
+        "109": 2,
+        "133": 2,
+        "206": 2,
+        "207": 2,
+        "208": 2,
+        "209": 2,
+        "210": 2
+      },
+      "hoi_an_toan": {
+        "11": 2,
+        "12": 5,
+        "17": 3,
+        "29": 6,
+        "80": 2,
+        "97": 2,
+        "111": 5,
+        "165": 2,
+        "166": 2,
+        "200": 2,
+        "206": 2,
+        "211": 2,
+        "212": 2,
+        "213": 3,
+        "214": 2,
+        "215": 2,
+        "216": 2,
+        "217": 2,
+        "218": 2
+      },
+      "hoi_san_pham": {
+        "10": 2,
+        "12": 3,
+        "14": 2,
+        "17": 2,
+        "22": 3,
+        "28": 2,
+        "29": 4,
+        "32": 3,
+        "47": 2,
+        "52": 2,
+        "56": 2,
+        "129": 3,
+        "219": 2,
+        "220": 2,
+        "221": 6,
+        "222": 6,
+        "223": 3,
+        "224": 2,
+        "225": 2,
+        "226": 2,
+        "227": 2,
+        "228": 2
+      },
+      "faq_nguc_bay": {
+        "12": 2,
+        "14": 2,
+        "21": 6,
+        "22": 6,
+        "24": 4,
+        "29": 2,
+        "36": 3,
+        "37": 2,
+        "64": 4,
+        "93": 3,
+        "101": 2,
+        "103": 2,
+        "127": 7,
+        "133": 2,
+        "134": 2,
+        "184": 3,
+        "185": 3,
+        "186": 2,
+        "191": 2,
+        "229": 8,
+        "230": 4,
+        "231": 5,
+        "232": 2,
+        "233": 2,
+        "234": 2
+      },
+      "gia_nang_nguc": {
+        "21": 6,
+        "22": 10,
+        "23": 5,
+        "24": 5,
+        "25": 3,
+        "26": 2,
+        "27": 2,
+        "30": 4,
+        "31": 6,
+        "32": 4,
+        "39": 2,
+        "41": 2,
+        "43": 2,
+        "235": 2,
+        "236": 2,
+        "237": 2
+      },
+      "gia_nang_mui": {
+        "21": 7,
+        "23": 5,
+        "24": 4,
+        "25": 3,
+        "26": 2,
+        "27": 2,
+        "30": 4,
+        "31": 6,
+        "42": 11,
+        "43": 2,
+        "44": 3,
+        "45": 2,
+        "46": 2,
+        "47": 2,
+        "90": 2,
+        "238": 2
+      },
+      "gia_mat": {
+        "23": 6,
+        "24": 4,
+        "25": 3,
+        "26": 3,
+        "27": 3,
+        "30": 4,
+        "31": 5,
+        "47": 2,
+        "53": 4,
+        "54": 6,
+        "55": 4,
+        "56": 2,
+        "57": 2,
+        "62": 2,
+        "63": 2,
+        "64": 2
+      },
+      "gia_tham_my_cam": {
+        "6": 2,
+        "9": 2,
+        "23": 5,
+        "24": 3,
+        "25": 3,
+        "26": 2,
+        "27": 2,
+        "30": 3,
+        "31": 4,
+        "47": 2,
+        "65": 8,
+        "239": 2
+      },
+      "gia_hut_mo": {
+        "23": 4,
+        "24": 2,
+        "25": 2,
+        "30": 4,
+        "31": 6,
+        "106": 7,
+        "107": 8,
+        "108": 3,
+        "109": 2,
+        "110": 2,
+        "115": 2,
+        "121": 2,
+        "122": 2,
+        "200": 2,
+        "240": 2
+      },
+      "gia_cang_da": {
+        "23": 4,
+        "24": 2,
+        "25": 2,
+        "30": 5,
+        "31": 5,
+        "55": 2,
+        "56": 2,
+        "68": 6,
+        "69": 5,
+        "70": 2,
+        "71": 2,
+        "73": 2,
+        "111": 2,
+        "241": 2,
+        "242": 2
+      },
+      "gia_vung_kin": {
+        "9": 3,
+        "23": 3,
+        "24": 2,
+        "25": 2,
+        "30": 3,
+        "31": 4,
+        "70": 2,
+        "71": 2,
+        "119": 5,
+        "120": 5,
+        "121": 2,
+        "122": 2,
+        "243": 2,
+        "244": 2
+      }
     },
-    "docs":[
-      {"label":"menu_dich_vu","text":["xem","cac","dich","vu"]},
-      {"label":"menu_dich_vu","text":["menu","dich","vu"]},
-      {"label":"menu_dich_vu","text":["cac","dich","vu","khac"]},
-      {"label":"menu_dich_vu","text":["dich","vu","lam","ep"]},
-      {"label":"menu_dich_vu","text":["dv","lam","ep"]},
-      {"label":"menu_dich_vu","text":["dich","vu","tham"]},
-      {"label":"menu_dich_vu","text":["tu","van","dich","vu"]},
-      {"label":"menu_dich_vu","text":["co","nhung","dich","vu","nao"]},
-      {"label":"menu_dich_vu","text":["danh","sach","dich","vu"]},
-      {"label":"menu_dich_vu","text":["dich","vu","gi"]},
-      {"label":"menu_dich_vu","text":["tham","gi"]},
-      {"label":"menu_dich_vu","text":["lam","ep","gi"]},
-      {"label":"menu_dich_vu","text":["menu"]},
-      {"label":"menu_dich_vu","text":["dich","vu"]},
-      {"label":"menu_dich_vu","text":["tu","van","lam","ep"]},
-      {"label":"menu_dich_vu","text":["muon","lam","ep"]},
-      {"label":"menu_dich_vu","text":["dv","tham"]},
-      {"label":"menu_dich_vu","text":["dv","khac"]},
-      {"label":"menu_dich_vu","text":["cac","dv"]},
-      {"label":"menu_dich_vu","text":["tat","ca","dich","vu"]},
-      {"label":"nang_nguc","text":["tu","van","nang","nguc"]},
-      {"label":"nang_nguc","text":["nang","nguc","gia","bao","nhieu"]},
-      {"label":"nang_nguc","text":["phau","thuat","nguc","co","au","khong"]},
-      {"label":"nang_nguc","text":["muon","nang","nguc"]},
-      {"label":"nang_nguc","text":["chi","phi","tui","nguc"]},
-      {"label":"nang_nguc","text":["nang","nguc","au","tot"]},
-      {"label":"nang_nguc","text":["nang","nguc","co","lai","seo","khong"]},
-      {"label":"nang_nguc","text":["nang","nguc","bao","lau","thi","lanh"]},
-      {"label":"nang_nguc","text":["thao","tui","nguc","cu"]},
-      {"label":"nang_nguc","text":["thai","tui","nguc"]},
-      {"label":"nang_mui","text":["nang","mui","het","bao","nhieu"]},
-      {"label":"nang_mui","text":["tu","van","nang","mui"]},
-      {"label":"nang_mui","text":["phau","thuat","mui"]},
-      {"label":"nang_mui","text":["muon","sua","mui"]},
-      {"label":"nang_mui","text":["nang","mui","sun","suon"]},
-      {"label":"nang_mui","text":["nang","mui","co","au","khong"]},
-      {"label":"nang_mui","text":["chinh","sua","mui","hong"]},
-      {"label":"nang_mui","text":["mui","bi","lech"]},
-      {"label":"nang_mui","text":["mui","bi","bien","chung"]},
-      {"label":"nang_mui","text":["sua","mui","hong"]},
-      {"label":"tham_my_mat","text":["cat","mi","mat"]},
-      {"label":"tham_my_mat","text":["nhan","mi"]},
-      {"label":"tham_my_mat","text":["bam","mi"]},
-      {"label":"tham_my_mat","text":["tu","van","ve","mat"]},
-      {"label":"tham_my_mat","text":["phau","thuat","mat"]},
-      {"label":"tham_my_mat","text":["mat","bi","xe"]},
-      {"label":"tham_my_mat","text":["mat","mot","mi"]},
-      {"label":"tham_my_mat","text":["mat","khong","eu"]},
-      {"label":"tham_my_mat","text":["treo","cung","mai"]},
-      {"label":"tham_my_mat","text":["chinh","sua","mat"]},
-      {"label":"tham_my_cam","text":["cam"]},
-      {"label":"tham_my_cam","text":["cam"]},
-      {"label":"tham_my_cam","text":["cam","ngan"]},
-      {"label":"tham_my_cam","text":["cam","lech"]},
-      {"label":"tham_my_cam","text":["chinh","cam"]},
-      {"label":"tham_my_cam","text":["lam","cam","vline"]},
-      {"label":"cang_da","text":["cang","da","mat"]},
-      {"label":"cang_da","text":["tre","hoa","da"]},
-      {"label":"cang_da","text":["cang","chi"]},
-      {"label":"cang_da","text":["cang","da","chai","xe"]},
-      {"label":"cang_da","text":["xoa","nhan"]},
-      {"label":"cang_da","text":["lam","cang","da","mat"]},
-      {"label":"hoi_gia","text":["gia","bao","nhieu"]},
-      {"label":"hoi_gia","text":["chi","phi"]},
-      {"label":"hoi_gia","text":["bang","gia"]},
-      {"label":"hoi_gia","text":["phi","phau","thuat"]},
-      {"label":"hoi_gia","text":["gia","ca","nao"]},
-      {"label":"dat_lich","text":["lich"]},
-      {"label":"dat_lich","text":["hen","kham"]},
-      {"label":"dat_lich","text":["ang","ky","tu","van"]},
-      {"label":"dat_lich","text":["muon","gap","bac","si"]},
-      {"label":"dat_lich","text":["lich","kham"]},
-      {"label":"dat_lich","text":["cho","em","xin","ien","thoai"]},
-      {"label":"dat_lich","text":["xin","zalo"]},
-      {"label":"dat_lich","text":["xin","viber"]},
-      {"label":"dat_lich","text":["muon","tu","van"]},
-      {"label":"dat_lich","text":["tu","van","truc","tiep"]},
-      {"label":"dat_lich","text":["gap","truc","tiep"]},
-      {"label":"dat_lich","text":["muon","en","kham"]},
-      {"label":"dat_lich","text":["hen"]},
-      {"label":"dat_lich","text":["xin","ien","thoai","tu","van"]},
-      {"label":"dat_lich","text":["muon","uoc","tu","van"]},
-      {"label":"dat_lich","text":["tu","van"]},
-      {"label":"dat_lich","text":["tu","van","giup","em"]},
-      {"label":"dat_lich","text":["cho","em","lich"]},
-      {"label":"dat_lich","text":["muon","book","lich"]},
-      {"label":"dat_lich","text":["book","lich","kham"]},
-      {"label":"dat_lich","text":["lich"]},
-      {"label":"dat_lich","text":["hen"]},
-      {"label":"dat_lich","text":["lich","kham"]},
-      {"label":"dat_lich","text":["lich","tu","van"]},
-      {"label":"dat_lich","text":["xin","ien","thoai"]},
-      {"label":"dat_lich","text":["cho","xin","ien","thoai"]},
-      {"label":"dat_lich","text":["ien","thoai","cua","chi","la"]},
-      {"label":"dat_lich","text":["ien","thoai","cua","em","la"]},
-      {"label":"dat_lich","text":["cua","chi","la"]},
-      {"label":"dat_lich","text":["cua","em","la"]},
-      {"label":"dat_lich","text":["ien","thoai"]},
-      {"label":"dat_lich","text":["sdt"]},
-      {"label":"dat_lich","text":["ien","thoai"]},
-      {"label":"dat_lich","text":["ay","la","cua","chi"]},
-      {"label":"dat_lich","text":["ay","la","cua","em"]},
-      {"label":"dat_lich","text":["zalo","cua","chi","la"]},
-      {"label":"dat_lich","text":["zalo","cua","em","la"]},
-      {"label":"dat_lich","text":["zalo","cua","chi"]},
-      {"label":"dat_lich","text":["zalo","cua","em"]},
-      {"label":"dat_lich","text":["viber","cua","chi","la"]},
-      {"label":"dat_lich","text":["viber","cua","em","la"]},
-      {"label":"dia_chi","text":["phong","kham","au"]},
-      {"label":"dia_chi","text":["ia","chi","phong","kham"]},
-      {"label":"dia_chi","text":["cho","kham","au"]},
-      {"label":"dia_chi","text":["ia","iem","phong","kham"]},
-      {"label":"dia_chi","text":["van","phong","au"]},
-      {"label":"dia_chi","text":["ia","chi","bac","si"]},
-      {"label":"dia_chi","text":["phong","kham","nam","au"]},
-      {"label":"dia_chi","text":["tim","uong","en","phong","kham"]},
-      {"label":"dia_chi","text":["chi","uong","en","phong","kham"]},
-      {"label":"hut_mo","text":["hut","mo","bung"]},
-      {"label":"hut_mo","text":["giam","mo","bung"]},
-      {"label":"hut_mo","text":["hut","mo","ui"]},
-      {"label":"hut_mo","text":["hut","mo","toan"]},
-      {"label":"hut_mo","text":["giam","beo","khong","phau","thuat"]},
-      {"label":"hut_mo","text":["hut","mo","bodi"]},
-      {"label":"hut_mo","text":["hut","mo","bap","tai"]},
-      {"label":"hut_mo","text":["giam","mo","nhanh"]},
-      {"label":"hut_mo","text":["hut","mo","co","au","khong"]},
-      {"label":"tham_my_vung_kin","text":["thu","hep","vung","kin"]},
-      {"label":"tham_my_vung_kin","text":["tu","van","tham","vung","kin"]},
-      {"label":"tham_my_vung_kin","text":["phau","thuat","vung","kin"]},
-      {"label":"tham_my_vung_kin","text":["lam","hong","vung","kin"]},
-      {"label":"tham_my_vung_kin","text":["tao","hinh","vung","kin"]},
-      {"label":"xem_feedback","text":["xem","ket","qua"]},
-      {"label":"xem_feedback","text":["hinh","anh","truoc","sau"]},
-      {"label":"xem_feedback","text":["khach","hang","lam"]},
-      {"label":"xem_feedback","text":["review","ket","qua"]},
-      {"label":"xem_feedback","text":["feedback","khach","hang"]},
-      {"label":"xem_feedback","text":["ket","qua","tham"]},
-      {"label":"xem_feedback","text":["hinh","anh","thuc","te"]},
-      {"label":"bien_chung","text":["bien","chung"]},
-      {"label":"bien_chung","text":["bi","bien","chung"]},
-      {"label":"bien_chung","text":["co","bien","chung"]},
-      {"label":"nang_mui","text":["nang","mui","het","bao","nhieu"]},
-      {"label":"nang_mui","text":["tu","van","nang","mui"]},
-      {"label":"nang_mui","text":["phau","thuat","mui"]},
-      {"label":"nang_mui","text":["muon","sua","mui"]},
-      {"label":"nang_mui","text":["nang","mui","sun","suon"]},
-      {"label":"nang_mui","text":["nang","mui","co","au","khong"]},
-      {"label":"nang_mui","text":["cho","em","hoi","ve","nang","mui"]},
-      {"label":"nang_mui","text":["muon","nang","mui"]},
-      {"label":"nang_mui","text":["tu","van","ve","mui"]},
-      {"label":"nang_mui","text":["phau","thuat","nang","mui"]},
-      {"label":"nang_mui","text":["nang","mui","tham"]},
-      {"label":"nang_mui","text":["lam","mui"]},
-      {"label":"tham_my_mat","text":["bac","si","tu","van","cat","mi","giup","em"]},
-      {"label":"tham_my_mat","text":["tu","van","ve","mat"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng","ph","thu"]},
-      {"label":"bien_chung","text":["bi","ch","ng","th"]},
-      {"label":"bien_chung","text":["bi","ch","ng","sau","ph","thu"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["lo","bi","ch","ng"]},
-      {"label":"bien_chung","text":["bi","ch","ng"]},
-      {"label":"bien_chung","text":["ng"]},
-      {"label":"bien_chung","text":["ng"]},
-      {"label":"bien_chung","text":["ng","ng"]},
-      {"label":"bien_chung","text":["bi","ng"]},
-      {"label":"bien_chung","text":["ph","thu"]},
-      {"label":"bien_chung","text":["ch","nh"]},
-      {"label":"bien_chung","text":["kh","ph"]},
-      {"label":"bien_chung","text":["gi"]},
-      {"label":"treo_sa_tre","text":["sa","tr"]},
-      {"label":"treo_sa_tre","text":["ng","sa"]},
-      {"label":"treo_sa_tre","text":["ng","tr"]},
-      {"label":"treo_sa_tre","text":["sa","tr","ng"]},
-      {"label":"treo_sa_tre","text":["treo","ng","sa"]},
-      {"label":"treo_sa_tre","text":["treo","sa"]},
-      {"label":"treo_sa_tre","text":["treo","ng"]},
-      {"label":"treo_sa_tre","text":["ph","thu","sa","tr"]},
-      {"label":"cang_da","text":["ng","da"]},
-      {"label":"cang_da","text":["ng","da"]},
-      {"label":"cang_da","text":["ng","ch"]},
-      {"label":"cang_da","text":["ng","ch"]},
-      {"label":"treo_sa_tre","text":["ng","ng","sa","tr"]},
-      {"label":"treo_sa_tre","text":["ph","thu","treo","ng"]},
-      {"label":"treo_sa_tre","text":["kh","ph","ng","sa"]},
-      {"label":"treo_sa_tre","text":["kh","ph","ng","tr"]},
-      {"label":"bien_chung","text":["ch","nh"]},
-      {"label":"bien_chung","text":["kh","ph"]},
-      {"label":"bien_chung","text":["gi"]},
-      {"label":"faq_thao_tui","text":["th","ng"]},
-      {"label":"faq_thao_tui","text":["th","kh","ng","au"]},
-      {"label":"faq_nang_nguc_dao","text":["ng","ng","dao","si"]},
-      {"label":"faq_nang_nguc_dao","text":["ng","ng","kh","ng","au"]},
-      {"label":"faq_nguc_bay","text":["bai","sau","ng","ng"]},
-      {"label":"faq_nguc_bay","text":["bai","sau","ng","ng"]},
-      {"label":"faq_nguc_bay","text":["xu","vi","sau","ng","ng"]},
-      {"label":"bien_chung","text":["ch","nh"]},
-      {"label":"bien_chung","text":["kh","ph"]},
-      {"label":"bien_chung","text":["gi"]}],"features":{"xem":2,"cac":3,"dich":11,"vu":11,"menu":2,"khac":2,"lam":10,"ep":5,"dv":4,"tham":6,"tu":18,"van":19,"co":7,"nhung":1,"nao":2,"danh":1,"sach":1,"gi":6,"muon":10,"tat":1,"ca":2,"nang":18,"nguc":10,"gia":4,"bao":5,"nhieu":4,"phau":8,"thuat":8,"au":11,"khong":7,"chi":12,"phi":3,"tui":3,"tot":1,"lai":1,"seo":1,"lau":1,"thi":1,"lanh":1,"thao":1,"cu":1,"thai":1,"mui":22,"het":2,"sua":5,"sun":2,"suon":2,"chinh":3,"hong":3,"bi":16,"lech":2,"bien":4,"chung":4,"cat":2,"mi":5,"mat":10,"nhan":2,"bam":1,"ve":4,"xe":2,"mot":1,"eu":1,"treo":5,"cung":1,"mai":1,"cam":6,"ngan":1,"vline":1,"cang":4,"da":6,"tre":1,"hoa":1,"chai":1,"xoa":1,"bang":1,"lich":8,"hen":3,"kham":12,"ang":1,"ky":1,"gap":2,"bac":3,"si":4,"cho":5,"em":11,"xin":6,"ien":8,"thoai":8,"zalo":5,"viber":3,"truc":2,"tiep":2,"en":3,"uoc":1,"giup":2,"book":2,"cua":12,"la":10,"sdt":1,"ay":2,"phong":7,"ia":3,"iem":1,"nam":1,"tim":1,"uong":2,"hut":6,"mo":8,"bung":2,"giam":3,"ui":1,"toan":1,"beo":1,"bodi":1,"bap":1,"tai":1,"nhanh":1,"thu":6,"hep":1,"vung":5,"kin":5,"tao":1,"hinh":3,"ket":3,"qua":3,"anh":2,"truoc":1,"sau":5,"khach":2,"hang":2,"review":1,"feedback":1,"thuc":1,"te":1,"hoi":1,"ch":16,"ng":43,"ph":10,"th":3,"lo":1,"nh":3,"kh":7,"sa":8,"tr":6,"dao":1,"bai":2,"xu":1,"vi":1},"stemmer":{},"lastAdded":203,"events":{"_events":{},"_eventsCount":0}},
-      {"label": "faq_size_tui", "text": ["size", "nguc"]},
-      {"label": "faq_size_tui", "text": ["size", "tui", "nguc"]},
-      {"label": "faq_size_tui", "text": ["size", "nao"]},
-      {"label": "faq_size_tui", "text": ["size", "bao", "nhieu"]},
-      {"label": "faq_size_tui", "text": ["kich", "thuoc", "tui"]},
-      {"label": "faq_size_tui", "text": ["kich", "thuoc", "nguc"]},
-      {"label": "faq_size_tui", "text": ["chon", "size", "nao"]},
-      {"label": "faq_size_tui", "text": ["size", "phu", "hop"]}
+    "classTotals": {
+      "menu_dich_vu": 21,
+      "nang_nguc": 11,
+      "nang_mui": 23,
+      "tham_my_mat": 13,
+      "tham_my_cam": 7,
+      "cang_da": 11,
+      "hoi_gia": 6,
+      "dat_lich": 42,
+      "dia_chi": 10,
+      "hut_mo": 10,
+      "tham_my_vung_kin": 6,
+      "xem_feedback": 8,
+      "bien_chung": 22,
+      "treo_sa_tre": 22,
+      "faq_nang_nguc_dao": 23,
+      "faq_size_tui": 437,
+      "faq_thao_tui": 25,
+      "chao_hoi": 13,
+      "cam_on": 9,
+      "ket_thuc": 8,
+      "hoi_kinh_nghiem": 9,
+      "thoi_gian_phuc_hoi": 10,
+      "bao_hanh": 9,
+      "thanh_toan": 10,
+      "hoi_dau": 10,
+      "hoi_an_toan": 10,
+      "hoi_san_pham": 9,
+      "faq_nguc_bay": 13,
+      "gia_nang_nguc": 11,
+      "gia_nang_mui": 11,
+      "gia_mat": 10,
+      "gia_tham_my_cam": 8,
+      "gia_hut_mo": 9,
+      "gia_cang_da": 8,
+      "gia_vung_kin": 6
+    },
+    "totalExamples": 836,
+    "smoothing": 1
+  },
+  "docs": [
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "xem",
+        "cac",
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "menu",
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "cac",
+        "dich",
+        "vu",
+        "khac"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dich",
+        "vu",
+        "lam",
+        "ep"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dv",
+        "lam",
+        "ep"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dich",
+        "vu",
+        "tham"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "tu",
+        "van",
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "co",
+        "nhung",
+        "dich",
+        "vu",
+        "nao"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "danh",
+        "sach",
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dich",
+        "vu",
+        "gi"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "tham",
+        "gi"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "lam",
+        "ep",
+        "gi"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "menu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "tu",
+        "van",
+        "lam",
+        "ep"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "muon",
+        "lam",
+        "ep"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dv",
+        "tham"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "dv",
+        "khac"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "cac",
+        "dv"
+      ]
+    },
+    {
+      "label": "menu_dich_vu",
+      "text": [
+        "tat",
+        "ca",
+        "dich",
+        "vu"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "tu",
+        "van",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "phau",
+        "thuat",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "muon",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "chi",
+        "phi",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "au",
+        "tot"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "co",
+        "lai",
+        "seo",
+        "khong"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "bao",
+        "lau",
+        "thi",
+        "lanh"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "cu"
+      ]
+    },
+    {
+      "label": "nang_nguc",
+      "text": [
+        "thai",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "het",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "tu",
+        "van",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "phau",
+        "thuat",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "muon",
+        "sua",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "sun",
+        "suon"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "chinh",
+        "sua",
+        "mui",
+        "hong"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "mui",
+        "bi",
+        "lech"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "mui",
+        "bi",
+        "bien",
+        "chung"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "sua",
+        "mui",
+        "hong"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "cat",
+        "mi",
+        "mat"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "nhan",
+        "mi"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "bam",
+        "mi"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "tu",
+        "van",
+        "ve",
+        "mat"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "phau",
+        "thuat",
+        "mat"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "mat",
+        "bi",
+        "xe"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "mat",
+        "mot",
+        "mi"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "mat",
+        "khong",
+        "eu"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "treo",
+        "cung",
+        "mai"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "chinh",
+        "sua",
+        "mat"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "cam"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "cam"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "cam",
+        "ngan"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "cam",
+        "lech"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "chinh",
+        "cam"
+      ]
+    },
+    {
+      "label": "tham_my_cam",
+      "text": [
+        "lam",
+        "cam",
+        "vline"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "cang",
+        "da",
+        "mat"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "tre",
+        "hoa",
+        "da"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "cang",
+        "chi"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "cang",
+        "da",
+        "chai",
+        "xe"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "xoa",
+        "nhan"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "lam",
+        "cang",
+        "da",
+        "mat"
+      ]
+    },
+    {
+      "label": "hoi_gia",
+      "text": [
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "hoi_gia",
+      "text": [
+        "chi",
+        "phi"
+      ]
+    },
+    {
+      "label": "hoi_gia",
+      "text": [
+        "bang",
+        "gia"
+      ]
+    },
+    {
+      "label": "hoi_gia",
+      "text": [
+        "phi",
+        "phau",
+        "thuat"
+      ]
+    },
+    {
+      "label": "hoi_gia",
+      "text": [
+        "gia",
+        "ca",
+        "nao"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "lich"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "hen",
+        "kham"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ang",
+        "ky",
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "muon",
+        "gap",
+        "bac",
+        "si"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "lich",
+        "kham"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "cho",
+        "em",
+        "xin",
+        "ien",
+        "thoai"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "xin",
+        "zalo"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "xin",
+        "viber"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "muon",
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "tu",
+        "van",
+        "truc",
+        "tiep"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "gap",
+        "truc",
+        "tiep"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "muon",
+        "en",
+        "kham"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "hen"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "xin",
+        "ien",
+        "thoai",
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "muon",
+        "uoc",
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "tu",
+        "van",
+        "giup",
+        "em"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "cho",
+        "em",
+        "lich"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "muon",
+        "book",
+        "lich"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "book",
+        "lich",
+        "kham"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "lich"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "hen"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "lich",
+        "kham"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "lich",
+        "tu",
+        "van"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "xin",
+        "ien",
+        "thoai"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "cho",
+        "xin",
+        "ien",
+        "thoai"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ien",
+        "thoai",
+        "cua",
+        "chi",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ien",
+        "thoai",
+        "cua",
+        "em",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "cua",
+        "chi",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "cua",
+        "em",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ien",
+        "thoai"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "sdt"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ien",
+        "thoai"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ay",
+        "la",
+        "cua",
+        "chi"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "ay",
+        "la",
+        "cua",
+        "em"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "zalo",
+        "cua",
+        "chi",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "zalo",
+        "cua",
+        "em",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "zalo",
+        "cua",
+        "chi"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "zalo",
+        "cua",
+        "em"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "viber",
+        "cua",
+        "chi",
+        "la"
+      ]
+    },
+    {
+      "label": "dat_lich",
+      "text": [
+        "viber",
+        "cua",
+        "em",
+        "la"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "phong",
+        "kham",
+        "au"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "ia",
+        "chi",
+        "phong",
+        "kham"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "cho",
+        "kham",
+        "au"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "ia",
+        "iem",
+        "phong",
+        "kham"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "van",
+        "phong",
+        "au"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "ia",
+        "chi",
+        "bac",
+        "si"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "phong",
+        "kham",
+        "nam",
+        "au"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "tim",
+        "uong",
+        "en",
+        "phong",
+        "kham"
+      ]
+    },
+    {
+      "label": "dia_chi",
+      "text": [
+        "chi",
+        "uong",
+        "en",
+        "phong",
+        "kham"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "bung"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "giam",
+        "mo",
+        "bung"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "ui"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "toan"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "giam",
+        "beo",
+        "khong",
+        "phau",
+        "thuat"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "bodi"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "bap",
+        "tai"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "giam",
+        "mo",
+        "nhanh"
+      ]
+    },
+    {
+      "label": "hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "tham_my_vung_kin",
+      "text": [
+        "thu",
+        "hep",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "tham_my_vung_kin",
+      "text": [
+        "tu",
+        "van",
+        "tham",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "tham_my_vung_kin",
+      "text": [
+        "phau",
+        "thuat",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "tham_my_vung_kin",
+      "text": [
+        "lam",
+        "hong",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "tham_my_vung_kin",
+      "text": [
+        "tao",
+        "hinh",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "xem",
+        "ket",
+        "qua"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "hinh",
+        "anh",
+        "truoc",
+        "sau"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "khach",
+        "hang",
+        "lam"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "review",
+        "ket",
+        "qua"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "feedback",
+        "khach",
+        "hang"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "ket",
+        "qua",
+        "tham"
+      ]
+    },
+    {
+      "label": "xem_feedback",
+      "text": [
+        "hinh",
+        "anh",
+        "thuc",
+        "te"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bien",
+        "chung"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "bien",
+        "chung"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "co",
+        "bien",
+        "chung"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "het",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "tu",
+        "van",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "phau",
+        "thuat",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "muon",
+        "sua",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "sun",
+        "suon"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "cho",
+        "em",
+        "hoi",
+        "ve",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "muon",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "tu",
+        "van",
+        "ve",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "phau",
+        "thuat",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "tham"
+      ]
+    },
+    {
+      "label": "nang_mui",
+      "text": [
+        "lam",
+        "mui"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "bac",
+        "si",
+        "tu",
+        "van",
+        "cat",
+        "mi",
+        "giup",
+        "em"
+      ]
+    },
+    {
+      "label": "tham_my_mat",
+      "text": [
+        "tu",
+        "van",
+        "ve",
+        "mat"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng",
+        "ph",
+        "thu"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng",
+        "th"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng",
+        "sau",
+        "ph",
+        "thu"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "lo",
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "ng",
+        "ng"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "bi",
+        "ng"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "sa",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "sa",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "nguc",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "nguc",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "sa",
+        "tre",
+        "nguc"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "nguc",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "phau",
+        "thuat",
+        "treo",
+        "nguc"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "tu",
+        "van",
+        "treo",
+        "sa",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "tu",
+        "van",
+        "nguc",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "hoi",
+        "ve",
+        "sa",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "nguc",
+        "bi",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "nguc",
+        "bi",
+        "tre"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "ng",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "treo",
+        "ng"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "ph",
+        "thu",
+        "sa",
+        "tr"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "ng",
+        "da"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "ng",
+        "da"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "ng",
+        "ch"
+      ]
+    },
+    {
+      "label": "cang_da",
+      "text": [
+        "ng",
+        "ch"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "ng",
+        "ng",
+        "sa",
+        "tr"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "ph",
+        "thu",
+        "treo",
+        "ng"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "kh",
+        "ph",
+        "ng",
+        "sa"
+      ]
+    },
+    {
+      "label": "treo_sa_tre",
+      "text": [
+        "kh",
+        "ph",
+        "ng",
+        "tr"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "ch",
+        "nh"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "kh",
+        "ph"
+      ]
+    },
+    {
+      "label": "bien_chung",
+      "text": [
+        "gi"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "dao",
+        "mo",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "ultrason"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "dao",
+        "sieu",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "pp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "pahp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "kich",
+        "thuoc",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "chon",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "size",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "loai",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "kich",
+        "co",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "form",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "chon",
+        "form",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "tui",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "rut",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "cu"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thai",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "silicon"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "ph"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ch",
+        "ng"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "size"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "th"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "ng",
+        "lo"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "xin",
+        "chao"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "chao",
+        "ban"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "hello"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "hi"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "chao"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "xin",
+        "chao",
+        "bac",
+        "si"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "chao",
+        "em"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "co",
+        "ai",
+        "khong"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "ban",
+        "oi"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "em",
+        "oi"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "chao",
+        "buoi",
+        "sang"
+      ]
+    },
+    {
+      "label": "chao_hoi",
+      "text": [
+        "chao",
+        "buoi",
+        "chieu"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam",
+        "ban"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "thank"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "thank"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam",
+        "nhe"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam",
+        "em"
+      ]
+    },
+    {
+      "label": "cam_on",
+      "text": [
+        "cam",
+        "bac",
+        "si"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "tam",
+        "biet"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "bye"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "goodby"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "hen",
+        "gap",
+        "lai"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "chao",
+        "tam",
+        "biet"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "ket",
+        "thuc"
+      ]
+    },
+    {
+      "label": "ket_thuc",
+      "text": [
+        "ket",
+        "thuc",
+        "cuoc",
+        "tro",
+        "chuyen"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "co",
+        "kinh",
+        "nghiem",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "lam",
+        "uoc",
+        "bao",
+        "nhieu",
+        "ca"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "kinh",
+        "nghiem",
+        "cua",
+        "bac",
+        "si"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "lam",
+        "uoc",
+        "bao",
+        "lau",
+        "roi"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "co",
+        "gioi",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "co",
+        "chuyen",
+        "mon",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "lam",
+        "bao",
+        "nhieu",
+        "ca",
+        "phau",
+        "thuat"
+      ]
+    },
+    {
+      "label": "hoi_kinh_nghiem",
+      "text": [
+        "bac",
+        "si",
+        "co",
+        "chung",
+        "chi",
+        "khong"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "thoi",
+        "gian",
+        "hoi",
+        "phuc"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "bao",
+        "lau",
+        "thi",
+        "lanh"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "bao",
+        "lau",
+        "thi",
+        "het",
+        "sung"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "phuc",
+        "hoi",
+        "mat",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "bao",
+        "lau",
+        "thi",
+        "lam",
+        "lai",
+        "uoc"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "thoi",
+        "gian",
+        "nghi",
+        "duong"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "bao",
+        "lau",
+        "thi",
+        "inh"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "khi",
+        "nao",
+        "thi",
+        "lanh",
+        "han"
+      ]
+    },
+    {
+      "label": "thoi_gian_phuc_hoi",
+      "text": [
+        "thoi",
+        "gian",
+        "nghi",
+        "ngoi",
+        "sau",
+        "phau",
+        "thuat"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "bao",
+        "hanh",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "co",
+        "bao",
+        "hanh",
+        "khong"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "che",
+        "bao",
+        "hanh"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "thoi",
+        "gian",
+        "bao",
+        "hanh"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "bao",
+        "hanh",
+        "tron",
+        "oi",
+        "khong"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "neu",
+        "co",
+        "van",
+        "thi",
+        "sao"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "bao",
+        "hanh",
+        "nhu",
+        "nao"
+      ]
+    },
+    {
+      "label": "bao_hanh",
+      "text": [
+        "chinh",
+        "sach",
+        "bao",
+        "hanh"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "thanh",
+        "toan",
+        "nhu",
+        "nao"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "phuong",
+        "thuc",
+        "thanh",
+        "toan"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "tra",
+        "gop",
+        "uoc",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "co",
+        "tra",
+        "gop",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "thanh",
+        "toan",
+        "bang",
+        "uoc",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "co",
+        "thanh",
+        "toan",
+        "onlin",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "chuyen",
+        "khoan",
+        "uoc",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "co",
+        "giam",
+        "gia",
+        "khong"
+      ]
+    },
+    {
+      "label": "thanh_toan",
+      "text": [
+        "co",
+        "khuyen",
+        "mai",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "au",
+        "lam",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "muc",
+        "au"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "co",
+        "au",
+        "nhieu",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "au",
+        "trong",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "co",
+        "gai",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "co",
+        "te",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "cam",
+        "giac",
+        "au",
+        "nao"
+      ]
+    },
+    {
+      "label": "hoi_dau",
+      "text": [
+        "co",
+        "cach",
+        "giam",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "co",
+        "toan",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "toan"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "rui",
+        "ro",
+        "la",
+        "gi"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "ngui",
+        "hiem",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "ti",
+        "le",
+        "thanh",
+        "cong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "co",
+        "ngui",
+        "co",
+        "gi",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "co",
+        "ai",
+        "gap",
+        "van",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "co",
+        "toan",
+        "tuyet",
+        "oi",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_an_toan",
+      "text": [
+        "muc",
+        "toan"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "su",
+        "dung",
+        "san",
+        "pham",
+        "gi"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "tui",
+        "nguc",
+        "hang",
+        "nao"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "chat",
+        "lieu",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "san",
+        "pham",
+        "co",
+        "chat",
+        "luong",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "nguon",
+        "goc",
+        "san",
+        "pham"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "san",
+        "pham",
+        "nhap",
+        "tu",
+        "au"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "co",
+        "chung",
+        "nhan",
+        "khong"
+      ]
+    },
+    {
+      "label": "hoi_san_pham",
+      "text": [
+        "san",
+        "pham",
+        "chinh",
+        "hang",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "mai",
+        "bai",
+        "sau",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "bai",
+        "sau",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "khi",
+        "nao",
+        "uoc",
+        "mai",
+        "bai"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "xuat",
+        "vien",
+        "sau",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "thoi",
+        "gian",
+        "nam",
+        "vien"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "bao",
+        "lau",
+        "thi",
+        "xuat",
+        "vien"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "thoi",
+        "gian",
+        "hoi",
+        "phuc"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "bao",
+        "gio",
+        "uoc",
+        "bai"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "co",
+        "mai",
+        "bai",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "bai",
+        "quoc",
+        "te",
+        "sau",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "bai",
+        "noi",
+        "ia",
+        "sau",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nguc_bay",
+      "text": [
+        "xuat",
+        "vien",
+        "sau",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "dao",
+        "sieu",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "pp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "phuong",
+        "pahp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "chon",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "size",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "loai",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "kich",
+        "co",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "form",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "dao",
+        "mo",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "ultrason"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "dao",
+        "sieu",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "pp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "pahp",
+        "nang",
+        "nguc",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_nang_nguc_dao",
+      "text": [
+        "phuong",
+        "phap",
+        "nang",
+        "nguc",
+        "bang",
+        "dao",
+        "sieu"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "kich",
+        "thuoc",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "chon",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "size",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tui",
+        "nguc",
+        "loai",
+        "nao"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "kich",
+        "co",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "size",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "tu",
+        "van",
+        "form",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "chon",
+        "form",
+        "tui"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "size",
+        "tui",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_size_tui",
+      "text": [
+        "form",
+        "tui",
+        "phu",
+        "hop"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "rut",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "cu"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thai",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "silicon"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "rut",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "cu"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thai",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "silicon"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "khong",
+        "au"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "co",
+        "au",
+        "khong"
+      ]
+    },
+    {
+      "label": "faq_thao_tui",
+      "text": [
+        "thao",
+        "tui",
+        "nguc",
+        "bao",
+        "lau"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "gia",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "chi",
+        "phi",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "phi",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "chi",
+        "phi",
+        "phau",
+        "thuat",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "gia",
+        "thai",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "chi",
+        "phi",
+        "thao",
+        "tui",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "phi",
+        "boc",
+        "bao",
+        "xo"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "bao",
+        "gia",
+        "nang",
+        "nguc"
+      ]
+    },
+    {
+      "label": "gia_nang_nguc",
+      "text": [
+        "nang",
+        "nguc",
+        "het",
+        "bao",
+        "nhieu",
+        "tien"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "gia",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "chi",
+        "phi",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "phi",
+        "sua",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "nang",
+        "mui",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "chi",
+        "phi",
+        "phau",
+        "thuat",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "gia",
+        "nang",
+        "mui",
+        "sun",
+        "suon"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "chi",
+        "phi",
+        "chinh",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "sua",
+        "mui",
+        "het",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "bao",
+        "gia",
+        "nang",
+        "mui"
+      ]
+    },
+    {
+      "label": "gia_nang_mui",
+      "text": [
+        "phi",
+        "nang",
+        "mui",
+        "cau",
+        "truc"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "gia",
+        "cat",
+        "mi"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "chi",
+        "phi",
+        "nhan",
+        "mi"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "phi",
+        "bam",
+        "mi"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "cat",
+        "mi",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "chi",
+        "phi",
+        "phau",
+        "thuat",
+        "mat"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "gia",
+        "treo",
+        "cung",
+        "mai"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "chi",
+        "phi",
+        "chinh",
+        "mat"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "phau",
+        "thuat",
+        "mat",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "bao",
+        "gia",
+        "cat",
+        "mi"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "gia",
+        "cam"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "chi",
+        "phi",
+        "cam"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "phi",
+        "chinh",
+        "cam"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "cam",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "chi",
+        "phi",
+        "lam",
+        "cam",
+        "line"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "gia",
+        "phau",
+        "thuat",
+        "cam"
+      ]
+    },
+    {
+      "label": "gia_tham_my_cam",
+      "text": [
+        "tham",
+        "cam",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "gia",
+        "hut",
+        "mo"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "chi",
+        "phi",
+        "hut",
+        "mo",
+        "bung"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "phi",
+        "giam",
+        "mo"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "hut",
+        "mo",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "chi",
+        "phi",
+        "hut",
+        "mo",
+        "ui"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "gia",
+        "hut",
+        "mo",
+        "lung"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "chi",
+        "phi",
+        "hut",
+        "mo",
+        "tai"
+      ]
+    },
+    {
+      "label": "gia_hut_mo",
+      "text": [
+        "phi",
+        "tao",
+        "hinh",
+        "thanh",
+        "bung"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "gia",
+        "cang",
+        "da",
+        "mat"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "chi",
+        "phi",
+        "tre",
+        "hoa",
+        "da"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "phi",
+        "cang",
+        "chi"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "cang",
+        "da",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "chi",
+        "phi",
+        "xoa",
+        "nhan"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "gia",
+        "cang",
+        "da",
+        "toan",
+        "dien"
+      ]
+    },
+    {
+      "label": "gia_cang_da",
+      "text": [
+        "phi",
+        "cang",
+        "chi",
+        "collagen"
+      ]
+    },
+    {
+      "label": "gia_vung_kin",
+      "text": [
+        "gia",
+        "tham",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "gia_vung_kin",
+      "text": [
+        "chi",
+        "phi",
+        "se",
+        "khit"
+      ]
+    },
+    {
+      "label": "gia_vung_kin",
+      "text": [
+        "phi",
+        "tao",
+        "hinh",
+        "vung",
+        "kin"
+      ]
+    },
+    {
+      "label": "gia_vung_kin",
+      "text": [
+        "tham",
+        "vung",
+        "kin",
+        "gia",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_vung_kin",
+      "text": [
+        "chi",
+        "phi",
+        "tre",
+        "hoa",
+        "vung",
+        "kin"
+      ]
+    }
+  ],
+  "features": {
+    "xem": 2,
+    "cac": 3,
+    "dich": 11,
+    "vu": 11,
+    "menu": 2,
+    "khac": 2,
+    "lam": 16,
+    "ep": 5,
+    "dv": 4,
+    "tham": 9,
+    "tu": 27,
+    "van": 29,
+    "co": 39,
+    "nhung": 1,
+    "nao": 17,
+    "danh": 1,
+    "sach": 2,
+    "gi": 7,
+    "muon": 10,
+    "tat": 1,
+    "ca": 4,
+    "nang": 63,
+    "nguc": 94,
+    "gia": 30,
+    "bao": 43,
+    "nhieu": 19,
+    "phau": 16,
+    "thuat": 16,
+    "au": 30,
+    "khong": 49,
+    "chi": 33,
+    "phi": 32,
+    "tui": 65,
+    "tot": 1,
+    "lai": 3,
+    "seo": 1,
+    "lau": 14,
+    "thi": 8,
+    "lanh": 3,
+    "thao": 20,
+    "cu": 4,
+    "thai": 5,
+    "mui": 32,
+    "het": 5,
+    "sua": 7,
+    "sun": 3,
+    "suon": 3,
+    "chinh": 8,
+    "hong": 3,
+    "bi": 18,
+    "lech": 2,
+    "bien": 4,
+    "chung": 6,
+    "cat": 5,
+    "mi": 10,
+    "mat": 15,
+    "nhan": 5,
+    "bam": 2,
+    "ve": 5,
+    "xe": 2,
+    "mot": 1,
+    "eu": 1,
+    "treo": 11,
+    "cung": 2,
+    "mai": 6,
+    "cam": 20,
+    "ngan": 1,
+    "vline": 1,
+    "cang": 9,
+    "da": 10,
+    "tre": 10,
+    "hoa": 3,
+    "chai": 1,
+    "xoa": 2,
+    "bang": 8,
+    "lich": 8,
+    "hen": 4,
+    "kham": 12,
+    "ang": 1,
+    "ky": 1,
+    "gap": 4,
+    "bac": 13,
+    "si": 13,
+    "cho": 5,
+    "em": 14,
+    "xin": 8,
+    "ien": 8,
+    "thoai": 8,
+    "zalo": 5,
+    "viber": 3,
+    "truc": 3,
+    "tiep": 2,
+    "en": 3,
+    "uoc": 9,
+    "giup": 2,
+    "book": 2,
+    "cua": 13,
+    "la": 11,
+    "sdt": 1,
+    "ay": 2,
+    "phong": 7,
+    "ia": 4,
+    "iem": 1,
+    "nam": 2,
+    "tim": 1,
+    "uong": 2,
+    "hut": 12,
+    "mo": 17,
+    "bung": 4,
+    "giam": 6,
+    "ui": 2,
+    "toan": 10,
+    "beo": 1,
+    "bodi": 1,
+    "bap": 1,
+    "tai": 2,
+    "nhanh": 1,
+    "thu": 5,
+    "hep": 1,
+    "vung": 9,
+    "kin": 9,
+    "tao": 3,
+    "hinh": 5,
+    "ket": 5,
+    "qua": 3,
+    "anh": 2,
+    "truoc": 1,
+    "sau": 9,
+    "khach": 2,
+    "hang": 4,
+    "review": 1,
+    "feedback": 1,
+    "thuc": 4,
+    "te": 3,
+    "hoi": 5,
+    "ch": 69,
+    "ng": 195,
+    "ph": 62,
+    "th": 57,
+    "lo": 58,
+    "sa": 15,
+    "tr": 3,
+    "kh": 3,
+    "nh": 1,
+    "dao": 19,
+    "sieu": 19,
+    "ultrason": 2,
+    "phuong": 10,
+    "phap": 6,
+    "pp": 3,
+    "pahp": 3,
+    "size": 186,
+    "form": 124,
+    "kich": 5,
+    "thuoc": 2,
+    "chon": 5,
+    "loai": 3,
+    "phu": 7,
+    "hop": 7,
+    "rut": 3,
+    "silicon": 3,
+    "chao": 8,
+    "ban": 3,
+    "hello": 1,
+    "hi": 1,
+    "ai": 2,
+    "oi": 4,
+    "buoi": 2,
+    "sang": 1,
+    "chieu": 1,
+    "thank": 2,
+    "nhe": 1,
+    "tam": 2,
+    "biet": 2,
+    "bye": 1,
+    "goodby": 1,
+    "cuoc": 1,
+    "tro": 1,
+    "chuyen": 3,
+    "kinh": 2,
+    "nghiem": 2,
+    "roi": 1,
+    "gioi": 1,
+    "mon": 1,
+    "thoi": 6,
+    "gian": 6,
+    "phuc": 3,
+    "sung": 1,
+    "nghi": 2,
+    "duong": 1,
+    "inh": 1,
+    "khi": 2,
+    "han": 1,
+    "ngoi": 1,
+    "hanh": 7,
+    "che": 1,
+    "tron": 1,
+    "neu": 1,
+    "sao": 1,
+    "nhu": 2,
+    "thanh": 6,
+    "tra": 2,
+    "gop": 2,
+    "onlin": 1,
+    "khoan": 1,
+    "khuyen": 1,
+    "muc": 2,
+    "trong": 1,
+    "gai": 1,
+    "giac": 1,
+    "cach": 1,
+    "rui": 1,
+    "ro": 1,
+    "ngui": 2,
+    "hiem": 1,
+    "ti": 1,
+    "le": 1,
+    "cong": 1,
+    "tuyet": 1,
+    "su": 1,
+    "dung": 1,
+    "san": 5,
+    "pham": 5,
+    "chat": 2,
+    "lieu": 1,
+    "luong": 1,
+    "nguon": 1,
+    "goc": 1,
+    "nhap": 1,
+    "bai": 7,
+    "xuat": 3,
+    "vien": 4,
+    "gio": 1,
+    "quoc": 1,
+    "noi": 1,
+    "boc": 1,
+    "xo": 1,
+    "tien": 1,
+    "cau": 1,
+    "line": 1,
+    "lung": 1,
+    "dien": 1,
+    "collagen": 1,
+    "se": 1,
+    "khit": 1
+  },
+  "stemmer": {},
+  "lastAdded": 835,
+  "events": {
+    "_events": {},
+    "_eventsCount": 0
+  }
+}

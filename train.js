@@ -1085,10 +1085,16 @@ Object.keys(price_intents).forEach(intent => {
     }
 });
 
-// Train and save the model
+// Train the classifier
 classifier.train();
 
-// Save the trained model
-const modelJson = JSON.stringify(classifier);
-fs.writeFileSync('model.json', modelJson, 'utf8');
-console.log('✅ Model trained and saved successfully!');
+// Save the trained model with proper formatting
+const modelJson = JSON.stringify(classifier, null, 2);
+try {
+    // Validate JSON before saving
+    JSON.parse(modelJson);
+    fs.writeFileSync('model.json', modelJson, 'utf8');
+    console.log('✅ Model trained and saved successfully!');
+} catch (error) {
+    console.error('Error saving model:', error);
+}
