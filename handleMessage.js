@@ -2,6 +2,7 @@ const natural = require('natural');
 const fs = require('fs');
 const serviceFlows = require('./servicesFlow');
 const messengerClient = require('./services/messengerClient');
+const tuiNgucFlow = require('./flows/tuiNgucFlow');
 const { completedUsers, userResponses } = require('./index.js');
 
 // Load classifier and country rules
@@ -170,6 +171,12 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
         break;
       case 'faq_dau_nghi':
         await serviceFlows.sendDauNghiFaq(sender_psid);
+        break;
+      case 'faq_loai_tui':
+        await tuiNgucFlow.sendLoaiTuiFlow(sender_psid);
+        break;
+      case 'faq_tui_mentor_extra':
+        await tuiNgucFlow.sendTuiMentorExtraFlow(sender_psid);
         break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);

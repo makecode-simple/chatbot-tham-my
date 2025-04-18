@@ -5,6 +5,25 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "faq_loai_tui": [
+        "túi ngực loại nào",
+        "dùng túi ngực gì",
+        "túi mentor là gì",
+        "túi ngực hiệu gì",
+        "túi ngực chất lượng",
+        "túi ngực an toàn",
+        "túi ngực nào tốt",
+        "túi ngực nào đẹp"
+    ],
+    "faq_tui_mentor_extra": [
+        "túi mentor extra",
+        "túi mentor classic",
+        "túi mentor loại nào",
+        "sự khác nhau giữa mentor extra và classic",
+        "túi mentor nào phù hợp",
+        "túi mentor nào đẹp hơn",
+        "túi mentor nào tự nhiên hơn"
+    ],
     "faq_dau_nghi": [
         "có đau không",
         "đau không em",
