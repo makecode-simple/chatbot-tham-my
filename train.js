@@ -5,6 +5,67 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "xem_anh_nguc": [
+        "xin ảnh ngực",
+        "cho xem ảnh ngực",
+        "xem ảnh nâng ngực",
+        "hình ảnh nâng ngực",
+        "xem kết quả nâng ngực"
+    ],
+    "xem_anh_mat": [
+        "xin ảnh mắt",
+        "cho xem ảnh mắt",
+        "xem ảnh mắt",
+        "hình ảnh mắt",
+        "xem kết quả mắt"
+    ],
+    "xem_anh_mui": [
+        "xin ảnh mũi",
+        "cho xem ảnh mũi",
+        "xem ảnh mũi",
+        "hình ảnh mũi",
+        "xem kết quả mũi"
+    ],
+    "xem_anh_mong": [
+        "xin ảnh mông",
+        "cho xem ảnh mông",
+        "xem ảnh mông",
+        "hình ảnh mông",
+        "xem kết quả mông"
+    ],
+    "xem_anh_vungkin": [
+        "xin ảnh vùng kín",
+        "cho xem ảnh vùng kín",
+        "xem ảnh vùng kín",
+        "hình ảnh vùng kín"
+    ],
+    "xem_anh_hutmo": [
+        "xin ảnh hút mỡ",
+        "cho xem ảnh hút mỡ",
+        "xem ảnh hút mỡ",
+        "hình ảnh hút mỡ",
+        "xem kết quả hút mỡ"
+    ],
+    "xem_anh_vu": [
+        "xin ảnh vú",
+        "cho xem ảnh vú",
+        "xem ảnh vú",
+        "hình ảnh vú"
+    ],
+    "xem_anh_da": [
+        "xin ảnh da",
+        "cho xem ảnh da",
+        "xem ảnh da",
+        "hình ảnh da",
+        "xem kết quả da"
+    ],
+    "xem_anh_satre": [
+        "xin ảnh sa trễ",
+        "cho xem ảnh sa trễ",
+        "xem ảnh sa trễ",
+        "hình ảnh sa trễ",
+        "xem kết quả sa trễ"
+    ],
     "xem_bang_gia_full": [
         "xin bảng giá toàn bộ",
         "xin bảng giá tất cả",

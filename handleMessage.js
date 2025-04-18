@@ -6,6 +6,7 @@ const tuiNgucFlow = require('./flows/tuiNgucFlow');
 const ngucFaqFlow = require('./flows/ngucFaqFlow');
 const hoiGiaFlow = require('./flows/hoiGiaFlow');
 const contactFlow = require('./flows/contactFlow');
+const xemAnhFlow = require('./flows/xemAnhFlow');
 const { completedUsers, userResponses } = require('./index.js');
 
 // Load classifier and country rules
@@ -205,6 +206,33 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
         break;
       case 'xem_bang_gia_mong':
         await hoiGiaFlow.sendGiaMongFlow(sender_psid);
+        break;
+      case 'xem_anh_nguc':
+        await xemAnhFlow.sendAnhNgucFlow(sender_psid);
+        break;
+      case 'xem_anh_mat':
+        await xemAnhFlow.sendAnhMatFlow(sender_psid);
+        break;
+      case 'xem_anh_mui':
+        await xemAnhFlow.sendAnhMuiFlow(sender_psid);
+        break;
+      case 'xem_anh_mong':
+        await xemAnhFlow.sendAnhMongFlow(sender_psid);
+        break;
+      case 'xem_anh_vungkin':
+        await xemAnhFlow.sendAnhVungKinFlow(sender_psid);
+        break;
+      case 'xem_anh_hutmo':
+        await xemAnhFlow.sendAnhHutMoFlow(sender_psid);
+        break;
+      case 'xem_anh_vu':
+        await xemAnhFlow.sendAnhVuFlow(sender_psid);
+        break;
+      case 'xem_anh_da':
+        await xemAnhFlow.sendAnhDaFlow(sender_psid);
+        break;
+      case 'xem_anh_satre':
+        await xemAnhFlow.sendAnhSaTreFlow(sender_psid);
         break;
       case 'khong_co_sdt':
         await contactFlow.sendNoPhoneResponse(sender_psid);
