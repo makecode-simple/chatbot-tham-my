@@ -4,7 +4,7 @@ const { getBangGiaImage } = require('../cloudinaryService');
 async function sendHoiGiaFlow(sender_psid) {
   console.log("🚀 Trigger Hỏi Giá Flow");
   
-  const bangGiaImage = await getBangGiaImage('banggia_cacdichvu');
+  const bangGiaImage = await getBangGiaImage('banggia_nangngucc');
   if (bangGiaImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
@@ -43,7 +43,7 @@ async function sendGiaCamFlow(sender_psid) {
 async function sendGiaNgucFlow(sender_psid) {
   console.log("🚀 Trigger Giá Ngực Flow");
   
-  const bangGiaNgucImage = await getBangGiaImage('banggia_nguc');
+  const bangGiaNgucImage = await getBangGiaImage('banggia_nangngucc');
   if (bangGiaNgucImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaNgucImage, is_reusable: true } }
@@ -58,7 +58,7 @@ async function sendGiaNgucFlow(sender_psid) {
 async function sendGiaMongFlow(sender_psid) {
   console.log("🚀 Trigger Giá Mông Flow");
   
-  const bangGiaMongImage = await getBangGiaImage('banggia_mong');
+  const bangGiaMongImage = await getBangGiaImage('banggia_cacdichvukhac');
   if (bangGiaMongImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaMongImage, is_reusable: true } }
@@ -73,7 +73,7 @@ async function sendGiaMongFlow(sender_psid) {
 async function sendGiaMuiFlow(sender_psid) {
   console.log("🚀 Trigger Giá Mũi Flow");
   
-  const bangGiaMuiImage = await getBangGiaImage('banggia_mui');
+  const bangGiaMuiImage = await getBangGiaImage('banggia_thammymui');
   if (bangGiaMuiImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaMuiImage, is_reusable: true } }
