@@ -5,9 +5,40 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "xem_bang_gia_full": [
+        "xin bảng giá toàn bộ",
+        "xin bảng giá tất cả",
+        "xem bảng giá các dịch vụ",
+        "xem bảng giá sản phẩm",
+        "bảng giá dịch vụ"
+    ],
+    "xem_bang_gia_nguc": [
+        "xin bảng giá ngực",
+        "xem bảng giá ngực",
+        "bảng giá phẫu thuật ngực"
+    ],
+    "xem_bang_gia_mat": [
+        "xin bảng giá mắt",
+        "xem bảng giá mắt",
+        "bảng giá phẫu thuật mắt"
+    ],
+    "xem_bang_gia_mui": [
+        "xin bảng giá mũi",
+        "xem bảng giá mũi",
+        "bảng giá phẫu thuật mũi"
+    ],
+    "xem_bang_gia_cam": [
+        "xin bảng giá cằm",
+        "xem bảng giá cằm",
+        "bảng giá phẫu thuật cằm"
+    ],
+    "xem_bang_gia_mong": [
+        "xin bảng giá mông",
+        "xem bảng giá mông",
+        "bảng giá nâng mông"
+    ],
     "khong_co_sdt": [
         "không có số điện thoại",
-        "chưa có số điện thoại",
         "không dùng số điện thoại",
         "không có sđt",
         "chị không có số",
@@ -1071,12 +1102,17 @@ const price_intents = {
         "giá nâng ngực",
         "chi phí nâng ngực",
         "phí đặt túi ngực",
-        "nâng ngực giá bao nhiêu",
+        "ngực giá bao nhiêu",
         "chi phí phẫu thuật ngực",
-        "giá thay túi ngực",
-        "chi phí tháo túi ngực",
-        "phí bóc bao xơ",
+        "giá chỉnh ngực",
+        "chi phí chỉnh ngực",
+        "phẫu thuật ngực giá bao nhiêu",
         "báo giá nâng ngực",
+        "cho xin bảng giá ngực",
+        "xem bảng giá ngực",
+        "bảng giá nâng ngực",
+        "bảng giá phẫu thuật ngực",
+        "giá túi ngực",
         "nâng ngực hết bao nhiêu tiền"
     ],
     "gia_nang_mui": [

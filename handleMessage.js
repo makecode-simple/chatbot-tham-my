@@ -188,6 +188,24 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
       case 'gia_tham_my_cam':
         await hoiGiaFlow.sendGiaCamFlow(sender_psid);
         break;
+      case 'xem_bang_gia_full':
+        await hoiGiaFlow.sendHoiGiaFlow(sender_psid);
+        break;
+      case 'xem_bang_gia_nguc':
+        await hoiGiaFlow.sendGiaNgucFlow(sender_psid);
+        break;
+      case 'xem_bang_gia_mat':
+        await hoiGiaFlow.sendGiaMatFlow(sender_psid);
+        break;
+      case 'xem_bang_gia_mui':
+        await hoiGiaFlow.sendGiaMuiFlow(sender_psid);
+        break;
+      case 'xem_bang_gia_cam':
+        await hoiGiaFlow.sendGiaCamFlow(sender_psid);
+        break;
+      case 'xem_bang_gia_mong':
+        await hoiGiaFlow.sendGiaMongFlow(sender_psid);
+        break;
       case 'khong_co_sdt':
         await contactFlow.sendNoPhoneResponse(sender_psid);
         break;

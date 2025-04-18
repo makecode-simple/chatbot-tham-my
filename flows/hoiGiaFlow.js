@@ -9,6 +9,10 @@ async function sendHoiGiaFlow(sender_psid) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
     });
+
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị đang quan tâm dịch vụ nào ạ?"
+    });
   }
 }
 
@@ -20,7 +24,7 @@ async function sendGiaMatFlow(sender_psid) {
   });
 
   await messengerClient.sendMessage(sender_psid, {
-    text: "Chị cho em xin số điện thoại Zalo/Viber bạn Ngân trợ lý bác Vũ sẽ liên hệ tư vấn chuyên sâu hơn ạ"
+    text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
   });
 }
 
@@ -32,12 +36,60 @@ async function sendGiaCamFlow(sender_psid) {
   });
 
   await messengerClient.sendMessage(sender_psid, {
-    text: "Chị cho em xin số điện thoại Zalo/Viber bạn Ngân trợ lý bác Vũ sẽ liên hệ tư vấn chuyên sâu hơn ạ"
+    text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
   });
+}
+
+async function sendGiaNgucFlow(sender_psid) {
+  console.log("🚀 Trigger Giá Ngực Flow");
+  
+  const bangGiaNgucImage = await getBangGiaImage('banggia_nguc');
+  if (bangGiaNgucImage) {
+    await messengerClient.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaNgucImage, is_reusable: true } }
+    });
+
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  }
+}
+
+async function sendGiaMongFlow(sender_psid) {
+  console.log("🚀 Trigger Giá Mông Flow");
+  
+  const bangGiaMongImage = await getBangGiaImage('banggia_mong');
+  if (bangGiaMongImage) {
+    await messengerClient.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaMongImage, is_reusable: true } }
+    });
+
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  }
+}
+
+async function sendGiaMuiFlow(sender_psid) {
+  console.log("🚀 Trigger Giá Mũi Flow");
+  
+  const bangGiaMuiImage = await getBangGiaImage('banggia_mui');
+  if (bangGiaMuiImage) {
+    await messengerClient.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaMuiImage, is_reusable: true } }
+    });
+
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  }
 }
 
 module.exports = {
   sendHoiGiaFlow,
   sendGiaMatFlow,
-  sendGiaCamFlow
+  sendGiaCamFlow,
+  sendGiaNgucFlow,
+  sendGiaMongFlow,
+  sendGiaMuiFlow
 };
