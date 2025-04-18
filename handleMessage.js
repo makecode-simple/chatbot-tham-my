@@ -4,6 +4,7 @@ const serviceFlows = require('./servicesFlow');
 const messengerClient = require('./services/messengerClient');
 const tuiNgucFlow = require('./flows/tuiNgucFlow');
 const ngucFaqFlow = require('./flows/ngucFaqFlow');
+const hoiGiaFlow = require('./flows/hoiGiaFlow');
 const { completedUsers, userResponses } = require('./index.js');
 
 // Load classifier and country rules
@@ -179,6 +180,12 @@ Hiện nay tình trạng giả Ultrasonic Surgical Scalpel rất nhiều, chị 
         break;
       case 'faq_tui_mentor_extra':
         await tuiNgucFlow.sendTuiMentorExtraFlow(sender_psid);
+        break;
+      case 'gia_mat':
+        await hoiGiaFlow.sendGiaMatFlow(sender_psid);
+        break;
+      case 'gia_tham_my_cam':
+        await hoiGiaFlow.sendGiaCamFlow(sender_psid);
         break;
       default:
         await serviceFlows.sendMenuDichVu(sender_psid);

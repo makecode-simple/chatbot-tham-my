@@ -663,22 +663,20 @@
         "253": 2
       },
       "gia_mat": {
-        "31": 3,
-        "33": 4,
+        "28": 2,
+        "31": 7,
+        "33": 2,
         "34": 3,
         "35": 3,
-        "37": 4,
-        "41": 2,
-        "78": 6,
-        "79": 5,
-        "90": 2,
-        "96": 4,
-        "97": 6,
-        "98": 4,
-        "99": 2,
-        "100": 2,
-        "105": 2,
-        "106": 2
+        "36": 3,
+        "37": 6,
+        "39": 4,
+        "78": 8,
+        "79": 2,
+        "87": 3,
+        "90": 3,
+        "98": 14,
+        "254": 9
       },
       "gia_tham_my_cam": {
         "30": 2,
@@ -692,7 +690,7 @@
         "79": 4,
         "90": 2,
         "107": 8,
-        "254": 2
+        "255": 2
       },
       "gia_hut_mo": {
         "31": 2,
@@ -709,7 +707,7 @@
         "156": 2,
         "157": 2,
         "224": 2,
-        "255": 2
+        "256": 2
       },
       "gia_cang_da": {
         "11": 2,
@@ -725,8 +723,8 @@
         "112": 2,
         "113": 2,
         "115": 2,
-        "256": 2,
-        "257": 2
+        "257": 2,
+        "258": 2
       },
       "gia_vung_kin": {
         "31": 2,
@@ -741,8 +739,8 @@
         "155": 5,
         "156": 2,
         "157": 2,
-        "258": 2,
-        "259": 2
+        "259": 2,
+        "260": 2
       }
     },
     "classTotals": {
@@ -779,13 +777,13 @@
       "faq_nguc_bay": 13,
       "gia_nang_nguc": 11,
       "gia_nang_mui": 11,
-      "gia_mat": 10,
+      "gia_mat": 14,
       "gia_tham_my_cam": 8,
       "gia_hut_mo": 9,
       "gia_cang_da": 8,
       "gia_vung_kin": 6
     },
-    "totalExamples": 871,
+    "totalExamples": 875,
     "smoothing": 1
   },
   "docs": [
@@ -7264,42 +7262,6 @@
       "label": "gia_mat",
       "text": [
         "gia",
-        "cat",
-        "mi"
-      ]
-    },
-    {
-      "label": "gia_mat",
-      "text": [
-        "chi",
-        "phi",
-        "nhan",
-        "mi"
-      ]
-    },
-    {
-      "label": "gia_mat",
-      "text": [
-        "phi",
-        "bam",
-        "mi"
-      ]
-    },
-    {
-      "label": "gia_mat",
-      "text": [
-        "cat",
-        "mi",
-        "gia",
-        "bao",
-        "nhieu"
-      ]
-    },
-    {
-      "label": "gia_mat",
-      "text": [
-        "chi",
-        "phi",
         "phau",
         "thuat",
         "mat"
@@ -7308,26 +7270,15 @@
     {
       "label": "gia_mat",
       "text": [
-        "gia",
-        "treo",
-        "cung",
-        "mai"
-      ]
-    },
-    {
-      "label": "gia_mat",
-      "text": [
         "chi",
         "phi",
-        "chinh",
+        "mo",
         "mat"
       ]
     },
     {
       "label": "gia_mat",
       "text": [
-        "phau",
-        "thuat",
         "mat",
         "gia",
         "bao",
@@ -7337,10 +7288,94 @@
     {
       "label": "gia_mat",
       "text": [
+        "phau",
+        "thuat",
+        "mat",
+        "het",
         "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "mat",
+        "het",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
         "gia",
-        "cat",
-        "mi"
+        "mat",
+        "loi"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "mat",
+        "loi",
+        "gia"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "chinh",
+        "mat",
+        "loi",
+        "gia"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "sua",
+        "mat",
+        "loi",
+        "gia"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "mo",
+        "mat",
+        "loi",
+        "gia"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "mat",
+        "loi",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "chinh",
+        "mat",
+        "loi",
+        "bao",
+        "nhieu"
+      ]
+    },
+    {
+      "label": "gia_mat",
+      "text": [
+        "sua",
+        "mat",
+        "loi",
+        "het",
+        "nhieu",
+        "khong"
       ]
     },
     {
@@ -7624,20 +7659,20 @@
     "nhien": 1,
     "co": 44,
     "au": 41,
-    "khong": 57,
+    "khong": 58,
     "em": 16,
     "lam": 18,
-    "nhieu": 20,
+    "nhieu": 24,
     "bac": 14,
-    "chi": 34,
+    "chi": 32,
     "phau": 17,
     "thuat": 17,
-    "mo": 18,
-    "bao": 50,
+    "mo": 20,
+    "bao": 52,
     "lau": 22,
-    "het": 8,
+    "het": 11,
     "khi": 4,
-    "mai": 9,
+    "mai": 8,
     "ngai": 3,
     "trong": 1,
     "thoi": 8,
@@ -7674,8 +7709,8 @@
     "tat": 1,
     "ca": 4,
     "nang": 63,
-    "gia": 30,
-    "phi": 32,
+    "gia": 32,
+    "phi": 29,
     "lai": 3,
     "seo": 1,
     "lanh": 3,
@@ -7683,26 +7718,26 @@
     "cu": 4,
     "thai": 5,
     "mui": 32,
-    "sua": 7,
+    "sua": 9,
     "sun": 3,
     "suon": 3,
-    "chinh": 8,
+    "chinh": 9,
     "hong": 3,
     "bi": 18,
     "lech": 2,
     "bien": 4,
     "chung": 6,
-    "cat": 5,
-    "mi": 10,
-    "mat": 15,
-    "nhan": 5,
-    "bam": 2,
+    "cat": 2,
+    "mi": 5,
+    "mat": 25,
+    "nhan": 4,
+    "bam": 1,
     "ve": 5,
     "xe": 2,
     "mot": 1,
     "eu": 1,
-    "treo": 11,
-    "cung": 2,
+    "treo": 10,
+    "cung": 1,
     "cam": 19,
     "ngan": 1,
     "vline": 1,
@@ -7850,6 +7885,7 @@
     "xo": 1,
     "tien": 1,
     "cau": 1,
+    "loi": 8,
     "line": 1,
     "lung": 1,
     "dien": 1,
@@ -7858,7 +7894,7 @@
     "khit": 1
   },
   "stemmer": {},
-  "lastAdded": 870,
+  "lastAdded": 874,
   "events": {
     "_events": {},
     "_eventsCount": 0

@@ -1079,15 +1079,19 @@ const price_intents = {
         "phí nâng mũi cấu trúc"
     ],
     "gia_mat": [
-        "giá cắt mí",
-        "chi phí nhấn mí",
-        "phí bấm mí",
-        "cắt mí giá bao nhiêu",
-        "chi phí phẫu thuật mắt",
-        "giá treo cung mày",
-        "chi phí chỉnh mắt",
-        "phẫu thuật mắt giá bao nhiêu",
-        "báo giá cắt mí"
+        "giá phẫu thuật mắt",
+        "chi phí mổ mắt",
+        "mắt giá bao nhiêu",
+        "phẫu thuật mắt hết bao nhiêu",
+        "mắt hết bao nhiêu",
+        "giá mắt lỗi",
+        "mắt lỗi giá",
+        "chỉnh mắt lỗi giá",
+        "sửa mắt lỗi giá",
+        "mổ mắt lỗi giá",
+        "mắt lỗi bao nhiêu",
+        "chỉnh mắt lỗi bao nhiêu",
+        "sửa mắt lỗi hết nhiều không"
     ],
     "gia_tham_my_cam": [
         "giá độn cằm",
