@@ -5,6 +5,19 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "khong_co_sdt": [
+        "không có số điện thoại",
+        "chưa có số điện thoại",
+        "không dùng số điện thoại",
+        "không có sđt",
+        "chị không có số",
+        "em không có số",
+        "tôi không có số",
+        "không có zalo",
+        "không dùng zalo",
+        "không có viber",
+        "không dùng viber"
+    ],
     "faq_loai_tui": [
         "túi ngực loại nào",
         "dùng túi ngực gì",
