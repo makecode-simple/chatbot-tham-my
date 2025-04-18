@@ -16,6 +16,11 @@ async function sendImageAndAskContact(sender_psid, folder) {
     await messengerClient.sendMessage(sender_psid, {
       text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
     });
+  } else {
+    console.log(`❌ No images found in folder: ${folder}`);
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+    });
   }
 }
 

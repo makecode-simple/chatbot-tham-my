@@ -13,31 +13,52 @@ async function sendHoiGiaFlow(sender_psid) {
     await messengerClient.sendMessage(sender_psid, {
       text: "Chị đang quan tâm dịch vụ nào ạ?"
     });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+    });
   }
 }
 
 async function sendGiaMatFlow(sender_psid) {
   console.log("🚀 Trigger Giá Mắt Flow");
   
-  await messengerClient.sendMessage(sender_psid, {
-    text: `Dạ chi phí sửa lại mắt từng thẩm mỹ bị lỗi từ 35-65 triệu tùy trường hợp.`
-  });
+  const bangGiaImage = await getBangGiaImage('banggia_thammydamat');
+  if (bangGiaImage) {
+    await messengerClient.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
 
-  await messengerClient.sendMessage(sender_psid, {
-    text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
-  });
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+    });
+  }
 }
 
 async function sendGiaCamFlow(sender_psid) {
   console.log("🚀 Trigger Giá Cằm Flow");
   
-  await messengerClient.sendMessage(sender_psid, {
-    text: `Chi phí thẩm mỹ cằm sẽ từ 30-40 triệu tùy cấu trúc giải phẫu ạ`
-  });
+  const bangGiaImage = await getBangGiaImage('banggia_thammycam');
+  if (bangGiaImage) {
+    await messengerClient.sendMessage(sender_psid, {
+      attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
+    });
 
-  await messengerClient.sendMessage(sender_psid, {
-    text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
-  });
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+    });
+  }
 }
 
 async function sendGiaNgucFlow(sender_psid) {
@@ -51,6 +72,11 @@ async function sendGiaNgucFlow(sender_psid) {
 
     await messengerClient.sendMessage(sender_psid, {
       text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
     });
   }
 }
@@ -67,6 +93,11 @@ async function sendGiaMongFlow(sender_psid) {
     await messengerClient.sendMessage(sender_psid, {
       text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
     });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+    });
   }
 }
 
@@ -81,6 +112,11 @@ async function sendGiaMuiFlow(sender_psid) {
 
     await messengerClient.sendMessage(sender_psid, {
       text: "Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu cho chị được không ạ?"
+    });
+  } else {
+    console.log('❌ No price list image found');
+    await messengerClient.sendMessage(sender_psid, {
+      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
     });
   }
 }
