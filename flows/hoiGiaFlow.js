@@ -4,7 +4,7 @@ const { getBangGiaImage } = require('../cloudinaryService');
 async function sendHoiGiaFlow(sender_psid) {
   console.log("🚀 Trigger Hỏi Giá Flow");
   
-  const bangGiaImage = await getBangGiaImage('banggia_nangngucc');
+  const bangGiaImage = await getBangGiaImage('banggia_nangnguc');
   if (bangGiaImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
@@ -64,7 +64,7 @@ async function sendGiaCamFlow(sender_psid) {
 async function sendGiaNgucFlow(sender_psid) {
   console.log("🚀 Trigger Giá Ngực Flow");
   
-  const bangGiaNgucImage = await getBangGiaImage('banggia_nangngucc');
+  const bangGiaNgucImage = await getBangGiaImage('banggia_nangnguc');
   if (bangGiaNgucImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaNgucImage, is_reusable: true } }
