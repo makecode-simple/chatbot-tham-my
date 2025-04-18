@@ -64,6 +64,7 @@ async function sendDiaChiFlow(sender_psid) {
 }
 
 const serviceFlows = {
+  sendNangMuiFlow: require('./flows/nangMuiFlow'),
   sendNangNgucFlow: require('./flows/nangNgucFlow'),
   sendThaoTuiNgucFlow: require('./flows/thaoTuiNgucFlow'),
 

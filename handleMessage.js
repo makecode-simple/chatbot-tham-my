@@ -33,8 +33,6 @@ const donCamFlow = require('./flows/donCamFlow');
 const hutMoTayFlow = require('./flows/hutMoTayFlow');
 const hutMoDuiFlow = require('./flows/hutMoDuiFlow');
 const hutMoLungFlow = require('./flows/hutMoLungFlow');
-const nangMuiFlow = require('./flows/nangMuiFlow');
-
 const { completedUsers, userResponses } = require('./index.js');
 
 // Load classifier and country rules
@@ -282,7 +280,7 @@ async function handleMessage(sender_psid, received_message) {
           await hutMoLungFlow.sendHutMoLungFlow(sender_psid);
           break;
         case 'nang_mui':
-          await nangMuiFlow.sendNangMuiFlow(sender_psid);
+          await serviceFlows.sendNangMuiFlow(sender_psid);
           break;
         case 'faq_nang_nguc_dao':
           await faqNangNgucDaoFlow.sendFaqNangNgucDaoFlow(sender_psid);
