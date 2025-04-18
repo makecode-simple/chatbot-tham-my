@@ -22,7 +22,7 @@ async function sendNangMuiFlow(sender_psid) {
 
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-  const bangGiaImage = await getBangGiaImage("banggia_nangmui");
+  const bangGiaImage = await getBangGiaImage("banggia_thammymui");
   if (bangGiaImage) {
     await messengerClient.sendMessage(sender_psid, {
       attachment: { type: 'image', payload: { url: bangGiaImage, is_reusable: true } }
