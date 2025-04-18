@@ -12,4 +12,6 @@ Sau 2 ngày chị có thể bay nội địa, 7 ngày bay quốc tế ạ`
     });
 }
 
-module.exports = sendFaqNgucBayFlow;
+module.exports = {
+    sendFaqNgucBayFlow
+};

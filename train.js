@@ -348,8 +348,23 @@ const trainingData = {
         "nâng ngực ở đâu tốt",
         "nâng ngực có để lại sẹo không",
         "nâng ngực bao lâu thì lành",
+        "nâng ngực",
+        "phẫu thuật nâng ngực",
+        "đặt túi ngực"
+    ],
+    "thao_tui_nguc": [
+        "tháo túi ngực",
         "tháo túi ngực cũ",
-        "thay túi ngực"
+        "thay túi ngực",
+        "muốn tháo túi ngực",
+        "tư vấn tháo túi ngực",
+        "tháo túi silicon",
+        "thay túi silicon",
+        "thay túi ngực mới",
+        "tháo túi ngực hỏng",
+        "tháo túi ngực bị vỡ",
+        "tháo túi ngực bị trật",
+        "tháo túi ngực bị lệch"
     ],
     "nang_mui": [
         "nâng mũi hết bao nhiêu",
@@ -396,9 +411,19 @@ const trainingData = {
     "hoi_gia": [
         "giá bao nhiêu",
         "chi phí",
+        "phí",
         "bảng giá",
-        "phí phẫu thuật",
-        "giá cả thế nào"
+        "giá cả thế nào",
+        "bảng giá toàn bộ",
+        "bảng giá tất cả",
+        "bảng giá các dịch vụ",
+        "bảng giá toàn bộ sản phẩm",
+        "bảng giá toàn bộ dịch vụ",
+        "giá các dịch vụ",
+        "chi phí các dịch vụ",
+        "phí dịch vụ",
+        "cho xem bảng giá",
+        "xem bảng giá"
     ],
     "dat_lich": [
         "đặt lịch",
@@ -674,85 +699,9 @@ classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
 classifier.addDocument('tư vấn size túi', 'faq_size_tui');
 classifier.addDocument('tư vấn form túi', 'faq_size_tui');
 classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
+classifier.addDocument('chọn size túi', 'faq_size_tui');
+classifier.addDocument('tư vấn kích thước túi', 'faq_size_tui');
+classifier.addDocument('tư vấn size phù hợp', 'faq_size_tui');
 classifier.addDocument('size phù hợp', 'faq_size_tui');
 classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
 classifier.addDocument('tư vấn size túi', 'faq_size_tui');
