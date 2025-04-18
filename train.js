@@ -961,47 +961,27 @@ const additionalPhrases = [
     "dao siêu âm nâng ngực",
     "pp nang nguc dao sieu am",
     "phuong pahp nang nguc dao sieu am",
-    "phương pháp nâng ngực bằng dao siêu âm"
+    "phương pháp nâng ngực bằng dao siêu âm",
+    "size nâng ngực",
+    "chọn size túi",
+    "túi ngực size nào",
+    "form túi thế nào",
+    "túi ngực loại nào",
+    "size phù hợp",
+    "kích cỡ túi ngực",
+    "tư vấn size túi",
+    "tư vấn form túi"
 ];
-      "size nâng ngực",
-      "chọn size túi",
-      "túi ngực size nào",
-      "form túi thế nào",
-      "túi ngực loại nào",
-      "size phù hợp",
-      "kích cỡ túi ngực",
-      "tư vấn size túi",
-      "tư vấn form túi"
-    ]
-  }
-};
+
+additionalPhrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'faq_size_tui', 10);
+});
 
 // Add FAQ documents with weights
 Object.entries(faqIntents).forEach(([intent, data]) => {
   data.phrases.forEach(text => {
     classifier.addDocument(normalizeText(text), intent, data.weight);
   });
-});
-
-// Train and save the model
-classifier.train();
-
-classifier.save('model.json', (err) => {
-  if (err) {
-    console.error('Error saving model:', err);
-  } else {
-    console.log('Model trained and saved successfully!');
-  }
-});
-    "nâng ngực bằng dao siêu âm",
-    "dao siêu âm nâng ngực",
-    "pp nang nguc dao sieu am",
-    "phuong pahp nang nguc dao sieu am",
-    "phương pháp nâng ngực bằng dao siêu âm"
-];
-
-faq_nang_nguc_dao_phrases.forEach(phrase => {
-    classifier.addDocument(normalizeText(phrase), 'faq_nang_nguc_dao', 10);
 });
 
 // Fix the faq_thao_tui object definition
@@ -1105,10 +1085,10 @@ Object.keys(price_intents).forEach(intent => {
     }
 });
 
-// Train the classifier
+// Train and save the model
 classifier.train();
 
 // Save the trained model
-const modelData = classifier.toJSON();
-fs.writeFileSync('model.json', JSON.stringify(modelData, null, 2), 'utf8');
+const modelJson = JSON.stringify(classifier);
+fs.writeFileSync('model.json', modelJson, 'utf8');
 console.log('✅ Model trained and saved successfully!');
