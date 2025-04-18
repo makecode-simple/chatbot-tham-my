@@ -5,6 +5,125 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "hut_mo_tay": [
+        "hút mỡ tay",
+        "giảm mỡ tay",
+        "làm thể tay",
+        "tư vấn hút mỡ tay",
+        "hút mỡ cánh tay",
+        "bắp tay to",
+        "tay mập",
+        "cánh tay to",
+        "bắp tay mập",
+        "tay quá to"
+    ],
+    "hut_mo_dui": [
+        "hút mỡ đùi",
+        "giảm mỡ đùi",
+        "làm thể đùi",
+        "tư vấn hút mỡ đùi",
+        "đùi to",
+        "đùi mập",
+        "đùi quá to",
+        "bắp đùi to",
+        "chân to",
+        "chân mập"
+    ],
+    "hut_mo_lung": [
+        "hút mỡ lưng",
+        "giảm mỡ lưng",
+        "làm thể lưng",
+        "tư vấn hút mỡ lưng",
+        "lưng mập",
+        "lưng to",
+        "lưng quá to",
+        "mỡ lưng",
+        "bụng lưng",
+        "lưng mỡ"
+    ],
+    "don_cam": [
+        "độn cằm",
+        "phẫu thuật độn cằm",
+        "tạo hình cằm",
+        "chỉnh sửa cằm",
+        "tư vấn độn cằm",
+        "làm đẹp cằm",
+        "cằm chỉnh hình",
+        "cằm v6",
+        "cằm chuẩn hàn",
+        "cằm thẩm mỹ"
+    ],
+    "don_thai_duong": [
+        "độn thái dương",
+        "phẫu thuật thái dương",
+        "tạo hình thái dương",
+        "chỉnh sửa thái dương",
+        "tư vấn độn thái dương",
+        "làm đẹp thái dương",
+        "thái dương hóp",
+        "thái dương lõm",
+        "thái dương thẩm mỹ"
+    ],
+    "tham_my_vung_kin": [
+        "thẩm mỹ vùng kín",
+        "phẫu thuật vùng kín",
+        "tạo hình vùng kín",
+        "chỉnh sửa vùng kín",
+        "thu hẹp vùng kín",
+        "làm đẹp vùng kín",
+        "phẫu thuật thẩm mỹ vùng kín",
+        "tư vấn thẩm mỹ vùng kín",
+        "chỉnh hình vùng kín",
+        "vùng kín đẹp"
+    ],
+    "prp_tre_hoa": [
+        "prp trẻ hóa",
+        "tiểu cầu giàu plasma",
+        "trẻ hóa da prp",
+        "tiêm prp",
+        "trẻ hóa bằng prp",
+        "prp là gì",
+        "trẻ hóa bằng huyết tương",
+        "trẻ hóa tự thân",
+        "tiêm huyết tương",
+        "trẻ hóa da mặt"
+    ],
+    "hut_mo_bung": [
+        "hút mỡ bụng",
+        "phẫu thuật hút mỡ bụng",
+        "giảm mỡ bụng",
+        "lấy mỡ bụng",
+        "hút mỡ vùng bụng",
+        "hút mỡ bụng đau không",
+        "hút mỡ bụng giá bao nhiêu",
+        "tư vấn hút mỡ bụng",
+        "hút mỡ bụng dưới da",
+        "hút mỡ bụng an toàn"
+    ],
+    "nang_mui": [
+        "nâng mũi tái cấu trúc",
+        "nâng mũi sụn sườn",
+        "nâng mũi",
+        "chỉnh sửa mũi",
+        "phẫu thuật nâng mũi",
+        "sửa mũi",
+        "tư vấn nâng mũi",
+        "mũi tái cấu trúc",
+        "mũi sụn sườn",
+        "mũi đẹp"
+    ],
+    "cang_da_mat": [
+        "căng da mặt",
+        "phẫu thuật căng da mặt",
+        "căng da",
+        "căng chỉ mặt",
+        "căng da mặt chỉ",
+        "căng da mặt không phẫu thuật",
+        "căng da mặt bằng chỉ",
+        "căng da mặt có đau không",
+        "căng da mặt giá bao nhiêu",
+        "tư vấn căng da mặt"
+    ],
     "boc_bao_xo": [
         "bóc bao xơ",
         "phẫu thuật bóc bao xơ",
@@ -242,7 +361,9 @@ const trainingData = {
         "chỉnh sửa mũi hỏng",
         "mũi bị lệch",
         "mũi bị biến chứng",
-        "sửa mũi hỏng"
+        "sửa mũi hỏng",
+        "nâng mũi tái cấu",
+        "tái cấu trúc mũi"
     ],
     "tham_my_mat": [
         "cắt mí mắt",

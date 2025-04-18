@@ -25,6 +25,16 @@ const hutMoBodyFlow = require('./flows/hutMoBodyFlow');
 const taiTaoVuFlow = require('./flows/taiTaoVuFlow');
 const thaoTuiNgucFlow = require('./flows/thaoTuiNgucFlow');
 const bocBaoXoFlow = require('./flows/bocBaoXoFlow');
+const cangDaMatFlow = require('./flows/cangDaMatFlow');
+const hutMoBungFlow = require('./flows/hutMoBungFlow');
+const prpTreHoaFlow = require('./flows/prpTreHoaFlow');
+const thamMyVungKinFlow = require('./flows/thamMyVungKinFlow');
+const donThaiDuongFlow = require('./flows/donThaiDuongFlow');
+const donCamFlow = require('./flows/donCamFlow');
+const hutMoTayFlow = require('./flows/hutMoTayFlow');
+const hutMoDuiFlow = require('./flows/hutMoDuiFlow');
+const hutMoLungFlow = require('./flows/hutMoLungFlow');
+const nangMuiFlow = require('./flows/nangMuiFlow');
 
 const { completedUsers, userResponses } = require('./index.js');
 
@@ -246,6 +256,36 @@ async function handleMessage(sender_psid, received_message) {
           break;
         case 'boc_bao_xo':
           await bocBaoXoFlow.sendBocBaoXoFlow(sender_psid);
+          break;
+        case 'cang_da_mat':
+          await cangDaMatFlow.sendCangDaMatFlow(sender_psid);
+          break;
+        case 'hut_mo_bung':
+          await hutMoBungFlow.sendHutMoBungFlow(sender_psid);
+          break;
+        case 'prp_tre_hoa':
+          await prpTreHoaFlow.sendPrpTreHoaFlow(sender_psid);
+          break;
+        case 'tham_my_vung_kin':
+          await thamMyVungKinFlow.sendThamMyVungKinFlow(sender_psid);
+          break;
+        case 'don_thai_duong':
+          await donThaiDuongFlow.sendDonThaiDuongFlow(sender_psid);
+          break;
+        case 'don_cam':
+          await donCamFlow.sendDonCamFlow(sender_psid);
+          break;
+        case 'hut_mo_tay':
+          await hutMoTayFlow.sendHutMoTayFlow(sender_psid);
+          break;
+        case 'hut_mo_dui':
+          await hutMoDuiFlow.sendHutMoDuiFlow(sender_psid);
+          break;
+        case 'hut_mo_lung':
+          await hutMoLungFlow.sendHutMoLungFlow(sender_psid);
+          break;
+        case 'nang_mui':
+          await nangMuiFlow.sendNangMuiFlow(sender_psid);
           break;
         case 'faq_nang_nguc_dao':
           await faqNangNgucDaoFlow.sendFaqNangNgucDaoFlow(sender_psid);
