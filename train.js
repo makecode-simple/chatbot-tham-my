@@ -253,35 +253,27 @@ classifier.addDocument('bị hư', 'bien_chung');
 classifier.addDocument('bị hỏng mũi', 'bien_chung');
 classifier.addDocument('bị hỏng ngực', 'bien_chung');
 classifier.addDocument('bị biến dạng', 'bien_chung');
-classifier.addDocument('sửa lại', 'bien_chung');
-classifier.addDocument('phẫu thuật lại', 'bien_chung');
-classifier.addDocument('chỉnh sửa lại', 'bien_chung');
-classifier.addDocument('khắc phục', 'bien_chung');
-classifier.addDocument('giải cứu', 'bien_chung');
 // Add more specific training data for treo_sa_tre
-classifier.addDocument('treo_sa_tre': {
-    weight: 12,  // Increased weight
-    phrases: [
-        "treo sa trễ",
-        "sa trễ",
-        "ngực sa",
-        "ngực trễ",
-        "sa trễ ngực",
-        "treo ngực sa",
-        "treo sa",
-        "treo ngực",
-        "phẫu thuật sa trễ",
-        "khắc phục ngực sa",
-        "khắc phục ngực trễ",
-        "nâng ngực sa trễ",
-        "phẫu thuật treo ngực",
-        "tư vấn treo sa trễ",
-        "tư vấn ngực sa",
-        "hỏi về sa trễ",
-        "ngực bị sa",
-        "ngực bị trễ"
-    ]
-},
+const treo_sa_tre_phrases = [
+    "treo sa trễ",
+    "sa trễ",
+    "ngực sa",
+    "ngực trễ",
+    "sa trễ ngực",
+    "treo ngực sa",
+    "treo sa",
+    "phẫu thuật treo ngực",
+    "tư vấn treo sa trễ",
+    "tư vấn ngực sa",
+    "hỏi về sa trễ",
+    "ngực bị sa",
+    "ngực bị trễ"
+];
+
+treo_sa_tre_phrases.forEach(phrase => {
+    classifier.addDocument(normalizeText(phrase), 'treo_sa_tre', 12);
+});
+
 classifier.addDocument('treo ngực sa', 'treo_sa_tre');
 classifier.addDocument('treo sa', 'treo_sa_tre');
 classifier.addDocument('treo ngực', 'treo_sa_tre');
@@ -299,59 +291,55 @@ classifier.addDocument('khắc phục ngực trễ', 'treo_sa_tre');
 classifier.addDocument('chỉnh sửa lại', 'bien_chung');
 classifier.addDocument('khắc phục', 'bien_chung');
 classifier.addDocument('giải cứu', 'bien_chung');
-// Add FAQ intents
-classifier.addDocument('tháo túi ngực', 'faq_thao_tui');
-classifier.addDocument('tháo túi không đau', 'faq_thao_tui');
-classifier.addDocument('nâng ngực dao siêu âm', 'faq_nang_nguc_dao');
-classifier.addDocument('nâng ngực không đau', 'faq_nang_nguc_dao');
-classifier.addDocument('bay sau nâng ngực', 'faq_nguc_bay');
-const intents = {
-    weight: 10,
-    phrases: [
-        "đi // ... existing code ...
-
-// Add training data for treo_sa_tre
-const treoSaTreData = [
-    "treo sa trễ",
-    "sa trễ",
-    "ngực sa",
-    "ngực trễ",
-    "sa trễ ngực",
-    "treo ngực sa",
-    "treo sa",
-    "treo ngực",
-    "phẫu thuật sa trễ",
-    "khắc phục ngực sa",
-    "khắc phục ngực trễ",
-    "nâng ngực sa trễ",
-    "phẫu thuật treo ngực",
-    "tư vấn treo sa trễ",
-    "tư vấn ngực sa",
-    "hỏi về sa trễ",
-    "ngực bị sa",
-    "ngực bị trễ"
-];
-
-treoSaTreData.forEach(text => {
-    classifier.addDocument(normalizeText(text), 'treo_sa_tre', 12);
-});
-
-// Add FAQ intents with proper structure
+// Define FAQ intents
 const faqIntents = {
-    "faq_nguc_bay": {
+    "faq_nang_nguc_dao": {
         weight: 10,
         phrases: [
-            "đi máy bay sau nâng ngực",
-            "bay sau nâng ngực",
-            "khi nào được đi máy bay",
-            "xuất viện sau bao lâu",
-            "thời gian nằm viện",
-            "bao lâu thì xuất viện",
-            "thời gian hồi phục",
-            "bao giờ được bay",
-            "có thể đi máy bay không",
-            "bay quốc tế sau nâng ngực",
-            "bay nội địa sau nâng ngực"
+            "nâng ngực dao siêu âm",
+            "nâng ngực không đau",
+            "dao mổ siêu âm",
+            "nâng ngực ultrasonic",
+            "phương pháp nâng ngực không đau",
+            "nâng ngực có đau không",
+            "nâng ngực bằng dao siêu âm",
+            "dao siêu âm nâng ngực",
+            "pp nang nguc dao sieu am",
+            "phuong pahp nang nguc dao sieu am",
+            "phương pháp nâng ngực bằng dao siêu âm"
+        ]
+    },
+    "faq_size_tui": {
+        weight: 12,
+        phrases: [
+            "size túi ngực",
+            "form túi ngực",
+            "kích thước túi",
+            "size nâng ngực",
+            "chọn size túi",
+            "túi ngực size nào",
+            "form túi thế nào",
+            "túi ngực loại nào",
+            "size phù hợp",
+            "kích cỡ túi ngực",
+            "tư vấn size túi",
+            "tư vấn form túi",
+            "chọn form túi",
+            "size túi phù hợp",
+            "form túi phù hợp"
+        ]
+    },
+    "faq_thao_tui": {
+        weight: 10,
+        phrases: [
+            "tháo túi ngực",
+            "rút túi ngực",
+            "tháo túi ngực cũ",
+            "thay túi ngực",
+            "tháo túi silicon",
+            "tháo túi không đau",
+            "tháo túi ngực có đau không",
+            "tháo túi ngực bao lâu"
         ]
     }
 };
@@ -362,109 +350,6 @@ Object.entries(faqIntents).forEach(([intent, data]) => {
         classifier.addDocument(normalizeText(text), intent, data.weight);
     });
 });
-
-// ... rest of your code ... sau nâng ngực",
-        "bay sau nâng ngực",
-        "khi nào được đi máy bay",
-        "xuất viện sau bao lâu",
-        "thời gian nằm viện",
-        "bao lâu thì xuất viện",
-        "thời gian hồi phục",
-        "bao giờ được bay",
-        "có thể đi máy bay không",
-        "bay quốc tế sau nâng ngực",
-        "bay nội địa sau nâng ngực"
-    ]
-},
-
-"faq_nang_nguc_dao": {
-    weight: 10,
-    phrases: [
-        "nâng ngực dao siêu âm",
-        "nâng ngực không đau",
-        "dao mổ siêu âm",
-        "nâng ngực ultrasonic",
-        "phương pháp nâng ngực không đau",
-        "nâng ngực có đau không",
-        "nâng ngực bằng dao siêu âm",
-        "dao siêu âm nâng ngực",
-        "pp nang nguc dao sieu am",
-        "phuong pahp nang nguc dao sieu am",
-        "phương pháp nâng ngực bằng dao siêu âm"
-    ]
-},
-"faq_size_tui": {
-    weight: 12,  // Increased weight for better matching
-    phrases: [
-        "size túi ngực",
-        "form túi ngực",
-        "kích thước túi",
-        "size nâng ngực",
-        "chọn size túi",
-        "túi ngực size nào",
-        "form túi thế nào",
-        "túi ngực loại nào",
-        "size phù hợp",
-        "kích cỡ túi ngực",
-        "tư vấn size túi",
-        "tư vấn form túi",
-        "chọn form túi",
-        "size túi phù hợp",
-        "form túi phù hợp"
-    ]
-},
-
-"faq_thao_tui": {
-    weight: 10,
-    phrases: [
-        "tháo túi ngực",
-        "rút túi ngực",
-        "tháo túi ngực cũ",
-        "thay túi ngực",
-        "tháo túi silicon",
-        "tháo túi không đau",
-        "tháo túi ngực có đau không",
-        "tháo túi ngực bao lâu"
-    ]
-}
-classifier.addDocument('treo ngực sa', 'treo_sa_tre');
-classifier.addDocument('treo sa', 'treo_sa_tre');
-classifier.addDocument('treo ngực', 'treo_sa_tre');
-classifier.addDocument('phẫu thuật sa trễ', 'treo_sa_tre');
-
-// Make sure there's no overlap with cang_da
-classifier.addDocument('căng da', 'cang_da');
-classifier.addDocument('căng da mặt', 'cang_da');
-classifier.addDocument('căng chỉ', 'cang_da');
-classifier.addDocument('căng chỉ mặt', 'cang_da');
-classifier.addDocument('nâng ngực sa trễ', 'treo_sa_tre');
-classifier.addDocument('phẫu thuật treo ngực', 'treo_sa_tre');
-classifier.addDocument('khắc phục ngực sa', 'treo_sa_tre');
-classifier.addDocument('khắc phục ngực trễ', 'treo_sa_tre');
-classifier.addDocument('chỉnh sửa lại', 'bien_chung');
-classifier.addDocument('khắc phục', 'bien_chung');
-classifier.addDocument('giải cứu', 'bien_chung');
-// Add FAQ intents
-classifier.addDocument('tháo túi ngực', 'faq_thao_tui');
-classifier.addDocument('tháo túi không đau', 'faq_thao_tui');
-classifier.addDocument('nâng ngực dao siêu âm', 'faq_nang_nguc_dao');
-classifier.addDocument('nâng ngực không đau', 'faq_nang_nguc_dao');
-classifier.addDocument('bay sau nâng ngực', 'faq_nguc_bay');
-classifier.addDocument('đi máy bay sau nâng ngực', 'faq_nguc_bay');
-classifier.addDocument('xuất viện sau nâng ngực', 'faq_nguc_bay');
-classifier.addDocument('chỉnh sửa lại', 'bien_chung');
-classifier.addDocument('khắc phục', 'bien_chung');
-classifier.addDocument('giải cứu', 'bien_chung');
-// Add corresponding classifier documents
-classifier.addDocument('size túi ngực', 'faq_size_tui');
-classifier.addDocument('form túi ngực', 'faq_size_tui');
-classifier.addDocument('kích thước túi', 'faq_size_tui');
-classifier.addDocument('chọn size túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
 classifier.addDocument('tư vấn size túi', 'faq_size_tui');
 classifier.addDocument('tư vấn form túi', 'faq_size_tui');
 classifier.addDocument('túi ngực size nào', 'faq_size_tui');
@@ -855,13 +740,6 @@ classifier.addDocument('tư vấn form túi', 'faq_size_tui');
 classifier.addDocument('túi ngực size nào', 'faq_size_tui');
 classifier.addDocument('form túi thế nào', 'faq_size_tui');
 classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui);// ... existing code ...
 
 // Fix the syntax error in the last line
 classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
@@ -1054,31 +932,7 @@ if (!trainingData.hoi_san_pham) {
     });
 }
 
-// Fix the treo_sa_tre object definition
-const treo_sa_tre_phrases = [
-    "treo sa trễ",
-    "sa trễ",
-    "ngực sa",
-    "ngực trễ",
-    "sa trễ ngực",
-    "treo ngực sa",
-    "treo sa",
-    "treo ngực",
-    "phẫu thuật sa trễ",
-    "khắc phục ngực sa",
-    "khắc phục ngực trễ",
-    "nâng ngực sa trễ",
-    "phẫu thuật treo ngực",
-    "tư vấn treo sa trễ",
-    "tư vấn ngực sa",
-    "hỏi về sa trễ",
-    "ngực bị sa",
-    "ngực bị trễ"
-];
-
-treo_sa_tre_phrases.forEach(phrase => {
-    classifier.addDocument(normalizeText(phrase), 'treo_sa_tre', 12);
-});
+// Training data for treo_sa_tre is now handled in faqIntents above
 
 // Fix the faq_nguc_bay object definition
 const faq_nguc_bay_phrases = [
@@ -1100,38 +954,15 @@ faq_nguc_bay_phrases.forEach(phrase => {
     classifier.addDocument(normalizeText(phrase), 'faq_nguc_bay', 10);
 });
 
-// Fix the faq_nang_nguc_dao object definition
-const faq_nang_nguc_dao_phrases = [
-    "nâng ngực dao siêu âm",
-    "nâng ngực không đau",
-    "dao mổ siêu âm",
-    "nâng ngực ultrasonic",
+// Add remaining phrases to classifier
+const additionalPhrases = [
     "phương pháp nâng ngực không đau",
-    "nâng ngực có đau không",// ... existing code ...
-
-// Define FAQ intents with proper structure
-const faqIntents = {
-  "faq_nang_nguc_dao": {
-    weight: 10,
-    phrases: [
-      "nâng ngực dao siêu âm",
-      "nâng ngực không đau",
-      "nâng ngực có đau không",
-      "dao mổ siêu âm",
-      "nâng ngực ultrasonic",
-      "phương pháp nâng ngực không đau",
-      "nâng ngực bằng dao siêu âm",
-      "dao siêu âm nâng ngực",
-      "pp nang nguc dao sieu am",
-      "phương pháp nâng ngực bằng dao siêu âm"
-    ]
-  },
-  "faq_size_tui": {
-    weight: 12,
-    phrases: [
-      "size túi ngực",
-      "form túi ngực", 
-      "kích thước túi",
+    "nâng ngực bằng dao siêu âm",
+    "dao siêu âm nâng ngực",
+    "pp nang nguc dao sieu am",
+    "phuong pahp nang nguc dao sieu am",
+    "phương pháp nâng ngực bằng dao siêu âm"
+];
       "size nâng ngực",
       "chọn size túi",
       "túi ngực size nào",
@@ -1274,15 +1105,10 @@ Object.keys(price_intents).forEach(intent => {
     }
 });
 
-// Add code to train and save the model if not already present
 // Train the classifier
 classifier.train();
 
 // Save the trained model
-classifier.save('model.json', (err) => {
-    if (err) {
-        console.error('Error saving model:', err);
-    } else {
-        console.log('Model trained and saved successfully!');
-    }
-});
+const modelData = classifier.toJSON();
+fs.writeFileSync('model.json', JSON.stringify(modelData, null, 2), 'utf8');
+console.log('✅ Model trained and saved successfully!');
