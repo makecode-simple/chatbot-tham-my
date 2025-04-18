@@ -196,9 +196,7 @@ async function handleMessage(sender_psid, received_message) {
         case 'nang_nguc':
           await serviceFlows.sendNangNgucFlow(sender_psid);
           break;
-        case 'nang_mui':
-          await serviceFlows.sendNangMuiFlow(sender_psid);
-          break;
+
         case 'tham_my_cam':
           await serviceFlows.sendThamMyCamFlow(sender_psid);
           break;

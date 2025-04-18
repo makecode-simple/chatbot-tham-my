@@ -35,4 +35,6 @@ async function sendNangMuiFlow(sender_psid) {
   });
 }
 
-module.exports = sendNangMuiFlow;
+module.exports = {
+  sendNangMuiFlow
+};
