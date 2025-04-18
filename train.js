@@ -24,11 +24,19 @@ const trainingData = {
         "túi mentor nào đẹp hơn",
         "túi mentor nào tự nhiên hơn"
     ],
-    "faq_dau_nghi": [
+    "hoi_dau": [
         "có đau không",
         "đau không em",
         "có đau lắm không",
         "đau nhiều không",
+        "có đau không em",
+        "có đau không bác",
+        "đau không ạ",
+        "có đau không chị",
+        "phẫu thuật có đau không",
+        "mổ có đau không"
+    ],
+    "faq_dau_nghi": [
         "nghỉ dưỡng bao lâu",
         "cần nghỉ ngơi không",
         "bao lâu thì hồi phục",
@@ -36,7 +44,10 @@ const trainingData = {
         "có phải nằm viện lâu không",
         "nằm viện mấy ngày",
         "bao lâu thì đi làm được",
-        "khi nào thì hoạt động bình thường"
+        "khi nào thì hoạt động bình thường",
+        "có cần nghỉ dưỡng không",
+        "nghỉ bao lâu thì đi làm được",
+        "bao lâu thì sinh hoạt bình thường"
     ],
     "menu_dich_vu": [
         "xem các dịch vụ",
