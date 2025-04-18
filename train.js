@@ -34,7 +34,15 @@ const trainingData = {
         "đau không ạ",
         "có đau không chị",
         "phẫu thuật có đau không",
-        "mổ có đau không"
+        "mổ có đau không",
+        "bao lâu hết đau",
+        "khi nào hết đau",
+        "mấy ngày hết đau",
+        "đau trong bao lâu",
+        "đau mấy ngày",
+        "đau bao nhiêu lâu",
+        "thời gian đau",
+        "có đau kéo dài không"
     ],
     "faq_dau_nghi": [
         "nghỉ dưỡng bao lâu",
