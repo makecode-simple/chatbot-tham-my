@@ -16,7 +16,7 @@ async function sendHoiGiaFlow(sender_psid) {
   } else {
     console.log('❌ No price list image found');
     await messengerClient.sendMessage(sender_psid, {
-      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+      text: "Hiện tại bên em chưa có sẵn bảng giá ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi bảng giá cho chị tham khảo được không ạ?"
     });
   }
 }
@@ -36,7 +36,7 @@ async function sendGiaMatFlow(sender_psid) {
   } else {
     console.log('❌ No price list image found');
     await messengerClient.sendMessage(sender_psid, {
-      text: "Hiện tại bên em chưa có sẵn ảnh ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi ảnh cho chị tham khảo được không ạ?"
+      text: "Hiện tại bên em chưa có sẵn bảng giá ở đây, Chị cho em xin số điện thoại, bạn Ngân trợ lý bác Vũ tư vấn chuyên sâu + gửi bảng giá cho chị tham khảo được không ạ?"
     });
   }
 }

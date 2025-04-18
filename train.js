@@ -5,6 +5,18 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "tham_my_mat": [
+        "cắt mí",
+        "nhấn mí",
+        "bấm mí",
+        "phẫu thuật mắt",
+        "thẩm mỹ mắt",
+        "cắt mí mắt",
+        "nhấn mí mắt",
+        "bấm mí mắt",
+        "phẫu thuật thẩm mỹ mắt",
+        "làm đẹp mắt"
+    ],
     "xem_anh_nguc": [
         "xin ảnh ngực",
         "cho xem ảnh ngực",

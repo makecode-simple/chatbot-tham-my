@@ -35,4 +35,6 @@ async function sendThamMyMatFlow(sender_psid) {
   });
 }
 
-module.exports = sendThamMyMatFlow;
+module.exports = {
+  sendThamMyMatFlow
+};
