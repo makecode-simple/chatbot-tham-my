@@ -24,6 +24,7 @@ const faqThaoTuiFlow = require('./flows/faqThaoTuiFlow');
 const hutMoBodyFlow = require('./flows/hutMoBodyFlow');
 const taiTaoVuFlow = require('./flows/taiTaoVuFlow');
 const thaoTuiNgucFlow = require('./flows/thaoTuiNgucFlow');
+const bocBaoXoFlow = require('./flows/bocBaoXoFlow');
 
 const { completedUsers, userResponses } = require('./index.js');
 
@@ -243,6 +244,9 @@ async function handleMessage(sender_psid, received_message) {
         case 'treo_cung_may':
           await treoCungMayFlow.sendTreoCungMayFlow(sender_psid);
           break;
+        case 'boc_bao_xo':
+          await bocBaoXoFlow.sendBocBaoXoFlow(sender_psid);
+          break;
         case 'faq_nang_nguc_dao':
           await faqNangNgucDaoFlow.sendFaqNangNgucDaoFlow(sender_psid);
           break;
@@ -265,15 +269,23 @@ async function handleMessage(sender_psid, received_message) {
           await thaoTuiNgucFlow(sender_psid);
           break;
         default:
+          // If intent confidence is low or message count > 3, don't respond
+          if (topIntent.value < 0.7 || currentState.messageCount > 3) {
+            return;
+          }
+          // Otherwise ask for phone number
           await messengerClient.sendMessage(sender_psid, {
             text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
           });
       }
     } catch (error) {
-      console.error('Error in switch case:', error);
-      await messengerClient.sendMessage(sender_psid, {
-        text: "Dạ xin lỗi chị, hiện tại hệ thống đang gặp sự cố. Chị vui lòng thử lại sau ít phút nha!"
-      });
+      console.error('Error handling message:', error);
+      // Don't send error message if message count > 3
+      if (currentState.messageCount <= 3) {
+        await messengerClient.sendMessage(sender_psid, {
+          text: "Chị để lại số điện thoại/Zalo/Viber để bên em tư vấn chi tiết hơn cho mình nha!"
+        });
+      }
     }
   } catch (error) {
     console.error('Error handling message:', error);

@@ -5,6 +5,30 @@ const classifier = new natural.BayesClassifier();
 
 // Training data
 const trainingData = {
+    "boc_bao_xo": [
+        "bóc bao xơ",
+        "phẫu thuật bóc bao xơ",
+        "mổ bóc bao xơ",
+        "tư vấn bóc bao xơ",
+        "chi phí bóc bao xơ",
+        "bóc bao xơ ngực",
+        "bóc bao xơ vù",
+        "bóc bao xơ không đau",
+        "bóc bao xơ bằng dao siêu âm",
+        "bóc bao xơ ultrasonic"
+    ],
+    "hut_mo_tiem_len_mat": [
+        "hút mỡ tiêm lên mặt",
+        "hút mỡ tự thân mặt",
+        "hút mỡ cấy mỡ mặt",
+        "tiêm mỡ tự thân lên mặt",
+        "cấy mỡ tự thân mặt",
+        "hút mỡ làm đầy mặt",
+        "tiêm mỡ làm đầy mặt",
+        "hút mỡ tạo khuôn mặt",
+        "tiêm mỡ tạo khuôn mặt",
+        "hút mỡ tạo mặt V-line"
+    ],
     "tham_my_mat": [
         "cắt mí",
         "nhấn mí",
