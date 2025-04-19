@@ -26,11 +26,11 @@ class IntentClassifier {
             // Add weights for specific intents that need boosting
             const weightedIntents = {
                 'nang_mui': 1.5,      // Boost nâng mũi intent
-                'nang_nguc': 1.5,     // Boost nâng ngực intent
+                'nang_nguc': 2.0,     // Boost nâng ngực intent more
                 'tham_my_mat': 1.5,   // Boost thẩm mỹ mắt intent
                 'faq_nguc_bay': 1.3,  // Increased weight
                 'faq_thao_tui': 1.3,  // Increased weight
-                'bien_chung': 1.3,
+                'bien_chung': 1.0,    // Reduced weight
                 'treo_sa_tre': 1.2
             };
 
@@ -145,11 +145,11 @@ class IntentClassifier {
 
         try {
             // Direct mapping for common intents
-            if (normalizedText === 'nang mui') {
+            if (normalizedText === 'nang mui' || normalizedText.includes('nang mui')) {
                 console.log('✅ Direct match for nang_mui intent');
                 return 'nang_mui';
             }
-            if (normalizedText === 'nang nguc') {
+            if (normalizedText === 'nang nguc' || normalizedText.includes('nang nguc')) {
                 console.log('✅ Direct match for nang_nguc intent');
                 return 'nang_nguc';
             }

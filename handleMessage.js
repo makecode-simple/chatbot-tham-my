@@ -255,7 +255,7 @@ async function handleMessage(sender_psid, received_message) {
           await bocBaoXoFlow.sendBocBaoXoFlow(sender_psid);
           break;
         case 'cang_da_mat':
-          await cangDaMatFlow.sendCangDaMatFlow(sender_psid);
+          await cangDaMatFlow(sender_psid);
           break;
         case 'hut_mo_bung':
           await hutMoBungFlow.sendHutMoBungFlow(sender_psid);

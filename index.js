@@ -115,9 +115,10 @@ function shutdown() {
 }
 
 // ====== START SERVER ======
-// Add PORT definition
+// Add PORT and HOST definition for Railway.com
 const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';  // Listen on all network interfaces
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server running on ${HOST}:${PORT}`);
 });
