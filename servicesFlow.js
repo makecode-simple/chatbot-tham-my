@@ -89,7 +89,6 @@ const serviceFlows = {
   sendFaqNangNgucDaoFlow: require('./flows/faqNangNgucDaoFlow'),
   // Change from sendNgucBayFaq to match handleMessage.js
   sendFaqNgucBayFlow: require('./flows/faqNgucBayFlow'),
-  sendFaqSizeTuiFlow: require('./flows/faqSizeTuiFlow'),
   
   // Add missing flows
   sendHoiGiaFlow: require('./flows/hoiGiaFlow'),
