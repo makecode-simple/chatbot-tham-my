@@ -60,9 +60,30 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// Add basic health check endpoint
+// Add root route and health check endpoints
+app.get('/', (req, res) => {
+  res.status(200).send('Chatbot server is running!');
+});
+
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
+});
+
+// Add webhook verification
+app.get('/webhook', (req, res) => {
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode && token) {
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+      console.log('✅ Webhook verified');
+      res.status(200).send(challenge);
+    } else {
+      res.sendStatus(403);
+    }
+  }
 });
 
 // Enhance webhook handler with error handling
@@ -116,7 +137,7 @@ function shutdown() {
 
 // ====== START SERVER ======
 // Add PORT and HOST definition for Railway.com
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';  // Listen on all network interfaces
 
 const server = app.listen(PORT, HOST, () => {
