@@ -8,4 +8,6 @@ async function sendFaqSizeTuiFlow(sender_psid) {
   });
 }
 
-module.exports = sendFaqSizeTuiFlow;
+module.exports = {
+  sendFaqSizeTuiFlow
+};

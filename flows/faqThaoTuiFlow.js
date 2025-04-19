@@ -29,4 +29,6 @@ async function sendFaqThaoTuiFlow(sender_psid) {
   });
 }
 
-module.exports = sendFaqThaoTuiFlow;
+module.exports = {
+  sendFaqThaoTuiFlow
+};

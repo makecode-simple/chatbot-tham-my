@@ -35,4 +35,6 @@ async function sendHutMoBodyFlow(sender_psid) {
   });
 }
 
-module.exports = sendHutMoBodyFlow;
+module.exports = {
+  sendHutMoBodyFlow
+};

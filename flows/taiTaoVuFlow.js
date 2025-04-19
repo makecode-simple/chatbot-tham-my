@@ -35,4 +35,6 @@ async function sendTaiTaoVuFlow(sender_psid) {
   });
 }
 
-module.exports = sendTaiTaoVuFlow;
+module.exports = {
+  sendTaiTaoVuFlow
+};

@@ -40,4 +40,6 @@ async function sendThaoTuiNgucFlow(sender_psid) {
   });
 }
 
-module.exports = sendThaoTuiNgucFlow;
+module.exports = {
+  sendThaoTuiNgucFlow
+};

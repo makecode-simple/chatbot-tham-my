@@ -289,19 +289,19 @@ async function handleMessage(sender_psid, received_message) {
           await faqNgucBayFlow.sendFaqNgucBayFlow(sender_psid);
           break;
         case 'faq_size_tui':
-          await faqSizeTuiFlow(sender_psid);
+          await faqSizeTuiFlow.sendFaqSizeTuiFlow(sender_psid);
           break;
         case 'faq_thao_tui':
-          await faqThaoTuiFlow(sender_psid);
+          await faqThaoTuiFlow.sendFaqThaoTuiFlow(sender_psid);
           break;
         case 'hut_mo_body':
-          await hutMoBodyFlow(sender_psid);
+          await hutMoBodyFlow.sendHutMoBodyFlow(sender_psid);
           break;
         case 'tai_tao_vu':
-          await taiTaoVuFlow(sender_psid);
+          await taiTaoVuFlow.sendTaiTaoVuFlow(sender_psid);
           break;
         case 'thao_tui_nguc':
-          await thaoTuiNgucFlow(sender_psid);
+          await thaoTuiNgucFlow.sendThaoTuiNgucFlow(sender_psid);
           break;
         default:
           // If intent confidence is low or message count > 3, don't respond

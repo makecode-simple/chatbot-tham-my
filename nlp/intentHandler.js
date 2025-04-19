@@ -79,11 +79,35 @@ class IntentClassifier {
     }
 
     normalizeText(text) {
-        return text.toLowerCase()
+        if (!text) return '';
+        // Convert to lowercase and normalize unicode
+        let normalized = text.toLowerCase()
             .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[!.,?]/g, "")
+            .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+            .replace(/[!.,?]/g, "")         // Remove punctuation
+            .replace(/\s+/g, ' ')           // Normalize spaces
             .trim();
+
+        // Map common variations
+        const variations = {
+            // Nâng mũi variations
+            'nang mui': 'nang mui',
+            'chinh mui': 'nang mui',
+            'sua mui': 'nang mui',
+            'lam mui': 'nang mui',
+            'phau thuat mui': 'nang mui',
+            // Nâng ngực variations
+            'nang nguc': 'nang nguc',
+            'phau thuat nguc': 'nang nguc',
+            'dat tui nguc': 'nang nguc',
+            'tui nguc': 'nang nguc',
+            'lam nguc': 'nang nguc',
+            'nang sinh': 'nang nguc',
+            'nguc': 'nang nguc'
+        };
+
+        // Check if the normalized text matches any variations
+        return variations[normalized] || normalized;
     }
 
     getConfidence(message) {
@@ -106,7 +130,19 @@ class IntentClassifier {
         if (!message) return 'menu_dich_vu';
         
         const normalizedText = this.normalizeText(message);
+        console.log(`🔄 Normalized text: "${normalizedText}"`);
+
         try {
+            // Direct mapping for common intents
+            if (normalizedText === 'nang mui') {
+                console.log('✅ Direct match for nang_mui intent');
+                return 'nang_mui';
+            }
+            if (normalizedText === 'nang nguc') {
+                console.log('✅ Direct match for nang_nguc intent');
+                return 'nang_nguc';
+            }
+
             // Get all classifications with their confidence scores
             const classifications = this.classifier.getClassifications(normalizedText);
             
@@ -126,22 +162,33 @@ class IntentClassifier {
             const confidence = topIntent.value;
             const intent = topIntent.label;
 
+            // Special handling for common intents
+            if (normalizedText.includes('mui')) {
+                const muiIntent = classifications.find(c => c.label === 'nang_mui');
+                if (muiIntent && muiIntent.value > 0.3) {
+                    console.log(`✅ Found nang_mui intent with confidence: ${(muiIntent.value * 100).toFixed(1)}%`);
+                    return 'nang_mui';
+                }
+            }
+            
+            if (normalizedText.includes('nguc')) {
+                const ngucIntent = classifications.find(c => c.label === 'nang_nguc');
+                if (ngucIntent && ngucIntent.value > 0.3) {
+                    console.log(`✅ Found nang_nguc intent with confidence: ${(ngucIntent.value * 100).toFixed(1)}%`);
+                    return 'nang_nguc';
+                }
+            }
+
             // Check if confidence meets our threshold
             if (confidence < this.confidenceThreshold) {
                 console.log(`⚠️ Low confidence (${(confidence * 100).toFixed(1)}%) for message: "${message}". Fallback to menu_dich_vu`);
                 return 'menu_dich_vu';
             }
 
-            // If we have a second best intent, check if it's too close to the top intent
-            if (classifications.length > 1) {
-                const secondBest = classifications[1];
-                const confidenceDiff = confidence - secondBest.value;
-                
-                // If the difference is too small (less than 20%), fall back to menu
-                if (confidenceDiff < 0.2) {
-                    console.log(`⚠️ Ambiguous intent - top two are too close: ${intent} (${(confidence * 100).toFixed(1)}%) vs ${secondBest.label} (${(secondBest.value * 100).toFixed(1)}%)`);
-                    return 'menu_dich_vu';
-                }
+            // Prevent faq_size_tui from being triggered too easily
+            if (intent === 'faq_size_tui' && confidence < 0.6) {
+                console.log(`⚠️ Preventing faq_size_tui with low confidence: ${(confidence * 100).toFixed(1)}%`);
+                return 'menu_dich_vu';
             }
 
             console.log(`🎯 Detected intent: ${intent} (confidence: ${(confidence * 100).toFixed(1)}%)`);
