@@ -346,7 +346,9 @@
         "có biến chứng",
         "bị biến chứng phẫu thuật",
         "bị biến chứng thẩm mỹ",
-        "bị biến chứng sau phẫu thuật",
+        "bị biến chứng sau phẫu thuật"
+      ]
+    },
     {
       "intent": "treo_sa_tre",
       "examples": [
