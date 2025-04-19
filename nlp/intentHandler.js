@@ -6,8 +6,8 @@ class IntentClassifier {
     constructor() {
         this.classifier = new natural.BayesClassifier();
         this.trained = false;
-        this.confidenceThreshold = 0.4;  // Lowered base threshold since we're using relative confidence
-        this.minConfidenceDiff = 0.15;   // Minimum confidence difference between top 2 intents
+        this.confidenceThreshold = 0.6;  // Increased base threshold for better accuracy
+        this.minConfidenceDiff = 0.2;   // Increased minimum confidence difference
         this.trainModel();
     }
 
@@ -28,9 +28,8 @@ class IntentClassifier {
                 'nang_mui': 1.5,      // Boost nâng mũi intent
                 'nang_nguc': 1.5,     // Boost nâng ngực intent
                 'tham_my_mat': 1.5,   // Boost thẩm mỹ mắt intent
-                'faq_nguc_bay': 1.2,
-                'faq_thao_tui': 1.2,
-                'faq_size_tui': 1.0,  // Reduced weight for this intent
+                'faq_nguc_bay': 1.3,  // Increased weight
+                'faq_thao_tui': 1.3,  // Increased weight
                 'bien_chung': 1.3,
                 'treo_sa_tre': 1.2
             };
@@ -88,7 +87,7 @@ class IntentClassifier {
             .replace(/\s+/g, ' ')           // Normalize spaces
             .trim();
 
-        // Map common variations
+        // Map common variations and keywords
         const variations = {
             // Nâng mũi variations
             'nang mui': 'nang mui',
@@ -96,6 +95,7 @@ class IntentClassifier {
             'sua mui': 'nang mui',
             'lam mui': 'nang mui',
             'phau thuat mui': 'nang mui',
+            'mui': 'nang mui',
             // Nâng ngực variations
             'nang nguc': 'nang nguc',
             'phau thuat nguc': 'nang nguc',
@@ -103,7 +103,18 @@ class IntentClassifier {
             'tui nguc': 'nang nguc',
             'lam nguc': 'nang nguc',
             'nang sinh': 'nang nguc',
-            'nguc': 'nang nguc'
+            'nguc': 'nang nguc',
+            'vu': 'nang nguc',
+            'nguc dep': 'nang nguc',
+            'nang vu': 'nang nguc',
+            'tui vu': 'nang nguc',
+            'phau thuat vu': 'nang nguc',
+            // Greeting variations
+            'hi': 'chao hoi',
+            'hello': 'chao hoi',
+            'hey': 'chao hoi',
+            'alo': 'chao hoi',
+            'chao': 'chao hoi'
         };
 
         // Check if the normalized text matches any variations
@@ -165,15 +176,15 @@ class IntentClassifier {
             // Special handling for common intents
             if (normalizedText.includes('mui')) {
                 const muiIntent = classifications.find(c => c.label === 'nang_mui');
-                if (muiIntent && muiIntent.value > 0.3) {
+                if (muiIntent && muiIntent.value > 0.5) {
                     console.log(`✅ Found nang_mui intent with confidence: ${(muiIntent.value * 100).toFixed(1)}%`);
                     return 'nang_mui';
                 }
             }
             
-            if (normalizedText.includes('nguc')) {
+            if (normalizedText.includes('nguc') || normalizedText.includes('vu')) {
                 const ngucIntent = classifications.find(c => c.label === 'nang_nguc');
-                if (ngucIntent && ngucIntent.value > 0.3) {
+                if (ngucIntent && ngucIntent.value > 0.5) {
                     console.log(`✅ Found nang_nguc intent with confidence: ${(ngucIntent.value * 100).toFixed(1)}%`);
                     return 'nang_nguc';
                 }
@@ -185,9 +196,10 @@ class IntentClassifier {
                 return 'menu_dich_vu';
             }
 
-            // Prevent faq_size_tui from being triggered too easily
-            if (intent === 'faq_size_tui' && confidence < 0.6) {
-                console.log(`⚠️ Preventing faq_size_tui with low confidence: ${(confidence * 100).toFixed(1)}%`);
+            // Prevent certain intents from being triggered too easily
+            const highConfidenceIntents = ['faq_size_tui', 'faq_thao_tui', 'faq_nguc_bay'];
+            if (highConfidenceIntents.includes(intent) && confidence < 0.7) {
+                console.log(`⚠️ Preventing ${intent} with low confidence: ${(confidence * 100).toFixed(1)}%`);
                 return 'menu_dich_vu';
             }
 

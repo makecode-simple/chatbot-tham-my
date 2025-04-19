@@ -347,11 +347,6 @@
         "bị biến chứng phẫu thuật",
         "bị biến chứng thẩm mỹ",
         "bị biến chứng sau phẫu thuật",
-        "lo bị biến chứng",
-        "phẫu thuật có nguy hiểm không",
-        "có rủi ro gì không"
-      ]
-    },
     {
       "intent": "treo_sa_tre",
       "examples": [

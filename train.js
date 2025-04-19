@@ -648,26 +648,7 @@ const faqIntents = {
             "phương pháp nâng ngực bằng dao siêu âm"
         ]
     },
-    "faq_size_tui": {
-        weight: 12,
-        phrases: [
-            "size túi ngực",
-            "form túi ngực",
-            "kích thước túi",
-            "size nâng ngực",
-            "chọn size túi",
-            "túi ngực size nào",
-            "form túi thế nào",
-            "túi ngực loại nào",
-            "size phù hợp",
-            "kích cỡ túi ngực",
-            "tư vấn size túi",
-            "tư vấn form túi",
-            "chọn form túi",
-            "size túi phù hợp",
-            "form túi phù hợp"
-        ]
-    },
+
     "faq_thao_tui": {
         weight: 10,
         phrases: [
@@ -689,57 +670,7 @@ Object.entries(faqIntents).forEach(([intent, data]) => {
         classifier.addDocument(normalizeText(text), intent, data.weight);
     });
 });
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('chọn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn kích thước túi', 'faq_size_tui');
-classifier.addDocument('tư vấn size phù hợp', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
-classifier.addDocument('size phù hợp', 'faq_size_tui');
-classifier.addDocument('kích cỡ túi ngực', 'faq_size_tui');
-classifier.addDocument('tư vấn size túi', 'faq_size_tui');
-classifier.addDocument('tư vấn form túi', 'faq_size_tui');
-classifier.addDocument('túi ngực size nào', 'faq_size_tui');
-classifier.addDocument('form túi thế nào', 'faq_size_tui');
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
 
-// Fix the syntax error in the last line
-classifier.addDocument('túi ngực loại nào', 'faq_size_tui');
 
 // Add missing intents from training_data.json that aren't already in the file
 // Add chao_hoi intent if not already present

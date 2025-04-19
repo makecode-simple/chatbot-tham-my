@@ -19,7 +19,6 @@ const treoSaTreFlow = require('./flows/treoSaTreFlow');
 const treoCungMayFlow = require('./flows/treoCungMayFlow');
 const faqNangNgucDaoFlow = require('./flows/faqNangNgucDaoFlow');
 const faqNgucBayFlow = require('./flows/faqNgucBayFlow');
-const faqSizeTuiFlow = require('./flows/faqSizeTuiFlow');
 const faqThaoTuiFlow = require('./flows/faqThaoTuiFlow');
 const hutMoBodyFlow = require('./flows/hutMoBodyFlow');
 const taiTaoVuFlow = require('./flows/taiTaoVuFlow');
@@ -185,6 +184,9 @@ async function handleMessage(sender_psid, received_message) {
     // Handle intents
     try {
       switch (topIntent.label) {
+        case 'chao_hoi':
+          await serviceFlows.sendMenuDichVu(sender_psid);
+          break;
         case 'tham_my_mat':
           await thamMyMatFlow(sender_psid);
           break;
@@ -287,9 +289,6 @@ async function handleMessage(sender_psid, received_message) {
           break;
         case 'faq_nguc_bay':
           await faqNgucBayFlow.sendFaqNgucBayFlow(sender_psid);
-          break;
-        case 'faq_size_tui':
-          await faqSizeTuiFlow.sendFaqSizeTuiFlow(sender_psid);
           break;
         case 'faq_thao_tui':
           await faqThaoTuiFlow.sendFaqThaoTuiFlow(sender_psid);
